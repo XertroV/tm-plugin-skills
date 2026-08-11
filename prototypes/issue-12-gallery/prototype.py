@@ -210,7 +210,7 @@ string TierName(GalleryTier tier) {
 
 def generate_info(manifest: dict) -> str:
     gallery = manifest["gallery"]
-    return f'''[meta]\nname = {json.dumps(gallery["name"])}\nauthor = "tm-plugin-skills prototype"\ncategory = "Developer"\nversion = {json.dumps(gallery["version"])}\nsiteid = 0\n\n[script]\ndependencies = []\n'''
+    return f'''[meta]\nname = {json.dumps(gallery["name"])}\nauthor = "tm-plugin-skills prototype"\ncategory = "Skillpack Demos"\nversion = {json.dumps(gallery["version"])}\nsiteid = 0\n\n[script]\ndependencies = []\n'''
 
 
 def expected_outputs(manifest: dict) -> dict[Path, bytes]:

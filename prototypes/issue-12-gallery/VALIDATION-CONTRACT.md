@@ -14,7 +14,7 @@
 
 ## Live gates (mandatory before any promotion; intentionally not claimed here)
 
-Every snippet is introduced through a temporary/development plugin as it is written, not accumulated for one late integration pass. One or more demo plugins may be used to keep unrelated APIs, callbacks, dependencies, or risk levels isolated. All skillpack demo plugins use one dedicated Openplanet category so Max can find and inspect them together; the final category name is a validation-ticket decision and must be applied consistently rather than falling back to a generic Developer category.
+Every snippet is introduced through a temporary/development plugin as it is written, not accumulated for one late integration pass. One or more demo plugins may be used to keep unrelated APIs, callbacks, dependencies, or risk levels isolated. All skillpack demo plugins use the dedicated Openplanet category **`Skillpack Demos`** so Max can find and inspect them together; do not mix them into the generic Developer category.
 
 For every required screenshot case:
 
