@@ -59,16 +59,15 @@ def main() -> None:
     require("Report findings first" in content, "portable workflow omits findings-first step")
     require("base/head commits" in content, "change reviews do not pin a review range")
     require("no applicable row is silently omitted" in content, "fault matrix lacks exhaustive completion")
-    for failure_class in (
-        "UI callback failure containment",
-        "Plugin/game state desynchronization",
-        "Transactional mutation restoration",
-        "Async terminal-state completeness",
-        "Mutation-result truthfulness",
-        "Network architecture mismatch",
-    ):
-        require(failure_class in ledger, f"maintainer ledger omits {failure_class}")
-        require(failure_class in bundled_ledger, f"bundled ledger omits {failure_class}")
+    maintainer_classes = set(re.findall(r"^### (.+)$", ledger, re.MULTILINE))
+    bundled_classes = set(re.findall(r"^### (.+)$", bundled_ledger, re.MULTILINE))
+    require(bool(maintainer_classes), "maintainer ledger has no failure classes")
+    require(
+        maintainer_classes == bundled_classes,
+        "maintainer/bundled ledger taxonomy drift: "
+        f"maintainer-only={sorted(maintainer_classes - bundled_classes)}, "
+        f"bundled-only={sorted(bundled_classes - maintainer_classes)}",
+    )
     require("Unrolling dangling script UI stack" in evidence, "live UI evidence missing")
     require(probe.startswith("#if SKILLPACK_PROBE_MODE\n"), "unsafe probe is not mechanically gated")
     require("startnew(CoroutineFunc(ThrowProbeIsolated))" in probe, "probe lacks isolated boundary")

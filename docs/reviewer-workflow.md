@@ -69,9 +69,9 @@ Static diagnostics and token-presence checks never prove runtime behavior.
 13. **Report findings first.** For each: severity, `path:line`, trigger,
     mechanism, impact, evidence grade, next probe, and ledger class. Include
     positive evidence only after findings.
-14. **Close coverage.** Mark every ledger class caught, not applicable, or not
-    tested. Add each new mechanism to the ledger and feed prevention into normal
-    development guidance plus tests/demos where applicable.
+14. **Close coverage.** Mark every ledger class caught, N/A with rationale, or
+    not tested. Add each new mechanism to the ledger and feed prevention into
+    normal development guidance plus tests/demos where applicable.
 
 ## False-positive controls
 
@@ -109,7 +109,7 @@ Severity measures impact independently of evidence confidence:
 - Ledger class:
 
 ## Coverage
-| Failure class | Caught / N/A / Not tested | Evidence |
+| Failure class | Caught / N/A with rationale / Not tested | Evidence |
 
 ## Positive evidence
 ## Runtime gaps
