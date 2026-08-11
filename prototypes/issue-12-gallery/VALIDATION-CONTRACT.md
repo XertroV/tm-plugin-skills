@@ -34,4 +34,6 @@ For every increment, preserve both diagnostic transcripts: `openplanet-lsp` and 
 
 Remote-control component actions have separate gates: stable unique ID; registration/unregistration across reload; render-epoch visibility; default `force=false`; invisible/not-drawn actions make no state change; the error reports concise cause plus retry/open-or-force guidance; `force=true` invokes the semantic callback and reports that it was forced; mouse button/action names are validated; stale registrations fail safely; and UI/NVG implementations obey the same behavioral contract. Transport remains DEV-only, opt-in, loopback-bound, size/time bounded, fixed-route only, and concise on every failure.
 
+The reference result envelope is `{v,id,ok,result}` on success and `{v,id,ok:false,error:{code,message,next}}` on failure. `message` states the immediate cause; `next` gives one concrete retry, force, or documentation action. Do not return a stack trace or unbounded payload. Required component error codes include `not_drawn`, `unknown_component`, `unknown_action`, `invalid_mouse_button`, `busy`, and `stale_registration`.
+
 A static pass leaves maturity unchanged. Only a later, explicit live-validation workflow may propose `stable`; this prototype does not define that promotion mutation.
