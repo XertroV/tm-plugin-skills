@@ -1,0 +1,6 @@
+interface:
+  display_name: "Openplanet Initialization"
+  short_description: "Scaffold and prove a loadable Openplanet plugin identity"
+  default_prompt: "Use $openplanet-init to scaffold or normalize this Openplanet plugin, create its tracked initialization brief, keep capability receipts clone-local, and obtain first-load evidence or an explicit runtime blocker. Stop before feature work."
+policy:
+  allow_implicit_invocation: true
