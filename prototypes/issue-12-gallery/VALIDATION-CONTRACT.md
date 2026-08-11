@@ -14,10 +14,11 @@
 10. Each testable feature uses a neighboring `Feature_Test.as` with `[Test]` functions. The filename is the skillpack convention; Openplanet discovers `[Test]` metadata. Companion tests compile into the demo plugin and directly test feature behavior. Ordinary exports are compiled into dependent modules rather than the library's own module, so their focused tests live in a dependent demo companion. Every manifest recipe must have a companion test unless the manifest records a concrete, reviewed reason that it cannot be tested through the current Openplanet test API.
 11. Ordinary tests do not invoke UI, draw-list, or NVG drawing APIs. They exercise extracted pure seams; live demo and screenshot gates prove actual rendering and stack restoration.
 12. Every applicable rule in `docs/openplanet-gotchas.md` is represented by implementation, an automated gate, live evidence, or an explicit reviewed non-applicability record. Prose-only acknowledgement is insufficient for components that exercise the gotcha.
+13. When the local Openplanet plugin directory is available, exactly one installed plugin folder may own the gallery's display name. A stale second folder fails validation instead of producing a second prototype window.
 
 ## Live gates (mandatory before any promotion; intentionally not claimed here)
 
-Every snippet is introduced through a temporary/development plugin as it is written, not accumulated for one late integration pass. One or more demo plugins may be used to keep unrelated APIs, callbacks, dependencies, or risk levels isolated. All skillpack demo plugins use the dedicated Openplanet category **`Skillpack Demos`** so Max can find and inspect them together; do not mix them into the generic Developer category.
+Every snippet is introduced through a temporary/development plugin as it is written, not accumulated for one late integration pass. All visual examples must remain selectable inside the one authoritative Visual Recipe Gallery window; isolated visual fixtures may exist for fault testing but must not create a competing gallery window. Non-visual components get a `Skillpack Demos` behavior demo whenever controls, state readouts, logs, or a deterministic fault probe can communicate their contract effectively. All skillpack demo plugins use the dedicated Openplanet category **`Skillpack Demos`** so Max can find and inspect them together; do not mix them into the generic Developer category.
 
 For every required screenshot case:
 

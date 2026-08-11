@@ -9,6 +9,13 @@
   "required_cases": [
     {"id": "default-theme-a", "recipe": "theme-table", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 0},
     {"id": "default-theme-b", "recipe": "theme-table", "theme": "representative-light-or-high-contrast", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "main-menu", "frame": 0},
+    {"id": "stable-ids-label-a", "recipe": "stable-widget-ids", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 0},
+    {"id": "stable-ids-label-b", "recipe": "stable-widget-ids", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 60},
+    {"id": "render-owner-overlay", "recipe": "overlay-render-owner", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 0},
+    {"id": "render-owner-hidden", "recipe": "overlay-render-owner", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "in-map", "frame": 120},
+    {"id": "visibility-hidden", "recipe": "visibility-safe-action", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 0},
+    {"id": "visibility-drawn", "recipe": "visibility-safe-action", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 60},
+    {"id": "visibility-forced", "recipe": "visibility-safe-action", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 120},
     {"id": "nvg-menu", "recipe": "nvg-scissor", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 0},
     {"id": "nvg-map", "recipe": "nvg-scissor", "theme": "stock-dark", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "in-map", "frame": 0},
     {"id": "gradient-scaled", "recipe": "drawlist-gradient", "theme": "representative-light-or-high-contrast", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "main-menu", "frame": 0},

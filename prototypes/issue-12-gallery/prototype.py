@@ -100,6 +100,12 @@ def validate_model(manifest: dict, matrix: dict) -> None:
             fail(f"style instrumentation missing: {recipe['id']}")
         if "animation-state" in instrumentation and "captureFrame" not in text:
             fail(f"deterministic animation state missing: {recipe['id']}")
+        if "stable-id" in instrumentation and "###" not in text:
+            fail(f"stable widget identity missing: {recipe['id']}")
+        if "render-ownership" in instrumentation and "SubmissionCount" not in text:
+            fail(f"render ownership seam missing: {recipe['id']}")
+        if "visibility-state" in instrumentation and "InvokeAction" not in text:
+            fail(f"visibility-safe action seam missing: {recipe['id']}")
 
 
 def as_string(value: str) -> str:
@@ -283,6 +289,23 @@ def validate_outputs(outputs: dict[Path, bytes], manifest: dict) -> None:
         fail("not every manifest recipe generated exactly once")
 
 
+def validate_live_install_identity(manifest: dict) -> None:
+    plugins_dir = Path.home() / "OpenplanetNext" / "Plugins"
+    if not plugins_dir.is_dir():
+        return
+    gallery_name = manifest["gallery"]["name"]
+    owners = []
+    for info in plugins_dir.glob("*/info.toml"):
+        text = info.read_text(errors="replace")
+        if f'name = "{gallery_name}"' in text:
+            owners.append(info.parent.name)
+    if len(owners) > 1:
+        fail(
+            f"duplicate live gallery installations own {gallery_name!r}: {owners}; "
+            "unload/remove stale plugin folders so one authoritative gallery remains"
+        )
+
+
 def validate_exclusions() -> None:
     for path in ROOT.rglob("*"):
         if not path.is_file():
@@ -338,6 +361,7 @@ def main() -> int:
         outputs = expected_outputs(manifest)
         write_outputs(outputs)
         validate_outputs(outputs, manifest)
+        validate_live_install_identity(manifest)
         first_digest = tree_digest()
         write_outputs(outputs)
         validate_outputs(outputs, manifest)

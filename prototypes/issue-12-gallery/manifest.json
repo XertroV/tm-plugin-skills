@@ -10,6 +10,24 @@
       "state_contract": {"capture_frames": [0], "instrumentation": ["style-depth"]}
     },
     {
+      "id": "stable-widget-ids", "title": "Stable widget identities", "tier": "default-imgui",
+      "source": "recipes/StableWidgetIds.as", "namespace": "RecipeStableWidgetIds", "entrypoint": "DrawPanel", "surface": "panel", "maturity": "candidate-static-only", "license": "CC0-1.0 OR Unlicense",
+      "expected": "Changing the visible label preserves the same explicit widget identity; repeated controls remain distinct and report stable IDs.",
+      "state_contract": {"capture_frames": [0, 60], "instrumentation": ["stable-id"]}
+    },
+    {
+      "id": "overlay-render-owner", "title": "Overlay-aware render owner", "tier": "default-imgui",
+      "source": "recipes/OverlayRenderOwner.as", "namespace": "RecipeOverlayRenderOwner", "entrypoint": "DrawPanel", "surface": "panel", "maturity": "candidate-static-only", "license": "CC0-1.0 OR Unlicense",
+      "expected": "For both overlay states, exactly one callback owns the surface; the panel reports which callback is authoritative and a submission count of one.",
+      "state_contract": {"capture_frames": [0, 120], "instrumentation": ["render-ownership"]}
+    },
+    {
+      "id": "visibility-safe-action", "title": "Visibility-safe semantic action", "tier": "default-imgui",
+      "source": "recipes/VisibilitySafeAction.as", "namespace": "RecipeVisibilitySafeAction", "entrypoint": "DrawPanel", "surface": "panel", "maturity": "candidate-static-only", "license": "CC0-1.0 OR Unlicense",
+      "expected": "A hidden component rejects the default semantic action without mutation and reports a concise retry/force next step; forced invocation is labeled forced.",
+      "state_contract": {"capture_frames": [0, 60, 120], "instrumentation": ["visibility-state"]}
+    },
+    {
       "id": "nvg-scissor", "title": "Balanced NVG scissor", "tier": "nvg",
       "source": "recipes/NvgScissor.as", "namespace": "RecipeNvgScissor", "entrypoint": "DrawCanvas", "surface": "canvas", "maturity": "candidate-static-only", "license": "CC0-1.0 OR Unlicense",
       "provenance": {"kind": "independent-api-example", "repository": "XertroV/tm-plugin-skills", "file": "prototypes/issue-12-gallery/recipes/NvgScissor.as", "note": "Tiny independent API exercise; deliberately not copied from any plugin helper family."},
