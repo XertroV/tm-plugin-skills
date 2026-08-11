@@ -1,0 +1,10 @@
+[meta]
+name = "Lifecycle Bridge Contract Fixture"
+author = "tm-plugin-skills fixture draft"
+category = "Skillpack Demos"
+version = "0.0.0"
+
+[script]
+module = "LifecycleBridgeFixture"
+timeout = 0
+dependencies = []

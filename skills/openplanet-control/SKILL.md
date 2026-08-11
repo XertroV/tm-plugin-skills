@@ -55,6 +55,13 @@ Use it only when repeated semantic automation justifies maintenance. It is:
 
 Default concrete bounds may be 64 KiB request/response frames with project-recorded deadlines; test zero/one/exact-limit/over-limit, fragmented header/body, malformed length/JSON, partial write, timeout, second client, active-client shutdown, and reload. See [transport and envelopes](references/transport-and-envelopes.md).
 
+The skillpack ships a dependency-free reference client at
+[`scripts/control.py`](scripts/control.py). Its big-endian framing is a host-side
+reference only until the target Openplanet socket implementation passes the
+byte-order probe in the transport reference. The adjacent
+`prototypes/semantic-control-reference/` fixture remains DEV-only and disabled
+by default.
+
 ## Semantic component actions
 
 Every controllable UI/NVG component registers a stable unique ID and narrow named actions (`click`, bounded `hover`, validated `mouse_button`, or domain-specific equivalents). Registration has an owner/generation and is removed on teardown.

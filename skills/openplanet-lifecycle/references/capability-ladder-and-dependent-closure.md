@@ -47,3 +47,9 @@ and do not restore required dependents until a later explicit load request.
 | Dual plugin paths | Byte-compare both against staged source and correlate fresh log identity |
 
 Openplanet lifecycle operations are queued and plugin handles become invalid next frame. Yield and resolve by ID after mutation.
+
+`prototypes/lifecycle-bridge-contract/` is the executable host-side contract
+model for snapshot retention, unload-only behavior, topological restoration,
+and partial retries. It is candidate/model evidence, not a shipped or
+live-confirmed L1 bridge; retain L0 until a real zero-dependency Openplanet
+implementation closes its documented live gates.

@@ -1,0 +1,9 @@
+[meta]
+name = "Semantic Control Fixture DEV"
+author = "tm-plugin-skills reference draft"
+category = "Skillpack Demos"
+version = "0.0.0"
+siteid = 0
+
+[script]
+defines = ["DEV"]
