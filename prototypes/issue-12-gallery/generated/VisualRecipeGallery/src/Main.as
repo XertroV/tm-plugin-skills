@@ -1,7 +1,10 @@
 // GENERATED prototype shell; do not edit. Canonical implementations live in recipes/*.as.
 bool g_windowOpen = true;
-int g_selectedRecipe = 3;
+int g_selectedRecipe = 7;
 int g_captureFrame = 0;
+bool g_animationPlaying = true;
+uint64 g_lastAnimationTick = 0;
+float g_animationFrameCarry = 0.0f;
 
 void RenderMenu() {
     if (UI::BeginMenu("Skillpack Demos")) {
@@ -77,6 +80,8 @@ void EnsureSelectionMatchesCuration(bool featured) {
         if (g_recipes[i].IsFeatured == featured) {
             g_selectedRecipe = int(i);
             g_captureFrame = g_recipes[i].CaptureFrames[0];
+            g_animationPlaying = true;
+            g_lastAnimationTick = 0;
             return;
         }
     }
@@ -84,22 +89,61 @@ void EnsureSelectionMatchesCuration(bool featured) {
 
 void DrawSelectedRecipe() {
     auto recipe = g_recipes[g_selectedRecipe];
+    AdvanceAnimationFrame(recipe);
     UI::Text(recipe.Title);
     UI::TextDisabled(recipe.Id + " · " + recipe.Maturity);
     UI::TextWrapped("Expected: " + recipe.Expected);
     UI::TextWrapped("Provenance: " + recipe.Provenance);
     UI::SetNextItemWidth(260);
-    g_captureFrame = UI::SliderInt("Deterministic capture frame", g_captureFrame, 0, 120);
+    int chosenFrame = UI::SliderInt("Deterministic capture frame", g_captureFrame, 0, 120);
+    if (chosenFrame != g_captureFrame) {
+        g_captureFrame = chosenFrame;
+        g_animationPlaying = false;
+    }
+    if (recipe.IsAnimated) {
+        UI::SameLine();
+        if (UI::Button((g_animationPlaying ? "Pause animation" : "Play animation") + "###animation-play-state-" + recipe.Id)) {
+            g_animationPlaying = !g_animationPlaying;
+            g_lastAnimationTick = 0;
+        }
+    }
     UI::Text("Matrix frames:"); UI::SameLine();
     for (uint i = 0; i < recipe.CaptureFrames.Length; i++) {
         if (i > 0) UI::SameLine();
         int frame = recipe.CaptureFrames[i];
-        if (UI::Button(tostring(frame) + "###capture-frame-" + recipe.Id + "-" + i)) g_captureFrame = frame;
+        if (UI::Button(tostring(frame) + "###capture-frame-" + recipe.Id + "-" + i)) {
+            g_captureFrame = frame;
+            g_animationPlaying = false;
+        }
     }
     UI::SameLine();
-    if (UI::Button("Reset state###reset-state-" + recipe.Id)) g_captureFrame = recipe.CaptureFrames[0];
+    if (UI::Button("Return to frame 0###reset-state-" + recipe.Id)) {
+        g_captureFrame = recipe.CaptureFrames[0];
+        g_animationPlaying = recipe.IsAnimated;
+        g_lastAnimationTick = 0;
+    }
     UI::Separator();
     DrawRecipeByIndex(g_selectedRecipe, g_captureFrame);
+}
+
+void AdvanceAnimationFrame(RecipeMeta@ recipe) {
+    if (!recipe.IsAnimated || !g_animationPlaying) {
+        g_lastAnimationTick = 0;
+        return;
+    }
+    uint64 now = Time::Now;
+    if (g_lastAnimationTick == 0) {
+        g_lastAnimationTick = now;
+        return;
+    }
+    uint64 elapsed = now - g_lastAnimationTick;
+    g_lastAnimationTick = now;
+    g_animationFrameCarry += float(Math::Min(elapsed, uint64(250))) * 30.0f / 1000.0f;
+    int wholeFrames = int(Math::Floor(g_animationFrameCarry));
+    if (wholeFrames > 0) {
+        g_captureFrame = (g_captureFrame + wholeFrames) % 121;
+        g_animationFrameCarry -= float(wholeFrames);
+    }
 }
 
 string TierName(GalleryTier tier) {

@@ -46,7 +46,12 @@ class GalleryEvidenceTests(unittest.TestCase):
             self.assertFalse(record["live"]["native_tests"])
             self.assertFalse(record["live"]["screenshots"])
             self.assertEqual(record["static"]["lsp"], shutil.which("openplanet-lsp") is not None)
-            self.assertEqual(len(record["cases"]), 17)
+            matrix = json.loads(
+                (ROOT / "prototypes" / "issue-12-gallery" / "screenshot-matrix.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(len(record["cases"]), len(matrix["required_cases"]))
             self.assertTrue(all(case["status"] == "pending" for case in record["cases"]))
             self.assertTrue(SCHEMA.is_file())
             jsonschema.validate(record, json.loads(SCHEMA.read_text(encoding="utf-8")))

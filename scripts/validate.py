@@ -17,6 +17,7 @@ QUICK_COMMANDS = (
     (sys.executable, "scripts/check-reviewer-skill.py"),
     (sys.executable, "scripts/check-packaging.py"),
     (sys.executable, "scripts/check-demo-menu-contract.py"),
+    (sys.executable, "tests/test_gallery_curation.py", "-v"),
     (sys.executable, "tests/test_evidence_records.py", "-v"),
     (sys.executable, "tests/test_install_smoke.py", "-v"),
     (sys.executable, "-m", "unittest", "discover", "-s", "tests/semantic_control", "-v"),

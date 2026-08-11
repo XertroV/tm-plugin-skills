@@ -2,20 +2,21 @@
 enum GalleryTier { DefaultImgui, Nvg, Advanced }
 
 class RecipeMeta {
-    string Id; string Title; GalleryTier Tier; bool IsFeatured; string Maturity; string Expected; string Provenance; int[] CaptureFrames;
-    RecipeMeta(const string &in id, const string &in title, GalleryTier tier, bool isFeatured, const string &in maturity, const string &in expected, const string &in provenance, int[] frames) {
-        Id = id; Title = title; Tier = tier; IsFeatured = isFeatured; Maturity = maturity; Expected = expected; Provenance = provenance; CaptureFrames = frames;
+    string Id; string Title; GalleryTier Tier; bool IsFeatured; bool IsAnimated; string Maturity; string Expected; string Provenance; int[] CaptureFrames;
+    RecipeMeta(const string &in id, const string &in title, GalleryTier tier, bool isFeatured, bool isAnimated, const string &in maturity, const string &in expected, const string &in provenance, int[] frames) {
+        Id = id; Title = title; Tier = tier; IsFeatured = isFeatured; IsAnimated = isAnimated; Maturity = maturity; Expected = expected; Provenance = provenance; CaptureFrames = frames;
     }
 }
 
 RecipeMeta@[] g_recipes = {
-    RecipeMeta("theme-table", "Theme-respecting table", GalleryTier::DefaultImgui, false, "candidate-static-only", "A two-column table inherits active theme colors and spacing; changing Openplanet themes changes its chrome.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/ThemeTable.as · independent-api-example", {0}),
-    RecipeMeta("stable-widget-ids", "Stable widget identities", GalleryTier::DefaultImgui, false, "candidate-static-only", "Changing the visible label preserves the same explicit widget identity; repeated controls remain distinct and report stable IDs.", "", {0, 60}),
-    RecipeMeta("overlay-render-owner", "Overlay-aware render owner", GalleryTier::DefaultImgui, false, "candidate-static-only", "Frame 0 shows RenderInterface drawing while Render skips; frame 120 shows the reverse. Both report one shared-window submission and PASS: one copy.", "", {0, 120}),
-    RecipeMeta("visibility-safe-action", "Visibility-safe semantic action", GalleryTier::DefaultImgui, true, "candidate-static-only", "A hidden component rejects the default semantic action without mutation and reports a concise retry/force next step; forced invocation is labeled forced.", "", {0, 60, 120}),
-    RecipeMeta("nvg-scissor", "Balanced NVG scissor", GalleryTier::Nvg, true, "candidate-static-only", "A cyan circle is clipped to a fixed rectangle and a white outline reveals the expected clip boundary.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/NvgScissor.as · independent-api-example", {0}),
-    RecipeMeta("drawlist-gradient", "Clipped draw-list gradient", GalleryTier::Advanced, true, "candidate-static-only", "A fixed-size four-corner gradient stays inside its clip rectangle; clip depth returns to zero.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/DrawListGradient.as · independent-api-example", {0}),
-    RecipeMeta("deterministic-pulse", "Deterministic pulse state", GalleryTier::Advanced, true, "candidate-static-only", "The progress bar and reported phase exactly match capture frames 0, 30, 60, 90, and 120.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/DeterministicPulse.as · independent-api-example", {0, 30, 60, 90, 120}),
+    RecipeMeta("theme-table", "Theme-respecting table", GalleryTier::DefaultImgui, false, false, "candidate-static-only", "A two-column table inherits active theme colors and spacing; changing Openplanet themes changes its chrome.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/ThemeTable.as · independent-api-example", {0}),
+    RecipeMeta("stable-widget-ids", "Stable widget identities", GalleryTier::DefaultImgui, false, false, "candidate-static-only", "Changing the visible label preserves the same explicit widget identity; repeated controls remain distinct and report stable IDs.", "", {0, 60}),
+    RecipeMeta("overlay-render-owner", "Overlay-aware render owner", GalleryTier::DefaultImgui, false, false, "candidate-static-only", "Frame 0 shows RenderInterface drawing while Render skips; frame 120 shows the reverse. Both report one shared-window submission and PASS: one copy.", "", {0, 120}),
+    RecipeMeta("visibility-safe-action", "Visibility-safe semantic action", GalleryTier::DefaultImgui, false, false, "candidate-static-only", "A hidden component rejects the default semantic action without mutation and reports a concise retry/force next step; forced invocation is labeled forced.", "", {0, 60, 120}),
+    RecipeMeta("nvg-scissor", "Balanced NVG scissor", GalleryTier::Nvg, false, false, "candidate-static-only", "A cyan circle is clipped to a fixed rectangle and a white outline reveals the expected clip boundary.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/NvgScissor.as · independent-api-example", {0}),
+    RecipeMeta("drawlist-gradient", "Clipped draw-list gradient", GalleryTier::Advanced, false, false, "candidate-static-only", "A fixed-size four-corner gradient stays inside its clip rectangle; clip depth returns to zero.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/DrawListGradient.as · independent-api-example", {0}),
+    RecipeMeta("deterministic-pulse", "Deterministic pulse state", GalleryTier::Advanced, false, true, "candidate-static-only", "The progress bar and reported phase exactly match capture frames 0, 30, 60, 90, and 120.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/DeterministicPulse.as · independent-api-example", {0, 30, 60, 90, 120}),
+    RecipeMeta("kinetic-spectrum-reactor", "Kinetic spectrum reactor", GalleryTier::Advanced, true, true, "candidate-static-only", "A cyan-violet-amber containment field travels around the panel perimeter and feeds four synchronized conduits into a recessed breathing reactor, with orbital spark trails and radial energy ticks; frame 120 closes the loop by matching frame 0.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/KineticSpectrumReactor.as · independent-api-example", {0, 30, 60, 90, 120}),
 };
 
 void DrawRecipeByIndex(int index, int captureFrame) {
@@ -26,4 +27,5 @@ void DrawRecipeByIndex(int index, int captureFrame) {
     else if (index == 4) RecipeNvgScissor::DrawCanvas(captureFrame);
     else if (index == 5) RecipeDrawListGradient::DrawPanel(captureFrame);
     else if (index == 6) RecipeDeterministicPulse::DrawPanel(captureFrame);
+    else if (index == 7) RecipeKineticSpectrumReactor::DrawPanel(captureFrame);
 }

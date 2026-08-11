@@ -67,7 +67,7 @@ def main() -> None:
     if initial is None or curations[int(initial.group(1))] != "featured":
         fail("gallery initial selection is not featured")
     catalog = (ROOT / "prototypes" / "issue-12-gallery" / "generated" / "VisualRecipeGallery" / "src" / "GeneratedCatalog.as").read_text(encoding="utf-8")
-    generated_curations = re.findall(r"RecipeMeta\([^\n]+, (true|false), \"candidate-static-only\"", catalog)
+    generated_curations = re.findall(r"RecipeMeta\([^\n]+, (true|false), (?:true|false), \"candidate-static-only\"", catalog)
     expected_curations = ["true" if value == "featured" else "false" for value in curations]
     if generated_curations != expected_curations:
         fail("generated catalog curation does not match manifest order")

@@ -68,6 +68,9 @@ def validate_model(manifest: dict, matrix: dict) -> None:
     curations = [recipe["curation"] for recipe in recipes]
     if "featured" not in curations or "boring" not in curations:
         fail("gallery must contain both featured and boring recipes")
+    featured = [recipe for recipe in recipes if recipe["curation"] == "featured"]
+    if not all("showcase-composition" in recipe["state_contract"]["instrumentation"] for recipe in featured):
+        fail("every featured recipe must declare showcase-composition instrumentation")
 
     axes = matrix["axes"]
     ids = {recipe["id"] for recipe in recipes}
@@ -110,6 +113,10 @@ def validate_model(manifest: dict, matrix: dict) -> None:
             fail(f"render ownership seam missing: {recipe['id']}")
         if "visibility-state" in instrumentation and "InvokeAction" not in text:
             fail(f"visibility-safe action seam missing: {recipe['id']}")
+        if "showcase-composition" in instrumentation:
+            for signature in ("AddRectFilledMultiColor", "AddCircleFilled", "AddLine"):
+                if signature not in text:
+                    fail(f"featured showcase composition missing {signature}: {recipe['id']}")
 
 
 def as_string(value: str) -> str:
@@ -123,9 +130,9 @@ def generate_catalog(manifest: dict) -> str:
         "enum GalleryTier { DefaultImgui, Nvg, Advanced }",
         "",
         "class RecipeMeta {",
-        "    string Id; string Title; GalleryTier Tier; bool IsFeatured; string Maturity; string Expected; string Provenance; int[] CaptureFrames;",
-        "    RecipeMeta(const string &in id, const string &in title, GalleryTier tier, bool isFeatured, const string &in maturity, const string &in expected, const string &in provenance, int[] frames) {",
-        "        Id = id; Title = title; Tier = tier; IsFeatured = isFeatured; Maturity = maturity; Expected = expected; Provenance = provenance; CaptureFrames = frames;",
+        "    string Id; string Title; GalleryTier Tier; bool IsFeatured; bool IsAnimated; string Maturity; string Expected; string Provenance; int[] CaptureFrames;",
+        "    RecipeMeta(const string &in id, const string &in title, GalleryTier tier, bool isFeatured, bool isAnimated, const string &in maturity, const string &in expected, const string &in provenance, int[] frames) {",
+        "        Id = id; Title = title; Tier = tier; IsFeatured = isFeatured; IsAnimated = isAnimated; Maturity = maturity; Expected = expected; Provenance = provenance; CaptureFrames = frames;",
         "    }",
         "}",
         "",
@@ -136,8 +143,9 @@ def generate_catalog(manifest: dict) -> str:
         p = recipe.get("provenance")
         provenance = "" if p is None else f"{p['repository']} · {p['file']} · {p['kind']}"
         frames = ", ".join(str(frame) for frame in recipe["state_contract"]["capture_frames"])
+        is_animated = "animation-state" in recipe["state_contract"]["instrumentation"]
         lines.append(
-            f"    RecipeMeta({as_string(recipe['id'])}, {as_string(recipe['title'])}, {tier_expr[recipe['tier']]}, {str(recipe['curation'] == 'featured').lower()}, "
+            f"    RecipeMeta({as_string(recipe['id'])}, {as_string(recipe['title'])}, {tier_expr[recipe['tier']]}, {str(recipe['curation'] == 'featured').lower()}, {str(is_animated).lower()}, "
             f"{as_string(recipe['maturity'])}, {as_string(recipe['expected'])}, {as_string(provenance)}, {{{frames}}}),"
         )
     lines.extend(["};", "", "void DrawRecipeByIndex(int index, int captureFrame) {"])
@@ -154,6 +162,9 @@ def generate_main(manifest: dict) -> str:
 bool g_windowOpen = true;
 int g_selectedRecipe = __INITIAL_RECIPE__;
 int g_captureFrame = 0;
+bool g_animationPlaying = true;
+uint64 g_lastAnimationTick = 0;
+float g_animationFrameCarry = 0.0f;
 
 void RenderMenu() {
     if (UI::BeginMenu("Skillpack Demos")) {
@@ -229,6 +240,8 @@ void EnsureSelectionMatchesCuration(bool featured) {
         if (g_recipes[i].IsFeatured == featured) {
             g_selectedRecipe = int(i);
             g_captureFrame = g_recipes[i].CaptureFrames[0];
+            g_animationPlaying = true;
+            g_lastAnimationTick = 0;
             return;
         }
     }
@@ -236,22 +249,61 @@ void EnsureSelectionMatchesCuration(bool featured) {
 
 void DrawSelectedRecipe() {
     auto recipe = g_recipes[g_selectedRecipe];
+    AdvanceAnimationFrame(recipe);
     UI::Text(recipe.Title);
     UI::TextDisabled(recipe.Id + " · " + recipe.Maturity);
     UI::TextWrapped("Expected: " + recipe.Expected);
     UI::TextWrapped("Provenance: " + recipe.Provenance);
     UI::SetNextItemWidth(260);
-    g_captureFrame = UI::SliderInt("Deterministic capture frame", g_captureFrame, 0, 120);
+    int chosenFrame = UI::SliderInt("Deterministic capture frame", g_captureFrame, 0, 120);
+    if (chosenFrame != g_captureFrame) {
+        g_captureFrame = chosenFrame;
+        g_animationPlaying = false;
+    }
+    if (recipe.IsAnimated) {
+        UI::SameLine();
+        if (UI::Button((g_animationPlaying ? "Pause animation" : "Play animation") + "###animation-play-state-" + recipe.Id)) {
+            g_animationPlaying = !g_animationPlaying;
+            g_lastAnimationTick = 0;
+        }
+    }
     UI::Text("Matrix frames:"); UI::SameLine();
     for (uint i = 0; i < recipe.CaptureFrames.Length; i++) {
         if (i > 0) UI::SameLine();
         int frame = recipe.CaptureFrames[i];
-        if (UI::Button(tostring(frame) + "###capture-frame-" + recipe.Id + "-" + i)) g_captureFrame = frame;
+        if (UI::Button(tostring(frame) + "###capture-frame-" + recipe.Id + "-" + i)) {
+            g_captureFrame = frame;
+            g_animationPlaying = false;
+        }
     }
     UI::SameLine();
-    if (UI::Button("Reset state###reset-state-" + recipe.Id)) g_captureFrame = recipe.CaptureFrames[0];
+    if (UI::Button("Return to frame 0###reset-state-" + recipe.Id)) {
+        g_captureFrame = recipe.CaptureFrames[0];
+        g_animationPlaying = recipe.IsAnimated;
+        g_lastAnimationTick = 0;
+    }
     UI::Separator();
     DrawRecipeByIndex(g_selectedRecipe, g_captureFrame);
+}
+
+void AdvanceAnimationFrame(RecipeMeta@ recipe) {
+    if (!recipe.IsAnimated || !g_animationPlaying) {
+        g_lastAnimationTick = 0;
+        return;
+    }
+    uint64 now = Time::Now;
+    if (g_lastAnimationTick == 0) {
+        g_lastAnimationTick = now;
+        return;
+    }
+    uint64 elapsed = now - g_lastAnimationTick;
+    g_lastAnimationTick = now;
+    g_animationFrameCarry += float(Math::Min(elapsed, uint64(250))) * 30.0f / 1000.0f;
+    int wholeFrames = int(Math::Floor(g_animationFrameCarry));
+    if (wholeFrames > 0) {
+        g_captureFrame = (g_captureFrame + wholeFrames) % 121;
+        g_animationFrameCarry -= float(wholeFrames);
+    }
 }
 
 string TierName(GalleryTier tier) {

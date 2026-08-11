@@ -23,7 +23,12 @@
     {"id": "pulse-030", "recipe": "deterministic-pulse", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 30},
     {"id": "pulse-060", "recipe": "deterministic-pulse", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 60},
     {"id": "pulse-090", "recipe": "deterministic-pulse", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 90},
-    {"id": "pulse-120", "recipe": "deterministic-pulse", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 120}
+    {"id": "pulse-120", "recipe": "deterministic-pulse", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 120},
+    {"id": "reactor-000", "recipe": "kinetic-spectrum-reactor", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 0},
+    {"id": "reactor-030", "recipe": "kinetic-spectrum-reactor", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 30},
+    {"id": "reactor-060", "recipe": "kinetic-spectrum-reactor", "theme": "stock-dark", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "in-map", "frame": 60},
+    {"id": "reactor-090", "recipe": "kinetic-spectrum-reactor", "theme": "representative-light-or-high-contrast", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "main-menu", "frame": 90},
+    {"id": "reactor-120", "recipe": "kinetic-spectrum-reactor", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 120}
   ],
   "capture_evidence": ["fresh PNG", "PNG modification time after reload", "post-change Loaded plugin log window", "no later compile error", "observed critique", "depth counters all zero after draw"]
 }
