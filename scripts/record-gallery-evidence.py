@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -24,6 +25,18 @@ def tree_digest(path: Path) -> str:
     return digest.hexdigest()
 
 
+def source_identity(source_tree_sha256: str) -> str:
+    supplied = os.environ.get("GALLERY_SOURCE_COMMIT")
+    if supplied:
+        return supplied
+    result = subprocess.run(
+        ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, capture_output=True
+    )
+    if result.returncode == 0 and result.stdout.strip():
+        return result.stdout.strip()
+    return f"archive-tree-{source_tree_sha256}"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--static-only", action="store_true")
@@ -34,9 +47,8 @@ def main() -> None:
 
     subprocess.run(["python", str(GALLERY / "prototype.py")], cwd=ROOT, check=True)
     matrix = json.loads((GALLERY / "screenshot-matrix.json").read_text(encoding="utf-8"))
-    commit = subprocess.run(
-        ["git", "rev-parse", "HEAD"], cwd=ROOT, check=True, text=True, capture_output=True
-    ).stdout.strip()
+    source_tree_sha256 = tree_digest(GENERATED)
+    commit = source_identity(source_tree_sha256)
     cases = [
         {
             "id": case["id"],
@@ -52,7 +64,7 @@ def main() -> None:
         "schema_version": 1,
         "component": "VisualRecipeGallery",
         "commit": commit,
-        "source_tree_sha256": tree_digest(GENERATED),
+        "source_tree_sha256": source_tree_sha256,
         "evidence_level": "candidate-static-only",
         "static": {
             "schema": True,

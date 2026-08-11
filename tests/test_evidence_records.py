@@ -8,6 +8,7 @@ import unittest
 import shutil
 import copy
 import importlib.util
+import os
 from pathlib import Path
 
 import jsonschema
@@ -74,6 +75,22 @@ class GalleryEvidenceTests(unittest.TestCase):
         )
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("use --static-only", result.stdout + result.stderr)
+
+    def test_static_runner_accepts_explicit_archive_source_identity(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / "evidence.json"
+            environment = {**os.environ, "GALLERY_SOURCE_COMMIT": "archive-export-2026-08-12"}
+            result = subprocess.run(
+                [sys.executable, str(RUNNER), "--static-only", "--output", str(output)],
+                cwd=ROOT,
+                env=environment,
+                text=True,
+                capture_output=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            record = json.loads(output.read_text(encoding="utf-8"))
+            self.assertEqual(record["commit"], "archive-export-2026-08-12")
+            validate_semantics(record)
 
 
 if __name__ == "__main__":
