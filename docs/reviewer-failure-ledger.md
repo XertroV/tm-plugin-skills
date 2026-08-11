@@ -31,9 +31,11 @@ adversarial review is performed.
   the UI stack; the plugin stops receiving render callbacks and its UI vanishes.
 - **Invariant:** render callbacks remain bounded and exception-minimal; complex
   action execution cannot escape through the active UI stack.
-- **Evidence:** user-observed Openplanet behavior; research Max's plugins for
-  established `startnew(...)` button/action patterns and capture a minimal live
-  reproduction before promotion.
+- **Evidence:** user-observed Openplanet behavior plus containment patterns in
+  `tm-draw-tests/src/Epp/ExtraEditorMenuItem.as:8-70,114-175` and
+  `tm-bosslike/src/Game/Modes/SimpleRM.as:124-162`. No literal engine unwind
+  log was found; capture a minimal live reproduction before promotion. Full
+  evidence: `docs/research/issue-13-adversarial-review-evidence.md`.
 - **Reviewer probe:** trace every render-path call transitively; flag operations
   that can throw, yield, perform I/O, mutate game state, or invoke untrusted
   callbacks inline. Confirm style/ID/clip/scissor scopes are balanced on all
@@ -78,8 +80,9 @@ adversarial review is performed.
   UI, or silent no-op while the plugin believes the action succeeded.
 - **Invariant:** mode-specific work validates current mode and reacquires live
   objects at the point of use.
-- **Evidence:** to be expanded from Editor++, Map Together, Dips++, and other
-  plugins with explicit app/editor/playground guards.
+- **Evidence:** Bosslike normalizes mode-sensitive state in
+  `tm-bosslike/src/TM_State.as:1-155`; Map Together couples room lifetime to
+  editor presence in `tm-map-together/src/EditorFeed.as:400-415`.
 - **Reviewer probe:** exercise menu→playground→editor→menu, map changes, server
   join/leave, spectate, plugin reload, and dependency reload. Find cached nods or
   handles crossing these boundaries.
@@ -94,8 +97,10 @@ adversarial review is performed.
   overwrites newer state; a retry loses the original dependent closure.
 - **Invariant:** every mutation is tied to a generation/session/map identity and
   stale results cannot commit.
-- **Evidence:** lifecycle dependent-closure retry gotcha; Map Together and Dips++
-  packet/state architectures require dedicated comparative research.
+- **Evidence:** lifecycle dependent-closure retry gotcha; Bosslike post-yield
+  stale-state revalidation (`Game/Modes/SimpleRM.as:124-162`); Dips++ connection
+  nonce (`Server/Server.as:154-213`); Map Together expected-map reconciliation
+  (`EditorFeed.as:417-500`).
 - **Reviewer probe:** reorder, duplicate, delay, and drop events/packets; overlap
   actions; change map/server/mode while work is pending; retry after partial
   teardown.
@@ -138,8 +143,10 @@ adversarial review is performed.
   head-of-line blocking, parsing ambiguity, or incorrect reconciliation.
 - **Invariant:** transport and packet architecture follow explicit workload and
   consistency requirements rather than precedent alone.
-- **Evidence:** Dips++ and Map Together intentionally differ; comparative source
-  research is pending.
+- **Evidence:** confirmed comparison in
+  `docs/research/issue-13-adversarial-review-evidence.md`: Dips++ is a sampled
+  JSON API/session client with resume; Map Together is binary ordered editor
+  replication with queued application and map reconciliation.
 - **Reviewer probe:** characterize packet sizes/rates, ordering, partial reads,
   framing, backpressure, retry, disconnect, ownership, and per-frame work;
   simulate malformed, duplicated, delayed, and burst traffic.
@@ -157,23 +164,39 @@ adversarial review is performed.
 - **Invariant:** namespaces define domains; classes own state/lifetimes;
   interfaces/callback bases expose narrow extension points; state machines and
   packet routers make transitions explicit.
-- **Evidence:** Bosslike's planned namespace/class architecture, reusable button
-  inheritance, and mature plugin APIs require focused extraction.
+- **Evidence:** Bosslike's runtime root, normalized state, base mode engine,
+  adapters, split score ownership, animation polymorphism, and subsystem RNG
+  streams are mapped in `docs/research/issue-13-adversarial-review-evidence.md`.
+  Editor++ provides explicit external registration and teardown evidence.
 - **Reviewer probe:** map ownership and dependency direction; identify mutable
   global clusters, feature-condition fan-out, callbacks without lifecycle, and
   code that cannot be tested without rendering/network/game state.
 - **Prevention/evidence gate:** architecture note for nontrivial features,
   cohesive APIs, pure seams, extension tests, and a demo proving intended use.
 
+## Confirmed additional reviewer probes
+
+- A stored `CoroutineFunc@` called inline does not isolate UI exceptions; trace
+  to an actual `startnew(...)` boundary.
+- Snapshot selected values at click time. Do not pass a loop index or reread a
+  mutable selection after the frame.
+- After every yield, revalidate app/editor/playground/session identity and any
+  borrowed object.
+- Define repeated-click policy: disable, coalesce, cancel previous, queue, or
+  explicitly allow concurrency.
+- Give every coroutine an owner, cancellation/generation identity, and cleanup
+  on success, error, timeout, unload, and mode transition.
+- Reject god objects that own transport, parsing, replicated state, logs,
+  persistence, and UI unless their internal boundaries are independently testable.
+- Fault-inject fragmentation, partial writes, malformed lengths, overload,
+  replay, reorder, drop, stale sessions, concurrent writers, and poisoned
+  reconciliation in network reviews.
+
 ## Research queue
 
-- Survey all Max plugins for coroutine isolation from UI callbacks, including
-  argument passing and typed temporary state carriers.
-- Extract reusable button/component superclass patterns and custom `OnClick`
-  overrides.
-- Map Bosslike namespaces, state ownership, mode engines, and extension APIs.
-- Compare Dips++ and Map Together packet framing, routing, state reconciliation,
-  queueing, and performance assumptions.
 - Capture the exact Openplanet UI-stack unwind log signature and a minimal safe
   live reproduction.
-- Turn each confirmed mechanism into reviewer checklist items and tests/demos.
+- Prototype a stable-ID, render-epoch, guarded-coroutine, overridable-action
+  component and test repeated-click/stale-state policies.
+- Build protocol fixtures for confirmed Dips++ and Map Together hazards before
+  promoting specific remediation as proven.

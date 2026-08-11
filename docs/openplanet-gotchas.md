@@ -50,6 +50,13 @@ Reusable button/component classes can provide a stable ID, render-epoch state,
 an overridable semantic `OnClick` method, and one guarded coroutine launcher.
 Subclasses then express behavior without duplicating callback plumbing.
 
+The strongest current precedent is
+`tm-draw-tests/src/Epp/ExtraEditorMenuItem.as`, refined with Bosslike's typed
+userdata and post-yield stale-state checks. A callback merely typed as
+`CoroutineFunc` is not isolated when invoked inline; execution must cross an
+actual `startnew(...)`. Snapshot selected values at click time and define
+repeated-click, cancellation, cleanup, and error-reporting policy.
+
 Catalog concrete failure patterns and adversarial checks in
 `reviewer-failure-ledger.md`; this file keeps the preferred development default.
 
@@ -168,6 +175,34 @@ Provide a checked-in CLI for framing, macros, timeouts, and assertions. Simple
 manual frames may be usable through `nc`; do not make hand-built framing the
 normal automation interface. Dips++ `BetterSocket` is an advanced design input,
 not a reason to copy server/client-specific behavior blindly.
+
+Protocol architecture follows data semantics. Replaceable telemetry and
+queries can use coalescing, correlation, and session resume; ordered
+non-commutative editor operations need epochs, sequence/operation IDs,
+deduplication, bounded ordered queues, and guarded reconciliation. One writer
+owns complete framed writes, and decoders consume exactly the declared frame.
+Test fragmentation, partial writes, malformed lengths, overload, replay,
+reorder, dropped operations, stale sessions, and concurrent writers.
+
+## Architect nontrivial plugins before feature growth
+
+Start with one ownership map covering the runtime shell, normalized game-state
+snapshot, domain engine, environment adapters, UI, persistence, networking, and
+background-task owner. Keep Openplanet callbacks as thin adapters into one root
+runtime object.
+
+Prefer a deep invariant-owning engine with small policy hooks and real adapters
+for genuinely varying environments. Separate per-map observations from
+cross-map rules, isolate deterministic RNG streams by subsystem, and use enums
+once boolean combinations can form invalid workflow states. Every coroutine
+needs an owner, cancellation or generation identity, stale-result checks after
+yields, and teardown on every terminal path.
+
+When external extension is intended, design `module`, `exports`,
+`shared_exports`, minimal shared interfaces, one registration function, and
+explicit kill/unregister behavior up front. Namespaces alone do not establish
+ownership; reject god classes, uncontrolled mutable public fields, competing
+state normalizers, and abandoned parallel architectures.
 
 ## Golden hashes need an update policy
 

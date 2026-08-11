@@ -29,7 +29,8 @@ ways a compiling plugin can fail in use:
 - visual/control/test paths that claim success without runtime evidence.
 
 The reviewer consumes `docs/reviewer-failure-ledger.md` and progressively
-disclosed architecture references. It feeds actionable prevention back into
+disclosed evidence in `docs/research/issue-13-adversarial-review-evidence.md`.
+It feeds actionable prevention back into
 `openplanet-dev`, `openplanet-visual`, `openplanet-control`, tests, and demos.
 
 ## Cross-links
