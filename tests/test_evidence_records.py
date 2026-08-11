@@ -8,6 +8,8 @@ import unittest
 import shutil
 from pathlib import Path
 
+import jsonschema
+
 ROOT = Path(__file__).resolve().parents[1]
 RUNNER = ROOT / "scripts" / "record-gallery-evidence.py"
 SCHEMA = ROOT / "evidence" / "gallery-evidence.schema.json"
@@ -36,6 +38,7 @@ class GalleryEvidenceTests(unittest.TestCase):
             self.assertEqual(len(record["cases"]), 17)
             self.assertTrue(all(case["status"] == "pending" for case in record["cases"]))
             self.assertTrue(SCHEMA.is_file())
+            jsonschema.validate(record, json.loads(SCHEMA.read_text(encoding="utf-8")))
 
     def test_runner_refuses_to_claim_live_without_runtime_inputs(self) -> None:
         result = subprocess.run(
