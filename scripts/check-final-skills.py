@@ -70,7 +70,7 @@ def main() -> None:
         require(phrase in dev, f"openplanet-dev omits {phrase}")
 
     visual = (ROOT / "skills" / "openplanet-visual" / "SKILL.md").read_text()
-    for phrase in ("Theme-preserving ImGui", "stable ID", "one reachable `Skillpack Demos` gallery", "submenu", "fresh screenshot", "startnew", "candidate-static-only"):
+    for phrase in ("Theme-preserving ImGui", "stable ID", "one reachable `Skillpack Demos` gallery", "submenu", "`Boring` tab", "fresh screenshot", "startnew", "candidate-static-only"):
         require(phrase in visual, f"openplanet-visual omits {phrase}")
 
     control = (ROOT / "skills" / "openplanet-control" / "SKILL.md").read_text()

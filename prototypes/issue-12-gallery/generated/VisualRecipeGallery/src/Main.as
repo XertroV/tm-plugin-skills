@@ -1,6 +1,6 @@
 // GENERATED prototype shell; do not edit. Canonical implementations live in recipes/*.as.
 bool g_windowOpen = true;
-int g_selectedRecipe = 0;
+int g_selectedRecipe = 3;
 int g_captureFrame = 0;
 
 void RenderMenu() {
@@ -43,15 +43,42 @@ void DrawGallery() {
 }
 
 void DrawNavigation() {
+    UI::BeginTabBar("gallery-curation-tabs");
+        if (UI::BeginTabItem("Featured")) {
+            DrawNavigationForCuration(true);
+            UI::EndTabItem();
+        }
+        if (UI::BeginTabItem("Boring")) {
+            DrawNavigationForCuration(false);
+            UI::EndTabItem();
+        }
+    UI::EndTabBar();
+}
+
+void DrawNavigationForCuration(bool featured) {
+    EnsureSelectionMatchesCuration(featured);
     GalleryTier lastTier = GalleryTier::Advanced;
     bool first = true;
     for (uint i = 0; i < g_recipes.Length; i++) {
         auto recipe = g_recipes[i];
+        if (recipe.IsFeatured != featured) continue;
         if (first || recipe.Tier != lastTier) {
             UI::SeparatorText(TierName(recipe.Tier));
             lastTier = recipe.Tier; first = false;
         }
         if (UI::Selectable(recipe.Title + "###recipe-" + recipe.Id, int(i) == g_selectedRecipe)) g_selectedRecipe = int(i);
+    }
+}
+
+void EnsureSelectionMatchesCuration(bool featured) {
+    if (g_selectedRecipe >= 0 && g_selectedRecipe < int(g_recipes.Length)
+            && g_recipes[g_selectedRecipe].IsFeatured == featured) return;
+    for (uint i = 0; i < g_recipes.Length; i++) {
+        if (g_recipes[i].IsFeatured == featured) {
+            g_selectedRecipe = int(i);
+            g_captureFrame = g_recipes[i].CaptureFrames[0];
+            return;
+        }
     }
 }
 

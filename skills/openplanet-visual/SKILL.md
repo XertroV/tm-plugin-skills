@@ -39,6 +39,9 @@ See [design and ownership](references/design-and-ownership.md).
    Every demo/test plugin main window is independently toggleable from a checked
    item under a `Skillpack Demos` submenu in Openplanet's Plugins menu. The menu
    item and window close button share one persistent visibility boolean.
+   Lead with the most interesting, reusable demos people will want to adopt.
+   Keep foundational or diagnostic examples available under a clearly secondary
+   `Boring` tab rather than placing them front and center.
 6. **Make reusable galleries deterministic.** For gallery/recipe work, keep
    handwritten recipe code canonical in one place. Put stable ID, title, depth,
    source, maturity, license, optional truthful provenance, expected result,

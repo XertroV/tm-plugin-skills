@@ -29,6 +29,9 @@ This repository is in Wayfinder planning mode. GitHub Issues are the canonical d
 - Put Openplanet `[Test]` coverage in a neighboring `Feature_Test.as` companion when the behavior is testable. The companion must exercise the public behavior and important failure or boundary cases, not merely compile.
 - Follow `docs/testing-openplanet-plugins.md` for signatures, assertions, context lifetime, safe test seams, invocation, and live evidence.
 - Every visual example—stable, candidate, prototype, recipe, helper, and interactive component—must have a selectable live demo in the shared Visual Recipe Gallery prototype window. Extend the gallery manifest, navigation, deterministic state/capture matrix, expected result, and adjacent test rather than leaving visual sample code unreachable or split across untracked windows.
+- Curate the gallery for people looking for reusable ideas: interesting demos are
+  front and center, while foundational/diagnostic examples remain reachable under
+  a secondary `Boring` tab. Do not delete boring evidence just to improve curation.
 - Give non-visual components and behaviors a `Skillpack Demos` demo whenever their contract can be shown effectively through controls, state readouts, logs, deterministic fault probes, or another observable surface. Record an explicit reviewed non-applicability only when a demo would not communicate useful behavior.
 - Every demo/test plugin main window must be independently toggleable and listed
   under a `Skillpack Demos` submenu in Openplanet's Plugins menu. The checked menu

@@ -43,6 +43,10 @@ def main() -> None:
 
     if window_plugins == 0:
         fail("no Skillpack Demos main windows found")
+    gallery = (ROOT / "prototypes" / "issue-12-gallery" / "generated" / "VisualRecipeGallery" / "src" / "Main.as").read_text(encoding="utf-8")
+    for phrase in ('UI::BeginTabItem("Featured")', 'UI::BeginTabItem("Boring")', "EnsureSelectionMatchesCuration"):
+        if phrase not in gallery:
+            fail(f"gallery curation contract missing {phrase}")
     print(f"demo menu validation passed ({window_plugins} toggleable main windows)")
 
 

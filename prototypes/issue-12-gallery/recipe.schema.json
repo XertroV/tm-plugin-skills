@@ -20,11 +20,12 @@
       "type": "array", "minItems": 1,
       "items": {
         "type": "object", "additionalProperties": false,
-        "required": ["id", "title", "tier", "source", "namespace", "entrypoint", "surface", "maturity", "license", "expected", "state_contract"],
+        "required": ["id", "title", "tier", "curation", "source", "namespace", "entrypoint", "surface", "maturity", "license", "expected", "state_contract"],
         "properties": {
           "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"},
           "title": {"type": "string", "minLength": 1},
           "tier": {"enum": ["default-imgui", "nvg", "advanced"]},
+          "curation": {"enum": ["featured", "boring"]},
           "source": {"type": "string", "pattern": "^recipes/[A-Za-z0-9_-]+\\.as$"},
           "namespace": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]+$"},
           "entrypoint": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]+$"},

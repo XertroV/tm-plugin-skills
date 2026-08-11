@@ -65,6 +65,10 @@ def validate_model(manifest: dict, matrix: dict) -> None:
         if provenance is not None and provenance["file"] != f"prototypes/issue-12-gallery/{recipe['source']}":
             fail(f"present provenance file does not identify canonical source: {recipe['id']}")
 
+    curations = [recipe["curation"] for recipe in recipes]
+    if "featured" not in curations or "boring" not in curations:
+        fail("gallery must contain both featured and boring recipes")
+
     axes = matrix["axes"]
     ids = {recipe["id"] for recipe in recipes}
     seen_cases: set[str] = set()
@@ -119,9 +123,9 @@ def generate_catalog(manifest: dict) -> str:
         "enum GalleryTier { DefaultImgui, Nvg, Advanced }",
         "",
         "class RecipeMeta {",
-        "    string Id; string Title; GalleryTier Tier; string Maturity; string Expected; string Provenance; int[] CaptureFrames;",
-        "    RecipeMeta(const string &in id, const string &in title, GalleryTier tier, const string &in maturity, const string &in expected, const string &in provenance, int[] frames) {",
-        "        Id = id; Title = title; Tier = tier; Maturity = maturity; Expected = expected; Provenance = provenance; CaptureFrames = frames;",
+        "    string Id; string Title; GalleryTier Tier; bool IsFeatured; string Maturity; string Expected; string Provenance; int[] CaptureFrames;",
+        "    RecipeMeta(const string &in id, const string &in title, GalleryTier tier, bool isFeatured, const string &in maturity, const string &in expected, const string &in provenance, int[] frames) {",
+        "        Id = id; Title = title; Tier = tier; IsFeatured = isFeatured; Maturity = maturity; Expected = expected; Provenance = provenance; CaptureFrames = frames;",
         "    }",
         "}",
         "",
@@ -133,7 +137,7 @@ def generate_catalog(manifest: dict) -> str:
         provenance = "" if p is None else f"{p['repository']} · {p['file']} · {p['kind']}"
         frames = ", ".join(str(frame) for frame in recipe["state_contract"]["capture_frames"])
         lines.append(
-            f"    RecipeMeta({as_string(recipe['id'])}, {as_string(recipe['title'])}, {tier_expr[recipe['tier']]}, "
+            f"    RecipeMeta({as_string(recipe['id'])}, {as_string(recipe['title'])}, {tier_expr[recipe['tier']]}, {str(recipe['curation'] == 'featured').lower()}, "
             f"{as_string(recipe['maturity'])}, {as_string(recipe['expected'])}, {as_string(provenance)}, {{{frames}}}),"
         )
     lines.extend(["};", "", "void DrawRecipeByIndex(int index, int captureFrame) {"])
@@ -145,9 +149,10 @@ def generate_catalog(manifest: dict) -> str:
 
 
 def generate_main(manifest: dict) -> str:
+    initial_recipe = next(i for i, recipe in enumerate(manifest["recipes"]) if recipe["curation"] == "featured")
     return """// GENERATED prototype shell; do not edit. Canonical implementations live in recipes/*.as.
 bool g_windowOpen = true;
-int g_selectedRecipe = 0;
+int g_selectedRecipe = __INITIAL_RECIPE__;
 int g_captureFrame = 0;
 
 void RenderMenu() {
@@ -190,15 +195,42 @@ void DrawGallery() {
 }
 
 void DrawNavigation() {
+    UI::BeginTabBar("gallery-curation-tabs");
+        if (UI::BeginTabItem("Featured")) {
+            DrawNavigationForCuration(true);
+            UI::EndTabItem();
+        }
+        if (UI::BeginTabItem("Boring")) {
+            DrawNavigationForCuration(false);
+            UI::EndTabItem();
+        }
+    UI::EndTabBar();
+}
+
+void DrawNavigationForCuration(bool featured) {
+    EnsureSelectionMatchesCuration(featured);
     GalleryTier lastTier = GalleryTier::Advanced;
     bool first = true;
     for (uint i = 0; i < g_recipes.Length; i++) {
         auto recipe = g_recipes[i];
+        if (recipe.IsFeatured != featured) continue;
         if (first || recipe.Tier != lastTier) {
             UI::SeparatorText(TierName(recipe.Tier));
             lastTier = recipe.Tier; first = false;
         }
         if (UI::Selectable(recipe.Title + "###recipe-" + recipe.Id, int(i) == g_selectedRecipe)) g_selectedRecipe = int(i);
+    }
+}
+
+void EnsureSelectionMatchesCuration(bool featured) {
+    if (g_selectedRecipe >= 0 && g_selectedRecipe < int(g_recipes.Length)
+            && g_recipes[g_selectedRecipe].IsFeatured == featured) return;
+    for (uint i = 0; i < g_recipes.Length; i++) {
+        if (g_recipes[i].IsFeatured == featured) {
+            g_selectedRecipe = int(i);
+            g_captureFrame = g_recipes[i].CaptureFrames[0];
+            return;
+        }
     }
 }
 
@@ -227,7 +259,7 @@ string TierName(GalleryTier tier) {
     if (tier == GalleryTier::Nvg) return "2 · NVG recipes";
     return "3 · Advanced composition (opt-in)";
 }
-"""
+""".replace("__INITIAL_RECIPE__", str(initial_recipe))
 
 
 def generate_info(manifest: dict) -> str:

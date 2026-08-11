@@ -18,6 +18,9 @@
 14. Every demo/test plugin main window is independently toggleable and listed
     under a `Skillpack Demos` submenu in the Plugins menu; the menu checkmark and
     window close button share one visibility state. Windowless libraries are exempt.
+15. Every recipe declares `featured` or `boring`. The gallery opens on Featured,
+    which contains the most interesting reusable demos. Foundational/diagnostic
+    recipes remain selectable under the secondary Boring tab.
 
 ## Live gates (mandatory before any promotion; intentionally not claimed here)
 

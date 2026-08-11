@@ -1,5 +1,14 @@
 # Openplanet implementation gotchas
 
+## LSP/runtime UI signature parity
+
+- `openplanet-lsp` may accept a UI signature that differs from the tested
+  Openplanet runtime. Openplanet 1.29.0 exposed `UI::BeginTabBar` as `void`, so
+  `if (UI::BeginTabBar(...))` passed LSP but failed in-game compilation. Call it
+  unconditionally and preserve both static and fresh runtime diagnostics.
+- The same runtime rejected `UI::BulletText`; use presentational
+  `UI::Text("• " + text)` when a bullet helper is not essential.
+
 These are defaults learned from real plugin work. Apply them early; they prevent
 bugs that are disproportionately difficult to diagnose after components spread
 across multiple plugins.
