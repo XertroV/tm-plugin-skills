@@ -14,6 +14,7 @@ This repository is in Wayfinder planning mode. GitHub Issues are the canonical d
 - Portable default: the plugin repository may itself be a folder inside Openplanet's `Plugins/` directory.
 - Project-specific build scripts, `openplanet-lsp`, RemoteBuild, MCP bridges, and screenshot tooling are capabilities to detect, not universal prerequisites.
 - Skills must be concise, opinionated, progressively disclosed, and backed by observable completion gates.
+- Read `docs/openplanet-gotchas.md` before designing or changing Openplanet components. Preserve its experienced defaults unless current evidence justifies and documents an exception.
 
 ## Repository work
 

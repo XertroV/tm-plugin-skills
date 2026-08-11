@@ -17,6 +17,7 @@ The command validates `recipe.schema.json` and `manifest.json`, rebuilds `genera
 - `recipes/*.as` is the only handwritten implementation of a recipe.
 - A neighboring `Feature_Test.as` is the canonical companion for Openplanet `[Test]` functions and is assembled beside `Feature.as`.
 - `docs/testing-openplanet-plugins.md` defines the companion signature, safe test seams, Developer-menu workflow, and live evidence gate.
+- `docs/openplanet-gotchas.md` records callback, identity, export, diagnostics, control, and visual defaults that examples must demonstrate rather than merely mention.
 - `SkillpackDemoLib` owns reusable dev-only helpers. It exposes implementation files through ordinary `exports`, so Openplanet compiles those helpers into each dependent demo plugin. Use `shared_exports` only when cross-plugin shared identity/state is actually required.
 - `manifest.json` is the only handwritten catalog/navigation/license record. Provenance may be recorded when known and useful but is optional.
 - `generated/VisualRecipeGallery/src/recipes/*.as` is a byte-for-byte assembly output. Editing it fails drift validation and the next run overwrites it.
