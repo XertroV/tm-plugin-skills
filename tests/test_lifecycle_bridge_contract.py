@@ -1,12 +1,46 @@
 #!/usr/bin/env python3
 import json
+import importlib.util
 import subprocess
+import socket
+import threading
 import sys
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = ROOT / "prototypes" / "lifecycle-bridge-contract" / "lifecycle_bridge.py"
+SPEC = importlib.util.spec_from_file_location("lifecycle_bridge", MODEL)
+assert SPEC is not None and SPEC.loader is not None
+lifecycle_bridge = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = lifecycle_bridge
+SPEC.loader.exec_module(lifecycle_bridge)
+
+
+class OneShotLifecycleServer:
+    def __init__(self, response: bytes):
+        self.response = response
+        self.listener = socket.socket()
+        self.listener.bind(("127.0.0.1", 0))
+        self.listener.listen(1)
+        self.port = self.listener.getsockname()[1]
+        self.thread = threading.Thread(target=self.run)
+        self.thread.start()
+
+    def run(self):
+        try:
+            conn, _ = self.listener.accept()
+            with conn:
+                while not conn.recv(4096).endswith(b"\n"):
+                    pass
+                conn.sendall(self.response)
+        finally:
+            self.listener.close()
+
+    def join(self):
+        self.thread.join(timeout=2)
+        if self.thread.is_alive():
+            raise AssertionError("lifecycle server did not stop")
 
 
 class ModelSession:
@@ -136,15 +170,25 @@ class LifecycleBridgeContractTests(unittest.TestCase):
         self.assertTrue(self.model.request("status")["ok"])
 
     def test_tcp_client_rejects_non_loopback_and_oversized_request(self):
-        sys.path.insert(0, str(ROOT / "prototypes" / "lifecycle-bridge-contract"))
-        import lifecycle_bridge
-
         request = {"v": 1, "id": "r1", "route": "status", "data": {}}
         with self.assertRaisesRegex(ValueError, "loopback"):
             lifecycle_bridge.call_tcp("example.com", 30007, 1.0, request)
         request["data"] = {"value": "x" * 70000}
         with self.assertRaisesRegex(ValueError, "65536"):
             lifecycle_bridge.call_tcp("127.0.0.1", 30007, 1.0, request)
+
+    def test_tcp_client_rejects_mismatched_correlation_and_oversized_response(self):
+        request = {"v": 1, "id": "r1", "route": "status", "data": {}}
+        bad = json.dumps({"v": 1, "id": "stale", "route": "status", "ok": True}).encode() + b"\n"
+        server = OneShotLifecycleServer(bad)
+        with self.assertRaisesRegex(RuntimeError, "correlation"):
+            lifecycle_bridge.call_tcp("127.0.0.1", server.port, 1.0, request)
+        server.join()
+
+        server = OneShotLifecycleServer(b"x" * (lifecycle_bridge.MAX_MESSAGE + 1))
+        with self.assertRaisesRegex(RuntimeError, "65536"):
+            lifecycle_bridge.call_tcp("127.0.0.1", server.port, 1.0, request)
+        server.join()
 
 
 if __name__ == "__main__":

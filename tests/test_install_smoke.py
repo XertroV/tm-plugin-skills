@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import shutil
+import os
 import subprocess
 import tempfile
 import unittest
@@ -34,10 +35,13 @@ class InstallSmokeTests(unittest.TestCase):
             temporary_path = Path(temporary)
             home = temporary_path / "home"
             environment = {
-                **__import__("os").environ,
+                **os.environ,
                 "HOME": str(home),
                 "XDG_CONFIG_HOME": str(temporary_path / "config"),
                 "XDG_CACHE_HOME": str(temporary_path / "cache"),
+                "npm_config_cache": str(temporary_path / "npm-cache"),
+                "npm_config_userconfig": str(temporary_path / "npmrc"),
+                "NPM_CONFIG_GLOBALCONFIG": str(temporary_path / "global-npmrc"),
             }
             command = ["npx", "--yes", "skills@1.4.1", "add", "."]
             for name in sorted(EXPECTED):
