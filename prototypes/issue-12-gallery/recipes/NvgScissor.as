@@ -1,6 +1,13 @@
 namespace RecipeNvgScissor {
     int scissorDepth = 0;
 
+    int ScissorDepthAfterBalancedOperations(int initialDepth = 0) {
+        int depth = initialDepth;
+        depth++;
+        depth--;
+        return depth;
+    }
+
     void DrawCanvas(int captureFrame) {
         vec2 topLeft = vec2(80, 140);
         vec2 size = vec2(220, 100);

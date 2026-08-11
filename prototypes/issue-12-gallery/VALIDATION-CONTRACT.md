@@ -11,7 +11,8 @@
 7. No binary/assets/fonts, forbidden source imports, reviewer/admin artifacts, or unsafe policy/evasion content enter the prototype.
 8. `openplanet-lsp check` runs for both `generated/SkillpackDemoLib` and dependent `generated/VisualRecipeGallery` (with the generated plugin directory configured for dependency resolution) and must report zero diagnostics.
 9. Running the command twice produces the same tree digest.
-10. Each testable feature uses a neighboring `Feature_Test.as` with `[Test]` functions. The filename is the skillpack convention; Openplanet discovers `[Test]` metadata. Companion tests compile into the demo plugin and directly test both feature behavior and compiled-in ordinary exports. Every manifest recipe must have a companion test unless the manifest records a concrete, reviewed reason that it cannot be tested through the current Openplanet test API.
+10. Each testable feature uses a neighboring `Feature_Test.as` with `[Test]` functions. The filename is the skillpack convention; Openplanet discovers `[Test]` metadata. Companion tests compile into the demo plugin and directly test feature behavior. Ordinary exports are compiled into dependent modules rather than the library's own module, so their focused tests live in a dependent demo companion. Every manifest recipe must have a companion test unless the manifest records a concrete, reviewed reason that it cannot be tested through the current Openplanet test API.
+11. Ordinary tests do not invoke UI, draw-list, or NVG drawing APIs. They exercise extracted pure seams; live demo and screenshot gates prove actual rendering and stack restoration.
 
 ## Live gates (mandatory before any promotion; intentionally not claimed here)
 

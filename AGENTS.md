@@ -25,6 +25,7 @@ This repository is in Wayfinder planning mode. GitHub Issues are the canonical d
 
 - Every new or changed reusable component, helper, recipe, or behavioral feature must expand both automated tests and an incrementally runnable demo. Do not add implementation without adding or updating its evidence in the same change.
 - Put Openplanet `[Test]` coverage in a neighboring `Feature_Test.as` companion when the behavior is testable. The companion must exercise the public behavior and important failure or boundary cases, not merely compile.
+- Follow `docs/testing-openplanet-plugins.md` for signatures, assertions, context lifetime, safe test seams, invocation, and live evidence.
 - Add each visual or interactive component to a `Skillpack Demos` plugin so it can be selected and inspected in Trackmania. Extend the manifest, deterministic state/capture matrix, and expected result instead of leaving unreachable sample code.
 - Reusable demo infrastructure belongs in `SkillpackDemoLib`. Prefer ordinary `exports` so stateless helpers are compiled into each dependent demo plugin; reserve `shared_exports` for genuine cross-plugin identity or shared state.
 - Before moving to the next component, dogfood the changed example: run `openplanet-lsp`, compile/load it in Openplanet, compare diagnostics and warnings, execute applicable `[Test]` cases, exercise behavior, and capture/review fresh visual evidence when it renders.

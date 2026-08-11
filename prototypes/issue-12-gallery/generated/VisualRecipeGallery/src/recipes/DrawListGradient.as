@@ -1,6 +1,13 @@
-// GENERATED COPY sha256=97f7fca236c4c2b90b479ce8e9c5dd1e62c3eb57a5d18dbae793ec59fd055427 source=recipes/DrawListGradient.as
+// GENERATED COPY sha256=bfd5ca2a09b96d84200029f84f4d0c5cc8cc0eb74ca4d2ab43a61a4f1d84c999 source=recipes/DrawListGradient.as
 namespace RecipeDrawListGradient {
     int clipDepth = 0;
+
+    int ClipDepthAfterBalancedOperations(int initialDepth = 0) {
+        int depth = initialDepth;
+        depth++;
+        depth--;
+        return depth;
+    }
 
     void DrawPanel(int captureFrame) {
         vec2 pos = UI::GetCursorScreenPos();

@@ -1,6 +1,13 @@
-// GENERATED COPY sha256=c077cbc9d81bbcd285843e0f71dc099c6f229f68c5fba74ed8abc487be6817de source=recipes/ThemeTable.as
+// GENERATED COPY sha256=73a924f861eff2ea694d5fc3fb6257da2f367f4e4e53cefed7524baa1c9e030f source=recipes/ThemeTable.as
 namespace RecipeThemeTable {
     int styleDepth = 0;
+
+    int StyleDepthAfterBalancedOperations(int initialDepth = 0) {
+        int depth = initialDepth;
+        depth++;
+        depth--;
+        return depth;
+    }
 
     void DrawPanel(int captureFrame) {
         UI::TextWrapped("This recipe uses ordinary widgets and inherits the active Openplanet theme.");

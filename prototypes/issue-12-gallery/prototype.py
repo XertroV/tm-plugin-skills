@@ -238,6 +238,7 @@ def expected_outputs(manifest: dict) -> dict[Path, bytes]:
     outputs: dict[Path, bytes] = {
         LIB_OUT / "info.toml": generate_library_info().encode(),
         LIB_OUT / "Exports.as": generate_library_exports().encode(),
+
         OUT / "info.toml": generate_info(manifest).encode(),
         OUT / "src" / "Main.as": generate_main(manifest).encode(),
         OUT / "src" / "GeneratedCatalog.as": generate_catalog(manifest).encode(),

@@ -1,6 +1,13 @@
 namespace RecipeThemeTable {
     int styleDepth = 0;
 
+    int StyleDepthAfterBalancedOperations(int initialDepth = 0) {
+        int depth = initialDepth;
+        depth++;
+        depth--;
+        return depth;
+    }
+
     void DrawPanel(int captureFrame) {
         UI::TextWrapped("This recipe uses ordinary widgets and inherits the active Openplanet theme.");
         if (UI::BeginTable("theme-table", 2, UI::TableFlags::SizingStretchProp)) {

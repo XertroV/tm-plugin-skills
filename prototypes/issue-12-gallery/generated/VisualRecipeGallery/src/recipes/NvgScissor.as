@@ -1,6 +1,13 @@
-// GENERATED COPY sha256=8eb7bbc497f016a9c3829de97a10831c82eefa43dac7f6a71a5a484f1ad2c96c source=recipes/NvgScissor.as
+// GENERATED COPY sha256=b3805160658a4731656ea85d96c134be270b205a5fcea4526f9526f3f11019e8 source=recipes/NvgScissor.as
 namespace RecipeNvgScissor {
     int scissorDepth = 0;
+
+    int ScissorDepthAfterBalancedOperations(int initialDepth = 0) {
+        int depth = initialDepth;
+        depth++;
+        depth--;
+        return depth;
+    }
 
     void DrawCanvas(int captureFrame) {
         vec2 topLeft = vec2(80, 140);

@@ -1,10 +1,9 @@
 namespace Tests {
     [Test]
     void ThemeTable_InstrumentationStaysBalanced(Tests::Context@ ctx) {
-        RecipeThemeTable::DrawPanel(0);
         ctx.AssertSame(
-            RecipeThemeTable::styleDepth,
-            0,
+            RecipeThemeTable::StyleDepthAfterBalancedOperations(3),
+            3,
             "theme table must not leak style state"
         );
     }

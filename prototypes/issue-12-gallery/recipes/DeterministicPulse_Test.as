@@ -10,6 +10,10 @@ namespace Tests {
 
     [Test]
     void SkillpackDemoLib_PhaseHandlesInvalidRange(Tests::Context@ ctx) {
-        ctx.AssertSameApprox(SkillpackDemoLib::PhaseFromFrame(10, 0), 0.0f, "an invalid maximum returns zero");
+        ctx.AssertSameApprox(
+            SkillpackDemoLib::PhaseFromFrame(10, 0),
+            0.0f,
+            "an invalid maximum returns zero in the dependent module"
+        );
     }
 }

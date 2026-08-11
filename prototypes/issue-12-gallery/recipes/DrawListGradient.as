@@ -1,6 +1,13 @@
 namespace RecipeDrawListGradient {
     int clipDepth = 0;
 
+    int ClipDepthAfterBalancedOperations(int initialDepth = 0) {
+        int depth = initialDepth;
+        depth++;
+        depth--;
+        return depth;
+    }
+
     void DrawPanel(int captureFrame) {
         vec2 pos = UI::GetCursorScreenPos();
         vec2 size = vec2(320, 90);

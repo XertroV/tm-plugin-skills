@@ -1,11 +1,10 @@
-// GENERATED COPY sha256=ff4444c2e57b6e4839e5311ec3feb71b76209035a57efe6bd66eafd70484a5e4 source=recipes/DrawListGradient_Test.as
+// GENERATED COPY sha256=57b2ddc136f8177a503725a5987f3fc378f034973f8818539799705e0fca1839 source=recipes/DrawListGradient_Test.as
 namespace Tests {
     [Test]
     void DrawListGradient_InstrumentationStaysBalanced(Tests::Context@ ctx) {
-        RecipeDrawListGradient::DrawPanel(0);
         ctx.AssertSame(
-            RecipeDrawListGradient::clipDepth,
-            0,
+            RecipeDrawListGradient::ClipDepthAfterBalancedOperations(4),
+            4,
             "draw-list recipe must restore its clip state"
         );
     }

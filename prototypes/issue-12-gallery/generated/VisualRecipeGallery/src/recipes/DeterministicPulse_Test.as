@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=e344d3711ea15b0403e4caf44366e5c7fa19398f4ea1e4ad11fb0f9bc98d1187 source=recipes/DeterministicPulse_Test.as
+// GENERATED COPY sha256=7f4a04e03292b5efe628b484eab1f75e0f30b3a8eeb60709a68aec08eeb65783 source=recipes/DeterministicPulse_Test.as
 namespace Tests {
     [Test]
     void DeterministicPulse_PhaseClampsAndNormalizes(Tests::Context@ ctx) {
@@ -11,6 +11,10 @@ namespace Tests {
 
     [Test]
     void SkillpackDemoLib_PhaseHandlesInvalidRange(Tests::Context@ ctx) {
-        ctx.AssertSameApprox(SkillpackDemoLib::PhaseFromFrame(10, 0), 0.0f, "an invalid maximum returns zero");
+        ctx.AssertSameApprox(
+            SkillpackDemoLib::PhaseFromFrame(10, 0),
+            0.0f,
+            "an invalid maximum returns zero in the dependent module"
+        );
     }
 }
