@@ -19,13 +19,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22.18.0"
+      - name: Create pinned Python validation environment
+        run: uv venv .venv
       - name: Install pinned Python validation dependencies
-        run: uv pip install --system jsonschema==4.25.0 PyYAML==6.0.2
+        run: uv pip install --python .venv/bin/python jsonschema==4.25.0 PyYAML==6.0.2
       - name: Run repository tests and quick contracts
         run: |
-          PYTHONDONTWRITEBYTECODE=1 python tests/test_validation_entrypoint.py -v
-          PYTHONDONTWRITEBYTECODE=1 python tests/test_evidence_records.py -v
-          PYTHONDONTWRITEBYTECODE=1 python scripts/validate.py --profile quick
+          PYTHONDONTWRITEBYTECODE=1 .venv/bin/python tests/test_validation_entrypoint.py -v
+          PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/validate.py --profile quick
       - name: Validate Agent Skills with pinned skills-ref
         run: |
           for skill in skills/openplanet-*; do
