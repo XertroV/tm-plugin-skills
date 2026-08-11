@@ -42,7 +42,7 @@ There is **no** public page at `/store`. The public catalog is `/plugins`; distr
 
 ## 2. Pre-code compatibility gate (all plugins)
 
-Apply these **before writing feature code**, even for local-only work. They are hard to retrofit and they match either (a) ToS rules that reviewers will enforce on any later publish path, or (b) runtime integrity rules that affect players as soon as a plugin is loaded outside a carefully labelled exception.
+Apply these **before writing feature code**, even for local-only work. The upload ToS legally attaches at upload, but the skillpack deliberately adopts the constraints below as its stricter universal product policy because they are hard to retrofit and protect players, authors, reviewers, and the community. Do not misstate that broader skillpack policy as the legal scope of the upload agreement.
 
 ### 2.1 Hard product/legal constraints (ToS-shaped)
 
@@ -171,20 +171,20 @@ From [Privacy policy](https://openplanet.dev/privacy) and site login chrome:
 
 ---
 
-## 4. Intentionally non-publishable local-only exceptions
+## 4. Legitimate local-only development
 
-Label these clearly in repo docs / skill output as **`local-only` / `do-not-publish`**. They are valid for private development under Developer mode but must not be treated as store-ready.
+`local-only` / `do-not-publish` describes a distribution decision, not a waiver from safety, rights, integrity, or the skillpack's non-deception policy. The skillpack may assist legitimate unsigned development and remediation, but must refuse work that facilitates infringement, paid-feature bypass, harmful exploitation, review evasion, prohibited bulk scraping, or false disclosure.
 
 | Exception class | Why non-publishable | Runtime reality |
 |-----------------|---------------------|-----------------|
 | **Unsigned folder plugins** | Not signed; Regular mode users will not load them | Requires Developer mode ([Signature modes](https://openplanet.dev/docs/tutorials/signature-modes); [Developer Mode news](https://openplanet.dev/news/2022/developer-mode)). Club edition required for unsigned per that news. |
-| **ToS-violating prototypes** (NSFW, crypto, paid bypass, bulk LB scrape, mostly-AI throwaways, unlicensed third-party code) | Explicit ToS rejection | May still run locally in Developer mode; never hand to publish skills as “almost ready” |
+| **Policy-remediation prototypes** | Existing work may need prohibited material removed, permissions added, provenance repaired, scraping redesigned, or AI usage truthfully disclosed | Assistance is limited to diagnosis and remediation; local-only status never authorizes the prohibited behavior |
 | **Unapproved competitive helpers intended for ranked/online play** | School mode / competition integrity policy | Practice helpers belong in **School** signing, not silent Regular features ([School mode](https://openplanet.dev/docs/school-mode)) |
 | **Trusted-dev-only workflows** | Depend on personal trusted flag / abuse risk | Trusted status is case-by-case; abuse → revoke + ban risk ([user/trusted](https://openplanet.dev/user/trusted)) |
 | **Breakage / exploit probes** | Unpublish + community harm; school bypasses must be reported privately | School-mode bypasses: confidential email to Miss per [school developer preview news](https://openplanet.dev/news/2024/school-mode-developer-preview) |
 | **Auth-secret or admin-only tooling** | Secrets and admin surfaces are not plugin payload | Auth secrets live in plugin admin ([Auth API](https://openplanet.dev/docs/reference/auth)) |
 
-**Labelling recommendation for the skillpack (non-normative to Openplanet):** when a plugin or recipe cannot meet §2–§3, emit an explicit marker such as `publication: none` / `local-only: true` and refuse store-oriented completion gates.
+**Labelling recommendation for the skillpack (non-normative to Openplanet):** legitimate unsigned or private work may use `publication: none` / `local-only: true`. If work conflicts with §2, refuse enabling assistance and offer remediation; do not use a local-only marker to launder it into an acceptable state.
 
 **Allowed local pattern that is still publishable later:** develop as `Plugins/<ID>/` folder; optionally install signed `.op` of same ID for non-dev testing. Mode decides which wins ([user/trusted](https://openplanet.dev/user/trusted)).
 

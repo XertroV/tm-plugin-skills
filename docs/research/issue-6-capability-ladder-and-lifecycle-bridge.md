@@ -358,25 +358,26 @@ Prefer `SourcePath` + `Source` + `Type` from the live `Plugin@` at snapshot time
 **`reload` sequence**
 
 1. Resolve T; if missing, error.
-2. `snapshot = closure(T)`; store as `last_snapshot[T.id]`.
+2. If `last_snapshot[T.id]` contains an unrestored snapshot from a prior failed reload, reuse it. Otherwise compute `snapshot = closure(T)` and store it as `last_snapshot[T.id]`. A retry must not overwrite retained failure memory with the now-empty closure; only explicit `snapshot_closure` replacement may do that.
 3. Capture T’s own reload descriptor.
 4. Byte-mark or timestamp-mark log (optional client-side) before mutation.
 5. `Meta::UnloadPlugin(T)` (engine unloads dependents); yield until T gone from `AllPlugins`.
 6. Re-load T via `Meta::LoadPlugin` using descriptor (prefer explicit load over `ReloadPlugin` when path/type known — matches RemoteBuild and allows failed-compile detection via null handle + log).
-7. If T failed:
+7. After yielding, treat T as tentatively loaded only when its handle remains present; when the client can read `Openplanet.log`, defer dependent restoration until the client confirms a fresh target-loaded event with no attributable later compile error. If target health cannot yet be confirmed, return a pending/failed health phase without restoring dependents.
+8. If T failed:
    - Retain `last_snapshot[T.id]`.
    - Do **not** attempt to load dependents (they cannot bind).
    - Optionally attempt one reload of **previous on-disk** T only if client passes `rollback_target:true` **and** staging did not overwrite — default **false** (agents usually already overwrote sources).
    - Return `ok:false` with `data.snapshot` echoed + `data.phase="target_load_failed"`.
-8. If T succeeded:
+9. If T succeeded and target health is confirmed:
    - Topologically order `snapshot` using forward deps among the snapshot set (Kahn / `PluginIndex` if helpful).
    - Load each missing id; collect per-id results.
    - Return `ok` only if T ok; dependent failures are partial (`data.dependent_errors`).
-9. Clients verify via `Openplanet.log` evidence gate regardless of `ok`.
+10. Clients verify via `Openplanet.log` evidence gate regardless of `ok`.
 
 **`PluginIndex` usage:** useful for ordering descriptors with path/source/type; **do not** assume `AddTree` alone yields reverse dependents — build reverse edges from `AllPlugins` + `Dependencies`.
 
-**Optional deps:** include Q in closure only if Q was loaded **and** listed T (or intermediate) in `Dependencies` **or** in `OptionalDependencies`. Do not load optional consumers that were not running.
+**Optional deps:** required dependents belong to the closure. Loaded optional consumers may be recorded as snapshot-only candidates, but v1 must not claim Openplanet cascade-unloads or requires restoration of them until live tests prove that behavior. Never load optional consumers that were not running.
 
 ### 6.5 Failure memory
 

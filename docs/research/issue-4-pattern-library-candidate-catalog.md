@@ -183,9 +183,9 @@ IDs are stable handles for later tickets (`P-###`). Scores are H/M/L.
 
 | Field | Value |
 |-------|--------|
-| **Gist** | `info.toml` `[script] #__DEFINES__`; code uses `#if DEV` / `#if SIG_DEVELOPER` for debug UI and tracing. |
-| **Scores** | Recency H · Repetition H (~235 files) · Settled H · Portability H · Deps H · Testability M |
-| **Tier** | **core-v1** |
+| **Gist** | In staged-build projects, the build script replaces the `#__DEFINES__` placeholder in `info.toml`; code then uses `#if DEV` / `#if SIG_DEVELOPER` for debug UI and tracing. The placeholder is not a standalone Openplanet feature and must never be prescribed for a live-folder project without its generating build step. |
+| **Scores** | Recency H · Repetition H (~235 files) · Settled H · Portability M · Deps build pipeline · Testability M |
+| **Tier** | **extended-v1** (staged-build-specific) |
 | **Repo** | template `info.toml`; exemplars bosslike `DevLog.as`, mlfeed `Main.as` |
 | **Files** | `info.toml`; `src/DevLog.as` (bosslike) |
 | **Commit** | bosslike tip `79c1949`; pattern widespread |
@@ -550,7 +550,7 @@ IDs are stable handles for later tickets (`P-###`). Scores are H/M/L.
 
 | Field | Value |
 |-------|--------|
-| **Gist** | `Meta::GetPluginFromID("…")` null/Enabled checks before calling into peers (ChampionMedals, ManiaExchange, MLHook, …). |
+| **Gist** | Bind `Meta::GetPluginFromID("…")` once, check the handle is non-null, then inspect `Enabled` before calling into peers (ChampionMedals, ManiaExchange, MLHook, …). Do not copy cited consumers that dereference `.Enabled` directly. |
 | **Scores** | Recency H · Repetition M–H · Settled H · Portability H · Deps optional · Testability H |
 | **Tier** | **core-v1** |
 | **Repo** | map-info, ghosts-pp, better-totd, magic-spectator, … |
@@ -671,16 +671,16 @@ Tier: **ecosystem-dep** documentation recipe (install/declare/use), not vendorin
 | **License** | Unlicense |
 | **Validation** | Authenticated GET returns JSON; bad path throws; UA visible in traces. |
 
-#### P-072 — Openplanet Auth token cache (when needed)
+#### P-072 — Openplanet Auth token acquisition (when needed)
 
 | Field | Value |
 |-------|--------|
-| **Gist** | `Auth::GetToken` wait loop; cache ~55 minutes; single-flight update. |
-| **Scores** | Recency M · Repetition M · Settled H · Portability M · Deps H · Testability M |
-| **Tier** | **extended-v1** |
+| **Gist** | `Auth::GetToken` wait loop with single-flight acquisition. Intermediate tokens are documented as short-lived (approximately 5 minutes) and should generally be retained only for seconds—never cache them for 55 minutes. |
+| **Scores** | Recency M · Repetition M · Settled L (source cache duration is invalid) · Portability M · Deps H · Testability M |
+| **Tier** | **blocked** pending a fresh implementation based on the current Authentication API documentation; do not copy the cited cache. |
 | **Repo** | map-info `src/API/Auth.as` (pattern; some copies commented if unused) |
 | **License** | Unlicense |
-| **Validation** | Token refresh; concurrent callers don’t double-fetch. |
+| **Validation** | Concurrent callers do not double-fetch; token is consumed promptly; expiry/validation failures reacquire safely; no token value is logged or persisted. |
 
 #### P-073 — Plugin-identified `Net::HttpRequest` wrappers
 

@@ -280,7 +280,7 @@ Opt-in depth for branded tools, cinematic overlays, game-mode HUDs, and animatio
 | Variant | Path | Shape | First / key commits | License |
 |---------|------|-------|---------------------|---------|
 | Dips++ `Animation` | `tm-dips-plus-plus/src/Animation.as` | `Update() -> bool` + `Draw() -> vec2`; parallel arrays for subtitle/status/title anims; `ReplaceStatusAnimation` | Title era 2024-02 (`aaed2cab` / `fbbe7aec`) | Unlicense · **cleared** |
-| Bosslike `Game::Animation` + `AnimMgr` + pool | `tm-bosslike/src/Game/Anim/Animation.as`, `Draw.as` | abstract Animation; `AnimMgr` QuadOut/EaseInBack; free-list pool in `Animations::AddAnimation` | `8789101` (2025-01-11 text), `1c3603a` (2025-01-21 "a bunch of animation and graphical stuff") | Unlicense · **cleared** |
+| Bosslike `Game::Animation` + `AnimMgr` + pool | `tm-bosslike/src/Game/Anim/Animation.as`, `Draw.as` | abstract Animation; `AnimMgr` QuadOut/EaseInBack; free-list pool in `Animations::AddAnimation` | `8789101` (2025-01-11 text), `1c3603a` (2025-01-21 "a bunch of animation and graphical stuff") | Local Unlicense evidence, but public upstream currently unavailable; **blocked for public snippet promotion** until vendored with provenance or linked to an accessible source |
 | Shared `AnimMgr` only | `tm-map-info/src/AnimMgr.as` (added `d810788` 2023-01-29); `tm-freecam-show-cp/src/AnimManager.as`; editor-camera-hotkeys | open/close t∈[0,1] with QuadOut | 2023+ copies | Unlicense · **cleared** |
 
 **Canonical advanced animation library for skillpack:** **Bosslike** (`Game::Animation` + `AnimMgr` + free-list `RenderAnimations`) — newer, namespaced, includes easing helpers, and pairs with sprite/text anims. Cite Dips++ as the earlier flagship multi-queue design (separate queues per anim kind).
@@ -332,7 +332,7 @@ Opt-in depth for branded tools, cinematic overlays, game-mode HUDs, and animatio
 
 - Explicit user/agent choice of brand or cinematic depth.
 - Push/pop balance on every path (agent skill's strongest portable lesson).
-- Screenshot gate with **fresh subagent critique** when polish is the goal (see §7).
+- Screenshot gate with fresh visual critique when polish is the goal; independent/subagent critique is recommended for advanced work but is not a universal topology requirement (see §7).
 - No accidental leakage of Tier-3 chrome into plugins that asked for Tier 1.
 
 ---
@@ -361,7 +361,7 @@ Portable steps (rephrase; do not require tm-agent scripts as the only capture pa
 3. Build/reload plugin; capture screenshot; **confirm PNG mtime**.
 4. Prefer a **crop to the plugin window** (pin size/pos with `UI::Cond::Always` only while iterating; mark `// TEMP (dev only)`).
 5. Agent describes what it **sees**, not what it intended.
-6. Every 2–3 iterations **and** before "done": fresh subagent (or external) critique with a blunt prompt.
+6. Every 2–3 iterations **and** before "done": fresh critique with a blunt prompt; for advanced polish, prefer an independent subagent or external reviewer when available.
 7. Layout disputes: draw expected rects via draw list (magenta/green asserts), then remove.
 
 **Capability detection (map-aligned):** screenshot tooling is optional enhancement — `xdotool`+ImageMagick, Playwright, Control-MCP, or user-provided PNG all satisfy the gate if the image is fresh and shows the plugin UI. If no capture path exists, the agent must say the visual gate is blocked rather than claim completion.
@@ -486,12 +486,12 @@ snippets/ (only cleared, compact AS)
 1. **One skill, three progressive tiers**, not three unrelated skills.
 2. **Tier 1 is strictly theme-preserving**; Scrubber-style `GetStyleColor` alpha modulation is the model for any translucency.
 3. **Tier 2 canonical helper source is Dips++ `src/nvg.as`** (Unlicense), with Bosslike blur/`TextInfo` as documented deltas.
-4. **Tier 3 animation canonical library is Bosslike** (`Game::Animation` + `AnimMgr` + free-list); Dips++ remains the multi-queue and lightning cinematic exemplar.
+4. **Tier 3 animation design exemplar is Bosslike** (`Game::Animation` + `AnimMgr` + free-list), but public snippet promotion is blocked until its source is accessible or vendored with provenance; Dips++ remains the publicly accessible multi-queue and lightning cinematic exemplar.
 5. **DD2 lightning is verified** in `SubtitlesAnim.as` (`DeepDip2LogoAnim`, commits `44427c65` / `73a17db`, Unlicense code).
 6. **tm-agent 2026-04-20 loop is verified** (`7cde07c`, `f407a8d`) and becomes the completion gate; **brand palette is Tier 3 only** and not default.
 7. **Verbatim tm-agent code is not copyable yet** (license/remote unresolved); patterns must be re-expressed or wait.
 8. **Fonts and most binary assets are out of snippet bundles** pending per-file licenses; Tengwar is the rare CC0 font among Bosslike set.
-9. **Screenshot gate is mandatory** for visual completion claims; capture mechanism is capability-detected, not hard-wired to one script.
+9. **Screenshot gate is mandatory** for visual completion claims; capture mechanism is capability-detected, not hard-wired to one script. Catalog entries are candidates only until the gallery prototype live-validates them.
 10. **Public snippets cite** `plugin/path`, commit SHA when stable, and license.
 
 ---
