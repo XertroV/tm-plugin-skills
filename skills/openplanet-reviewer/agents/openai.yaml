@@ -1,0 +1,6 @@
+interface:
+  display_name: "Openplanet Reviewer"
+  short_description: "Adversarial Openplanet runtime and architecture review"
+  default_prompt: "Review this Openplanet plugin adversarially for subtle runtime, state, lifecycle, UI, synchronization, protocol, and architecture failures. Report evidence-graded findings first."
+policy:
+  allow_implicit_invocation: true

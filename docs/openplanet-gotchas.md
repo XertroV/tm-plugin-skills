@@ -34,7 +34,10 @@ Test both overlay states whenever both callbacks exist.
 ## Keep throwing work out of render callbacks
 
 An exception escaping UI code can make Openplanet unwind the current UI stack
-and stop invoking that plugin's render callbacks. Treat render paths as fragile:
+and stop invoking that plugin's render callbacks. The issue-13 live fixture
+captured `Unrolling dangling script UI stack` followed by no later plugin
+heartbeat, while the isolated `startnew(...)` exception left heartbeats running.
+Treat render paths as fragile:
 keep them deterministic, bounded, and limited to drawing plus cheap local state
 changes.
 

@@ -28,8 +28,10 @@ ways a compiling plugin can fail in use:
 - export/module/lifetime mismatches; and
 - visual/control/test paths that claim success without runtime evidence.
 
-The reviewer consumes `docs/reviewer-failure-ledger.md` and progressively
-disclosed evidence in `docs/research/issue-13-adversarial-review-evidence.md`.
+The reviewer executes `docs/reviewer-workflow.md`, consumes
+`docs/reviewer-failure-ledger.md`, and progressively discloses source evidence
+from `docs/research/issue-13-adversarial-review-evidence.md` only when a branch
+needs precedent or a confirmed mechanism.
 It feeds actionable prevention back into
 `openplanet-dev`, `openplanet-visual`, `openplanet-control`, tests, and demos.
 

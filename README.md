@@ -13,6 +13,13 @@ This repository is currently being designed through a [Wayfinder map](https://gi
 - Maintain six independently triggerable skills, including `openplanet-reviewer` for adversarial runtime, state, synchronization, callback-safety, and architecture review. See `docs/skill-manifest.md`.
 - Turn every newly discovered subtle failure mode into a reviewer-ledger entry and, where applicable, development guidance plus test/demo evidence.
 
+## Promoted skills
+
+- [`openplanet-reviewer`](skills/openplanet-reviewer/SKILL.md) — adversarial,
+  evidence-graded review for subtle Openplanet runtime and architecture failure.
+
+Other manifest entries remain planned until their own promotion gates pass.
+
 Implementation will follow the decisions recorded in the issue map.
 
 ## License

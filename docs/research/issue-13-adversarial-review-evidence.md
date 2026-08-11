@@ -57,7 +57,7 @@ Two reusable components are useful counterexamples:
 A callback typed as `CoroutineFunc` is not isolated unless execution crosses a
 real `startnew(...)` boundary.
 
-### UI exception evidence status
+### Demonstrated UI exception behavior
 
 Supporting code evidence exists:
 
@@ -68,11 +68,26 @@ Supporting code evidence exists:
 - `tm-draw-tests/src/Epp/ExtraEditorMenuItem.as:40-46` reports component action
   exceptions with component identity.
 
-No literal Openplanet engine log line saying it is unwinding/unrolling the UI
-stack was found in the corpus, git history, or current log. Render-callback
-cessation remains user-observed pending a controlled live reproduction. Do not
-upgrade that wording to engine-verified before capturing the log and subsequent
-frame behavior.
+The controlled DEV-only fixture at
+`prototypes/issue-13-ui-exception-probe/Main.as:1-60` demonstrated both paths on
+Openplanet 1.29.0:
+
+- At `Openplanet.log:26724-26727`, an exception in a coroutine launched through
+  `startnew(...)` produced a stack trace ending in `ThrowProbeIsolated()`.
+  Heartbeats continued afterward at `Openplanet.log:26746-26836`, proving the
+  plugin's render callbacks kept running.
+- At `Openplanet.log:27021-27027`, an exception escaped
+  `RenderInterface()` through `DrawProbeWindow()`. Openplanet logged the exact
+  warning `Unrolling dangling script UI stack` at the unmatched `UI::Begin`.
+- No later `SkillpackUiExceptionProbe` heartbeat exists in the captured log,
+  while unrelated plugins continued logging. This demonstrates callback
+  cessation for that plugin after the inline render exception in this run.
+
+The demonstrated invariant is narrower than “all UI exceptions always disable
+rendering”: an exception escaped the active render callback while a window scope
+was open, Openplanet unrolled the dangling UI stack, and this plugin received no
+later observed render heartbeat. Preserve the fixture and exact log sequence so
+future Openplanet versions can be rechecked rather than generalizing folklore.
 
 ## Bosslike and mature-plugin architecture
 

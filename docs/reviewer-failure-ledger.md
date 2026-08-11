@@ -31,11 +31,12 @@ adversarial review is performed.
   the UI stack; the plugin stops receiving render callbacks and its UI vanishes.
 - **Invariant:** render callbacks remain bounded and exception-minimal; complex
   action execution cannot escape through the active UI stack.
-- **Evidence:** user-observed Openplanet behavior plus containment patterns in
-  `tm-draw-tests/src/Epp/ExtraEditorMenuItem.as:8-70,114-175` and
-  `tm-bosslike/src/Game/Modes/SimpleRM.as:124-162`. No literal engine unwind
-  log was found; capture a minimal live reproduction before promotion. Full
-  evidence: `docs/research/issue-13-adversarial-review-evidence.md`.
+- **Evidence:** issue-13 live fixture. `Openplanet.log:26724-26836` shows an
+  isolated coroutine exception followed by continuing heartbeats;
+  `Openplanet.log:27021-27027` shows an inline `RenderInterface()` exception,
+  `Unrolling dangling script UI stack`, and no later probe heartbeat. Component
+  precedents remain in `tm-draw-tests/src/Epp/ExtraEditorMenuItem.as:8-70,114-175`
+  and `tm-bosslike/src/Game/Modes/SimpleRM.as:124-162`.
 - **Reviewer probe:** trace every render-path call transitively; flag operations
   that can throw, yield, perform I/O, mutate game state, or invoke untrusted
   callbacks inline. Confirm style/ID/clip/scissor scopes are balanced on all
@@ -174,6 +175,96 @@ adversarial review is performed.
 - **Prevention/evidence gate:** architecture note for nontrivial features,
   cohesive APIs, pure seams, extension tests, and a demo proving intended use.
 
+### Transactional mutation restoration
+
+- **Trigger:** a coroutine applies editor patches, hooks, intercepts, temporary
+  modes, settings, or other engine mutations before a yield or fallible check.
+- **Symptom/impact:** an early return, exception, cancellation, unload, or mode
+  transition leaves Trackmania or another plugin patched after the owner stops.
+- **Invariant:** temporary engine mutation is a transaction whose rollback runs
+  on every terminal path.
+- **Evidence:** `tm-map-together/src/EditorFeed.as:71-95,405-415` enables undo and
+  sweep patches before readiness checks whose early returns bypass cleanup.
+- **Reviewer probe:** inventory every patch/hook/intercept/temporary mode change;
+  cross each with success, early return, throw, cancel, unload, and transition.
+- **Prevention/evidence gate:** one owner and idempotent restoration path, with a
+  fault-injection test proving the original engine state is restored.
+
+### Manual engine-reference ownership
+
+- **Trigger:** code retains a nod or task manually and exits through timeout,
+  error, cancellation, or unload.
+- **Symptom/impact:** references or tasks leak, stale engine objects remain
+  reachable, or later cleanup double-releases them.
+- **Invariant:** every `MwAddRef`, retained nod, and owned task has one balanced
+  release on all terminal paths; borrowed handles are not retained implicitly.
+- **Evidence:** `tm-bosslike/src/Game/Modes/SimpleRM.as:344-402` adds a reference
+  to a matching download but releases it only on the non-timeout path.
+- **Reviewer probe:** build an ownership graph for `MwAddRef`/`MwRelease`, web
+  tasks, downloaded nods, and handles crossing yields; inject each terminal path.
+- **Prevention/evidence gate:** scoped/centralized cleanup plus repeated-failure
+  evidence showing stable refcounts and no retained tasks.
+
+### Async terminal-state completeness
+
+- **Trigger:** a loading, busy, in-progress, or delay flag is set before a
+  coroutine performs fallible or yielding work.
+- **Symptom/impact:** waiters suspend forever, repeated actions accumulate, UI
+  remains loading, or a gameplay transition stays blocked.
+- **Invariant:** every asynchronous operation reaches exactly one terminal state:
+  success, error, timeout, or cancellation.
+- **Evidence:** `tm-bosslike/src/Game/Modes/SimpleRM.as:289-319` throws before its
+  only `IsLoading = false`; consumers wait at `:156-162,208-226`.
+- **Reviewer probe:** enumerate async state flags and verify terminal assignment,
+  waiter release, error reporting, and retry policy on every exit.
+- **Prevention/evidence gate:** explicit terminal-state model and injected
+  success/error/timeout/cancel tests with no remaining waiters.
+
+### Zero-progress and boundary behavior
+
+- **Trigger:** a queue/time budget expires before processing item zero or exactly
+  at zero, one, or the declared limit.
+- **Symptom/impact:** negative indexing, stalled queues, skipped work, or overload
+  handling throws and bypasses cleanup.
+- **Invariant:** zero progress is a valid result with no item dereference; queue
+  accounting remains correct at every boundary.
+- **Evidence:** `tm-map-together/src/EditorFeed.as:312-343` can set processed
+  count to zero and then index `pendingUpdates[processed - 1]`.
+- **Reviewer probe:** test zero, one, exact limit, timeout-before-first-item,
+  partial success, and queue mutation during processing.
+- **Prevention/evidence gate:** guarded boundary logic and deterministic budget
+  tests that prove progress accounting and cleanup.
+
+### Mutation-result truthfulness
+
+- **Trigger:** expected/replicated state commits or queued work is removed when a
+  mutation returns control rather than when success is verified.
+- **Symptom/impact:** the plugin's authoritative model diverges from Trackmania;
+  reconciliation can amplify a failed or poisoned operation.
+- **Invariant:** validate → apply → observe/verify → commit expected state →
+  acknowledge/remove; failed application never becomes authoritative.
+- **Evidence:** Map Together updates `mapTree` in `Socket.as:527-578` before
+  application in `EditorFeed.as:291-343`, whose update APIs can report failure.
+- **Reviewer probe:** fault each mutation and compare live state, expected state,
+  queue removal, persistence, acknowledgement, and reconciliation behavior.
+- **Prevention/evidence gate:** explicit operation result and commit point, plus
+  failed/partial-application fault tests.
+
+### Exception-safe scope restoration
+
+- **Trigger:** validation counts push/pop tokens or models a separate depth
+  helper without traversing the real draw/control flow.
+- **Symptom/impact:** static checks pass while early return or exception leaks UI,
+  clip, scissor, style, table, child, or window state into later rendering.
+- **Invariant:** restoration holds on every actual exit path, not merely in token
+  counts or a parallel arithmetic model.
+- **Evidence:** gallery validation in `prototype.py:92-102` checks token presence;
+  recipe tests model depth independently of actual draw paths.
+- **Reviewer probe:** inject early return and throw after every push/begin/scissor,
+  then exercise the subsequent frame/component.
+- **Prevention/evidence gate:** path-sensitive analysis or runtime failure
+  injection; describe token-presence checks only as weak lint.
+
 ## Confirmed additional reviewer probes
 
 - A stored `CoroutineFunc@` called inline does not isolate UI exceptions; trace
@@ -186,6 +277,9 @@ adversarial review is performed.
   explicitly allow concurrency.
 - Give every coroutine an owner, cancellation/generation identity, and cleanup
   on success, error, timeout, unload, and mode transition.
+- Record each coroutine in an ownership table: launcher, captured inputs,
+  generation, cancellation condition, terminal states, cleanup site, and
+  stale-commit guard.
 - Reject god objects that own transport, parsing, replicated state, logs,
   persistence, and UI unless their internal boundaries are independently testable.
 - Fault-inject fragmentation, partial writes, malformed lengths, overload,
