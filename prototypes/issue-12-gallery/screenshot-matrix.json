@@ -1,0 +1,22 @@
+{
+  "contract_version": 1,
+  "axes": {
+    "theme": ["stock-dark", "representative-light-or-high-contrast"],
+    "viewport": ["1280x720", "1920x1080"],
+    "ui_scale": [1.0, 1.5],
+    "game_state": ["main-menu", "in-map"]
+  },
+  "required_cases": [
+    {"id": "default-theme-a", "recipe": "theme-table", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 0},
+    {"id": "default-theme-b", "recipe": "theme-table", "theme": "representative-light-or-high-contrast", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "main-menu", "frame": 0},
+    {"id": "nvg-menu", "recipe": "nvg-scissor", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 0},
+    {"id": "nvg-map", "recipe": "nvg-scissor", "theme": "stock-dark", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "in-map", "frame": 0},
+    {"id": "gradient-scaled", "recipe": "drawlist-gradient", "theme": "representative-light-or-high-contrast", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "main-menu", "frame": 0},
+    {"id": "pulse-000", "recipe": "deterministic-pulse", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 0},
+    {"id": "pulse-030", "recipe": "deterministic-pulse", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 30},
+    {"id": "pulse-060", "recipe": "deterministic-pulse", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 60},
+    {"id": "pulse-090", "recipe": "deterministic-pulse", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 90},
+    {"id": "pulse-120", "recipe": "deterministic-pulse", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 120}
+  ],
+  "capture_evidence": ["fresh PNG", "PNG modification time after reload", "post-change Loaded plugin log window", "no later compile error", "observed critique", "depth counters all zero after draw"]
+}

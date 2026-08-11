@@ -1,0 +1,21 @@
+// GENERATED COPY sha256=c077cbc9d81bbcd285843e0f71dc099c6f229f68c5fba74ed8abc487be6817de source=recipes/ThemeTable.as
+namespace RecipeThemeTable {
+    int styleDepth = 0;
+
+    void DrawPanel(int captureFrame) {
+        UI::TextWrapped("This recipe uses ordinary widgets and inherits the active Openplanet theme.");
+        if (UI::BeginTable("theme-table", 2, UI::TableFlags::SizingStretchProp)) {
+            UI::TableSetupColumn("Property");
+            UI::TableSetupColumn("Value");
+            UI::TableHeadersRow();
+            UI::TableNextRow();
+            UI::TableNextColumn(); UI::Text("Capture frame");
+            UI::TableNextColumn(); UI::Text(tostring(captureFrame));
+            UI::TableNextRow();
+            UI::TableNextColumn(); UI::Text("Theme source");
+            UI::TableNextColumn(); UI::Text("Active Openplanet theme");
+            UI::EndTable();
+        }
+        UI::Text("style-depth = " + styleDepth);
+    }
+}

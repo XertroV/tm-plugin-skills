@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "gallery": {"plugin_id": "VisualRecipeGalleryPrototype", "name": "Visual Recipe Gallery PROTOTYPE", "version": "0.0.0"},
+  "recipes": [
+    {
+      "id": "theme-table", "title": "Theme-respecting table", "tier": "default-imgui",
+      "source": "recipes/ThemeTable.as", "namespace": "RecipeThemeTable", "entrypoint": "DrawPanel", "surface": "panel", "maturity": "candidate-static-only",
+      "provenance": {"kind": "independent-api-example", "repository": "XertroV/tm-plugin-skills", "file": "prototypes/issue-12-gallery/recipes/ThemeTable.as", "license": "CC0-1.0 OR Unlicense", "note": "Independently written from documented Openplanet UI APIs; no palette or external source copied."},
+      "expected": "A two-column table inherits active theme colors and spacing; changing Openplanet themes changes its chrome.",
+      "state_contract": {"capture_frames": [0], "instrumentation": ["style-depth"]}
+    },
+    {
+      "id": "nvg-scissor", "title": "Balanced NVG scissor", "tier": "nvg",
+      "source": "recipes/NvgScissor.as", "namespace": "RecipeNvgScissor", "entrypoint": "DrawCanvas", "surface": "canvas", "maturity": "candidate-static-only",
+      "provenance": {"kind": "independent-api-example", "repository": "XertroV/tm-plugin-skills", "file": "prototypes/issue-12-gallery/recipes/NvgScissor.as", "license": "CC0-1.0 OR Unlicense", "note": "Tiny independent API exercise; deliberately not copied from any plugin helper family."},
+      "expected": "A cyan circle is clipped to a fixed rectangle and a white outline reveals the expected clip boundary.",
+      "state_contract": {"capture_frames": [0], "instrumentation": ["scissor-depth"]}
+    },
+    {
+      "id": "drawlist-gradient", "title": "Clipped draw-list gradient", "tier": "advanced",
+      "source": "recipes/DrawListGradient.as", "namespace": "RecipeDrawListGradient", "entrypoint": "DrawPanel", "surface": "panel", "maturity": "candidate-static-only",
+      "provenance": {"kind": "independent-api-example", "repository": "XertroV/tm-plugin-skills", "file": "prototypes/issue-12-gallery/recipes/DrawListGradient.as", "license": "CC0-1.0 OR Unlicense", "note": "Independently written API demonstration using a generated four-corner gradient."},
+      "expected": "A fixed-size four-corner gradient stays inside its clip rectangle; clip depth returns to zero.",
+      "state_contract": {"capture_frames": [0], "instrumentation": ["clip-depth"]}
+    },
+    {
+      "id": "deterministic-pulse", "title": "Deterministic pulse state", "tier": "advanced",
+      "source": "recipes/DeterministicPulse.as", "namespace": "RecipeDeterministicPulse", "entrypoint": "DrawPanel", "surface": "panel", "maturity": "candidate-static-only",
+      "provenance": {"kind": "independent-api-example", "repository": "XertroV/tm-plugin-skills", "file": "prototypes/issue-12-gallery/recipes/DeterministicPulse.as", "license": "CC0-1.0 OR Unlicense", "note": "Independent minimal state model; capture phase is controlled by gallery frame, not wall-clock time."},
+      "expected": "The progress bar and reported phase exactly match capture frames 0, 30, 60, 90, and 120.",
+      "state_contract": {"capture_frames": [0, 30, 60, 90, 120], "instrumentation": ["animation-state"]}
+    }
+  ]
+}

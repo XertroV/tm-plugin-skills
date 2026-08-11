@@ -1,0 +1,9 @@
+[meta]
+name = "Visual Recipe Gallery PROTOTYPE"
+author = "tm-plugin-skills prototype"
+category = "Developer"
+version = "0.0.0"
+siteid = 0
+
+[script]
+dependencies = []
