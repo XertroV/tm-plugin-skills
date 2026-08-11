@@ -9,10 +9,10 @@ class RecipeMeta {
 }
 
 RecipeMeta@[] g_recipes = {
-    RecipeMeta("theme-table", "Theme-respecting table", GalleryTier::DefaultImgui, "candidate-static-only", "A two-column table inherits active theme colors and spacing; changing Openplanet themes changes its chrome.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/ThemeTable.as · CC0-1.0 OR Unlicense · independent-api-example", {0}),
-    RecipeMeta("nvg-scissor", "Balanced NVG scissor", GalleryTier::Nvg, "candidate-static-only", "A cyan circle is clipped to a fixed rectangle and a white outline reveals the expected clip boundary.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/NvgScissor.as · CC0-1.0 OR Unlicense · independent-api-example", {0}),
-    RecipeMeta("drawlist-gradient", "Clipped draw-list gradient", GalleryTier::Advanced, "candidate-static-only", "A fixed-size four-corner gradient stays inside its clip rectangle; clip depth returns to zero.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/DrawListGradient.as · CC0-1.0 OR Unlicense · independent-api-example", {0}),
-    RecipeMeta("deterministic-pulse", "Deterministic pulse state", GalleryTier::Advanced, "candidate-static-only", "The progress bar and reported phase exactly match capture frames 0, 30, 60, 90, and 120.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/DeterministicPulse.as · CC0-1.0 OR Unlicense · independent-api-example", {0, 30, 60, 90, 120}),
+    RecipeMeta("theme-table", "Theme-respecting table", GalleryTier::DefaultImgui, "candidate-static-only", "A two-column table inherits active theme colors and spacing; changing Openplanet themes changes its chrome.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/ThemeTable.as · independent-api-example", {0}),
+    RecipeMeta("nvg-scissor", "Balanced NVG scissor", GalleryTier::Nvg, "candidate-static-only", "A cyan circle is clipped to a fixed rectangle and a white outline reveals the expected clip boundary.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/NvgScissor.as · independent-api-example", {0}),
+    RecipeMeta("drawlist-gradient", "Clipped draw-list gradient", GalleryTier::Advanced, "candidate-static-only", "A fixed-size four-corner gradient stays inside its clip rectangle; clip depth returns to zero.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/DrawListGradient.as · independent-api-example", {0}),
+    RecipeMeta("deterministic-pulse", "Deterministic pulse state", GalleryTier::Advanced, "candidate-static-only", "The progress bar and reported phase exactly match capture frames 0, 30, 60, 90, and 120.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/DeterministicPulse.as · independent-api-example", {0, 30, 60, 90, 120}),
 };
 
 void DrawRecipeByIndex(int index, int captureFrame) {

@@ -60,8 +60,9 @@ def validate_model(manifest: dict, matrix: dict) -> None:
         source = ROOT / recipe["source"]
         if not source.is_file():
             fail(f"missing canonical recipe: {recipe['source']}")
-        if recipe["provenance"]["file"] != f"prototypes/issue-12-gallery/{recipe['source']}":
-            fail(f"provenance file does not identify canonical source: {recipe['id']}")
+        provenance = recipe.get("provenance")
+        if provenance is not None and provenance["file"] != f"prototypes/issue-12-gallery/{recipe['source']}":
+            fail(f"present provenance file does not identify canonical source: {recipe['id']}")
 
     axes = matrix["axes"]
     ids = {recipe["id"] for recipe in recipes}
@@ -121,8 +122,8 @@ def generate_catalog(manifest: dict) -> str:
     ]
     tier_expr = {"default-imgui": "GalleryTier::DefaultImgui", "nvg": "GalleryTier::Nvg", "advanced": "GalleryTier::Advanced"}
     for recipe in recipes:
-        p = recipe["provenance"]
-        provenance = f"{p['repository']} · {p['file']} · {p['license']} · {p['kind']}"
+        p = recipe.get("provenance")
+        provenance = "" if p is None else f"{p['repository']} · {p['file']} · {p['kind']}"
         frames = ", ".join(str(frame) for frame in recipe["state_contract"]["capture_frames"])
         lines.append(
             f"    RecipeMeta({as_string(recipe['id'])}, {as_string(recipe['title'])}, {tier_expr[recipe['tier']]}, "

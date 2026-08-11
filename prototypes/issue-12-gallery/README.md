@@ -15,7 +15,7 @@ The command validates `recipe.schema.json` and `manifest.json`, rebuilds `genera
 ## Ownership decision proved
 
 - `recipes/*.as` is the only handwritten implementation of a recipe.
-- `manifest.json` is the only handwritten catalog/navigation/provenance record.
+- `manifest.json` is the only handwritten catalog/navigation/license record. Provenance may be recorded when known and useful but is optional.
 - `generated/VisualRecipeGallery/src/recipes/*.as` is a byte-for-byte assembly output. Editing it fails drift validation and the next run overwrites it.
 - `GeneratedCatalog.as` and the plugin shell are deterministic generator output.
 - `screenshot-matrix.json` owns capture cases; it is validation data, not another implementation.
@@ -24,7 +24,7 @@ The generator intentionally contains no production packaging abstraction. Delete
 
 ## Deliberate exclusions
 
-No third-party fonts, images, audio, sprite assets, reviewer/admin pages, control bridges, policy-bypass material, unresolved-license source, or inaccessible-upstream snippets are included. The examples are tiny, independently written API demonstrations under this repository's `CC0-1.0 OR Unlicense`; their provenance records say so explicitly.
+No third-party fonts, images, audio, sprite assets, reviewer/admin pages, control bridges, policy-bypass material, or unresolved-license source is included. The examples happen to be tiny independently written API demonstrations under this repository's `CC0-1.0 OR Unlicense`. The final design permits owner-authorized Bosslike-derived snippets and newly authored snippets without a listed external source; provenance must never be fabricated, and asset/font restrictions remain separate.
 
 ## Live-test boundary
 

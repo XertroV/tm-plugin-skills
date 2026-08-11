@@ -3,7 +3,7 @@
 ## Static/assembly gates (automated by `prototype.py`)
 
 1. Manifest validates against the checked-in schema; IDs, source paths, namespaces, and output paths are unique.
-2. Every recipe is explicitly `candidate-static-only`, independently authored, repository-licensed, and has expected output plus capture states.
+2. Every recipe is explicitly `candidate-static-only`, has an applicable license, expected output, and capture states. Provenance is optional; if present it must be truthful. Bosslike-derived and newly authored snippets need no listed external source.
 3. Generated recipe bytes and SHA-256 values equal canonical recipe bytes; generated files are exactly the expected set.
 4. Generated catalog order equals manifest order and navigation can reach every recipe.
 5. Every declared recipe capture frame has a screenshot case; matrix values belong to declared axes.
