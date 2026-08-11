@@ -4,6 +4,7 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,9 +37,10 @@ class InstallSmokeTests(unittest.TestCase):
             capture_output=True,
         )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-        self.assertIn("Found 6 skills", result.stdout)
+        plain = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", result.stdout)
+        self.assertIn("Found 6 skills", plain)
         for name in EXPECTED:
-            self.assertIn(name, result.stdout)
+            self.assertIn(name, plain)
 
 
 if __name__ == "__main__":
