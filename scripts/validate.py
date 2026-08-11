@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import subprocess
 import sys
@@ -55,7 +56,11 @@ def main() -> None:
     for command in QUICK_COMMANDS:
         run(command)
     check_skill_links()
-    run(("git", "diff", "--check"))
+    base = os.environ.get("VALIDATION_BASE_SHA")
+    if base:
+        run(("git", "diff", "--check", f"{base}...HEAD"))
+    else:
+        run(("git", "diff", "--check"))
     print(f"validation passed: {args.profile}")
 
 

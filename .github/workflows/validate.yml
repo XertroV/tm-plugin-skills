@@ -24,6 +24,8 @@ jobs:
       - name: Install pinned Python validation dependencies
         run: uv pip install --python .venv/bin/python --require-hashes -r requirements-validation.lock
       - name: Run repository tests and quick contracts
+        env:
+          VALIDATION_BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
           PYTHONDONTWRITEBYTECODE=1 .venv/bin/python tests/test_validation_entrypoint.py -v
           PYTHONDONTWRITEBYTECODE=1 .venv/bin/python scripts/validate.py --profile quick
