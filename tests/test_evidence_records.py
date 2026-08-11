@@ -6,6 +6,8 @@ import sys
 import tempfile
 import unittest
 import shutil
+import copy
+import importlib.util
 from pathlib import Path
 
 import jsonschema
@@ -13,6 +15,14 @@ import jsonschema
 ROOT = Path(__file__).resolve().parents[1]
 RUNNER = ROOT / "scripts" / "record-gallery-evidence.py"
 SCHEMA = ROOT / "evidence" / "gallery-evidence.schema.json"
+SPEC = importlib.util.spec_from_file_location(
+    "validate_gallery_evidence", ROOT / "evidence" / "validate_gallery_evidence.py"
+)
+assert SPEC is not None and SPEC.loader is not None
+MODULE = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(MODULE)
+EvidenceError = MODULE.EvidenceError
+validate_semantics = MODULE.validate_semantics
 
 
 class GalleryEvidenceTests(unittest.TestCase):
@@ -39,6 +49,21 @@ class GalleryEvidenceTests(unittest.TestCase):
             self.assertTrue(all(case["status"] == "pending" for case in record["cases"]))
             self.assertTrue(SCHEMA.is_file())
             jsonschema.validate(record, json.loads(SCHEMA.read_text(encoding="utf-8")))
+            validate_semantics(record)
+
+            contradictions = []
+            stable_pending = copy.deepcopy(record)
+            stable_pending["evidence_level"] = "stable"
+            contradictions.append(stable_pending)
+            complete_false = copy.deepcopy(record)
+            complete_false["live"]["status"] = "complete"
+            contradictions.append(complete_false)
+            approved_without_artifacts = copy.deepcopy(record)
+            approved_without_artifacts["cases"][0]["status"] = "approved"
+            contradictions.append(approved_without_artifacts)
+            for contradiction in contradictions:
+                with self.assertRaises(EvidenceError):
+                    validate_semantics(contradiction)
 
     def test_runner_refuses_to_claim_live_without_runtime_inputs(self) -> None:
         result = subprocess.run(
