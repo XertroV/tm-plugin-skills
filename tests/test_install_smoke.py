@@ -29,6 +29,34 @@ class InstallSmokeTests(unittest.TestCase):
                 copied = (install / name / "SKILL.md").read_bytes()
                 self.assertEqual(copied, source)
 
+    def test_pinned_cli_installs_exact_six_skills_in_isolated_home(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_path = Path(temporary)
+            home = temporary_path / "home"
+            environment = {
+                **__import__("os").environ,
+                "HOME": str(home),
+                "XDG_CONFIG_HOME": str(temporary_path / "config"),
+                "XDG_CACHE_HOME": str(temporary_path / "cache"),
+            }
+            command = ["npx", "--yes", "skills@1.4.1", "add", "."]
+            for name in sorted(EXPECTED):
+                command += ["--skill", name]
+            command += ["--yes", "--global"]
+            result = subprocess.run(
+                command, cwd=ROOT, env=environment, text=True, capture_output=True
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            install = home / ".agents" / "skills"
+            self.assertEqual(
+                {path.name for path in install.iterdir() if path.is_dir()}, EXPECTED
+            )
+            for name in EXPECTED:
+                self.assertEqual(
+                    (install / name / "SKILL.md").read_bytes(),
+                    (ROOT / "skills" / name / "SKILL.md").read_bytes(),
+                )
+
     def test_pinned_cli_discovers_exact_six_skills(self) -> None:
         result = subprocess.run(
             ["npx", "--yes", "skills@1.4.1", "add", ".", "--list"],
