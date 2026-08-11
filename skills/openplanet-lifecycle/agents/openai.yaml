@@ -1,0 +1,6 @@
+interface:
+  display_name: "Openplanet Lifecycle"
+  short_description: "Prove exact staged Openplanet bytes are running"
+  default_prompt: "Use $openplanet-lifecycle to stage and load, reload, or unload this Openplanet plugin, preserve its loaded dependent closure, diagnose the fresh log window, compare LSP and game diagnostics including warnings and deprecations, and prove the exact staged bytes with observable behavior evidence or a truthful blocker."
+policy:
+  allow_implicit_invocation: true

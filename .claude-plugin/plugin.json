@@ -14,6 +14,11 @@
     "review"
   ],
   "skills": [
-    "./skills/openplanet-reviewer"
+    "./skills/openplanet-control",
+    "./skills/openplanet-dev",
+    "./skills/openplanet-init",
+    "./skills/openplanet-lifecycle",
+    "./skills/openplanet-reviewer",
+    "./skills/openplanet-visual"
   ]
 }

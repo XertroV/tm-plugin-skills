@@ -15,12 +15,18 @@ This repository is currently being designed through a [Wayfinder map](https://gi
 
 ## Promoted skills
 
+- [`openplanet-init`](skills/openplanet-init/SKILL.md) — scaffold and normalize
+  plugin identity, policy onboarding, tracked briefs, and private local state.
+- [`openplanet-lifecycle`](skills/openplanet-lifecycle/SKILL.md) — stage, load,
+  reload, unload, diagnose, restore dependents, and prove exact running bytes.
+- [`openplanet-dev`](skills/openplanet-dev/SKILL.md) — implement AngelScript with
+  adjacent tests, effective demos, diagnostics parity, and lifecycle proof.
+- [`openplanet-visual`](skills/openplanet-visual/SKILL.md) — build theme-safe UI
+  with deterministic galleries and fresh screenshot critique.
+- [`openplanet-control`](skills/openplanet-control/SKILL.md) — choose safe runtime
+  capabilities and optionally build bounded DEV-only semantic controls.
 - [`openplanet-reviewer`](skills/openplanet-reviewer/SKILL.md) — adversarial,
   evidence-graded review for subtle Openplanet runtime and architecture failure.
-
-Other manifest entries remain planned until their own promotion gates pass.
-
-Implementation will follow the decisions recorded in the issue map.
 
 ## Install
 
@@ -33,7 +39,7 @@ duplicate skill names are not merged.
 npx skills add XertroV/tm-plugin-skills
 ```
 
-To select only the currently promoted skill:
+To select one skill:
 
 ```bash
 npx skills add XertroV/tm-plugin-skills --skill openplanet-reviewer

@@ -45,7 +45,7 @@ def main() -> None:
     require("$openplanet-reviewer" in openai["interface"]["default_prompt"], "OpenAI prompt must invoke skill")
     plugin = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text())
     require(plugin["version"] == frontmatter["metadata"]["version"], "plugin/skill version drift")
-    require(plugin["skills"] == ["./skills/openplanet-reviewer"], "plugin promotion list drift")
+    require("./skills/openplanet-reviewer" in plugin["skills"], "reviewer omitted from plugin promotion list")
 
     manifest = (ROOT / "docs" / "skill-manifest.md").read_text()
     workflow = (ROOT / "docs" / "reviewer-workflow.md").read_text()

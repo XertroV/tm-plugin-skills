@@ -61,7 +61,7 @@ def main() -> None:
         validate_common(name)
 
     lifecycle = (ROOT / "skills" / "openplanet-lifecycle" / "SKILL.md").read_text()
-    for phrase in ("exact staged bytes", "fresh post-action log window", "dependent", "manual", "explicit blocker"):
+    for phrase in ("exact staged bytes", "fresh post-action log window", "dependent", "manual", "truthful blocker"):
         require(phrase in lifecycle, f"openplanet-lifecycle omits {phrase}")
 
     dev = (ROOT / "skills" / "openplanet-dev" / "SKILL.md").read_text()
