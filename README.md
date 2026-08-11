@@ -15,7 +15,7 @@ Implementation will follow the decisions recorded in the issue map.
 
 ## License
 
-[MIT](LICENSE)
+[CC0-1.0 OR Unlicense](LICENSE) — use either license at your option.
 
 ## Acknowledgements
 
