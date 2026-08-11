@@ -22,7 +22,10 @@ This repository is currently being designed through a [Wayfinder map](https://gi
 - [`openplanet-dev`](skills/openplanet-dev/SKILL.md) — implement AngelScript with
   adjacent tests, effective demos, diagnostics parity, and lifecycle proof.
 - [`openplanet-visual`](skills/openplanet-visual/SKILL.md) — build theme-safe UI
-  with deterministic galleries and fresh screenshot critique.
+  with deterministic galleries and fresh screenshot critique. The bundled demo
+  gallery leads with interesting reusable recipes under `Featured`; foundational
+  and diagnostic examples remain available under `Boring`. Demo/test main
+  windows are toggleable from Plugins → `Skillpack Demos`.
 - [`openplanet-control`](skills/openplanet-control/SKILL.md) — choose safe runtime
   capabilities and optionally build bounded DEV-only semantic controls.
 - [`openplanet-reviewer`](skills/openplanet-reviewer/SKILL.md) — adversarial,
