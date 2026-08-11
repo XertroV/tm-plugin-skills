@@ -33,7 +33,12 @@
     {"id": "relay-030", "recipe": "spectral-relay-typography", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 30},
     {"id": "relay-060", "recipe": "spectral-relay-typography", "theme": "stock-dark", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "in-map", "frame": 60},
     {"id": "relay-090", "recipe": "spectral-relay-typography", "theme": "representative-light-or-high-contrast", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "main-menu", "frame": 90},
-    {"id": "relay-120", "recipe": "spectral-relay-typography", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 120}
+    {"id": "relay-120", "recipe": "spectral-relay-typography", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 120},
+    {"id": "split-monument-000", "recipe": "split-monument", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 0},
+    {"id": "split-monument-030", "recipe": "split-monument", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 30},
+    {"id": "split-monument-060", "recipe": "split-monument", "theme": "stock-dark", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "in-map", "frame": 60},
+    {"id": "split-monument-090", "recipe": "split-monument", "theme": "representative-light-or-high-contrast", "viewport": "1920x1080", "ui_scale": 1.5, "game_state": "main-menu", "frame": 90},
+    {"id": "split-monument-120", "recipe": "split-monument", "theme": "stock-dark", "viewport": "1280x720", "ui_scale": 1.0, "game_state": "main-menu", "frame": 120}
   ],
   "capture_evidence": ["fresh PNG", "PNG modification time after reload", "post-change Loaded plugin log window", "no later compile error", "observed critique", "depth counters all zero after draw"]
 }

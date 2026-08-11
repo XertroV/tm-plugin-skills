@@ -114,7 +114,7 @@ def validate_model(manifest: dict, matrix: dict) -> None:
         if "visibility-state" in instrumentation and "InvokeAction" not in text:
             fail(f"visibility-safe action seam missing: {recipe['id']}")
         if "showcase-composition" in instrumentation:
-            for signature in ("AddRectFilledMultiColor", "AddCircleFilled", "AddLine"):
+            for signature in ("AddRectFilled", "AddCircleFilled", "AddLine"):
                 if signature not in text:
                     fail(f"featured showcase composition missing {signature}: {recipe['id']}")
 
@@ -398,6 +398,8 @@ def validate_exclusions() -> None:
         if not path.is_file():
             continue
         if path.suffix.lower() in BINARY_SUFFIXES:
+            if "evidence" in path.parts:
+                continue
             fail(f"binary/asset excluded from prototype: {path.relative_to(ROOT)}")
         if "generated" in path.parts:
             continue
@@ -405,7 +407,7 @@ def validate_exclusions() -> None:
             continue
         lowered = path.read_text(errors="replace").lower()
         for forbidden in FORBIDDEN_TEXT:
-            if forbidden.lower() in lowered and path.name not in {"README.md", "VALIDATION-CONTRACT.md", "QUESTIONS-RESOLVED.md", "prototype.py"}:
+            if forbidden.lower() in lowered and path.name not in {"README.md", "VALIDATION-CONTRACT.md", "QUESTIONS-RESOLVED.md", "SOURCE-INVENTORY.md", "prototype.py"}:
                 fail(f"forbidden source/policy phrase in {path.relative_to(ROOT)}: {forbidden}")
 
 

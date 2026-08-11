@@ -61,6 +61,13 @@
       "provenance": {"kind": "independent-reimplementation", "repository": "XertroV/tm-plugin-skills", "file": "prototypes/issue-12-gallery/recipes/SpectralRelayTypography.as", "note": "Independently reimagines tm-agent's counter-propagating text-wave idea as a Trackmania checkpoint relay; no source, palette, or assets copied."},
       "expected": "Two counter-propagating spectral signals race through a monumental CHECKPOINT RELAY wordmark while lane traces, phase markers, and an interference bloom reveal the deterministic collision point; the composition remains legible and dramatic in every frozen frame.",
       "state_contract": {"capture_frames": [0, 30, 60, 90, 120], "instrumentation": ["clip-depth", "animation-state", "showcase-composition"]}
+    },
+    {
+      "id": "split-monument", "title": "Split monument", "tier": "advanced", "curation": "featured",
+      "source": "recipes/SplitMonument.as", "namespace": "RecipeSplitMonument", "entrypoint": "DrawPanel", "surface": "panel", "maturity": "candidate-static-only", "license": "CC0-1.0 OR Unlicense",
+      "provenance": {"kind": "independent-reimplementation", "repository": "XertroV/tm-plugin-skills", "file": "prototypes/issue-12-gallery/recipes/SplitMonument.as", "note": "Independently authored from the high-level thesis of measured race-result hierarchy found across local Openplanet HUDs; no source, palette, branding, fonts, data, or assets copied."},
+      "expected": "An asymmetrical limestone result plate balances a monumental clipped 01 against a precision split ledger; sector emphasis travels through the ledger while a measured NEW BEST lozenge interrupts the baseline rule without disturbing the static hero composition.",
+      "state_contract": {"capture_frames": [0, 30, 60, 90, 120], "instrumentation": ["clip-depth", "animation-state", "showcase-composition"]}
     }
   ]
 }
