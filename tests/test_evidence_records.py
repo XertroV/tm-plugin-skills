@@ -5,6 +5,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,6 +32,7 @@ class GalleryEvidenceTests(unittest.TestCase):
             self.assertFalse(record["live"]["runtime_load"])
             self.assertFalse(record["live"]["native_tests"])
             self.assertFalse(record["live"]["screenshots"])
+            self.assertEqual(record["static"]["lsp"], shutil.which("openplanet-lsp") is not None)
             self.assertEqual(len(record["cases"]), 17)
             self.assertTrue(all(case["status"] == "pending" for case in record["cases"]))
             self.assertTrue(SCHEMA.is_file())

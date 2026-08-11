@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -53,7 +54,11 @@ def main() -> None:
         "commit": commit,
         "source_tree_sha256": tree_digest(GENERATED),
         "evidence_level": "candidate-static-only",
-        "static": {"schema": True, "deterministic_generation": True, "lsp": True},
+        "static": {
+            "schema": True,
+            "deterministic_generation": True,
+            "lsp": shutil.which("openplanet-lsp") is not None,
+        },
         "live": {
             "status": "pending",
             "runtime_load": False,
