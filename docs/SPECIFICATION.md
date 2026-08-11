@@ -1,7 +1,8 @@
 # Openplanet agent skillpack specification
 
-**Status:** implementation-ready candidate; final user approval required  
-**Runtime depth:** Trackmania 2020 on explicitly recorded Openplanet versions  
+**Status:** approved implementation baseline
+
+**Runtime depth:** Trackmania 2020 on explicitly recorded Openplanet versions
 **License:** `CC0-1.0 OR Unlicense`
 
 ## 1. Goal
