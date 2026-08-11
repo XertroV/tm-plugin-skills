@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=364442b920bea36b104e3d68d3d4f70a16388d719d6cc56bcfef93221e7e0ef7 source=recipes/OverlayRenderOwner.as
+// GENERATED COPY sha256=a540ac6dcf81132070116ffd3b154dadd50fc09c215a7c0f85298422fb6ad8c2 source=recipes/OverlayRenderOwner.as
 namespace RecipeOverlayRenderOwner {
     string OwnerForOverlayState(bool overlayShown) {
         return overlayShown ? "RenderInterface" : "Render";
@@ -17,10 +17,16 @@ namespace RecipeOverlayRenderOwner {
         bool renderCalled = !overlayShown;
         int submissions = SubmissionCount(overlayShown, renderInterfaceCalled, renderCalled);
 
-        UI::TextWrapped("One callback owns the surface for each overlay state; IDs do not excuse duplicate submission.");
-        UI::Text("Simulated overlay state: " + (overlayShown ? "shown" : "hidden"));
-        UI::Text("Authoritative owner: " + OwnerForOverlayState(overlayShown));
-        UI::Text("SubmissionCount = " + submissions);
-        UI::ProgressBar(float(submissions), vec2(-1, 0), submissions == 1 ? "exactly one owner" : "ownership error");
+        UI::TextWrapped("Openplanet can call RenderInterface and Render for the same plugin. This recipe shows which callback is allowed to draw the shared window, so its contents appear once instead of twice.");
+        UI::Separator();
+        UI::Text("Simulated state selected by capture frame:");
+        UI::BulletText(overlayShown ? "Openplanet overlay is shown" : "Openplanet overlay is hidden");
+        UI::Text("Callback decision:");
+        UI::BulletText("RenderInterface: " + (renderInterfaceCalled ? "DRAW" : "skip"));
+        UI::BulletText("Render: " + (renderCalled ? "DRAW" : "skip"));
+        UI::Text("Result: " + OwnerForOverlayState(overlayShown) + " owns this surface");
+        UI::Text("Shared-window submissions this frame: " + submissions + " (expected 1)");
+        UI::ProgressBar(float(submissions), vec2(-1, 0), submissions == 1 ? "PASS: one copy" : "FAIL: duplicate/missing copy");
+        UI::TextWrapped("Use frame 0 for overlay shown and frame 120 for overlay hidden. In both states, the result must stay at one submission.");
     }
 }

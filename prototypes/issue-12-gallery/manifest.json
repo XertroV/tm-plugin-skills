@@ -18,7 +18,7 @@
     {
       "id": "overlay-render-owner", "title": "Overlay-aware render owner", "tier": "default-imgui",
       "source": "recipes/OverlayRenderOwner.as", "namespace": "RecipeOverlayRenderOwner", "entrypoint": "DrawPanel", "surface": "panel", "maturity": "candidate-static-only", "license": "CC0-1.0 OR Unlicense",
-      "expected": "For both overlay states, exactly one callback owns the surface; the panel reports which callback is authoritative and a submission count of one.",
+      "expected": "Frame 0 shows RenderInterface drawing while Render skips; frame 120 shows the reverse. Both report one shared-window submission and PASS: one copy.",
       "state_contract": {"capture_frames": [0, 120], "instrumentation": ["render-ownership"]}
     },
     {
