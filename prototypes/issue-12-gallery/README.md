@@ -1,8 +1,8 @@
-# Issue 12 visual-gallery assembly proof
+# Visual recipe gallery evidence harness
 
-> **THROWAWAY PROTOTYPE — not a production skill or stable recipe library.**
+> **MAINTAINED EVIDENCE HARNESS — not a stable recipe library.**
 
-This prototype answers whether one canonical recipe source can assemble a standalone Openplanet gallery without a hand-copied second implementation. All AngelScript examples remain `candidate-static-only` until the generated plugin is loaded and visually exercised in Trackmania/Openplanet. A successful local command is **not** live validation.
+This harness proves that one canonical recipe source can assemble a standalone Openplanet gallery without a hand-copied second implementation. All AngelScript examples remain `candidate-static-only` until the generated plugin is loaded and visually exercised in Trackmania/Openplanet. A successful local command is **not** live validation.
 
 ## One command
 
@@ -24,7 +24,9 @@ The command validates `recipe.schema.json` and `manifest.json`, rebuilds `genera
 - `GeneratedCatalog.as` and the plugin shell are deterministic generator output.
 - `screenshot-matrix.json` owns capture cases; it is validation data, not another implementation.
 
-The generator intentionally contains no production packaging abstraction. Delete this directory after its decisions are incorporated into the eventual implementation ticket.
+The generator intentionally contains no production packaging abstraction. Keep
+this directory as the canonical recipe, generated-plugin, capture-state, and
+evidence input. Static generation must never promote recipe maturity by itself.
 
 ## Deliberate exclusions
 

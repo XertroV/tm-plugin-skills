@@ -31,6 +31,19 @@ This repository is currently being designed through a [Wayfinder map](https://gi
 - [`openplanet-reviewer`](skills/openplanet-reviewer/SKILL.md) — adversarial,
   evidence-graded review for subtle Openplanet runtime and architecture failure.
 
+## Validation
+
+Run the repository-owned quick gate with:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python scripts/validate.py --profile quick
+```
+
+The visual gallery is a maintained evidence harness whose recipes remain
+`candidate-static-only`. `scripts/record-gallery-evidence.py --static-only`
+emits a machine-readable pending record; it does not claim live load, native
+test execution, screenshots, or human visual approval.
+
 ## Install
 
 Pick one installation route; do not install the same skill through both because
