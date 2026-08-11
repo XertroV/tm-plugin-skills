@@ -36,7 +36,18 @@ Remote-control component actions have separate gates: stable unique ID; registra
 
 The reference result envelope is `{v,id,ok,result}` on success and `{v,id,ok:false,error:{code,message,next}}` on failure. `message` states the immediate cause; `next` gives one concrete retry, force, or documentation action. Do not return a stack trace or unbounded payload. Required component error codes include `not_drawn`, `unknown_component`, `unknown_action`, `invalid_mouse_button`, `busy`, and `stale_registration`.
 
-Interactive-ID gates: every user-interactive widget/window has an explicit stable ID; repeated labels in loops are scoped; ID helper output covers stable string keys, numeric indices, combinations, and retained random IDs; push/pop scopes are balanced; changing a visible label does not reset state when `###` identity is intended; and no random ID changes per frame. Render the same dispatcher twice in one Openplanet frame and prove only one interior is submitted; a once-per-frame guard is required when callback topology cannot guarantee single dispatch.
+Interactive-ID gates:
+
+- every user-interactive widget/window has an explicit stable ID;
+- repeated labels in loops are scoped;
+- ID helper output covers stable string keys, numeric indices, combinations, and retained random IDs;
+- push/pop scopes are balanced;
+- changing a visible label does not reset state when `###` identity is intended;
+- no random ID changes per frame;
+- for windows exposed through both callbacks, `RenderInterface()` handles the overlay-visible state;
+- `Render()` returns when `UI::IsOverlayShown()` is true;
+- the `Render()` fallback exists only for an explicit “show while UI hidden” mode; otherwise it is omitted; and
+- tests exercise both overlay states and prove exactly one interior is submitted.
 
 Hash assertions must be preceded by a nearby comment explaining their update policy: which source changes are expected to change the hash, when maintainers should regenerate/update it, and which unexpected changes indicate drift or breakage. Do not leave opaque golden hashes. Determinism tests should usually compare two clean builds directly; pin a literal digest only when that cross-version identity is itself the contract.
 

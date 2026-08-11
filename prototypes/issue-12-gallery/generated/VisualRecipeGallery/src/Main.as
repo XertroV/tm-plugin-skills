@@ -2,17 +2,24 @@
 bool g_windowOpen = true;
 int g_selectedRecipe = 0;
 int g_captureFrame = 0;
-uint64 g_lastInterfaceFrame = uint64(-1);
 
 void RenderMenu() {
     if (UI::MenuItem("Visual Recipe Gallery PROTOTYPE", "", g_windowOpen)) g_windowOpen = !g_windowOpen;
 }
 
 void RenderInterface() {
-    // Openplanet can invoke UI rendering through more than one callback path. Drawing the
-    // same ImGui window ID twice in one frame can append a copy of its interior to itself.
-    if (g_lastInterfaceFrame == Time::FrameCount) return;
-    g_lastInterfaceFrame = Time::FrameCount;
+    DrawGalleryWindow();
+}
+
+void Render() {
+    // RenderInterface owns the normal Openplanet-overlay path. Only use Render for the
+    // optional HUD-like path while the overlay is hidden; otherwise the same ImGui window
+    // ID is submitted twice and its interior can appear duplicated.
+    if (UI::IsOverlayShown()) return;
+    DrawGalleryWindow();
+}
+
+void DrawGalleryWindow() {
     if (!g_windowOpen) return;
     UI::SetNextWindowSize(780, 560, UI::Cond::FirstUseEver);
     if (UI::Begin("Visual Recipe Gallery PROTOTYPE###skillpack-demo-gallery", g_windowOpen)) DrawGallery();
