@@ -1,0 +1,10 @@
+[meta]
+name = "Visual Recipe Gallery PROTOTYPE"
+author = "tm-plugin-skills prototype"
+category = "Skillpack Demos"
+version = "0.0.0"
+siteid = 0
+
+[script]
+dependencies = ["SkillpackDemoLib"]
+export_dependencies = ["SkillpackDemoLib"]

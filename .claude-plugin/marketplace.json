@@ -1,0 +1,15 @@
+{
+  "name": "tm-plugin-skills",
+  "description": "Portable Openplanet AngelScript agent skills.",
+  "owner": {
+    "name": "XertroV"
+  },
+  "plugins": [
+    {
+      "name": "tm-plugin-skills",
+      "source": "./",
+      "description": "Portable Openplanet AngelScript development and adversarial review skills.",
+      "version": "0.1.0"
+    }
+  ]
+}

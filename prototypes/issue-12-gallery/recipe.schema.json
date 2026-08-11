@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/tm-plugin-skills/prototypes/visual-recipe.schema.json",
+  "title": "Throwaway visual recipe manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "gallery", "recipes"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "gallery": {
+      "type": "object", "additionalProperties": false,
+      "required": ["plugin_id", "name", "version"],
+      "properties": {
+        "plugin_id": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9]+$"},
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+      }
+    },
+    "recipes": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "title", "tier", "source", "namespace", "entrypoint", "surface", "maturity", "license", "expected", "state_contract"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"},
+          "title": {"type": "string", "minLength": 1},
+          "tier": {"enum": ["default-imgui", "nvg", "advanced"]},
+          "source": {"type": "string", "pattern": "^recipes/[A-Za-z0-9_-]+\\.as$"},
+          "namespace": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]+$"},
+          "entrypoint": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]+$"},
+          "surface": {"enum": ["panel", "canvas"]},
+          "maturity": {"const": "candidate-static-only"},
+          "license": {"const": "CC0-1.0 OR Unlicense"},
+          "provenance": {
+            "type": "object", "additionalProperties": false,
+            "required": ["kind", "repository", "file", "note"],
+            "properties": {
+              "kind": {"const": "independent-api-example"},
+              "repository": {"const": "XertroV/tm-plugin-skills"},
+              "file": {"type": "string", "pattern": "^prototypes/issue-12-gallery/recipes/"},
+              "note": {"type": "string", "minLength": 1}
+            }
+          },
+          "expected": {"type": "string", "minLength": 1},
+          "state_contract": {
+            "type": "object", "additionalProperties": false,
+            "required": ["capture_frames", "instrumentation"],
+            "properties": {
+              "capture_frames": {"type": "array", "minItems": 1, "items": {"type": "integer", "minimum": 0, "maximum": 120}},
+              "instrumentation": {"type": "array", "items": {"enum": ["style-depth", "clip-depth", "scissor-depth", "animation-state", "stable-id", "render-ownership", "visibility-state"]}, "uniqueItems": true}
+            }
+          }
+        }
+      }
+    }
+  }
+}
