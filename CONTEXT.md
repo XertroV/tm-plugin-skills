@@ -11,3 +11,5 @@
 - **Clone-local state** — Private per-checkout capability discoveries, machine paths, receipts, and other non-portable state stored outside tracked project documentation and excluded through `.git/info/exclude`.
 - **Demo plugin** — A temporary/development Openplanet plugin used to compile, load, smoke, and visibly inspect skillpack snippets incrementally. Multiple demo plugins may isolate concerns; all use the dedicated `Skillpack Demos` category.
 - **Gotcha** — An experienced Openplanet failure mode whose preventative default belongs in `docs/openplanet-gotchas.md`, automated checks, and relevant skill guidance rather than only in session history.
+- **Adversarial review** — A failure-oriented review of game/plugin state, modes, lifetimes, callback safety, synchronization, packet flow, UI stack integrity, cleanup, and maintainability that actively searches for plausible ways a plugin can stop working despite compiling.
+- **Failure ledger** — The continuously maintained evidence base in `docs/reviewer-failure-ledger.md` that turns discovered trip-ups into reviewer checks and, where possible, regression tests and demos.

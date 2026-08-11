@@ -10,6 +10,8 @@ This repository is currently being designed through a [Wayfinder map](https://gi
 - Detect project build systems and automation as enhancements rather than assumptions.
 - Close the feedback loop through static checks, live load/reload, `Openplanet.log`, screenshots, and observable plugin behavior.
 - Keep skills concise, composable, and usable across agent harnesses.
+- Maintain six independently triggerable skills, including `openplanet-reviewer` for adversarial runtime, state, synchronization, callback-safety, and architecture review. See `docs/skill-manifest.md`.
+- Turn every newly discovered subtle failure mode into a reviewer-ledger entry and, where applicable, development guidance plus test/demo evidence.
 
 Implementation will follow the decisions recorded in the issue map.
 

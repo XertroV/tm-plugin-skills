@@ -198,7 +198,7 @@ The five-workflow hypothesis **survives** as the right *top-level* cut. Two sub-
 
 ### Top-level skills (v1 portable core)
 
-Five independently triggerable, model-invoked skills. Names are **proposals** for the specification to adopt or rename; the cut matters more than the final slug.
+Historical research proposed five independently triggerable, model-invoked skills. The later user-approved manifest adds `openplanet-reviewer` as a sixth failure-oriented skill; `docs/skill-manifest.md` is authoritative for the current boundary map. Names below remain the original research proposals.
 
 ```text
                     ┌──────────────────────────┐
@@ -222,7 +222,7 @@ Five independently triggerable, model-invoked skills. Names are **proposals** fo
 
 ### Shared preamble (every skill, short)
 
-Not a sixth skill — a few lines repeated or one tiny always-linked reference:
+Not another invocation surface — a few lines repeated or one tiny always-linked reference:
 
 1. Locate **plugin folder** (`info.toml`).
 2. Detect **topology** (live vs staged) and **capabilities** (build script, LSP, RemoteBuild, control bridge, screenshot tool).
@@ -294,6 +294,10 @@ Not a sixth skill — a few lines repeated or one tiny always-linked reference:
 | **Completion criterion** | Requested control action observed; if failed, next-lower rung attempted or explicit blocker; never “success” solely because a socket accepted bytes without runtime evidence when reload was involved. |
 | **Progressive disclosure** | Full protocol, ownership (this repo vs companion plugin vs upstream), dependent-closure restore semantics → [issue 6](https://github.com/XertroV/tm-plugin-skills/issues/6). Active practice pointer today: `tm-control-mcp` + `tools/call.py` (Hermes skill, MCP `AGENTS.md`). |
 | **Cross-links** | → `openplanet-lifecycle` as permanent fallback; ← from visual when capture needs the bridge; not required for pure code edits on live-folder plugins with manual reload. |
+
+### Later addition — `openplanet-reviewer`
+
+This historical study did not propose an adversarial reviewer. Subsequent dogfooding and user direction established a distinct task boundary: hunt for subtle runtime failures in game/plugin state, mode assumptions, lifetimes, synchronization, UI exception containment, packet architecture, and maintainability. The current trigger, completion gate, and cross-links live in `docs/skill-manifest.md`; the evolving evidence base lives in `docs/reviewer-failure-ledger.md`.
 
 ---
 
@@ -403,7 +407,7 @@ The five-workflow hypothesis is **accepted as the v1 top-level skill cut**, with
 ## Document checks run
 
 1. **Citation path existence** — all primary paths listed in Sources consulted were checked present on the research host (2026-08-11).
-2. **Internal consistency** — five skills, eight reference slots, ten rejected alternatives; no skill proposed for open product decisions owned by other tickets.
+2. **Historical internal consistency** — this research evaluated five skills, eight reference slots, and ten rejected alternatives. The later sixth reviewer skill is an explicit superseding product decision, not an unnoticed inconsistency in the original study.
 3. **Wayfinder compliance** — research asset only; no skill implementation; issue not edited/closed by this work.
 4. **Domain language** — uses `CONTEXT.md` terms (plugin folder, lifecycle loop, runtime evidence, portable path, capability detection, visual gate, control bridge).
 

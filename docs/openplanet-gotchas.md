@@ -31,6 +31,28 @@ the callback must follow Openplanet's overlay visibility state.
 If the feature has no “show while UI hidden” mode, omit the `Render()` path.
 Test both overlay states whenever both callbacks exist.
 
+## Keep throwing work out of render callbacks
+
+An exception escaping UI code can make Openplanet unwind the current UI stack
+and stop invoking that plugin's render callbacks. Treat render paths as fragile:
+keep them deterministic, bounded, and limited to drawing plus cheap local state
+changes.
+
+Button presses and other UI events should launch potentially throwing,
+yielding, networked, filesystem, or multi-step mutations through `startnew(...)`
+or a similarly isolated coroutine. Pass required arguments in an explicit typed
+state carrier or class when a callback signature cannot carry them directly.
+The coroutine boundary isolates failure from UI-stack cleanup; it does not
+replace validation, error reporting, cancellation, ownership, or stale-state
+checks.
+
+Reusable button/component classes can provide a stable ID, render-epoch state,
+an overridable semantic `OnClick` method, and one guarded coroutine launcher.
+Subclasses then express behavior without duplicating callback plumbing.
+
+Catalog concrete failure patterns and adversarial checks in
+`reviewer-failure-ledger.md`; this file keeps the preferred development default.
+
 ## Interactive controls need stable IDs
 
 Assign explicit stable IDs to every interactive item:
