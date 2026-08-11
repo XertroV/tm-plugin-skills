@@ -21,6 +21,9 @@ Create theme-respecting Openplanet UI and overlays with deterministic, inspectab
 3. **Advanced custom composition.** Choose explicitly for requested brand/cinematic work: custom ImGui style, draw lists, gradients, sprites, shapes, or animation. Isolate style/clip state and prove balanced cleanup. Do not leak this depth into default UI.
 
 See [design and ownership](references/design-and-ownership.md).
+Before mixing fixed dimensions, measured UI geometry, screen pixels, draw
+lists, NanoVG, Manialink, mouse input, or projected world positions, load
+[UI scaling and coordinate spaces](references/ui-scaling-and-coordinate-spaces.md).
 
 ## Workflow
 

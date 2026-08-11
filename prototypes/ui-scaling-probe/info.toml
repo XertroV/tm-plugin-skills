@@ -1,0 +1,9 @@
+[meta]
+name = "Skillpack UI Scaling Probe"
+author = "tm-plugin-skills"
+category = "Skillpack Demos"
+version = "0.0.0"
+siteid = 0
+
+[script]
+defines = ["SKILLPACK_SCALING_PROBE"]
