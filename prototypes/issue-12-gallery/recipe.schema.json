@@ -36,7 +36,7 @@
             "type": "object", "additionalProperties": false,
             "required": ["kind", "repository", "file", "note"],
             "properties": {
-              "kind": {"const": "independent-api-example"},
+              "kind": {"enum": ["independent-api-example", "independent-reimplementation"]},
               "repository": {"const": "XertroV/tm-plugin-skills"},
               "file": {"type": "string", "pattern": "^prototypes/issue-12-gallery/recipes/"},
               "note": {"type": "string", "minLength": 1}

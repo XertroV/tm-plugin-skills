@@ -17,6 +17,7 @@ RecipeMeta@[] g_recipes = {
     RecipeMeta("drawlist-gradient", "Clipped draw-list gradient", GalleryTier::Advanced, false, false, "candidate-static-only", "A fixed-size four-corner gradient stays inside its clip rectangle; clip depth returns to zero.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/DrawListGradient.as · independent-api-example", {0}),
     RecipeMeta("deterministic-pulse", "Deterministic pulse state", GalleryTier::Advanced, false, true, "candidate-static-only", "The progress bar and reported phase exactly match capture frames 0, 30, 60, 90, and 120.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/DeterministicPulse.as · independent-api-example", {0, 30, 60, 90, 120}),
     RecipeMeta("kinetic-spectrum-reactor", "Kinetic spectrum reactor", GalleryTier::Advanced, true, true, "candidate-static-only", "A cyan-violet-amber containment field travels around the panel perimeter and feeds four synchronized conduits into a recessed breathing reactor, with orbital spark trails and radial energy ticks; frame 120 closes the loop by matching frame 0.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/KineticSpectrumReactor.as · independent-api-example", {0, 30, 60, 90, 120}),
+    RecipeMeta("spectral-relay-typography", "Spectral relay typography", GalleryTier::Advanced, true, true, "candidate-static-only", "Two counter-propagating spectral signals race through a monumental CHECKPOINT RELAY wordmark while lane traces, phase markers, and an interference bloom reveal the deterministic collision point; the composition remains legible and dramatic in every frozen frame.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/SpectralRelayTypography.as · independent-reimplementation", {0, 30, 60, 90, 120}),
 };
 
 void DrawRecipeByIndex(int index, int captureFrame) {
@@ -28,4 +29,5 @@ void DrawRecipeByIndex(int index, int captureFrame) {
     else if (index == 5) RecipeDrawListGradient::DrawPanel(captureFrame);
     else if (index == 6) RecipeDeterministicPulse::DrawPanel(captureFrame);
     else if (index == 7) RecipeKineticSpectrumReactor::DrawPanel(captureFrame);
+    else if (index == 8) RecipeSpectralRelayTypography::DrawPanel(captureFrame);
 }

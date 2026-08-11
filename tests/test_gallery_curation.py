@@ -28,13 +28,27 @@ class GalleryCurationTests(unittest.TestCase):
 
     def test_featured_is_a_deliberate_showcase_not_a_foundational_proof(self) -> None:
         featured = [recipe for recipe in self.manifest["recipes"] if recipe["curation"] == "featured"]
-        self.assertEqual(["kinetic-spectrum-reactor"], [recipe["id"] for recipe in featured])
-        recipe = featured[0]
-        self.assertIn("showcase-composition", recipe["state_contract"]["instrumentation"])
-        self.assertEqual([0, 30, 60, 90, 120], recipe["state_contract"]["capture_frames"])
-        self.assertTrue((GALLERY / recipe["source"]).is_file())
-        source = GALLERY / recipe["source"]
-        self.assertTrue(source.with_name(source.stem + "_Test.as").is_file())
+        self.assertEqual(
+            [
+                "kinetic-spectrum-reactor",
+                "spectral-relay-typography",
+            ],
+            [recipe["id"] for recipe in featured],
+        )
+        for recipe in featured:
+            with self.subTest(recipe=recipe["id"]):
+                self.assertIn("showcase-composition", recipe["state_contract"]["instrumentation"])
+                self.assertEqual([0, 30, 60, 90, 120], recipe["state_contract"]["capture_frames"])
+                self.assertTrue((GALLERY / recipe["source"]).is_file())
+                source = GALLERY / recipe["source"]
+                self.assertTrue(source.with_name(source.stem + "_Test.as").is_file())
+
+    def test_tm_agent_inspired_showcases_are_independent_reimplementations(self) -> None:
+        for recipe_id in ("spectral-relay-typography",):
+            recipe = self.by_id[recipe_id]
+            provenance = recipe["provenance"]
+            self.assertEqual("independent-reimplementation", provenance["kind"])
+            self.assertIn("no source, palette, or assets copied", provenance["note"])
 
     def test_animations_autoplay_with_a_pause_play_control(self) -> None:
         generated_main = (

@@ -54,6 +54,13 @@
       "provenance": {"kind": "independent-api-example", "repository": "XertroV/tm-plugin-skills", "file": "prototypes/issue-12-gallery/recipes/KineticSpectrumReactor.as", "note": "New composition inspired by the documented tm-agent animated-border and pulsing-wave concepts; no unresolved-license source or palette copied."},
       "expected": "A cyan-violet-amber containment field travels around the panel perimeter and feeds four synchronized conduits into a recessed breathing reactor, with orbital spark trails and radial energy ticks; frame 120 closes the loop by matching frame 0.",
       "state_contract": {"capture_frames": [0, 30, 60, 90, 120], "instrumentation": ["clip-depth", "animation-state", "showcase-composition"]}
+    },
+    {
+      "id": "spectral-relay-typography", "title": "Spectral relay typography", "tier": "advanced", "curation": "featured",
+      "source": "recipes/SpectralRelayTypography.as", "namespace": "RecipeSpectralRelayTypography", "entrypoint": "DrawPanel", "surface": "panel", "maturity": "candidate-static-only", "license": "CC0-1.0 OR Unlicense",
+      "provenance": {"kind": "independent-reimplementation", "repository": "XertroV/tm-plugin-skills", "file": "prototypes/issue-12-gallery/recipes/SpectralRelayTypography.as", "note": "Independently reimagines tm-agent's counter-propagating text-wave idea as a Trackmania checkpoint relay; no source, palette, or assets copied."},
+      "expected": "Two counter-propagating spectral signals race through a monumental CHECKPOINT RELAY wordmark while lane traces, phase markers, and an interference bloom reveal the deterministic collision point; the composition remains legible and dramatic in every frozen frame.",
+      "state_contract": {"capture_frames": [0, 30, 60, 90, 120], "instrumentation": ["clip-depth", "animation-state", "showcase-composition"]}
     }
   ]
 }
