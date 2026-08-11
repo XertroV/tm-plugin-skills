@@ -127,6 +127,25 @@ class LifecycleBridgeContractTests(unittest.TestCase):
         self.assertEqual(["Direct", "Transitive"], completed["data"]["restore_attempt_order"])
         self.assertEqual(["Direct", "Provider", "Sibling", "Transitive"], self.model.request("status")["data"]["loaded"])
 
+    def test_non_object_json_returns_error_without_terminating_model(self):
+        self.model.proc.stdin.write("[]\n")
+        self.model.proc.stdin.flush()
+        response = json.loads(self.model.proc.stdout.readline())
+        self.assertFalse(response["ok"])
+        self.assertEqual("invalid_request", response["error"]["code"])
+        self.assertTrue(self.model.request("status")["ok"])
+
+    def test_tcp_client_rejects_non_loopback_and_oversized_request(self):
+        sys.path.insert(0, str(ROOT / "prototypes" / "lifecycle-bridge-contract"))
+        import lifecycle_bridge
+
+        request = {"v": 1, "id": "r1", "route": "status", "data": {}}
+        with self.assertRaisesRegex(ValueError, "loopback"):
+            lifecycle_bridge.call_tcp("example.com", 30007, 1.0, request)
+        request["data"] = {"value": "x" * 70000}
+        with self.assertRaisesRegex(ValueError, "65536"):
+            lifecycle_bridge.call_tcp("127.0.0.1", 30007, 1.0, request)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

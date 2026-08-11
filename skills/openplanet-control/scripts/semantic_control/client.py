@@ -26,6 +26,8 @@ def call(host, port, request, timeout=2.0, max_frame=DEFAULT_MAX_FRAME):
             sock.sendall(encode_frame(request, max_frame=max_frame))
             with sock.makefile("rb") as reader:
                 response = read_frame(reader, max_frame=max_frame)
+                if reader.read(1):
+                    raise ClientError("trailing bytes after response frame")
     except (OSError, ValueError) as exc:
         raise ClientError(str(exc)) from exc
     if response.get("id") != request_id:

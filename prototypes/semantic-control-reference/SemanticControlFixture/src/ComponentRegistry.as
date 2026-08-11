@@ -50,7 +50,7 @@ namespace SemanticControl {
         if (registration.Generation != generation) return "stale_registration";
         SemanticAction@ callback;
         if (!registration.Actions.Get(action, @callback)) return "unknown_action";
-        if (!force && registration.LastDrawnEpoch != g_SealedRenderEpoch) return "not_drawn";
+        if (!force && (g_SealedRenderEpoch == 0 || registration.LastDrawnEpoch != g_SealedRenderEpoch)) return "not_drawn";
         callback();
         return force ? "forced" : "performed";
     }

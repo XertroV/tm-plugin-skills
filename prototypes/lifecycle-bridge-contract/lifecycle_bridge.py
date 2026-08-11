@@ -10,6 +10,8 @@ from dataclasses import dataclass, field
 from typing import Any, TextIO
 
 PROTOCOL = 1
+MAX_MESSAGE = 65536
+LOOPBACK_HOSTS = {"127.0.0.1", "localhost", "::1"}
 
 
 @dataclass
@@ -219,7 +221,11 @@ def serve_model(source: TextIO, sink: TextIO) -> int:
     for line in source:
         try:
             request = json.loads(line)
-            response = model.handle(request)
+            if not isinstance(request, dict):
+                response = {"v": PROTOCOL, "id": None, "route": None, "ok": False,
+                            "error": {"code": "invalid_request", "message": "request must be an object"}, "data": {}}
+            else:
+                response = model.handle(request)
         except json.JSONDecodeError:
             response = {"v": PROTOCOL, "id": None, "route": None, "ok": False,
                         "error": {"code": "invalid_json", "message": "invalid json"}, "data": {}}
@@ -230,6 +236,10 @@ def serve_model(source: TextIO, sink: TextIO) -> int:
 
 def call_tcp(host: str, port: int, timeout: float, request: dict[str, Any]) -> dict[str, Any]:
     wire = json.dumps(request, separators=(",", ":")).encode() + b"\n"
+    if host not in LOOPBACK_HOSTS:
+        raise ValueError("lifecycle bridge client is loopback-only")
+    if len(wire) > MAX_MESSAGE:
+        raise ValueError(f"request exceeds {MAX_MESSAGE} bytes")
     with socket.create_connection((host, port), timeout=timeout) as sock:
         sock.settimeout(timeout)
         sock.sendall(wire)
@@ -239,9 +249,16 @@ def call_tcp(host: str, port: int, timeout: float, request: dict[str, Any]) -> d
             if not chunk:
                 raise RuntimeError("connection closed before newline response")
             response.extend(chunk)
-            if len(response) > 65536:
-                raise RuntimeError("response exceeds 65536 bytes")
-    return json.loads(response)
+            if len(response) > MAX_MESSAGE:
+                raise RuntimeError(f"response exceeds {MAX_MESSAGE} bytes")
+    decoded = json.loads(response)
+    if not isinstance(decoded, dict):
+        raise RuntimeError("response must be an object")
+    if decoded.get("v") != request.get("v"):
+        raise RuntimeError("response protocol mismatch")
+    if decoded.get("id") != request.get("id") or decoded.get("route") != request.get("route"):
+        raise RuntimeError("response correlation mismatch")
+    return decoded
 
 
 def main() -> int:

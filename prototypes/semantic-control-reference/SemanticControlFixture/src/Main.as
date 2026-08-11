@@ -21,9 +21,10 @@ void StartLoopbackListener() {
 void RenderInterface() {
     SemanticControl::BeginRenderEpoch();
     if (g_WindowOpen) {
-        UI::Begin("Semantic Control Fixture DEV", g_WindowOpen);
-        SemanticControlFixture::RenderSaveButton();
-        UI::Text("Semantic callbacks: " + SemanticControlFixture::ClickCount);
+        if (UI::Begin("Semantic Control Fixture DEV", g_WindowOpen)) {
+            SemanticControlFixture::RenderSaveButton();
+            UI::Text("Semantic callbacks: " + SemanticControlFixture::ClickCount);
+        }
         UI::End();
     }
     SemanticControl::SealRenderEpoch();

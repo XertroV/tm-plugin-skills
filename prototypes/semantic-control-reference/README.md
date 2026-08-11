@@ -18,7 +18,7 @@ Exit codes: `0` success, `1` transport/protocol/client error, `2` CLI usage or d
 
 ## AngelScript fixture
 
-`openplanet/SemanticControlFixture` is the canonical registry/router/component seam:
+`SemanticControlFixture/` is the canonical registry/router/component seam:
 
 - stable IDs, owner generation, teardown;
 - completed-render-epoch visibility truth;

@@ -17,8 +17,9 @@ from semantic_control.protocol import ProtocolError, encode_frame, read_frame
 
 
 class OneShotServer:
-    def __init__(self, responder):
+    def __init__(self, responder, trailing=b""):
         self.responder = responder
+        self.trailing = trailing
         self.received = None
         self.listener = socket.socket()
         self.listener.bind(("127.0.0.1", 0))
@@ -33,7 +34,7 @@ class OneShotServer:
             with conn, conn.makefile("rb") as reader:
                 self.received = read_frame(reader)
                 response = self.responder(self.received)
-                conn.sendall(encode_frame(response))
+                conn.sendall(encode_frame(response) + self.trailing)
         except (OSError, ProtocolError):
             pass
         finally:
@@ -60,7 +61,16 @@ class ClientTests(unittest.TestCase):
     def test_call_rejects_mismatched_response_id(self):
         server = OneShotServer(lambda request: {"v": 1, "id": "other", "ok": True, "result": {}})
         with self.assertRaises(ClientError):
-            call("127.0.0.1", server.port, {"v": 1, "id": "r1", "route": "ping"})
+            call("127.0.0.1", server.port, {"v": 1, "id": "request", "route": "ping", "args": {}})
+        server.join()
+
+    def test_call_rejects_trailing_response_bytes(self):
+        server = OneShotServer(
+            lambda request: {"v": 1, "id": request["id"], "ok": True},
+            trailing=b"garbage",
+        )
+        with self.assertRaisesRegex(ClientError, "trailing bytes"):
+            call("127.0.0.1", server.port, {"v": 1, "id": "r1", "route": "ping", "args": {}})
         server.join()
 
     def test_call_refuses_non_loopback_host(self):
