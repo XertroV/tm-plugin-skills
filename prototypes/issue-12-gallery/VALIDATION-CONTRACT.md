@@ -15,6 +15,9 @@
 11. Ordinary tests do not invoke UI, draw-list, or NVG drawing APIs. They exercise extracted pure seams; live demo and screenshot gates prove actual rendering and stack restoration.
 12. Every applicable rule in `docs/openplanet-gotchas.md` is represented by implementation, an automated gate, live evidence, or an explicit reviewed non-applicability record. Prose-only acknowledgement is insufficient for components that exercise the gotcha.
 13. When the local Openplanet plugin directory is available, exactly one installed plugin folder may own the gallery's display name. A stale second folder fails validation instead of producing a second prototype window.
+14. Every demo/test plugin main window is independently toggleable and listed
+    under a `Skillpack Demos` submenu in the Plugins menu; the menu checkmark and
+    window close button share one visibility state. Windowless libraries are exempt.
 
 ## Live gates (mandatory before any promotion; intentionally not claimed here)
 

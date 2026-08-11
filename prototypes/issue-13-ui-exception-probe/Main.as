@@ -1,6 +1,7 @@
 #if SKILLPACK_PROBE_MODE
 bool g_ThrowInlineOnce = false;
 bool g_ThrowIsolatedOnce = false;
+bool g_WindowOpen = false;
 uint g_RenderInterfaceCalls = 0;
 uint g_RenderCalls = 0;
 uint g_LastReportedFrame = 0;
@@ -13,9 +14,19 @@ void ThrowProbeIsolated() {
     ThrowProbe("isolated coroutine");
 }
 
+void RenderMenu() {
+    if (UI::BeginMenu("Skillpack Demos")) {
+        if (UI::MenuItem("UI Exception Probe", "", g_WindowOpen)) {
+            g_WindowOpen = !g_WindowOpen;
+        }
+        UI::EndMenu();
+    }
+}
+
 void DrawProbeWindow() {
+    if (!g_WindowOpen) return;
     UI::SetNextWindowSize(560, 0, UI::Cond::FirstUseEver);
-    if (!UI::Begin("UI Exception Probe###skillpack-ui-exception-probe")) {
+    if (!UI::Begin("UI Exception Probe###skillpack-ui-exception-probe", g_WindowOpen)) {
         UI::End();
         return;
     }

@@ -151,7 +151,10 @@ int g_selectedRecipe = 0;
 int g_captureFrame = 0;
 
 void RenderMenu() {
-    if (UI::MenuItem("Visual Recipe Gallery PROTOTYPE", "", g_windowOpen)) g_windowOpen = !g_windowOpen;
+    if (UI::BeginMenu("Skillpack Demos")) {
+        if (UI::MenuItem("Visual Recipe Gallery PROTOTYPE", "", g_windowOpen)) g_windowOpen = !g_windowOpen;
+        UI::EndMenu();
+    }
 }
 
 void RenderInterface() {

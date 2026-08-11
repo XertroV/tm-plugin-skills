@@ -38,9 +38,11 @@ ends at initialization; feature implementation belongs to `openplanet-dev`.
 4. **Record clone-local capabilities.** Follow
    [onboarding and local-state guidance](references/onboarding-and-local-state.md).
    Store machine paths, ports, detected tools, and runtime receipts in a private
-   checkout-local file listed in `.git/info/exclude`. Never write secrets to the
+   checkout-local file listed in `.git/info/exclude` when Git metadata exists;
+   otherwise use external private state outside the plugin folder. Never write secrets to the
    tracked brief, clone-local state, `info.toml`, logs, prompts, or commits.
-   Completion: portable decisions are tracked; local capabilities are excluded;
+   Completion: portable decisions are tracked; local capabilities are excluded
+   from tracked/public plugin files;
    secrets remain only in their proper secret store.
 5. **Create the minimal loadable identity.** Preserve a valid existing manifest
    when normalizing. Otherwise create the smallest `info.toml` and AngelScript
@@ -88,7 +90,8 @@ Initialization is complete only when:
   entrypoint;
 - the tracked initialization brief exists even for tiny/local-only work;
 - applicable advanced branches are resolved without speculative architecture;
-- clone-local receipts are private through `.git/info/exclude`;
+- clone-local receipts are private through `.git/info/exclude`, or external
+  private state is used when the plugin folder is not a Git checkout;
 - no secret was written into project or agent artifacts;
 - checks ran against the bytes intended for loading; and
 - fresh first-load evidence exists, or the result names an explicit runtime

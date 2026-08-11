@@ -28,6 +28,7 @@ def main() -> None:
     require(package["license"] == plugin["license"] == "CC0-1.0 OR Unlicense", "license metadata drift")
     require((ROOT / "LICENSES" / "CC0-1.0.txt").is_file(), "CC0 full text missing")
     require((ROOT / "LICENSES" / "Unlicense.txt").is_file(), "Unlicense full text missing")
+    require((ROOT / "scripts" / "check-demo-menu-contract.py").is_file(), "demo menu validator missing")
 
     skill_dirs = sorted(p.parent.name for p in (ROOT / "skills").glob("*/SKILL.md"))
     expected_skills = sorted((

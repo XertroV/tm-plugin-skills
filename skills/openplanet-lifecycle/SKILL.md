@@ -30,13 +30,31 @@ Use for first loads, reloads after source changes, unloads, compile diagnosis, d
 
 5. **Mutate lifecycle with closure safety.** For a provider or target with loaded reverse dependents, snapshot the currently loaded transitive closure before unload. Prefer L1 closure-aware reload. For an empty-closure leaf, use L2 when healthy. At L0, tell the human exactly which Scripts/Plugins UI action to perform and retain the dependent list for manual restoration. Openplanet queues unload/reload and invalidates plugin handles on the next frame; re-resolve by ID after yielding rather than retaining handles. Completion: the target mutation occurred and the prior loaded set is preserved for restoration.
 
-6. **Read the fresh transcript before restoring dependents.** Require a fresh target `Loaded plugin '<id>'` event (including the applicable folder/zip/legacy variant) and no later attributable `Script compilation failed`, `:  ERR :`, or equivalent compile failure before the next intentional unload. Capture game diagnostics with reason, location, severity, warnings, and deprecations; compare them with LSP rather than collapsing either side to pass/fail. A socket `ok`, copied files, or a surviving old plugin instance is insufficient. Completion: target health is established from the fresh log, or failure is diagnosed from that same window.
+6. **Read the fresh transcript before restoration.** For load/reload, require a
+   fresh target `Loaded plugin '<id>'` event (including the applicable
+   folder/zip/legacy variant) and no later attributable `Script compilation
+   failed`, `:  ERR :`, or equivalent compile failure before the next intentional
+   unload. For unload-only, require a fresh unload event and expected dependent
+   cascade without a later unintended reload. Capture game diagnostics with
+   reason, location, severity, warnings, and deprecations; compare them with LSP
+   rather than collapsing either side to pass/fail. A socket `ok`, copied files,
+   or a surviving old plugin instance is insufficient. Completion: operation
+   health is established from the fresh log, or failure is diagnosed there.
 
-7. **Restore only the retained closure.** After target health is confirmed, restore previously loaded dependents in topological load order—providers before consumers—and verify each from the fresh log. If target compilation fails, retain the original snapshot and restore none. On retry, reuse that snapshot; never replace it with the now-empty live closure. Record partial dependent failures and retry them after their prerequisites, without enabling unrelated, disabled, unloaded, or merely possible optional consumers. Completion: each snapshot member is restored and evidenced, or listed with its failure and next retry.
+7. **Branch restoration by operation.** For load/reload, after target health is
+   confirmed, restore previously loaded dependents in topological load order—
+   providers before consumers—and verify each from the fresh log. If target
+   compilation fails, retain the original snapshot and restore none. On retry,
+   reuse that snapshot; never replace it with the now-empty live closure. For an
+   intentional unload-only operation, do not reload the target or required
+   dependents; verify the expected cascade/unloaded state and retain the snapshot
+   only as evidence or for an explicit later load request. Never enable unrelated,
+   disabled, unloaded, or merely possible optional consumers. Completion:
+   reload/load restoration is evidenced, or unload-only expected state is evidenced.
 
 8. **Exercise behavior.** When behavior changed, perform a behavior-specific smoke through the available rung: manual interaction, deterministic `[Test]`, visible state, screenshot, or control probe. Observe the result rather than accepting command delivery. For unload-only work, verify the unload and expected dependent state. Completion: requested behavior is observed, or the exact unavailable probe and next action are recorded.
 
-9. **Report evidence and parity.** Report staged identity/digests, selected rung and fallback, mutation command/UI action, fresh log range, target/dependent outcomes, full LSP-versus-game diagnostic parity (acceptance, reasons, locations, severities, warnings, deprecations), behavior evidence, tested Openplanet/game version when known, and gaps. Use **Static**, **Compiled**, **Exercised**, and **Observed** labels accurately. Completion: another person can distinguish what ran, what was observed, and what remains untested.
+9. **Report evidence and parity.** Report staged identity/digests, selected rung and fallback, mutation command/UI action, fresh log range, target/dependent outcomes, full LSP-versus-game diagnostic parity (acceptance, reasons, locations, severities, warnings, deprecations), behavior evidence, and tested Openplanet/game version. If either runtime version cannot be identified, lower the claim and report a version-evidence blocker rather than making a deep **Compiled**, **Exercised**, or **Observed** compatibility claim. Use evidence labels accurately. Completion: another person can distinguish what ran, what was observed, and what remains untested.
 
 Load [evidence and log diagnosis](references/evidence-and-log-diagnosis.md) whenever compilation, staging identity, stale logs, RemoteBuild, or evidence claims are in question.
 
@@ -47,7 +65,8 @@ When no lifecycle automation is usable:
 1. Stage and byte-compare the target as above; record the fresh log offset.
 2. Ask the human to open Openplanet’s Scripts/Plugins UI and load, reload, unload, or enable the exact module ID.
 3. Read only the appended `Openplanet.log` window.
-4. If the target unloaded dependents, restore the retained list manually in provider-before-consumer order after target success.
+4. For load/reload, restore the retained list manually in provider-before-consumer
+   order after target success. For unload-only, leave the expected cascade unloaded.
 5. Exercise the changed behavior manually and record what was observed.
 
 Human interaction is a valid portable rung. If no human can operate the running game, state that runtime proof is blocked; do not replace it with static success.
@@ -77,6 +96,8 @@ A truthful blocker names the unavailable probe, observed cause, supported lower 
 - [ ] The lifecycle action has a fresh log byte window.
 - [ ] Target load/unload result comes from that window, not a stale line or socket alone.
 - [ ] LSP/game acceptance and all warnings/deprecations are preserved and compared.
-- [ ] The prior loaded dependent closure is restored in safe order or retained for retry.
+- [ ] For load/reload, the prior loaded dependent closure is restored in safe order
+      or retained for retry; for unload-only, the expected cascade remains unloaded.
+- [ ] Deep runtime claims name the tested Openplanet and game versions.
 - [ ] Changed behavior is observed through a real smoke.
 - [ ] Every missing probe is a blocker or evidence gap, never silently promoted to pass.

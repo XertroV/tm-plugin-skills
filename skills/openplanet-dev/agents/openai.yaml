@@ -1,6 +1,6 @@
 interface:
   display_name: "Openplanet Development"
   short_description: "Implement AngelScript with tests, demos, and live proof"
-  default_prompt: "Use $openplanet-dev to implement this Openplanet behavior increment with deterministic RED-GREEN-REFACTOR, a neighboring Feature_Test.as, an effective Skillpack Demos surface, exact-byte LSP/game parity, reviewer feedback, and lifecycle proof."
+  default_prompt: "Use $openplanet-dev to implement this Openplanet behavior increment with RED-GREEN-REFACTOR and a neighboring Feature_Test.as when deterministic; otherwise use a justified deterministic fault fixture or live probe. Require an effective demo surface, exact-byte LSP/game parity, reviewer feedback, and lifecycle proof."
 policy:
   allow_implicit_invocation: true

@@ -15,7 +15,7 @@ Pick the best lifecycle-capable rung, not merely the highest numbered rung. Alwa
 
 ## Closure invariant
 
-Before mutating target `T`:
+Before loading or reloading target `T`:
 
 1. From currently loaded plugins, build reverse edges from each plugin’s required dependencies. Include only loaded optional consumers as recorded candidates; do not claim cascade/restore semantics for them without live proof.
 2. Compute the transitive loaded reverse-dependent closure, excluding `T`.
@@ -27,6 +27,10 @@ Before mutating target `T`:
 8. Clear snapshot memory only after successful restoration or explicit replacement.
 
 Restore only the prior loaded set. Never auto-enable unrelated plugins, disabled/unloaded consumers, all folders listing the dependency, or optional consumers that were not running.
+
+For intentional unload-only operations, snapshot the loaded closure for evidence,
+let the expected cascade unload, and verify that state. Do not execute steps 5–8
+and do not restore required dependents until a later explicit load request.
 
 ## Failure and fallback matrix
 

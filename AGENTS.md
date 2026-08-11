@@ -30,6 +30,10 @@ This repository is in Wayfinder planning mode. GitHub Issues are the canonical d
 - Follow `docs/testing-openplanet-plugins.md` for signatures, assertions, context lifetime, safe test seams, invocation, and live evidence.
 - Every visual example—stable, candidate, prototype, recipe, helper, and interactive component—must have a selectable live demo in the shared Visual Recipe Gallery prototype window. Extend the gallery manifest, navigation, deterministic state/capture matrix, expected result, and adjacent test rather than leaving visual sample code unreachable or split across untracked windows.
 - Give non-visual components and behaviors a `Skillpack Demos` demo whenever their contract can be shown effectively through controls, state readouts, logs, deterministic fault probes, or another observable surface. Record an explicit reviewed non-applicability only when a demo would not communicate useful behavior.
+- Every demo/test plugin main window must be independently toggleable and listed
+  under a `Skillpack Demos` submenu in Openplanet's Plugins menu. The checked menu
+  state and the window close button must update the same persistent visibility
+  boolean. Libraries with no window are exempt.
 - Reusable demo infrastructure belongs in `SkillpackDemoLib`. Prefer ordinary `exports` so stateless helpers are compiled into each dependent demo plugin; reserve `shared_exports` for genuine cross-plugin identity or shared state.
 - Before moving to the next component, dogfood the changed example: run `openplanet-lsp`, compile/load it in Openplanet, compare diagnostics and warnings, execute applicable `[Test]` cases, exercise behavior, and capture/review fresh visual evidence when it renders.
 - Treat missing test/demo coverage as incomplete work. When touching an older component, bring it up to this standard rather than preserving the gap.

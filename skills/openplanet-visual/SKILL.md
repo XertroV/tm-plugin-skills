@@ -28,8 +28,24 @@ See [design and ownership](references/design-and-ownership.md).
 2. **Map ownership before drawing.** Give each surface one authoritative owner. `RenderInterface()` owns normal overlay-visible ImGui. Add a `Render()` fallback only for an intentional show-while-overlay-hidden mode, and return there while `UI::IsOverlayShown()` is true. Test both states. Never submit one window ID twice in a frame.
 3. **Assign stable identity.** Give every window and interactive item an explicit stable ID. Prefer `label###persistent-key` when visible text changes. Scope repeated controls with balanced IDs. Derive identity from persistent domain keys/indices or retain one random value for the instance lifetime—never regenerate it per frame.
 4. **Contain actions.** Render callbacks draw and make cheap local, nonthrowing changes only. Snapshot click-time values into typed state; launch yielding, throwing, I/O, network, dynamic-callback, or game-mutating work through a real `startnew(...)` boundary. Define busy/cancel/generation state, revalidate after yields, catch/report failures, and clean up. A `CoroutineFunc` invoked inline is not containment.
-5. **Use one authoritative gallery.** Add every visual example—stable, candidate, helper, prototype, and interactive component—to one reachable `Skillpack Demos` gallery. Do not create a competing gallery window. Reject duplicate installed `info.toml` owners of its display name. Temporary fault fixtures stay separate and are removed after evidence capture.
-6. **Make the gallery deterministic.** Keep handwritten recipe code canonical in one place. Put stable ID, title, depth, source, maturity, license, optional truthful provenance, expected result, deterministic capture frames, and instrumentation in one schema-validated manifest. Generate navigation and exact recipe copies; reject stale output and byte drift; assemble twice and compare tree digests. Prefer gallery-owned capture frames over wall-clock time.
+5. **Choose the evidence surface.** For this skillpack or reusable recipe work, add
+   every visual example—stable, candidate, helper, prototype, and interactive
+   component—to the one reachable `Skillpack Demos` gallery; do not create a
+   competing gallery window. For ordinary product UI, use a project-local
+   reachable demo/test state inside that plugin instead of importing this
+   repository's gallery infrastructure. Reject duplicate installed `info.toml`
+   owners of whichever evidence surface is used. Temporary fault fixtures stay
+   separate and are removed after evidence capture.
+   Every demo/test plugin main window is independently toggleable from a checked
+   item under a `Skillpack Demos` submenu in Openplanet's Plugins menu. The menu
+   item and window close button share one persistent visibility boolean.
+6. **Make reusable galleries deterministic.** For gallery/recipe work, keep
+   handwritten recipe code canonical in one place. Put stable ID, title, depth,
+   source, maturity, license, optional truthful provenance, expected result,
+   deterministic capture frames, and instrumentation in one schema-validated
+   manifest. Generate navigation and exact recipe copies; reject stale output and
+   byte drift; assemble twice and compare tree digests. For ordinary product UI,
+   record deterministic states and captures using the project's own harness.
 7. **Add adjacent evidence.** Each testable `Feature.as` gets a neighboring `Feature_Test.as` with `[Test] void Name(Tests::Context@ ctx)` over a pure seam. Keep every example reachable and self-explanatory in pixels: show simulated state, branch/owner decision, expected invariant, and PASS/FAIL. Instrument style/clip/scissor/resource/animation depths where applicable.
 8. **Validate exact staged bytes.** Run repository/schema/determinism checks and `openplanet-lsp`; preserve all diagnostics. Then load the same bytes in Openplanet. Static success leaves the recipe a candidate.
 9. **Prove lifecycle.** Preserve a post-action `Loaded plugin '<id>'` line for the exact staged plugin, no later attributable compile error before intentional unload, and behavior-specific interaction. Account for dependency reload order and stale duplicate installations.

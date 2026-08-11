@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the five final Openplanet workflow skills."""
+"""Validate the five workflow skills that complement the reviewer."""
 
 from __future__ import annotations
 
@@ -49,7 +49,7 @@ def main() -> None:
         "first-load evidence",
         "explicit runtime blocker",
         "local-only",
-        ".git/info/exclude",
+        "external private state",
         "Never write secrets",
         "controls_other_plugins",
     ):
@@ -62,22 +62,22 @@ def main() -> None:
         validate_common(name)
 
     lifecycle = (ROOT / "skills" / "openplanet-lifecycle" / "SKILL.md").read_text()
-    for phrase in ("exact staged bytes", "fresh post-action log window", "dependent", "manual", "truthful blocker"):
+    for phrase in ("exact staged bytes", "fresh post-action log window", "unload-only", "dependent", "manual", "truthful blocker", "version"):
         require(phrase in lifecycle, f"openplanet-lifecycle omits {phrase}")
 
     dev = (ROOT / "skills" / "openplanet-dev" / "SKILL.md").read_text()
-    for phrase in ("RED", "Feature_Test.as", "Skillpack Demos", "ordinary exports", "openplanet-lsp"):
+    for phrase in ("RED", "Feature_Test.as", "Skillpack Demos", "submenu", "ordinary exports", "openplanet-lsp"):
         require(phrase in dev, f"openplanet-dev omits {phrase}")
 
     visual = (ROOT / "skills" / "openplanet-visual" / "SKILL.md").read_text()
-    for phrase in ("Theme-preserving ImGui", "stable ID", "one authoritative gallery", "fresh screenshot", "startnew", "candidate-static-only"):
+    for phrase in ("Theme-preserving ImGui", "stable ID", "one reachable `Skillpack Demos` gallery", "submenu", "fresh screenshot", "startnew", "candidate-static-only"):
         require(phrase in visual, f"openplanet-visual omits {phrase}")
 
     control = (ROOT / "skills" / "openplanet-control" / "SKILL.md").read_text()
     for phrase in ("#if DEV", "127.0.0.1", "length-prefixed", "newline-delimited", "force", "completed render epoch", "single-flight"):
         require(phrase in control, f"openplanet-control omits {phrase}")
 
-    print("final skill validation passed (five final skills)")
+    print("workflow skill validation passed (5 workflow skills + reviewer validated separately)")
 
 
 if __name__ == "__main__":

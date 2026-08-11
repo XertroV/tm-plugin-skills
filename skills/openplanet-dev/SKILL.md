@@ -35,6 +35,11 @@ brief. Detect rather than assume:
 - `openplanet-lsp`, lifecycle, RemoteBuild, control, and screenshot capabilities;
 - module, `exports`, `shared_exports`, and dependent plugins.
 
+Every demo/test plugin main window must be independently toggleable from a
+checked item under a `Skillpack Demos` submenu in Openplanet's Plugins menu, with
+the window close button and menu item sharing one visibility state. Windowless
+libraries are exempt.
+
 Prefer project tooling when present. Default an ordinary project to one plugin
 module; add cross-plugin topology only when its dependency and lifetime costs are
 justified. Prefer ordinary exports; reserve `shared_exports` for APIs that truly

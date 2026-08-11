@@ -22,9 +22,9 @@ integrity, provenance truthfulness, or non-deception.
 
 ## Clone-local capability receipt
 
-Choose a repository-relative private path such as `.openplanet/local-state.md`.
-Add the exact path to this checkout's `.git/info/exclude` before writing the
-receipt:
+In a Git checkout, choose a repository-relative private path such as
+`.openplanet/local-state.md`. Add the exact path to this checkout's
+`.git/info/exclude` before writing the receipt:
 
 ```text
 # Openplanet initialization capability receipt
@@ -36,6 +36,15 @@ Verify the path is ignored with:
 ```sh
 git check-ignore -v .openplanet/local-state.md
 ```
+
+If the plugin folder has no `.git/` metadata, do not add an ignored file inside
+the public/live plugin folder. Store the receipt in external private state under
+the user's agent/config data directory, keyed by a stable digest of the plugin's
+absolute root path. Record only the external receipt's logical identifier in the
+report, not a machine-local path in tracked docs. If neither a Git-local exclude
+nor a private external store is available, omit the receipt and report that
+capability persistence is unavailable; initialization can still proceed from the
+tracked brief and fresh runtime evidence.
 
 A useful receipt may contain:
 
