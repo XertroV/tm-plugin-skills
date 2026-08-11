@@ -60,6 +60,22 @@ def main() -> None:
     for name in FINAL_SKILLS[1:]:
         validate_common(name)
 
+    lifecycle = (ROOT / "skills" / "openplanet-lifecycle" / "SKILL.md").read_text()
+    for phrase in ("exact staged bytes", "fresh post-action log window", "dependent", "manual", "explicit blocker"):
+        require(phrase in lifecycle, f"openplanet-lifecycle omits {phrase}")
+
+    dev = (ROOT / "skills" / "openplanet-dev" / "SKILL.md").read_text()
+    for phrase in ("RED", "Feature_Test.as", "Skillpack Demos", "ordinary exports", "openplanet-lsp"):
+        require(phrase in dev, f"openplanet-dev omits {phrase}")
+
+    visual = (ROOT / "skills" / "openplanet-visual" / "SKILL.md").read_text()
+    for phrase in ("Theme-preserving ImGui", "stable ID", "one authoritative gallery", "fresh screenshot", "startnew"):
+        require(phrase in visual, f"openplanet-visual omits {phrase}")
+
+    control = (ROOT / "skills" / "openplanet-control" / "SKILL.md").read_text()
+    for phrase in ("#if DEV", "127.0.0.1", "length-prefixed", "force", "completed render epoch", "single-flight"):
+        require(phrase in control, f"openplanet-control omits {phrase}")
+
     print("final skill validation passed (five final skills)")
 
 

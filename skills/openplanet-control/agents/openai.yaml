@@ -1,0 +1,6 @@
+interface:
+  display_name: "Openplanet Control"
+  short_description: "Bounded DEV control with truthful runtime evidence"
+  default_prompt: "Use $openplanet-control to detect the manual-to-control capability ladder, choose a safe rung with fallback, and verify the requested Openplanet action through fresh logs and observed state."
+policy:
+  allow_implicit_invocation: true

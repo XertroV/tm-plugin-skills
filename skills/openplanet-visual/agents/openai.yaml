@@ -1,0 +1,6 @@
+interface:
+  display_name: "Openplanet Visual"
+  short_description: "Theme-safe Openplanet UI with screenshot proof"
+  default_prompt: "Use $openplanet-visual to design or validate this Openplanet UI at the shallowest suitable visual depth, preserve theme and ownership invariants, and finish with fresh lifecycle and screenshot evidence."
+policy:
+  allow_implicit_invocation: true
