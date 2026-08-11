@@ -29,3 +29,5 @@ No third-party fonts, images, audio, sprite assets, reviewer/admin pages, contro
 ## Live-test boundary
 
 `prototype.py` proves assembly, schema, provenance fields, state-model reachability, stack instrumentation, screenshot-matrix coverage, and static diagnostics. It cannot prove rendering, visual quality, actual stack cleanup in Openplanet, or behavior across themes/scales/game states. Those are mandatory `live-pending` gates in `VALIDATION-CONTRACT.md`; recipes must not be promoted to stable before those gates pass.
+
+The implementation workflow is incremental and live: each new snippet is assembled into an appropriate temp/demo plugin, reviewed for best practices, loaded, compile-verified, behavior-smoked, and left available for Max to inspect before more recipes build on it. Multiple demo plugins are allowed when isolation is useful. They share a dedicated skillpack-demo category rather than mixing into ordinary Developer plugins.

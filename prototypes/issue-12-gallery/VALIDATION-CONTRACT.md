@@ -14,6 +14,8 @@
 
 ## Live gates (mandatory before any promotion; intentionally not claimed here)
 
+Every snippet is introduced through a temporary/development plugin as it is written, not accumulated for one late integration pass. One or more demo plugins may be used to keep unrelated APIs, callbacks, dependencies, or risk levels isolated. All skillpack demo plugins use one dedicated Openplanet category so Max can find and inspect them together; the final category name is a validation-ticket decision and must be applied consistently rather than falling back to a generic Developer category.
+
 For every required screenshot case:
 
 1. Assemble, copy/open the generated folder as a standalone plugin, and load/reload it.
@@ -24,5 +26,7 @@ For every required screenshot case:
 6. Confirm style, clip, and scissor depth counters read zero after drawing; switch away and back to detect retained animation state.
 7. For default ImGui, compare both themes and reject plugin-forced palette assumptions. For NVG, check clipping and scene legibility. For advanced examples, check clipping, deterministic motion state, and intentional style isolation.
 8. Record pass/fail and evidence path. Independent critique is recommended for advanced polish, not universally required.
+
+Before adding the next recipe, the current increment must pass source review for current Openplanet/AngelScript best practices, static checks, a fresh in-game compile/load log window, and its behavior-specific smoke. Keep the demo loaded and visible when practical so Max can inspect the running code throughout development. A recipe that has only LSP/static evidence remains a candidate and cannot be described as working.
 
 A static pass leaves maturity unchanged. Only a later, explicit live-validation workflow may propose `stable`; this prototype does not define that promotion mutation.
