@@ -7,6 +7,8 @@ import json
 import unittest
 from pathlib import Path
 
+from jsonschema import Draft202012Validator
+
 
 ROOT = Path(__file__).resolve().parents[1]
 GALLERY = ROOT / "prototypes" / "issue-12-gallery"
@@ -28,13 +30,8 @@ class GalleryCurationTests(unittest.TestCase):
 
     def test_featured_is_a_deliberate_showcase_not_a_foundational_proof(self) -> None:
         featured = [recipe for recipe in self.manifest["recipes"] if recipe["curation"] == "featured"]
-        self.assertEqual(
-            [
-                "kinetic-spectrum-reactor",
-                "spectral-relay-typography",
-            ],
-            [recipe["id"] for recipe in featured],
-        )
+        self.assertGreaterEqual(len(featured), 12)
+        self.assertEqual(len(featured), len({recipe["id"] for recipe in featured}))
         for recipe in featured:
             with self.subTest(recipe=recipe["id"]):
                 self.assertIn("showcase-composition", recipe["state_contract"]["instrumentation"])
@@ -42,6 +39,36 @@ class GalleryCurationTests(unittest.TestCase):
                 self.assertTrue((GALLERY / recipe["source"]).is_file())
                 source = GALLERY / recipe["source"]
                 self.assertTrue(source.with_name(source.stem + "_Test.as").is_file())
+
+    def test_every_featured_recipe_has_durable_visual_review_evidence(self) -> None:
+        schema = json.loads(
+            (GALLERY / "visual-review-receipts.schema.json").read_text(encoding="utf-8")
+        )
+        reviews = json.loads(
+            (GALLERY / "visual-review-receipts.json").read_text(encoding="utf-8")
+        )
+        Draft202012Validator(schema).validate(reviews)
+        by_recipe = {receipt["recipe"]: receipt for receipt in reviews["receipts"]}
+        featured = [recipe for recipe in self.manifest["recipes"] if recipe["curation"] == "featured"]
+        self.assertEqual({recipe["id"] for recipe in featured}, set(by_recipe))
+        for recipe in featured:
+            with self.subTest(recipe=recipe["id"]):
+                receipt = by_recipe[recipe["id"]]
+                self.assertGreaterEqual(len(receipt["convergence_passes"]), 1)
+                self.assertGreaterEqual(len(receipt["post_completion_passes"]), 3)
+                for review_pass in receipt["convergence_passes"] + receipt["post_completion_passes"]:
+                    self.assertEqual("pass", review_pass["parent_vision"])
+                    self.assertEqual("pass", review_pass["source_geometry"])
+                    self.assertTrue(review_pass["commit"])
+                    self.assertEqual(
+                        recipe["state_contract"]["capture_frames"],
+                        review_pass["frames"],
+                    )
+                    self.assertEqual(
+                        len(review_pass["frames"]), len(review_pass["screenshots"])
+                    )
+                    for screenshot in review_pass["screenshots"]:
+                        self.assertTrue((ROOT / screenshot).is_file(), screenshot)
 
     def test_tm_agent_inspired_showcases_are_independent_reimplementations(self) -> None:
         for recipe_id in ("spectral-relay-typography",):

@@ -24,6 +24,11 @@
 16. Scaling guidance has a dedicated DEV probe under `prototypes/ui-scaling-probe`.
     Its scale 1.0 and 2.0 captures are evidence for undocumented getter and boundary
     behavior; one scale alone must remain explicitly partial.
+17. Featured visual-review evidence validates against `visual-review-receipts.schema.json`.
+    Every Featured recipe records a converged parent-vision and source/geometry pass plus
+    at least three additional post-completion passes against all deterministic key frames.
+    Receipts point to tightly cropped, checked-in PNGs and exact checkpoint commits; they
+    do not promote runtime maturity by themselves.
 
 ## Live gates (mandatory before any promotion; intentionally not claimed here)
 
