@@ -143,15 +143,20 @@ def generate_main(manifest: dict) -> str:
 bool g_windowOpen = true;
 int g_selectedRecipe = 0;
 int g_captureFrame = 0;
+uint64 g_lastInterfaceFrame = uint64(-1);
 
 void RenderMenu() {
     if (UI::MenuItem("Visual Recipe Gallery PROTOTYPE", "", g_windowOpen)) g_windowOpen = !g_windowOpen;
 }
 
 void RenderInterface() {
+    // Openplanet can invoke UI rendering through more than one callback path. Drawing the
+    // same ImGui window ID twice in one frame can append a copy of its interior to itself.
+    if (g_lastInterfaceFrame == Time::FrameCount) return;
+    g_lastInterfaceFrame = Time::FrameCount;
     if (!g_windowOpen) return;
     UI::SetNextWindowSize(780, 560, UI::Cond::FirstUseEver);
-    if (UI::Begin("Visual Recipe Gallery PROTOTYPE", g_windowOpen)) DrawGallery();
+    if (UI::Begin("Visual Recipe Gallery PROTOTYPE###skillpack-demo-gallery", g_windowOpen)) DrawGallery();
     UI::End();
 }
 
@@ -177,7 +182,7 @@ void DrawNavigation() {
             UI::SeparatorText(TierName(recipe.Tier));
             lastTier = recipe.Tier; first = false;
         }
-        if (UI::Selectable(recipe.Title + "##" + recipe.Id, int(i) == g_selectedRecipe)) g_selectedRecipe = int(i);
+        if (UI::Selectable(recipe.Title + "###recipe-" + recipe.Id, int(i) == g_selectedRecipe)) g_selectedRecipe = int(i);
     }
 }
 
@@ -193,10 +198,10 @@ void DrawSelectedRecipe() {
     for (uint i = 0; i < recipe.CaptureFrames.Length; i++) {
         if (i > 0) UI::SameLine();
         int frame = recipe.CaptureFrames[i];
-        if (UI::Button(tostring(frame) + "##capture-frame-" + i)) g_captureFrame = frame;
+        if (UI::Button(tostring(frame) + "###capture-frame-" + recipe.Id + "-" + i)) g_captureFrame = frame;
     }
     UI::SameLine();
-    if (UI::Button("Reset state")) g_captureFrame = recipe.CaptureFrames[0];
+    if (UI::Button("Reset state###reset-state-" + recipe.Id)) g_captureFrame = recipe.CaptureFrames[0];
     UI::Separator();
     DrawRecipeByIndex(g_selectedRecipe, g_captureFrame);
 }
