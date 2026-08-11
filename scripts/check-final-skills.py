@@ -51,6 +51,7 @@ def main() -> None:
         "local-only",
         ".git/info/exclude",
         "Never write secrets",
+        "controls_other_plugins",
     ):
         require(phrase in init, f"openplanet-init omits {phrase}")
     init_dir = ROOT / "skills" / "openplanet-init"
@@ -69,11 +70,11 @@ def main() -> None:
         require(phrase in dev, f"openplanet-dev omits {phrase}")
 
     visual = (ROOT / "skills" / "openplanet-visual" / "SKILL.md").read_text()
-    for phrase in ("Theme-preserving ImGui", "stable ID", "one authoritative gallery", "fresh screenshot", "startnew"):
+    for phrase in ("Theme-preserving ImGui", "stable ID", "one authoritative gallery", "fresh screenshot", "startnew", "candidate-static-only"):
         require(phrase in visual, f"openplanet-visual omits {phrase}")
 
     control = (ROOT / "skills" / "openplanet-control" / "SKILL.md").read_text()
-    for phrase in ("#if DEV", "127.0.0.1", "length-prefixed", "force", "completed render epoch", "single-flight"):
+    for phrase in ("#if DEV", "127.0.0.1", "length-prefixed", "newline-delimited", "force", "completed render epoch", "single-flight"):
         require(phrase in control, f"openplanet-control omits {phrase}")
 
     print("final skill validation passed (five final skills)")

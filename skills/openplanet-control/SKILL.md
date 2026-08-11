@@ -25,6 +25,11 @@ Probe and preserve this recovery order:
 
 Select the highest useful rung for the operation, not merely the highest reachable socket. Preserve the rung below and print exact manual recovery. See [capability ladder](references/capability-ladder.md).
 
+Do not collapse the two bridge protocols: the researched lifecycle-only L1 uses
+newline-delimited JSON, while the optional semantic component-control router
+below uses bounded length-prefixed JSON. They have different ownership and
+failure contracts.
+
 ## Workflow
 
 1. **Discover, do not assume.** Locate the plugin root, build/staging flow, readable `Openplanet.log`, game process if relevant, lifecycle bridge, RemoteBuild listener/CLI, and project control endpoint. Record a capability map and why each signal is or is not proof.

@@ -38,6 +38,10 @@ See [design and ownership](references/design-and-ownership.md).
 
 Load [manifest and capture contract](references/manifest-and-capture.md) while building or reviewing the gallery.
 
+The bundled gallery currently reports `candidate-static-only` after a fresh
+generator/LSP run. Do not call any recipe stable or working until its current
+live load, behavior, screenshot, theme, and action evidence closes.
+
 ## Provenance truth
 
 Never fabricate provenance. Newly authored and owner-authorized Bosslike-derived snippets may omit an external source. Copied/adapted public code retains source repository/path and a compatible license. Audit fonts, images, audio, sprites, and other assets separately from code permission. Do not copy unresolved-license `tm-agent` code; its screenshot-loop procedure may be independently restated, while its fixed brand palette belongs only to the opt-in advanced depth.

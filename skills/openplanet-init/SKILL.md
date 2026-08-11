@@ -49,6 +49,9 @@ ends at initialization; feature implementation belongs to `openplanet-dev`.
    defines consistent with the brief. Use `Skillpack Demos` only for skillpack
    development/demo plugins. Completion: every manifest script path resolves to
    canonical or deterministically staged source and a minimal entrypoint exists.
+   Use a real version/name/author/category, justify game/timeout constraints, and
+   do not set `essential`, `controls_other_plugins`, or deprecated `meta.perms`
+   without a concrete requirement supported by current Openplanet documentation.
 6. **Check exact bytes.** Run available repository checks and `openplanet-lsp` on
    the exact source that will be loaded. If staging exists, compare staged bytes
    with canonical/generated inputs and record the command and result in local
