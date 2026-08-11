@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/XertroV/tm-plugin-skills/evidence/gallery-evidence.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "component", "commit", "source_tree_sha256", "evidence_level", "static", "live", "cases"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "component": {"const": "VisualRecipeGallery"},
+    "commit": {"type": "string", "minLength": 7},
+    "source_tree_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "evidence_level": {"enum": ["candidate-static-only", "observed", "stable"]},
+    "static": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "deterministic_generation", "lsp"],
+      "properties": {
+        "schema": {"type": "boolean"},
+        "deterministic_generation": {"type": "boolean"},
+        "lsp": {"type": "boolean"}
+      }
+    },
+    "live": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "runtime_load", "native_tests", "screenshots", "visual_critique", "openplanet_version", "game_version", "log_reference"],
+      "properties": {
+        "status": {"enum": ["pending", "partial", "complete"]},
+        "runtime_load": {"type": "boolean"},
+        "native_tests": {"type": "boolean"},
+        "screenshots": {"type": "boolean"},
+        "visual_critique": {"type": "boolean"},
+        "openplanet_version": {"type": ["string", "null"]},
+        "game_version": {"type": ["string", "null"]},
+        "log_reference": {"type": ["string", "null"]}
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "recipe", "frame", "status", "capture", "critique"],
+        "properties": {
+          "id": {"type": "string"},
+          "recipe": {"type": "string"},
+          "frame": {"type": "integer"},
+          "status": {"enum": ["pending", "captured", "approved", "rejected", "blocked"]},
+          "capture": {"type": ["string", "null"]},
+          "critique": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

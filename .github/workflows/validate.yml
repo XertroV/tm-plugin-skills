@@ -1,0 +1,41 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.8"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.18.0"
+      - name: Install pinned Python validation dependencies
+        run: uv pip install --system jsonschema==4.25.0 PyYAML==6.0.2
+      - name: Run repository tests and quick contracts
+        run: |
+          PYTHONDONTWRITEBYTECODE=1 python tests/test_validation_entrypoint.py -v
+          PYTHONDONTWRITEBYTECODE=1 python tests/test_evidence_records.py -v
+          PYTHONDONTWRITEBYTECODE=1 python scripts/validate.py --profile quick
+      - name: Validate Agent Skills with pinned skills-ref
+        run: |
+          for skill in skills/openplanet-*; do
+            uvx --from skills-ref==0.1.1 agentskills validate "$skill"
+          done
+      - name: Install pinned Claude Code CLI
+        run: npm install --global @anthropic-ai/claude-code@2.1.227
+      - name: Validate Claude plugin metadata
+        run: claude plugin validate . --strict
+      - name: Verify exact skill discovery with pinned CLI
+        run: npx --yes skills@1.4.1 add . --list
+      - name: Reject whitespace errors
+        run: git diff --check
