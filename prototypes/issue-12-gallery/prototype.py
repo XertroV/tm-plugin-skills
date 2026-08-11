@@ -247,10 +247,14 @@ def expected_outputs(manifest: dict) -> dict[Path, bytes]:
         banner = f"// GENERATED COPY sha256={sha256(source.read_bytes())} source={recipe['source']}\n".encode()
         outputs[OUT / "src" / "recipes" / source.name] = banner + source.read_bytes()
         test_source = source.with_name(source.stem + "_Test.as")
-        if test_source.is_file():
-            relative_test = test_source.relative_to(ROOT)
-            test_banner = f"// GENERATED COPY sha256={sha256(test_source.read_bytes())} source={relative_test}\n".encode()
-            outputs[OUT / "src" / "recipes" / test_source.name] = test_banner + test_source.read_bytes()
+        if not test_source.is_file():
+            fail(
+                f"recipe {recipe['id']} is missing neighboring test companion "
+                f"{test_source.name}"
+            )
+        relative_test = test_source.relative_to(ROOT)
+        test_banner = f"// GENERATED COPY sha256={sha256(test_source.read_bytes())} source={relative_test}\n".encode()
+        outputs[OUT / "src" / "recipes" / test_source.name] = test_banner + test_source.read_bytes()
     return outputs
 
 
