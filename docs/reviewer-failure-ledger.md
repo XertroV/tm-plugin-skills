@@ -31,10 +31,12 @@ adversarial review is performed.
   the UI stack; the plugin stops receiving render callbacks and its UI vanishes.
 - **Invariant:** render callbacks remain bounded and exception-minimal; complex
   action execution cannot escape through the active UI stack.
-- **Evidence:** issue-13 live fixture. `Openplanet.log:26724-26836` shows an
-  isolated coroutine exception followed by continuing heartbeats;
+- **Evidence:** prior issue-13 Openplanet 1.29.0 project observation; the original
+  log is not bundled. `Openplanet.log:26724-26836` showed an isolated coroutine
+  exception followed by continuing heartbeats;
   `Openplanet.log:27021-27027` shows an inline `RenderInterface()` exception,
-  `Unrolling dangling script UI stack`, and no later probe heartbeat. Component
+  `Unrolling dangling script UI stack`, and no later probe heartbeat. Rerun the
+  define-gated fixture for independent demonstration. Component
   precedents remain in `tm-draw-tests/src/Epp/ExtraEditorMenuItem.as:8-70,114-175`
   and `tm-bosslike/src/Game/Modes/SimpleRM.as:124-162`.
 - **Reviewer probe:** trace every render-path call transitively; flag operations
@@ -288,8 +290,8 @@ adversarial review is performed.
 
 ## Research queue
 
-- Capture the exact Openplanet UI-stack unwind log signature and a minimal safe
-  live reproduction.
+- Revalidate the captured UI-stack unwind signature and callback behavior on
+  future Openplanet versions; do not generalize the 1.29.0 observation.
 - Prototype a stable-ID, render-epoch, guarded-coroutine, overridable-action
   component and test repeated-click/stale-state policies.
 - Build protocol fixtures for confirmed Dips++ and Map Together hazards before

@@ -1,0 +1,11 @@
+{
+  "name": "tm-plugin-skills",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Portable Openplanet AngelScript development and adversarial review skills.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XertroV/tm-plugin-skills.git"
+  },
+  "license": "CC0-1.0 OR Unlicense"
+}

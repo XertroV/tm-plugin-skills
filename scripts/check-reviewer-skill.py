@@ -3,8 +3,8 @@
 
 from __future__ import annotations
 
-import re
 import json
+import re
 from pathlib import Path
 
 import yaml
@@ -30,17 +30,19 @@ def main() -> None:
     require(frontmatter.get("name") == SKILL_DIR.name, "name must match directory")
     description = frontmatter.get("description")
     require(isinstance(description, str) and 1 <= len(description) <= 1024, "invalid description")
-    require(description.startswith("Use when adversarially reviewing"), "trigger must be front-loaded")
+    require(description.startswith("Use when reviewing an Openplanet"), "trigger must be front-loaded")
     require(frontmatter.get("license") == "CC0-1.0 OR Unlicense", "license drift")
     require(len(content) <= 100_000, "SKILL.md exceeds portable limit")
 
-    refs = re.findall(r"\$\{CLAUDE_SKILL_DIR\}/([^`\s]+)", content)
-    require(bool(refs), "SKILL.md must progressively disclose references")
+    refs = re.findall(r"\[[^]]+\]\((references/[^)]+)\)", content)
+    require(bool(refs), "SKILL.md must progressively disclose relative references")
+    require("${CLAUDE_SKILL_DIR}" not in content, "Claude-specific reference path is not portable")
     for relative in refs:
         require((SKILL_DIR / relative).is_file(), f"missing linked file: {relative}")
 
     openai = yaml.safe_load((SKILL_DIR / "agents" / "openai.yaml").read_text())
     require(openai["policy"]["allow_implicit_invocation"] is True, "invocation policy drift")
+    require("$openplanet-reviewer" in openai["interface"]["default_prompt"], "OpenAI prompt must invoke skill")
     plugin = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text())
     require(plugin["version"] == frontmatter["metadata"]["version"], "plugin/skill version drift")
     require(plugin["skills"] == ["./skills/openplanet-reviewer"], "plugin promotion list drift")
@@ -48,20 +50,27 @@ def main() -> None:
     manifest = (ROOT / "docs" / "skill-manifest.md").read_text()
     workflow = (ROOT / "docs" / "reviewer-workflow.md").read_text()
     ledger = (ROOT / "docs" / "reviewer-failure-ledger.md").read_text()
+    bundled_ledger = (SKILL_DIR / "references" / "failure-ledger.md").read_text()
     evidence = (ROOT / "docs" / "research" / "issue-13-adversarial-review-evidence.md").read_text()
     probe = (ROOT / "prototypes" / "issue-13-ui-exception-probe" / "Main.as").read_text()
 
     require("`openplanet-reviewer`" in manifest, "manifest omits reviewer")
     require("## Evidence grades" in workflow and "## Output skeleton" in workflow, "workflow contract incomplete")
+    require("Report findings first" in content, "portable workflow omits findings-first step")
+    require("base/head commits" in content, "change reviews do not pin a review range")
+    require("no applicable row is silently omitted" in content, "fault matrix lacks exhaustive completion")
     for failure_class in (
         "UI callback failure containment",
+        "Plugin/game state desynchronization",
         "Transactional mutation restoration",
         "Async terminal-state completeness",
         "Mutation-result truthfulness",
         "Network architecture mismatch",
     ):
-        require(failure_class in ledger, f"ledger omits {failure_class}")
+        require(failure_class in ledger, f"maintainer ledger omits {failure_class}")
+        require(failure_class in bundled_ledger, f"bundled ledger omits {failure_class}")
     require("Unrolling dangling script UI stack" in evidence, "live UI evidence missing")
+    require(probe.startswith("#if SKILLPACK_PROBE_MODE\n"), "unsafe probe is not mechanically gated")
     require("startnew(CoroutineFunc(ThrowProbeIsolated))" in probe, "probe lacks isolated boundary")
     require('ThrowProbe("inline render callback")' in probe, "probe lacks inline failure path")
 

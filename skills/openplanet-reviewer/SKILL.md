@@ -1,6 +1,6 @@
 ---
 name: openplanet-reviewer
-description: Use when adversarially reviewing an Openplanet plugin for subtle runtime, state, lifecycle, UI, synchronization, protocol, or architecture failures.
+description: Use when reviewing an Openplanet plugin, change, PR, or release for subtle runtime, state, lifecycle, UI, synchronization, protocol, or architecture failures.
 license: CC0-1.0 OR Unlicense
 compatibility: Requires access to the plugin source. Live Openplanet, Openplanet.log, openplanet-lsp, and control tooling improve evidence but are not mandatory.
 metadata:
@@ -40,8 +40,11 @@ Static diagnostics and token-presence checks are not runtime proof.
 ## Workflow
 
 1. **Pin scope.** Declare source-only, live-capable, architecture, protocol,
-   visual, or release review. Record unavailable probes. Completion: the report
-   cannot imply stronger evidence than was gathered.
+   visual, or release review. For a change, PR, or release, pin base/head commits,
+   included files, generated-source policy, and transitive-impact boundary;
+   distinguish introduced findings from pre-existing findings. Record unavailable
+   probes. Completion: claims and attribution cannot exceed gathered evidence or
+   the pinned range.
 2. **Map topology.** Inspect `info.toml`, dependencies, ordinary/shared exports,
    canonical/generated sources, and every Openplanet callback. Completion: every
    runtime entry and module boundary is accounted for.
@@ -73,30 +76,33 @@ Static diagnostics and token-presence checks are not runtime proof.
    are explicit.
 10. **Probe boundaries before happy paths.** Cover null/empty, zero, one, exact
     limit, timeout-before-progress, partial success, duplicate launch, and
-    teardown-during-wait.
+    teardown-during-wait. Materialize each applicable boundary in a coverage
+    matrix as demonstrated, source-confirmed, N/A with rationale, or not tested.
 11. **Run transition/fault matrices.** Cross map/mode/session/reload transitions
     with pending UI actions, requests, packets, patches, and retained objects.
     For networks add fragmentation, partial writes, malformed frames, overload,
     duplicate/replay/reorder/drop, stale session, concurrent writers, and
-    poisoned reconciliation.
+    poisoned reconciliation. Completion: no applicable row is silently omitted;
+    each row carries one of the same four coverage statuses.
 12. **Assess architecture last.** Report ownership conflicts, duplicate
     normalizers, god objects, hidden cycles, mutable invariant leaks, or
     untestable seams only with concrete correctness or change-safety impact.
-13. **Close coverage.** Mark each applicable failure class caught, N/A, or not
-    tested. Feed new mechanisms into development guidance and tests/demos.
+13. **Report findings first.** Use the required finding fields below, then the
+    explicit coverage matrix, positive evidence, and runtime gaps.
+14. **Close coverage.** Mark each applicable failure class caught, N/A with
+    rationale, or not tested. Feed new mechanisms into development guidance and
+    tests/demos.
 
-Load `${CLAUDE_SKILL_DIR}/references/failure-ledger.md` to select failure classes.
-Load `${CLAUDE_SKILL_DIR}/references/evidence-precedents.md` only when a branch
-needs concrete Openplanet precedents or fault probes.
+Load the [failure ledger](references/failure-ledger.md) to select failure classes.
+Load [evidence precedents](references/evidence-precedents.md) only when a branch
+needs concrete project-local precedents or fault probes.
 
 ## UI containment invariant
 
 A callback merely typed `CoroutineFunc` is still inline unless execution crosses
 `startnew(...)`. Snapshot click-time values in typed carriers and revalidate
-state after yields. Openplanet 1.29.0 live evidence showed an isolated coroutine
-exception left render heartbeats running, while an exception escaping
-`RenderInterface()` logged `Unrolling dangling script UI stack` and no later
-plugin heartbeat.
+state after yields. Keep render paths bounded and exception-minimal; load the
+versioned evidence precedent only when UI containment is in scope.
 
 ## False-positive controls
 
@@ -121,6 +127,19 @@ Report findings first, ordered by severity. Each finding includes:
 
 Then include a coverage table, positive evidence, and runtime gaps. Never hide a
 high-severity hypothesis among stylistic notes.
+
+Severity is impact, not confidence:
+
+- **Critical** — reachable corruption, destructive persistent mutation, security
+  boundary failure, or broadly unrecoverable loss.
+- **High** — reachable crash/callback cessation, persistent state divergence,
+  leaked engine mutation/reference, or major operation deadlock.
+- **Medium** — bounded malfunction, stale result, overload, or lifecycle failure
+  with practical recovery.
+- **Low** — narrow correctness/change-safety defect with limited runtime impact.
+
+Evidence grade remains separate; a high-severity hypothesis stays high severity
+and names its decisive next probe.
 
 ## Verification
 

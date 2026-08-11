@@ -22,6 +22,34 @@ Other manifest entries remain planned until their own promotion gates pass.
 
 Implementation will follow the decisions recorded in the issue map.
 
+## Install
+
+Pick one installation route; do not install the same skill through both because
+duplicate skill names are not merged.
+
+### Agent Skills CLI (Claude Code, Codex, and other supported agents)
+
+```bash
+npx skills add XertroV/tm-plugin-skills
+```
+
+To select only the currently promoted skill:
+
+```bash
+npx skills add XertroV/tm-plugin-skills --skill openplanet-reviewer
+```
+
+### Claude Code plugin
+
+Clone the repository, then load that checkout directly:
+
+```bash
+claude --plugin-dir /path/to/tm-plugin-skills
+```
+
+The repository also includes a minimal local marketplace manifest for forks and
+unreleased commits. Official marketplace publication is not a v1 requirement.
+
 ## License
 
 [CC0-1.0 OR Unlicense](LICENSE) — use either license at your option.

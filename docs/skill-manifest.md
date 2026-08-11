@@ -28,10 +28,11 @@ ways a compiling plugin can fail in use:
 - export/module/lifetime mismatches; and
 - visual/control/test paths that claim success without runtime evidence.
 
-The reviewer executes `docs/reviewer-workflow.md`, consumes
-`docs/reviewer-failure-ledger.md`, and progressively discloses source evidence
-from `docs/research/issue-13-adversarial-review-evidence.md` only when a branch
-needs precedent or a confirmed mechanism.
+The installable skill executes `skills/openplanet-reviewer/SKILL.md`, consumes its
+bundled `references/failure-ledger.md`, and progressively discloses bundled
+project-local precedents only when a branch needs them. The repository-facing
+workflow, ledger, and issue-13 research retain the full maintainer evidence base;
+promotion validation prevents portable-contract and taxonomy drift.
 It feeds actionable prevention back into
 `openplanet-dev`, `openplanet-visual`, `openplanet-control`, tests, and demos.
 

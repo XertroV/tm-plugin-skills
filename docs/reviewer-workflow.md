@@ -19,8 +19,11 @@ Static diagnostics and token-presence checks never prove runtime behavior.
 ## Algorithm
 
 1. **Pin scope and evidence level.** Declare source-only, live-capable, release,
-   architecture, visual, or protocol review. Record unavailable probes.
-   Completion: the report cannot silently imply stronger evidence than was run.
+   architecture, visual, or protocol review. For a change, PR, or release, pin
+   base/head commits, included files, generated-source policy, and transitive
+   impact; distinguish introduced from pre-existing findings. Record unavailable
+   probes. Completion: claims and attribution cannot exceed gathered evidence or
+   the pinned range.
 2. **Derive topology.** Inspect `info.toml`, dependencies, exports/shared exports,
    generated versus canonical source, and all Openplanet entry callbacks.
    Completion: every runtime entry and module boundary is accounted for.
@@ -52,8 +55,8 @@ Static diagnostics and token-presence checks never prove runtime behavior.
    Completion: every field and failure policy is explicit.
 10. **Run boundary probes first.** Null/empty, zero work, one item, exact limit,
     timeout before progress, partial success, duplicate launch, and teardown
-    during wait. Completion: every applicable boundary has evidence or is
-    explicitly not tested.
+    during wait. Completion: materialize every applicable boundary as
+    demonstrated, source-confirmed, N/A with rationale, or not tested.
 11. **Run the transition/fault matrix.** Cross map/mode/session/reload transitions
     with pending UI action, request, packet, patch, and retained object. For
     network code add fragmentation, partial writes, malformed frames, overload,
@@ -79,6 +82,18 @@ Static diagnostics and token-presence checks never prove runtime behavior.
 - A runtime-throw placeholder is actionable only when a reachable concrete type
   can retain the base implementation.
 - Token matching is useful weak lint; label it as such.
+
+## Severity rubric
+
+Severity measures impact independently of evidence confidence:
+
+- **Critical:** reachable corruption, destructive persistent mutation, security
+  boundary failure, or broadly unrecoverable loss.
+- **High:** reachable crash/callback cessation, persistent state divergence,
+  leaked engine mutation/reference, or major operation deadlock.
+- **Medium:** bounded malfunction, stale result, overload, or lifecycle failure
+  with practical recovery.
+- **Low:** narrow correctness/change-safety defect with limited runtime impact.
 
 ## Output skeleton
 

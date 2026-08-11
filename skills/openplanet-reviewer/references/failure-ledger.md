@@ -35,11 +35,12 @@ window/table/child/style/clip/scissor state. Probe failure after each begin/push
 Code reaches editor/playground/map/server objects outside its valid mode. Model
 mode explicitly and fail closed with a concise reason and remediation.
 
-### Stale handles across transitions
+### Plugin/game state desynchronization
 
-A handle/task/result captured before yield commits after map, editor, server,
-session, or reload identity changes. Require generation ownership and post-yield
-revalidation.
+Callbacks, packets, retries, or overlapping tasks apply out of order or outlive
+the map/editor/server/session/reload snapshot that created them. Require
+generation ownership, post-yield revalidation, explicit retry/reorder semantics,
+and cleanup after partial teardown.
 
 ### Async terminal-state completeness
 
@@ -90,7 +91,7 @@ change-safety impact, not aesthetics.
 
 ## Networking and synchronization
 
-### Protocol/workload mismatch
+### Network architecture mismatch
 
 Transport architecture was copied without classifying data, cadence, ordering,
 loss consequence, consistency, and recovery. Document those properties first.

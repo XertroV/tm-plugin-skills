@@ -68,7 +68,7 @@ Supporting code evidence exists:
 - `tm-draw-tests/src/Epp/ExtraEditorMenuItem.as:40-46` reports component action
   exceptions with component identity.
 
-The controlled DEV-only fixture at
+The controlled, define-gated DEV-only fixture at
 `prototypes/issue-13-ui-exception-probe/Main.as:1-60` demonstrated both paths on
 Openplanet 1.29.0:
 

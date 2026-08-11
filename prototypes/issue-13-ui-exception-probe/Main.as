@@ -1,3 +1,4 @@
+#if SKILLPACK_PROBE_MODE
 bool g_ThrowInlineOnce = false;
 bool g_ThrowIsolatedOnce = false;
 uint g_RenderInterfaceCalls = 0;
@@ -58,3 +59,4 @@ void RenderInterface() {
 void Render() {
     g_RenderCalls++;
 }
+#endif

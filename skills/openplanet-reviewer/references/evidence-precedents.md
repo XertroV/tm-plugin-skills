@@ -1,6 +1,8 @@
 # Evidence precedents and probes
 
-Load only for branches that need concrete Openplanet precedent.
+Load only for branches that need concrete project-local Openplanet precedent.
+Paths name sibling repositories used during skill development; verify them at a
+pinned revision before treating them as independently inspectable evidence.
 
 ## UI actions
 
@@ -19,9 +21,11 @@ Load only for branches that need concrete Openplanet precedent.
   `tm-map-info/src/NvgButton.as:1-41` invoke stored callbacks inline. Callback
   type alone does not isolate failure.
 
-### Live UI exception fixture
+### Reported live UI exception fixture
 
-`prototypes/issue-13-ui-exception-probe/Main.as:1-60`, Openplanet 1.29.0:
+`prototypes/issue-13-ui-exception-probe/Main.as:1-62`, Openplanet 1.29.0. The
+fixture is bundled and mechanically gated by `SKILLPACK_PROBE_MODE`; the original
+log is not bundled, so these are prior project observations until rerun:
 
 - `Openplanet.log:26724-26727`: isolated coroutine exception;
   `:26746-26836`: later heartbeats continue.
@@ -51,7 +55,7 @@ Watch for callback business logic, duplicate state normalizers, implicit boolean
 state machines, ownerless coroutines, god objects, parallel arrays, mutable
 public invariants, and cleanup only on success.
 
-## Demonstrated/source-proven review findings
+## Confirmed source invariant violations
 
 - Map Together `src/EditorFeed.as:71-95,405-415`: editor patches can be enabled
   before readiness checks whose early returns bypass cleanup. Probe transition
@@ -84,13 +88,18 @@ ordering, queue, and reconciliation policies.
 
 ### Map Together source hazards
 
-- Variable player ID conflicts with fixed 46-byte tail assumptions:
+- **Confirmed structural mismatch; runtime impact needs a variable-length probe:**
+  variable player ID conflicts with fixed 46-byte tail assumptions:
   `Socket.as:3,841-846,1121-1131`.
-- Unknown types discard a hard-coded 46 bytes: `Socket.as:896-900,1027-1059`.
-- Frames use multiple writes with ignored return values: `Socket.as:441-519`.
-- Multiple coroutines write one socket without a sole-writer queue:
+- **Hypothesis pending protocol/server evidence:** unknown types discard a
+  hard-coded 46 bytes: `Socket.as:896-900,1027-1059`.
+- **Hypothesis pending socket full-write semantics:** frames use multiple writes
+  with ignored return values: `Socket.as:441-519`.
+- **Hypothesis pending ordering/atomicity guarantees:** multiple coroutines write
+  one socket without a sole-writer queue:
   `EditorFeed.as:115-230,575-597`; `Socket.as:237-253`.
-- No visible operation ID, room epoch, sequence, or dedup field.
+- **Hypothesis pending server inspection:** no visible operation ID, room epoch,
+  sequence, or dedup field.
 - Persistent update queue is effectively unbounded:
   `Socket.as:561`; `EditorFeed.as:259-343`.
 - `PlayerEphemUpdates.as:106-108` compares `cur_obj != cur_obj`.
