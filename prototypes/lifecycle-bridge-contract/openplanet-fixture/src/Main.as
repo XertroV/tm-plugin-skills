@@ -16,4 +16,8 @@ void Main() {
     // verified before implementing this stub; Listen(port) may expose all interfaces.
     warn("Lifecycle bridge fixture is a static candidate only; no socket was opened.");
 }
+#else
+void Main() {
+    trace("Lifecycle bridge contract fixture is DEV-only and disabled in this build.");
+}
 #endif

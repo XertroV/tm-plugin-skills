@@ -37,6 +37,10 @@ The tests invoke the model through the NDJSON subprocess seam rather than import
 
 ## Evidence boundary and manual fallback
 
-This is candidate/model evidence only. The files under `openplanet-fixture/` are deliberately gated DEV-only drafts and were not installed, compiled, loaded, or exercised in Openplanet. They must not be presented as live evidence.
+This is candidate/model evidence only. The files under `openplanet-fixture/` are
+deliberately gated DEV-only drafts. The disabled non-DEV shell compiled and
+loaded on Openplanet 1.29.0 during repository dogfood, but no lifecycle socket,
+dependency mutation, or in-game `[Test]` behavior was enabled or exercised.
+They must not be presented as live L1 evidence.
 
 Until a bridge passes current LSP + live Openplanet gates, preserve L0: stage/compare exact bytes, mark a fresh `Openplanet.log` offset, ask the human to operate the exact plugin ID in Scripts/Plugins, verify only appended log bytes, and manually restore the retained list provider-before-consumer after target success. For intentional unload-only, leave the expected cascade unloaded.
