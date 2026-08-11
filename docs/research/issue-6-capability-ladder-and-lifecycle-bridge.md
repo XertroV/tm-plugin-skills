@@ -1,10 +1,10 @@
 # Issue 6 — Capability ladder and dependency-aware lifecycle bridge
 
-**Ticket:** [Specify the capability ladder and dependency-aware lifecycle bridge](https://github.com/XertroV/tm-plugin-skills/issues/6)  
-**Map:** [Chart the implementation-ready specification for the Openplanet agent skillpack](https://github.com/XertroV/tm-plugin-skills/issues/1)  
-**Kind:** Wayfinder research (decision asset; not implementation)  
-**Date:** 2026-08-11  
-**Openplanet probed:** 1.29.5 (next, Public, `1234ad9e`) via live `OpenplanetNext` install  
+**Ticket:** [Specify the capability ladder and dependency-aware lifecycle bridge](https://github.com/XertroV/tm-plugin-skills/issues/6)
+**Map:** [Chart the implementation-ready specification for the Openplanet agent skillpack](https://github.com/XertroV/tm-plugin-skills/issues/1)
+**Kind:** Wayfinder research (decision asset; not implementation)
+**Date:** 2026-08-11
+**Openplanet probed:** 1.29.5 (next, Public, `1234ad9e`) via live `OpenplanetNext` install
 **Status:** Research complete — decisions below are ready for map resolution when the ticket is closed by a human/session that owns map updates
 
 ---
@@ -75,7 +75,7 @@ UnloadedPluginInfo[]@ Meta::UnloadedPlugins() // documented as possibly slow
 Plugin@  Meta::ExecutingPlugin()
 ```
 
-`PluginSource`: `Unknown`, `ApplicationFolder`, `UserFolder`  
+`PluginSource`: `Unknown`, `ApplicationFolder`, `UserFolder`
 `PluginType`: `Unknown`, `Legacy`, `Folder`, `Zip`
 
 **Semantics that matter for agents**
@@ -154,8 +154,8 @@ Bracket fields: source, level, timestamp, optional plugin id, then text. RemoteB
 
 A post-change success requires:
 
-1. A `Loaded plugin '<id>'` (or zipped/legacy variant) **after** the reload command, and  
-2. No later `Script compilation failed` / `:  ERR :` attributable to that plugin before the next intentional unload, and  
+1. A `Loaded plugin '<id>'` (or zipped/legacy variant) **after** the reload command, and
+2. No later `Script compilation failed` / `:  ERR :` attributable to that plugin before the next intentional unload, and
 3. When behavior changed: an observable behavior check (manual, screenshot, or Control MCP probe).
 
 False “shared class definition changed” refusals require **full game restart**, not diff thrash (`README_FOR_AGENTS.md` / Hermes skill). That is outside L1’s repair power; L1 should surface the log text and stop.
@@ -166,7 +166,7 @@ False “shared class definition changed” refusals require **full game restart
 
 ### 4.1 L0 — Manual UI
 
-Openplanet Scripts / Plugins UI: load, unload, reload, enable/disable, open log window.  
+Openplanet Scripts / Plugins UI: load, unload, reload, enable/disable, open log window.
 Works with zero agent tooling. Skills must document exact human steps when L1–L3 are absent.
 
 ### 4.2 L2 — RemoteBuild (today)
@@ -283,7 +283,7 @@ Record a structured capability map in agent-facing output, e.g.:
 
 Close the gap between:
 
-- engine cascade unload (automatic), and  
+- engine cascade unload (automatic), and
 - incomplete restore (today’s RemoteBuild + ad-hoc `build.sh` lists).
 
 Provide a **durable, low-dependency** in-game socket service that agents and build scripts can call without pulling editor automation.
@@ -388,8 +388,8 @@ last_snapshot: map<target_id, ClosureSnapshot>
 
 Survives failed reloads until:
 
-- successful restore of that snapshot, or  
-- explicit `snapshot_closure` replace, or  
+- successful restore of that snapshot, or
+- explicit `snapshot_closure` replace, or
 - bridge plugin unload/game exit.
 
 Persist to disk **out of scope for v1** (game restart loses memory — acceptable; L0/L2 still work).
@@ -406,9 +406,9 @@ Persist to disk **out of scope for v1** (game restart loses memory — acceptabl
 
 Whether Python or bash, the L1 client should:
 
-1. Record log file size before request.  
-2. Send mutating route.  
-3. Tail/parse new log lines (reuse RemoteBuild parser ideas or simplified needles).  
+1. Record log file size before request.
+2. Send mutating route.
+3. Tail/parse new log lines (reuse RemoteBuild parser ideas or simplified needles).
 4. Apply evidence gate for target + each restored dependent.
 
 Do not trust socket `ok` alone when log path is known.
@@ -437,9 +437,9 @@ Propose as **optional upstream PRs** to `tm-control-mcp`, not as skillpack forks
 
 When skill text is written (blocked on other map decisions):
 
-- Lifecycle skills: detect ladder → choose L1/L2/L0 → always state evidence from log.  
-- Visual skills: require L3 screenshot **or** manual screenshot drop; never block compile iteration on L3.  
-- Library/export skills (E++ style): **require** closure-aware reload narrative; if only L2, warn about stripped dependents and list who was lost if log shows `Unloading dependent plugin`.  
+- Lifecycle skills: detect ladder → choose L1/L2/L0 → always state evidence from log.
+- Visual skills: require L3 screenshot **or** manual screenshot drop; never block compile iteration on L3.
+- Library/export skills (E++ style): **require** closure-aware reload narrative; if only L2, warn about stripped dependents and list who was lost if log shows `Unloading dependent plugin`.
 - Capability probe skill or shared preamble: emit the JSON capability map from §5.2.
 
 ---
@@ -465,10 +465,10 @@ When skill text is written (blocked on other map decisions):
 
 ## 10. Open items deferred (not blocking this ticket’s architecture answer)
 
-1. Exact skill names / progressive disclosure — other research/grilling tickets.  
-2. Whether L1 ships enabled-by-default in a monorepo Plugins install vs opt-in copy — packaging ticket ([Research official installation and packaging targets](https://github.com/XertroV/tm-plugin-skills/issues/7)).  
-3. Multi-game port matrix beyond Next for L1 (RB already has 30000–30002).  
-4. Whether to upstream closure restore into skybaks RemoteBuild **in addition to** L1 (friendly; not required).  
+1. Exact skill names / progressive disclosure — other research/grilling tickets.
+2. Whether L1 ships enabled-by-default in a monorepo Plugins install vs opt-in copy — packaging ticket ([Research official installation and packaging targets](https://github.com/XertroV/tm-plugin-skills/issues/7)).
+3. Multi-game port matrix beyond Next for L1 (RB already has 30000–30002).
+4. Whether to upstream closure restore into skybaks RemoteBuild **in addition to** L1 (friendly; not required).
 5. Automated tests against a headless game — likely impossible; rely on protocol unit tests + live dogfood.
 
 ---
@@ -477,12 +477,12 @@ When skill text is written (blocked on other map decisions):
 
 > What runtime-control architecture and protocol should version one specify across manual Openplanet UI, a minimal project-local lifecycle bridge, RemoteBuild, and optional `tm-control-mcp`?
 
-**Architecture:** four-rung ladder L0→L3 (§5).  
-**L1 protocol:** newline-delimited JSON on `127.0.0.1:30007`, MCP-like envelope, lifecycle routes only (§6.3).  
-**APIs:** `Meta::LoadPlugin` / `UnloadPlugin` / `ReloadPlugin` / `AllPlugins` / dep fields / `PluginIndex` for ordering; logs via filesystem `Openplanet.log` (§3).  
-**Detection / fallback:** ordered probes D0–D6 and matrix (§5.2–5.3).  
-**Closure rule:** snapshot loaded reverse dependents before mutation; restore only that set after successful target compile; remember across failures (§1, §6.4–6.5).  
-**Ownership:** L1 companion plugin in skillpack repo; RB external; MCP external with thin delegate extensions (§6.2, §7).  
+**Architecture:** four-rung ladder L0→L3 (§5).
+**L1 protocol:** newline-delimited JSON on `127.0.0.1:30007`, MCP-like envelope, lifecycle routes only (§6.3).
+**APIs:** `Meta::LoadPlugin` / `UnloadPlugin` / `ReloadPlugin` / `AllPlugins` / dep fields / `PluginIndex` for ordering; logs via filesystem `Openplanet.log` (§3).
+**Detection / fallback:** ordered probes D0–D6 and matrix (§5.2–5.3).
+**Closure rule:** snapshot loaded reverse dependents before mutation; restore only that set after successful target compile; remember across failures (§1, §6.4–6.5).
+**Ownership:** L1 companion plugin in skillpack repo; RB external; MCP external with thin delegate extensions (§6.2, §7).
 **Non-duplication:** L1 must not become general control; MCP must not become lifecycle daemon (§1, §9).
 
 ---

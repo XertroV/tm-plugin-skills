@@ -1,9 +1,9 @@
 # Issue 4 — Provenance-cleared pattern-library candidate catalog
 
-**Ticket:** [Build the provenance-cleared pattern-library candidate catalog](https://github.com/XertroV/tm-plugin-skills/issues/4)  
-**Map:** [Chart the implementation-ready specification for the Openplanet agent skillpack](https://github.com/XertroV/tm-plugin-skills/issues/1)  
-**Status:** Research evidence asset (do not treat as recipe implementation)  
-**Research date:** 2026-08-11  
+**Ticket:** [Build the provenance-cleared pattern-library candidate catalog](https://github.com/XertroV/tm-plugin-skills/issues/4)
+**Map:** [Chart the implementation-ready specification for the Openplanet agent skillpack](https://github.com/XertroV/tm-plugin-skills/issues/1)
+**Status:** Research evidence asset (do not treat as recipe implementation)
+**Research date:** 2026-08-11
 **Corpus root:** `~/src/openplanet/` (primarily `my-plugins/`, plus standalone sibling repos)
 
 ---
@@ -58,11 +58,11 @@ Each candidate is scored qualitatively **H / M / L** on:
 
 For every candidate below:
 
-- **Repo** — GitHub or local path under the openplanet workspace  
-- **File** — primary exemplar path  
-- **Commit** — latest meaningful file tip (short SHA) and/or introduction when known  
-- **License** — Unlicense/PD unless noted  
-- **Validation** — what must be true before a recipe may ship  
+- **Repo** — GitHub or local path under the openplanet workspace
+- **File** — primary exemplar path
+- **Commit** — latest meaningful file tip (short SHA) and/or introduction when known
+- **License** — Unlicense/PD unless noted
+- **Validation** — what must be true before a recipe may ship
 
 Public snippets later **must** retain source repo/file and license (map constraint from issue 1).
 
@@ -72,16 +72,16 @@ Public snippets later **must** retain source repo/file and license (map constrai
 
 [Issue 3 — Curate the theme-respecting three-tier visual design skill](https://github.com/XertroV/tm-plugin-skills/issues/3) owns:
 
-- Default ImGui theme-respecting layout  
-- NVG helpers (text, stroke/shadow, labels, scissors, shapes, overlays)  
-- Advanced ImGui style vars, draw lists, gradients, animation libraries  
-- Screenshot completion gates; `tm-agent` brand styling vs. defaults  
-- Dips++ / Bosslike animation and sprite/draw-list systems  
+- Default ImGui theme-respecting layout
+- NVG helpers (text, stroke/shadow, labels, scissors, shapes, overlays)
+- Advanced ImGui style vars, draw lists, gradients, animation libraries
+- Screenshot completion gates; `tm-agent` brand styling vs. defaults
+- Dips++ / Bosslike animation and sprite/draw-list systems
 
 This catalog **does not** promote visual recipes. It only:
 
-1. Names **structural UI shells** (windows, tabs, menu items, notifications) that visual recipes will sit inside.  
-2. Flags cross-links (`visual-coord`) where a structural pattern has a visual twin.  
+1. Names **structural UI shells** (windows, tabs, menu items, notifications) that visual recipes will sit inside.
+2. Flags cross-links (`visual-coord`) where a structural pattern has a visual twin.
 3. Keeps green-timer / HUD positioning as **behavior + window flags**, not palette/style.
 
 ---
@@ -104,21 +104,21 @@ This catalog **does not** promote visual recipes. It only:
 
 ### 4.2 Settled house defaults
 
-1. **Plugin root = `info.toml` + `src/`**, staged by `build.sh` (template), *or* portable folder-in-`Plugins/` (skillpack product default — different deployment story, same source shape).  
-2. **Callbacks split by concern:** `Main` boots coroutines; `RenderEarly` updates globals/state; `Render` / `RenderInterface` draw; `RenderMenu` toggles; `OnDisabled`/`OnDestroyed` unload.  
-3. **Settings:** `[Setting category=…]` + optional `[SettingsTab]`; enable flags drive UI.  
-4. **User feedback:** `Notify` / `NotifyError` / `NotifyWarning` wrapping `UI::ShowNotification` + log.  
-5. **Async:** `startnew` + `yield` loops; `WaitAndClearTaskLater` for Nadeo task results.  
-6. **Game context:** prefer a small **state monitor** (`TM_State` lineage) over ad-hoc `GetApp()` soup at call sites.  
+1. **Plugin root = `info.toml` + `src/`**, staged by `build.sh` (template), *or* portable folder-in-`Plugins/` (skillpack product default — different deployment story, same source shape).
+2. **Callbacks split by concern:** `Main` boots coroutines; `RenderEarly` updates globals/state; `Render` / `RenderInterface` draw; `RenderMenu` toggles; `OnDisabled`/`OnDestroyed` unload.
+3. **Settings:** `[Setting category=…]` + optional `[SettingsTab]`; enable flags drive UI.
+4. **User feedback:** `Notify` / `NotifyError` / `NotifyWarning` wrapping `UI::ShowNotification` + log.
+5. **Async:** `startnew` + `yield` loops; `WaitAndClearTaskLater` for Nadeo task results.
+6. **Game context:** prefer a small **state monitor** (`TM_State` lineage) over ad-hoc `GetApp()` soup at call sites.
 7. **Deps:** use **VehicleState / Camera / NadeoServices / MLHook / MLFeed** rather than reimplementing.
 
 ### 4.3 What not to promote as defaults
 
-- Memory hooks / `MemPatcher` / pattern scans as everyday recipes (`advanced-dev` only).  
-- Private MapMonitor endpoints as universal infrastructure.  
-- Dashboard (upstream MIT, Miss) internals as Max-owned Unlicense recipes.  
-- Better Chat (Miss) patterns without separate license clearance.  
-- `tm-agent` / `tm-control-mcp` / `tm-mcptm` until license files exist (process exemplars only).  
+- Memory hooks / `MemPatcher` / pattern scans as everyday recipes (`advanced-dev` only).
+- Private MapMonitor endpoints as universal infrastructure.
+- Dashboard (upstream MIT, Miss) internals as Max-owned Unlicense recipes.
+- Better Chat (Miss) patterns without separate license clearance.
+- `tm-agent` / `tm-control-mcp` / `tm-mcptm` until license files exist (process exemplars only).
 - Forced brand ImGui styling from `tm-agent` (visual ticket; anti-default).
 
 ---
@@ -127,19 +127,19 @@ This catalog **does not** promote visual recipes. It only:
 
 A pattern graduates from this catalog into a **v1 recipe** only if all hold:
 
-1. **Provenance-clear:** Unlicense/PD (or explicit dual-license compatible with skillpack `CC0-1.0 OR Unlicense`), with repo/file/commit recorded.  
-2. **Settled:** used in ≥2 real plugins *or* is the canonical template form, with no active rewrite thrash.  
-3. **Portable path exists:** works without RemoteBuild/MCP/LSP; optional tools only tighten the loop.  
-4. **Dependency honest:** required deps listed; prefer mature ecosystem plugins over vendored clones when the dep is the product.  
-5. **Testable gate:** at least one of — compile/load clean, log assertion, settings round-trip, visible menu/window toggle, map-change edge, unload without leak/hook residue.  
-6. **Non-duplicative of issue 3** for pure visual content.  
+1. **Provenance-clear:** Unlicense/PD (or explicit dual-license compatible with skillpack `CC0-1.0 OR Unlicense`), with repo/file/commit recorded.
+2. **Settled:** used in ≥2 real plugins *or* is the canonical template form, with no active rewrite thrash.
+3. **Portable path exists:** works without RemoteBuild/MCP/LSP; optional tools only tighten the loop.
+4. **Dependency honest:** required deps listed; prefer mature ecosystem plugins over vendored clones when the dep is the product.
+5. **Testable gate:** at least one of — compile/load clean, log assertion, settings round-trip, visible menu/window toggle, map-change edge, unload without leak/hook residue.
+6. **Non-duplicative of issue 3** for pure visual content.
 7. **Compact AngelScript** suitable for progressive disclosure (recipe short; deep variants in references).
 
 **Stability sub-labels for later versioning policy (issue map still open):**
 
-- `stable` — core-v1 after live validation  
-- `draft` — catalog-only  
-- `deprecated` — historical  
+- `stable` — core-v1 after live validation
+- `draft` — catalog-only
+- `deprecated` — historical
 
 ---
 
@@ -802,9 +802,9 @@ Ordered for skillpack usefulness × readiness (not pure popularity):
 
 ### Historical (cite, don’t promote as default)
 
-- **GI/GameInfo accessor piles** (P-031) — superseded for monitoring by TM_State.  
-- **Early BRM Tab** remains valid but simpler than E++ TabGroup; both kept with different tiers.  
-- **cgf-library** (2023–2024) — rich but older monorepo-style; cherry-pick only if still unique.  
+- **GI/GameInfo accessor piles** (P-031) — superseded for monitoring by TM_State.
+- **Early BRM Tab** remains valid but simpler than E++ TabGroup; both kept with different tiers.
+- **cgf-library** (2023–2024) — rich but older monorepo-style; cherry-pick only if still unique.
 - **Empty-catch and outdated IndexOf overloads** — anti-patterns documented in workspace notes.
 
 ### Experimental / license-blocked (watchlist)
@@ -857,11 +857,11 @@ Not implemented now — packaging hypothesis for issue 2 / implementation:
 
 ## 11. Open follow-ons (out of scope for this ticket)
 
-1. Final stability-tier names and versioning policy (map “Not yet specified”).  
-2. Whether TM_State ships as copy-paste recipe, submodule, or tiny companion library plugin.  
-3. License pass on `tm-agent` / control bridges before citing code.  
-4. Issue 3 visual catalog cross-links once that research lands.  
-5. Issue 6 capability ladder wiring for P-002 RemoteBuild detection.  
+1. Final stability-tier names and versioning policy (map “Not yet specified”).
+2. Whether TM_State ships as copy-paste recipe, submodule, or tiny companion library plugin.
+3. License pass on `tm-agent` / control bridges before citing code.
+4. Issue 3 visual catalog cross-links once that research lands.
+5. Issue 6 capability ladder wiring for P-002 RemoteBuild detection.
 6. Deduplicating the many forked copies of ClearTasks/Http/UIHelpers into one canonical recipe text (implementation chore).
 
 ---

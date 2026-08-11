@@ -1,12 +1,12 @@
 # Issue 8 — Openplanet store policy and publication constraints
 
-**Ticket:** [Research the Openplanet store policy and publication constraints](https://github.com/XertroV/tm-plugin-skills/issues/8)  
-**Parent map:** [Chart the implementation-ready specification for the Openplanet agent skillpack](https://github.com/XertroV/tm-plugin-skills/issues/1)  
-**Research retrieved (UTC):** 2026-08-11T13:31:48Z  
-**Method:** Read-only fetch of public primary pages on `https://openplanet.dev` (no login, no upload, no admin UI).  
+**Ticket:** [Research the Openplanet store policy and publication constraints](https://github.com/XertroV/tm-plugin-skills/issues/8)
+**Parent map:** [Chart the implementation-ready specification for the Openplanet agent skillpack](https://github.com/XertroV/tm-plugin-skills/issues/1)
+**Research retrieved (UTC):** 2026-08-11T13:31:48Z
+**Method:** Read-only fetch of public primary pages on `https://openplanet.dev` (no login, no upload, no admin UI).
 **Out of scope (per map):** Performing store submission.
 
-This brief is an agent-facing pre-code compatibility gate. It separates (1) rules that should shape **every** plugin design, (2) constraints that apply only when **publication/signing** is intended, (3) **local-only** exceptions that must be labelled non-publishable, and (4) facts that still need a **read-only authenticated admin** inspection.
+This brief is an agent-facing pre-code compatibility gate. It separates (1) rules that should shape **every** plugin design, (2) constraints that apply only when **publication/signing** is intended, (3) **local-only** exceptions that must be labelled non-publishable, and (4) facts resolved by the later read-only plugin-owner inspection in [the owner workflow research](issue-9-plugin-owner-admin-workflow.md).
 
 ---
 

@@ -1,9 +1,9 @@
 # Research: official installation and packaging targets (issue 7)
 
-**Ticket:** [Research official installation and packaging targets](https://github.com/XertroV/tm-plugin-skills/issues/7)  
-**Map:** [Chart the implementation-ready specification for the Openplanet agent skillpack](https://github.com/XertroV/tm-plugin-skills/issues/1)  
-**Date:** 2026-08-11  
-**Branch:** `research/issue-7`  
+**Ticket:** [Research official installation and packaging targets](https://github.com/XertroV/tm-plugin-skills/issues/7)
+**Map:** [Chart the implementation-ready specification for the Openplanet agent skillpack](https://github.com/XertroV/tm-plugin-skills/issues/1)
+**Date:** 2026-08-11
+**Branch:** `research/issue-7`
 **Status:** Evidence + recommended v1 decisions (not implemented; issue not closed)
 
 ## Question
@@ -286,36 +286,36 @@ No submodule, subtree, or sparse-checkout requirement for v1.
 
 Do **not** take on for v1 packaging:
 
-1. **npm/pypi/crates publish** as an install channel.  
-2. **Native Codex plugin** packaging and App Store–style plugin UX.  
-3. **Duplicate skill trees** or generated flat copies for multi-manifest satisfaction.  
-4. **Symlink farms committed in-repo** for Codex (broken on plugin copy).  
-5. **Root-level single-skill `SKILL.md`** layout for a multi-skill pack.  
-6. **Shipping drafts** under `skills/` (including `skills/.experimental` unless deliberately opted into skills CLI discovery).  
-7. **Requiring** Anthropic official marketplace listing before calling packaging done.  
-8. **skills-lock.json**, `experimental_install`, or `experimental_sync` as author-side release tools.  
-9. **Monorepo / multi-package** workspace.  
-10. **Homebrew, Docker images, install.ps1 frameworks, git submodules.**  
-11. **Codegen of SKILL.md** from another IDL.  
-12. **CI release trains, changesets, semantic-release** as blockers (manual version bump + sync script is enough).  
-13. **Committing consumer harness dirs** (`.claude/skills`, `.agents/skills`) inside this repo for end users.  
-14. **Dual-install without warning** (plugin + skills.sh).  
+1. **npm/pypi/crates publish** as an install channel.
+2. **Native Codex plugin** packaging and App Store–style plugin UX.
+3. **Duplicate skill trees** or generated flat copies for multi-manifest satisfaction.
+4. **Symlink farms committed in-repo** for Codex (broken on plugin copy).
+5. **Root-level single-skill `SKILL.md`** layout for a multi-skill pack.
+6. **Shipping drafts** under `skills/` (including `skills/.experimental` unless deliberately opted into skills CLI discovery).
+7. **Requiring** Anthropic official marketplace listing before calling packaging done.
+8. **skills-lock.json**, `experimental_install`, or `experimental_sync` as author-side release tools.
+9. **Monorepo / multi-package** workspace.
+10. **Homebrew, Docker images, install.ps1 frameworks, git submodules.**
+11. **Codegen of SKILL.md** from another IDL.
+12. **CI release trains, changesets, semantic-release** as blockers (manual version bump + sync script is enough).
+13. **Committing consumer harness dirs** (`.claude/skills`, `.agents/skills`) inside this repo for end users.
+14. **Dual-install without warning** (plugin + skills.sh).
 15. **Replacing dual public-domain licensing** with MIT/Apache “for package managers.”
 
 ---
 
 ## Canonical install wording (draft for future README)
 
-> **Pick one.**  
->  
-> **Claude Code (managed plugin):** once manifests exist — install via Claude’s plugin flow for this repository (official marketplace if listed; otherwise `marketplace add` of this git URL + install from the repo’s single-plugin marketplace). Updates follow the plugin channel.  
->  
-> **Codex and everyone else (editable files):**  
-> `npx skills@latest add XertroV/tm-plugin-skills`  
-> Choose skills and agents when prompted (or `--all` / `-a` / `-s`).  
->  
-> **Direct git:** clone this repository, then `npx skills add ./tm-plugin-skills` or point Claude at the checkout with `--plugin-dir`.  
->  
+> **Pick one.**
+>
+> **Claude Code (managed plugin):** once manifests exist — install via Claude’s plugin flow for this repository (official marketplace if listed; otherwise `marketplace add` of this git URL + install from the repo’s single-plugin marketplace). Updates follow the plugin channel.
+>
+> **Codex and everyone else (editable files):**
+> `npx skills@latest add XertroV/tm-plugin-skills`
+> Choose skills and agents when prompted (or `--all` / `-a` / `-s`).
+>
+> **Direct git:** clone this repository, then `npx skills add ./tm-plugin-skills` or point Claude at the checkout with `--plugin-dir`.
+>
 > Maintainers hacking on the pack: `scripts/link-skills.sh` (unsupported for end users).
 
 Exact command strings should be centralized (Matt-style install-block file) when packaging is implemented.
@@ -338,40 +338,40 @@ Exact command strings should be centralized (Matt-style install-block file) when
 
 When a later **task** ticket implements packaging (not this research commit):
 
-1. Add `package.json` (`private: true`, version `0.1.0`, license expression, repository URL).  
-2. Add `.claude-plugin/plugin.json` + `marketplace.json`.  
-3. Create `skills/` and `drafts/` placeholders as skills are promoted.  
-4. Add `scripts/link-skills.sh`, `sync-plugin-version.mjs`, `check-packaging.sh`.  
-5. Wire CI to `check-packaging.sh` + `claude plugin validate . --strict`.  
-6. Replace README install stub with the canonical block.  
+1. Add `package.json` (`private: true`, version `0.1.0`, license expression, repository URL).
+2. Add `.claude-plugin/plugin.json` + `marketplace.json`.
+3. Create `skills/` and `drafts/` placeholders as skills are promoted.
+4. Add `scripts/link-skills.sh`, `sync-plugin-version.mjs`, `check-packaging.sh`.
+5. Wire CI to `check-packaging.sh` + `claude plugin validate . --strict`.
+6. Replace README install stub with the canonical block.
 7. Do **not** add `.codex-plugin/` until a dedicated decision revisits the Codex plugin.
 
 ---
 
 ## Source index (URLs and local observations)
 
-- https://agentskills.io/llms.txt  
-- https://agentskills.io/specification.md  
-- https://github.com/agentskills/agentskills (docs + skills-ref)  
-- https://github.com/vercel-labs/skills (CLI 1.5.22; README discovery tables; `src/agents.ts`, `src/plugin-manifest.ts`)  
-- `npx skills --help` / `npm view skills` (2026-08-11)  
-- https://code.claude.com/docs/en/skills.md  
-- https://code.claude.com/docs/en/plugins.md  
-- https://code.claude.com/docs/en/plugins-reference.md  
-- `claude plugin validate --help` (strict mode)  
-- https://developers.openai.com/codex/skills.md  
-- https://github.com/openai/codex — `codex-rs/skills/src/assets/samples/skill-creator/references/openai_yaml.md`, `…/plugin-creator/references/plugin-json-spec.md`  
-- https://github.com/mattpocock/skills — README install sections, `AGENTS.md`/`CLAUDE.md`, `.claude-plugin/*`, `.agents/adr/0002-ship-as-a-claude-code-plugin.md`, `.agents/install-block.md`, `.agents/invocation.md`, `scripts/link-skills.sh`, `scripts/sync-plugin-version.mjs`  
+- https://agentskills.io/llms.txt
+- https://agentskills.io/specification.md
+- https://github.com/agentskills/agentskills (docs + skills-ref)
+- https://github.com/vercel-labs/skills (CLI 1.5.22; README discovery tables; `src/agents.ts`, `src/plugin-manifest.ts`)
+- `npx skills --help` / `npm view skills` (2026-08-11)
+- https://code.claude.com/docs/en/skills.md
+- https://code.claude.com/docs/en/plugins.md
+- https://code.claude.com/docs/en/plugins-reference.md
+- `claude plugin validate --help` (strict mode)
+- https://developers.openai.com/codex/skills.md
+- https://github.com/openai/codex — `codex-rs/skills/src/assets/samples/skill-creator/references/openai_yaml.md`, `…/plugin-creator/references/plugin-json-spec.md`
+- https://github.com/mattpocock/skills — README install sections, `AGENTS.md`/`CLAUDE.md`, `.claude-plugin/*`, `.agents/adr/0002-ship-as-a-claude-code-plugin.md`, `.agents/install-block.md`, `.agents/invocation.md`, `scripts/link-skills.sh`, `scripts/sync-plugin-version.mjs`
 - Repo: `LICENSE` (`SPDX-License-Identifier: CC0-1.0 OR Unlicense`)
 
 ---
 
 ## Decision summary (for the ticket resolution comment, when a human/session closes issue 7)
 
-**v1 officially supports:** (1) `npx skills@latest add` / skills.sh across Agent Skills–compatible agents, (2) Claude Code native plugin manifests with fallback repo marketplace, (3) direct git clone consumption, (4) per-skill Codex `agents/openai.yaml` metadata.  
+**v1 officially supports:** (1) `npx skills@latest add` / skills.sh across Agent Skills–compatible agents, (2) Claude Code native plugin manifests with fallback repo marketplace, (3) direct git clone consumption, (4) per-skill Codex `agents/openai.yaml` metadata.
 
-**v1 layout:** promoted-only flat `skills/<name>/`; drafts outside; dual license retained; private `package.json` version + `.claude-plugin/plugin.json`; maintainer `link-skills.sh` only.  
+**v1 layout:** promoted-only flat `skills/<name>/`; drafts outside; dual license retained; private `package.json` version + `.claude-plugin/plugin.json`; maintainer `link-skills.sh` only.
 
-**v1 does not ship:** npm publish, native Codex plugin, committed symlink farms, draft skills under discovery roots, or heavy release automation.  
+**v1 does not ship:** npm publish, native Codex plugin, committed symlink farms, draft skills under discovery roots, or heavy release automation.
 
 **Metadata:** author skill bodies and openai.yaml; author plugin skill list; sync plugin version from package.json; validate with Agent Skills checks + `claude plugin validate --strict` + promotion triple + link/script gates.

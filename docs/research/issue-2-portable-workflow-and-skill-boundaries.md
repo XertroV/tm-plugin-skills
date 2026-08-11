@@ -127,10 +127,10 @@ Hermes skill strengthens the log window: after a failed compile the game may sti
 
 Documented ladder (`public-pattern-curation.md`, restated in Hermes skill and map notes):
 
-1. Manual Openplanet Scripts UI + log inspection  
-2. Minimal project-local lifecycle hook (socket) when needed  
-3. RemoteBuild for load/unload/reload  
-4. `tm-control-mcp` for screenshots, state inspection, interaction  
+1. Manual Openplanet Scripts UI + log inspection
+2. Minimal project-local lifecycle hook (socket) when needed
+3. RemoteBuild for load/unload/reload
+4. `tm-control-mcp` for screenshots, state inspection, interaction
 
 Observed live tree includes `RemoteBuild.op` and `tm-control-mcp` under `~/OpenplanetNext/Plugins/`, confirming rungs 3–4 as real optional installs, not hypotheticals.
 
@@ -224,9 +224,9 @@ Five independently triggerable, model-invoked skills. Names are **proposals** fo
 
 Not a sixth skill — a few lines repeated or one tiny always-linked reference:
 
-1. Locate **plugin folder** (`info.toml`).  
-2. Detect **topology** (live vs staged) and **capabilities** (build script, LSP, RemoteBuild, control bridge, screenshot tool).  
-3. Prefer project tools when present; never invent a required toolchain.  
+1. Locate **plugin folder** (`info.toml`).
+2. Detect **topology** (live vs staged) and **capabilities** (build script, LSP, RemoteBuild, control bridge, screenshot tool).
+3. Prefer project tools when present; never invent a required toolchain.
 4. Domain terms: `CONTEXT.md`.
 
 ---
@@ -379,10 +379,10 @@ These are **context pointers**, not invocation surfaces — Pocock progressive d
 
 The five-workflow hypothesis is **accepted as the v1 top-level skill cut**, with these refinements:
 
-1. Name the clusters as independently triggerable skills with explicit required cross-links (not five chapters of one skill).  
-2. Treat export-surface and package/publish as **disclosed sub-clusters**, not top-level v1 skills.  
-3. Make **capability detection** a shared step, not its own skill.  
-4. Bind develop/visual completion to lifecycle (and visual to screenshots) so composability does not reintroduce premature completion.  
+1. Name the clusters as independently triggerable skills with explicit required cross-links (not five chapters of one skill).
+2. Treat export-surface and package/publish as **disclosed sub-clusters**, not top-level v1 skills.
+3. Make **capability detection** a shared step, not its own skill.
+4. Bind develop/visual completion to lifecycle (and visual to screenshots) so composability does not reintroduce premature completion.
 5. Keep Max-specific Editor++/dogfood content out of portable core bodies.
 
 ---
@@ -402,9 +402,9 @@ The five-workflow hypothesis is **accepted as the v1 top-level skill cut**, with
 
 ## Document checks run
 
-1. **Citation path existence** — all primary paths listed in Sources consulted were checked present on the research host (2026-08-11).  
-2. **Internal consistency** — five skills, eight reference slots, ten rejected alternatives; no skill proposed for open product decisions owned by other tickets.  
-3. **Wayfinder compliance** — research asset only; no skill implementation; issue not edited/closed by this work.  
+1. **Citation path existence** — all primary paths listed in Sources consulted were checked present on the research host (2026-08-11).
+2. **Internal consistency** — five skills, eight reference slots, ten rejected alternatives; no skill proposed for open product decisions owned by other tickets.
+3. **Wayfinder compliance** — research asset only; no skill implementation; issue not edited/closed by this work.
 4. **Domain language** — uses `CONTEXT.md` terms (plugin folder, lifecycle loop, runtime evidence, portable path, capability detection, visual gate, control bridge).
 
 ---

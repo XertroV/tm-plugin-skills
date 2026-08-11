@@ -1,10 +1,10 @@
 # Research: Theme-respecting three-tier visual design skill
 
-**Ticket:** [Curate the theme-respecting three-tier visual design skill](https://github.com/XertroV/tm-plugin-skills/issues/3)  
-**Map:** [Chart the implementation-ready specification for the Openplanet agent skillpack](https://github.com/XertroV/tm-plugin-skills/issues/1)  
-**Date:** 2026-08-11  
-**Branch:** `research/issue-3`  
-**Scope:** Research and catalog only. No skill implementation. No issue close/edit.  
+**Ticket:** [Curate the theme-respecting three-tier visual design skill](https://github.com/XertroV/tm-plugin-skills/issues/3)
+**Map:** [Chart the implementation-ready specification for the Openplanet agent skillpack](https://github.com/XertroV/tm-plugin-skills/issues/1)
+**Date:** 2026-08-11
+**Branch:** `research/issue-3`
+**Scope:** Research and catalog only. No skill implementation. No issue close/edit.
 **Corpus root:** `~/src/openplanet/my-plugins/` (and local clones under `~/src/openplanet/`).
 
 ---
