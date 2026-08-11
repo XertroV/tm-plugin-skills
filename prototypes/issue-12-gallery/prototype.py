@@ -18,6 +18,7 @@ except ImportError as exc:  # pragma: no cover - explicit environment failure
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "generated" / "VisualRecipeGallery"
+LIB_OUT = ROOT / "generated" / "SkillpackDemoLib"
 MANIFEST_PATH = ROOT / "manifest.json"
 SCHEMA_PATH = ROOT / "recipe.schema.json"
 MATRIX_PATH = ROOT / "screenshot-matrix.json"
@@ -210,11 +211,21 @@ string TierName(GalleryTier tier) {
 
 def generate_info(manifest: dict) -> str:
     gallery = manifest["gallery"]
-    return f'''[meta]\nname = {json.dumps(gallery["name"])}\nauthor = "tm-plugin-skills prototype"\ncategory = "Skillpack Demos"\nversion = {json.dumps(gallery["version"])}\nsiteid = 0\n\n[script]\ndependencies = []\n'''
+    return f'''[meta]\nname = {json.dumps(gallery["name"])}\nauthor = "tm-plugin-skills prototype"\ncategory = "Skillpack Demos"\nversion = {json.dumps(gallery["version"])}\nsiteid = 0\n\n[script]\ndependencies = ["SkillpackDemoLib"]\nexport_dependencies = ["SkillpackDemoLib"]\n'''
+
+
+def generate_library_info() -> str:
+    return '''[meta]\nname = "Skillpack Demo Library PROTOTYPE"\nauthor = "tm-plugin-skills prototype"\ncategory = "Skillpack Demos"\nversion = "0.0.0"\nsiteid = 0\n\n[script]\nmodule = "SkillpackDemoLib"\nexports = ["Exports.as"]\n'''
+
+
+def generate_library_exports() -> str:
+    return '''namespace SkillpackDemoLib {\n    float ClampUnit(float value) { return Math::Clamp(value, 0.0f, 1.0f); }\n    float PhaseFromFrame(int frame, int maxFrame) {\n        if (maxFrame <= 0) return 0.0f;\n        return ClampUnit(float(frame) / float(maxFrame));\n    }\n}\n'''
 
 
 def expected_outputs(manifest: dict) -> dict[Path, bytes]:
     outputs: dict[Path, bytes] = {
+        LIB_OUT / "info.toml": generate_library_info().encode(),
+        LIB_OUT / "Exports.as": generate_library_exports().encode(),
         OUT / "info.toml": generate_info(manifest).encode(),
         OUT / "src" / "Main.as": generate_main(manifest).encode(),
         OUT / "src" / "GeneratedCatalog.as": generate_catalog(manifest).encode(),
@@ -223,19 +234,25 @@ def expected_outputs(manifest: dict) -> dict[Path, bytes]:
         source = ROOT / recipe["source"]
         banner = f"// GENERATED COPY sha256={sha256(source.read_bytes())} source={recipe['source']}\n".encode()
         outputs[OUT / "src" / "recipes" / source.name] = banner + source.read_bytes()
+        test_source = source.with_name(source.stem + "_Test.as")
+        if test_source.is_file():
+            relative_test = test_source.relative_to(ROOT)
+            test_banner = f"// GENERATED COPY sha256={sha256(test_source.read_bytes())} source={relative_test}\n".encode()
+            outputs[OUT / "src" / "recipes" / test_source.name] = test_banner + test_source.read_bytes()
     return outputs
 
 
 def write_outputs(outputs: dict[Path, bytes]) -> None:
-    if OUT.exists():
-        shutil.rmtree(OUT)
+    for root in (LIB_OUT, OUT):
+        if root.exists():
+            shutil.rmtree(root)
     for path, data in sorted(outputs.items(), key=lambda item: str(item[0])):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(data)
 
 
 def validate_outputs(outputs: dict[Path, bytes], manifest: dict) -> None:
-    actual = {path for path in OUT.rglob("*") if path.is_file()}
+    actual = {path for root in (LIB_OUT, OUT) for path in root.rglob("*") if path.is_file()}
     if actual != set(outputs):
         fail(f"generated file set drift: expected {sorted(map(str, outputs))}, actual {sorted(map(str, actual))}")
     for path, expected in outputs.items():
@@ -267,8 +284,9 @@ def validate_exclusions() -> None:
 
 def tree_digest() -> str:
     digest = hashlib.sha256()
-    for path in sorted(p for p in OUT.rglob("*") if p.is_file()):
-        digest.update(str(path.relative_to(OUT)).encode() + b"\0" + path.read_bytes() + b"\0")
+    for root in (LIB_OUT, OUT):
+        for path in sorted(p for p in root.rglob("*") if p.is_file()):
+            digest.update(root.name.encode() + b"/" + str(path.relative_to(root)).encode() + b"\0" + path.read_bytes() + b"\0")
     return digest.hexdigest()
 
 
@@ -276,15 +294,22 @@ def run_lsp() -> str:
     executable = shutil.which("openplanet-lsp")
     if executable is None:
         return "SKIP (openplanet-lsp unavailable; live compile still mandatory)"
-    result = subprocess.run([executable, "check", str(OUT)], text=True, capture_output=True)
-    combined = (result.stdout + result.stderr).strip()
-    if result.returncode != 0:
-        print(combined, file=sys.stderr)
-        fail(f"openplanet-lsp check failed with exit {result.returncode}")
-    diagnostic_match = re.search(r"(\d+)\s+diagnostic", combined, re.IGNORECASE)
-    if diagnostic_match and int(diagnostic_match.group(1)) != 0:
-        fail(f"openplanet-lsp reported diagnostics: {combined}")
-    return combined or "PASS (exit 0)"
+    summaries = []
+    for root in (LIB_OUT, OUT):
+        command = [executable, "check"]
+        if root == OUT:
+            command.extend(["--plugins-dir", str(LIB_OUT.parent)])
+        command.append(str(root))
+        result = subprocess.run(command, text=True, capture_output=True)
+        combined = (result.stdout + result.stderr).strip()
+        if result.returncode != 0:
+            print(combined, file=sys.stderr)
+            fail(f"openplanet-lsp check failed for {root.name} with exit {result.returncode}")
+        diagnostic_match = re.search(r"(\d+)\s+diagnostic", combined, re.IGNORECASE)
+        if diagnostic_match and int(diagnostic_match.group(1)) != 0:
+            fail(f"openplanet-lsp reported diagnostics for {root.name}: {combined}")
+        summaries.append(f"{root.name}: {combined or 'PASS (exit 0)'}")
+    return "; ".join(summaries)
 
 
 def main() -> int:

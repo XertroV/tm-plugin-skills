@@ -1,10 +1,9 @@
-// GENERATED COPY sha256=0662ec64e68f728e54fca6fa2f0b8027338b5f55c24f6cbc56baa07f0054c5dd source=recipes/DeterministicPulse.as
+// GENERATED COPY sha256=cf595a8e5ec0056c149df54bfdcb847a2404aa97ca81ebc3e47e1a88c5dfd99d source=recipes/DeterministicPulse.as
 namespace RecipeDeterministicPulse {
     int lastCaptureFrame = 0;
 
     float Phase(int captureFrame) {
-        int clamped = Math::Clamp(captureFrame, 0, 120);
-        return float(clamped) / 120.0;
+        return SkillpackDemoLib::PhaseFromFrame(captureFrame, 120);
     }
 
     void DrawPanel(int captureFrame) {

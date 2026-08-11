@@ -9,8 +9,9 @@
 5. Every declared recipe capture frame has a screenshot case; matrix values belong to declared axes.
 6. Default-tier recipe source has no style/color push; each instrumented stack operation has a balanced decrement in canonical source.
 7. No binary/assets/fonts, forbidden source imports, reviewer/admin artifacts, or unsafe policy/evasion content enter the prototype.
-8. `openplanet-lsp check generated/VisualRecipeGallery` runs when the executable is present and must report zero diagnostics.
+8. `openplanet-lsp check` runs for both `generated/SkillpackDemoLib` and dependent `generated/VisualRecipeGallery` (with the generated plugin directory configured for dependency resolution) and must report zero diagnostics.
 9. Running the command twice produces the same tree digest.
+10. Each testable feature uses a neighboring `Feature_Test.as` with `[Test]` functions. The filename is the skillpack convention; Openplanet discovers `[Test]` metadata. Companion tests compile into the demo plugin and directly test both feature behavior and compiled-in ordinary exports.
 
 ## Live gates (mandatory before any promotion; intentionally not claimed here)
 
@@ -28,5 +29,9 @@ For every required screenshot case:
 8. Record pass/fail and evidence path. Independent critique is recommended for advanced polish, not universally required.
 
 Before adding the next recipe, the current increment must pass source review for current Openplanet/AngelScript best practices, static checks, a fresh in-game compile/load log window, and its behavior-specific smoke. Keep the demo loaded and visible when practical so Max can inspect the running code throughout development. A recipe that has only LSP/static evidence remains a candidate and cannot be described as working.
+
+For every increment, preserve both diagnostic transcripts: `openplanet-lsp` and the fresh Openplanet build log. Compare errors and warnings, including deprecations. Same code, same reason, and ideally the same warning set is the parity target. If the game compiles but LSP reports an error, file an `openplanet-lsp` bug with the smallest known repro. If both reject it for materially different reasons, or warnings/deprecations differ, file an investigation issue with both exact transcripts and note that parity is not yet classified.
+
+Remote-control component actions have separate gates: stable unique ID; registration/unregistration across reload; render-epoch visibility; default `force=false`; invisible/not-drawn actions make no state change; the error reports concise cause plus retry/open-or-force guidance; `force=true` invokes the semantic callback and reports that it was forced; mouse button/action names are validated; stale registrations fail safely; and UI/NVG implementations obey the same behavioral contract. Transport remains DEV-only, opt-in, loopback-bound, size/time bounded, fixed-route only, and concise on every failure.
 
 A static pass leaves maturity unchanged. Only a later, explicit live-validation workflow may propose `stable`; this prototype does not define that promotion mutation.

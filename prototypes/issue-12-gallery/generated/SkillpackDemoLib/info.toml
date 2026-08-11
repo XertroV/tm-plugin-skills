@@ -1,0 +1,10 @@
+[meta]
+name = "Skillpack Demo Library PROTOTYPE"
+author = "tm-plugin-skills prototype"
+category = "Skillpack Demos"
+version = "0.0.0"
+siteid = 0
+
+[script]
+module = "SkillpackDemoLib"
+exports = ["Exports.as"]

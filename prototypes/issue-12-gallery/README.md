@@ -10,11 +10,13 @@ This prototype answers whether one canonical recipe source can assemble a standa
 ./prototypes/issue-12-gallery/prototype.py
 ```
 
-The command validates `recipe.schema.json` and `manifest.json`, rebuilds `generated/VisualRecipeGallery/` from canonical `recipes/*.as`, rejects drift/stale files/forbidden inputs, runs structural contracts, and runs `openplanet-lsp check` when available. It exits non-zero on any failure.
+The command validates `recipe.schema.json` and `manifest.json`, rebuilds `generated/SkillpackDemoLib/` plus dependent `generated/VisualRecipeGallery/` from canonical `recipes/*.as`, rejects drift/stale files/forbidden inputs, runs structural contracts, and runs `openplanet-lsp check` for both plugins when available. It exits non-zero on any failure.
 
 ## Ownership decision proved
 
 - `recipes/*.as` is the only handwritten implementation of a recipe.
+- A neighboring `Feature_Test.as` is the canonical companion for Openplanet `[Test]` functions and is assembled beside `Feature.as`.
+- `SkillpackDemoLib` owns reusable dev-only helpers. It exposes implementation files through ordinary `exports`, so Openplanet compiles those helpers into each dependent demo plugin. Use `shared_exports` only when cross-plugin shared identity/state is actually required.
 - `manifest.json` is the only handwritten catalog/navigation/license record. Provenance may be recorded when known and useful but is optional.
 - `generated/VisualRecipeGallery/src/recipes/*.as` is a byte-for-byte assembly output. Editing it fails drift validation and the next run overwrites it.
 - `GeneratedCatalog.as` and the plugin shell are deterministic generator output.
@@ -31,3 +33,5 @@ No third-party fonts, images, audio, sprite assets, reviewer/admin pages, contro
 `prototype.py` proves assembly, schema, provenance fields, state-model reachability, stack instrumentation, screenshot-matrix coverage, and static diagnostics. It cannot prove rendering, visual quality, actual stack cleanup in Openplanet, or behavior across themes/scales/game states. Those are mandatory `live-pending` gates in `VALIDATION-CONTRACT.md`; recipes must not be promoted to stable before those gates pass.
 
 The implementation workflow is incremental and live: each new snippet is assembled into an appropriate temp/demo plugin, reviewed for best practices, loaded, compile-verified, behavior-smoked, and left available for Max to inspect before more recipes build on it. Multiple demo plugins are allowed when isolation is useful. They share the dedicated **`Skillpack Demos`** category rather than mixing into ordinary Developer plugins.
+
+Reusable remote-control infrastructure belongs in `SkillpackDemoLib`: a bounded localhost JSON router plus registries for controllable components. A UI/NVG component may register stable actions such as click, hover, or a named mouse-button interaction. Actions default to `force=false`: if the component was not drawn/visible in the current render epoch, the callback does nothing and returns a concise structured error explaining that it was not visible and that the caller may retry after opening it or explicitly use `force=true`. Forced invocation calls the registered semantic callback; it must not pretend that a physical hover/click occurred. Every failure response includes a short cause and short next step or documentation pointer.

@@ -2,8 +2,7 @@ namespace RecipeDeterministicPulse {
     int lastCaptureFrame = 0;
 
     float Phase(int captureFrame) {
-        int clamped = Math::Clamp(captureFrame, 0, 120);
-        return float(clamped) / 120.0;
+        return SkillpackDemoLib::PhaseFromFrame(captureFrame, 120);
     }
 
     void DrawPanel(int captureFrame) {
