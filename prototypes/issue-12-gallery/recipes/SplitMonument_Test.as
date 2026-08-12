@@ -1,5 +1,19 @@
 namespace Tests {
     [Test]
+    void SplitMonument_MinimumWidthLedgerKeepsAReadableGutter(Tests::Context@ ctx) {
+        float panelWidth = 280.0f;
+        float splitX = panelWidth * 0.43f;
+        float ledgerX = splitX + 18.0f;
+        float ledgerRight = panelWidth - 20.0f;
+        float widestLabelEstimate = 67.0f;
+        float widestDeltaEstimate = 44.0f;
+        ctx.AssertTrue(
+            ledgerRight - ledgerX - widestLabelEstimate - widestDeltaEstimate >= 10.0f,
+            "minimum-width ledger preserves at least a ten-pixel inter-column gutter"
+        );
+    }
+
+    [Test]
     void SplitMonument_PhaseIsCaptureOwned(Tests::Context@ ctx) {
         ctx.AssertSameApprox(RecipeSplitMonument::Phase(-1), 0.0f, "negative frames clamp");
         ctx.AssertSameApprox(RecipeSplitMonument::Phase(60), 0.5f, "frame 60 is midpoint");

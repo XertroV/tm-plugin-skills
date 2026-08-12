@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=9fde872bb6f881cc22eba42177430dc51336986f0a4a8dc864932c4dc20adc39 source=recipes/SplitMonument.as
+// GENERATED COPY sha256=8d9621f6dda5ab5a7ef81bae44377a50155ee75f5b016973cbc0e465f42a30e0 source=recipes/SplitMonument.as
 namespace RecipeSplitMonument {
     int clipDepth = 0;
     int lastCaptureFrame = 0;
@@ -84,8 +84,8 @@ namespace RecipeSplitMonument {
         vec4 seam = highlighted == 3 ? green : vec4(ink.x, ink.y, ink.z, 0.18f);
         dl.AddRectFilled(vec4(vec2(pos.x + 21.0f, ruleY - 3.0f), vec2(size.x * 0.33f, 3.0f)), seam, 0.0f);
 
-        float ledgerX = splitX + 24.0f;
-        float ledgerRight = max.x - 26.0f;
+        float ledgerX = splitX + 18.0f;
+        float ledgerRight = max.x - 20.0f;
         float rowStartY = pos.y + 48.0f;
         string[] labels = {"SECTOR I", "SECTOR II", "SECTOR III"};
         for (int i = 0; i < 3; i++) {
