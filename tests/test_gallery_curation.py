@@ -93,6 +93,14 @@ class GalleryCurationTests(unittest.TestCase):
         ):
             self.assertIn(signature, source)
 
+    def test_apex_envelope_is_a_calibrated_featured_instrument(self) -> None:
+        recipe = self.by_id["apex-envelope"]
+        self.assertEqual("featured", recipe["curation"])
+        self.assertEqual([0, 30, 60, 90, 120], recipe["state_contract"]["capture_frames"])
+        source = (GALLERY / recipe["source"]).read_text(encoding="utf-8")
+        for signature in ("MarkerPosition", "SafeHalfWidth", "MARGIN", "OVERSLIP"):
+            self.assertIn(signature, source)
+
     def test_animations_autoplay_with_a_pause_play_control(self) -> None:
         generated_main = (
             GALLERY / "generated" / "VisualRecipeGallery" / "src" / "Main.as"

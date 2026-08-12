@@ -19,6 +19,7 @@ RecipeMeta@[] g_recipes = {
     RecipeMeta("kinetic-spectrum-reactor", "Kinetic spectrum reactor", GalleryTier::Advanced, true, true, "candidate-static-only", "A cyan-violet-amber containment field travels around the panel perimeter and feeds four synchronized conduits into a recessed breathing reactor, with orbital spark trails and radial energy ticks; frame 120 closes the loop by matching frame 0.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/KineticSpectrumReactor.as · independent-api-example", {0, 30, 60, 90, 120}),
     RecipeMeta("spectral-relay-typography", "Spectral relay typography", GalleryTier::Advanced, true, true, "candidate-static-only", "Two counter-propagating spectral signals race through a monumental CHECKPOINT RELAY wordmark while lane traces, phase markers, and an interference bloom reveal the deterministic collision point; the composition remains legible and dramatic in every frozen frame.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/SpectralRelayTypography.as · independent-reimplementation", {0, 30, 60, 90, 120}),
     RecipeMeta("split-monument", "Split monument", GalleryTier::Advanced, true, true, "candidate-static-only", "An asymmetrical limestone result plate balances a monumental clipped 01 against a precision split ledger; sector emphasis travels through the ledger while a measured NEW BEST lozenge interrupts the baseline rule without disturbing the static hero composition.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/SplitMonument.as · independent-reimplementation", {0, 30, 60, 90, 120}),
+    RecipeMeta("apex-envelope", "Apex envelope", GalleryTier::Advanced, true, true, "candidate-static-only", "A restrained carbon instrument horizon maps steering load into a narrowing teal safety envelope; an ivory marker crosses the threshold into a burnt-sienna overslip wedge while compact SIDE, TARGET, and MARGIN readouts preserve calibrated hierarchy.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/ApexEnvelope.as · independent-reimplementation", {0, 30, 60, 90, 120}),
 };
 
 void DrawRecipeByIndex(int index, int captureFrame) {
@@ -32,4 +33,5 @@ void DrawRecipeByIndex(int index, int captureFrame) {
     else if (index == 7) RecipeKineticSpectrumReactor::DrawPanel(captureFrame);
     else if (index == 8) RecipeSpectralRelayTypography::DrawPanel(captureFrame);
     else if (index == 9) RecipeSplitMonument::DrawPanel(captureFrame);
+    else if (index == 10) RecipeApexEnvelope::DrawPanel(captureFrame);
 }
