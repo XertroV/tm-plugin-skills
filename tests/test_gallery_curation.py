@@ -68,7 +68,7 @@ class GalleryCurationTests(unittest.TestCase):
                         len(review_pass["frames"]), len(review_pass["screenshots"])
                     )
                     for screenshot in review_pass["screenshots"]:
-                        self.assertTrue((ROOT / screenshot).is_file(), screenshot)
+                        self.assertTrue((GALLERY / screenshot).is_file(), screenshot)
 
     def test_tm_agent_inspired_showcases_are_independent_reimplementations(self) -> None:
         for recipe_id in ("spectral-relay-typography",):

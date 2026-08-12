@@ -1,4 +1,72 @@
 {
   "schema_version": 1,
-  "receipts": []
+  "receipts": [
+    {
+      "recipe": "split-monument",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "5b1484f",
+          "frames": [0, 30, 60, 90, 120],
+          "screenshots": [
+            "evidence/gallery-screenshots/split-monument/convergence/frame-000.png",
+            "evidence/gallery-screenshots/split-monument/convergence/frame-030.png",
+            "evidence/gallery-screenshots/split-monument/convergence/frame-060.png",
+            "evidence/gallery-screenshots/split-monument/convergence/frame-090.png",
+            "evidence/gallery-screenshots/split-monument/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Initial multi-frame inspection found edge clipping, a leaked phase mark, weak secondary contrast, and unresolved rule/badge joins; all were corrected before the checkpoint."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "5b1484f",
+          "frames": [0, 30, 60, 90, 120],
+          "screenshots": [
+            "evidence/gallery-screenshots/split-monument/post-1/frame-000.png",
+            "evidence/gallery-screenshots/split-monument/post-1/frame-030.png",
+            "evidence/gallery-screenshots/split-monument/post-1/frame-060.png",
+            "evidence/gallery-screenshots/split-monument/post-1/frame-090.png",
+            "evidence/gallery-screenshots/split-monument/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Verified hierarchy, state accents, arithmetic, containment, clip restoration, and absence of the earlier phase artifact across all key frames."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "5b1484f",
+          "frames": [0, 30, 60, 90, 120],
+          "screenshots": [
+            "evidence/gallery-screenshots/split-monument/post-2/frame-000.png",
+            "evidence/gallery-screenshots/split-monument/post-2/frame-030.png",
+            "evidence/gallery-screenshots/split-monument/post-2/frame-060.png",
+            "evidence/gallery-screenshots/split-monument/post-2/frame-090.png",
+            "evidence/gallery-screenshots/split-monument/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Fresh live captures confirmed the red Sector II state, green Sector III state, final NEW BEST state, exact status frames, and pixel-identical frame 0/120 loop closure."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "5b1484f",
+          "frames": [0, 30, 60, 90, 120],
+          "screenshots": [
+            "evidence/gallery-screenshots/split-monument/post-3/frame-000.png",
+            "evidence/gallery-screenshots/split-monument/post-3/frame-030.png",
+            "evidence/gallery-screenshots/split-monument/post-3/frame-060.png",
+            "evidence/gallery-screenshots/split-monument/post-3/frame-090.png",
+            "evidence/gallery-screenshots/split-monument/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Final parent visual pass found no clipping, overlap, stray geometry, typographic defect, or state inconsistency; source geometry review independently converged on the same revision."
+        }
+      ]
+    }
+  ]
 }
