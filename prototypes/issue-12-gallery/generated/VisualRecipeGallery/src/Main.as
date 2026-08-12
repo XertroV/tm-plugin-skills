@@ -35,7 +35,8 @@ void Render() {
 
 void DrawGalleryWindow() {
     if (!g_windowOpen) return;
-    UI::SetNextWindowSize(780, 560, UI::Cond::FirstUseEver);
+    UI::SetNextWindowSize(1180, 900, UI::Cond::FirstUseEver);
+    UI::SetNextWindowSizeConstraints(900, 650, 1800, 1200);
     if (UI::Begin("Visual Recipe Gallery PROTOTYPE###skillpack-demo-gallery", g_windowOpen)) DrawGallery();
     UI::End();
 }

@@ -7,6 +7,8 @@ namespace Tests {
         ctx.AssertSameApprox(RecipeApexEnvelope::Phase(120), 1.0f, "frame endpoint");
         ctx.AssertSameApprox(RecipeApexEnvelope::MarkerPosition(0), RecipeApexEnvelope::MarkerPosition(120), "marker closes loop");
         ctx.AssertSameApprox(RecipeApexEnvelope::SafeHalfWidth(0), RecipeApexEnvelope::SafeHalfWidth(120), "envelope closes loop");
+        ctx.AssertSameApprox(RecipeApexEnvelope::Margin(0), RecipeApexEnvelope::Margin(120), "artwork margin closes loop");
+        ctx.AssertTrue(RecipeApexEnvelope::IsOverslip(0) == RecipeApexEnvelope::IsOverslip(120), "artwork alert state closes loop");
     }
 
     [Test]
@@ -20,7 +22,7 @@ namespace Tests {
     }
 
     [Test]
-    void ApexEnvelope_ClipInstrumentationBalances(Tests::Context@ ctx) {
-        ctx.AssertTrue(RecipeApexEnvelope::clipDepth == 0, "clip depth starts balanced");
+    void ApexEnvelope_ClipInstrumentationStartsBalanced(Tests::Context@ ctx) {
+        ctx.AssertTrue(RecipeApexEnvelope::clipDepth == 0, "render-independent start-state assertion");
     }
 }

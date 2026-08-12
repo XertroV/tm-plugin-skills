@@ -57,7 +57,7 @@ New independently authored recipes:
 3. Split Monument — asymmetrical editorial result card.
 4. Apex Envelope — calibrated steering/safety instrument.
 5. Strategy Switchboard — tactile semantic decision matrix.
-6. Brake-Heat Relief — tactile ring-buffer telemetry landscape.
+6. Trajectory Orrery — depth-aware orbital instrument with near/far stroke segmentation.
 7. Altitude Ledger — vertical spatial race summary with collision-managed labels.
 8. Ghost Delta Cartogram — paired route and signed gain/loss field.
 9. Midnight Switchyard — state propagation through a branching rail diagram.
@@ -66,3 +66,8 @@ New independently authored recipes:
 12. Slipstream Loom — layered over/under ribbon renderer.
 
 The selected set intentionally spans light and dark compositions, static-first and animated work, data and atmosphere, horizontal and vertical layouts, typography and geometry, and direct interaction. Each must remain compelling without custom assets or fonts.
+
+Brake-Heat Relief was replaced after portfolio review because its telemetry, time-series,
+and ribbon-landscape vocabulary overlapped Apex Envelope, Ghost Delta Cartogram, and
+Slipstream Loom. Trajectory Orrery adds clean-room 3D projection, circular depth ordering,
+near/far transitions, and spatial manipulation inspired only by the thesis of ranked source 4.

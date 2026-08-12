@@ -100,6 +100,13 @@ class GalleryCurationTests(unittest.TestCase):
         source = (GALLERY / recipe["source"]).read_text(encoding="utf-8")
         for signature in ("MarkerPosition", "SafeHalfWidth", "MARGIN", "OVERSLIP"):
             self.assertIn(signature, source)
+        self.assertIn("Math::Max(450.0f, available.x - 8.0f)", source)
+        test_path = GALLERY / recipe["source"]
+        test_source = test_path.with_name(test_path.stem + "_Test.as").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("Margin(0), RecipeApexEnvelope::Margin(120)", test_source)
+        self.assertIn("IsOverslip(0) == RecipeApexEnvelope::IsOverslip(120)", test_source)
 
     def test_animations_autoplay_with_a_pause_play_control(self) -> None:
         generated_main = (

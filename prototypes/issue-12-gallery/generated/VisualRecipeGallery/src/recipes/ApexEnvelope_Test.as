@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=3b2d17963926f8d75d5518a02e33059b12f04fd6aab152ad0b16f5672365cdd3 source=recipes/ApexEnvelope_Test.as
+// GENERATED COPY sha256=16bacf0d259defb916f96087fff3eb54dfc6a1fb2a2caf5245734adeb008b6e6 source=recipes/ApexEnvelope_Test.as
 namespace Tests {
     [Test]
     void ApexEnvelope_PhaseAndLoopAreCaptureOwned(Tests::Context@ ctx) {
@@ -8,6 +8,8 @@ namespace Tests {
         ctx.AssertSameApprox(RecipeApexEnvelope::Phase(120), 1.0f, "frame endpoint");
         ctx.AssertSameApprox(RecipeApexEnvelope::MarkerPosition(0), RecipeApexEnvelope::MarkerPosition(120), "marker closes loop");
         ctx.AssertSameApprox(RecipeApexEnvelope::SafeHalfWidth(0), RecipeApexEnvelope::SafeHalfWidth(120), "envelope closes loop");
+        ctx.AssertSameApprox(RecipeApexEnvelope::Margin(0), RecipeApexEnvelope::Margin(120), "artwork margin closes loop");
+        ctx.AssertTrue(RecipeApexEnvelope::IsOverslip(0) == RecipeApexEnvelope::IsOverslip(120), "artwork alert state closes loop");
     }
 
     [Test]
@@ -21,7 +23,7 @@ namespace Tests {
     }
 
     [Test]
-    void ApexEnvelope_ClipInstrumentationBalances(Tests::Context@ ctx) {
-        ctx.AssertTrue(RecipeApexEnvelope::clipDepth == 0, "clip depth starts balanced");
+    void ApexEnvelope_ClipInstrumentationStartsBalanced(Tests::Context@ ctx) {
+        ctx.AssertTrue(RecipeApexEnvelope::clipDepth == 0, "render-independent start-state assertion");
     }
 }
