@@ -34,7 +34,9 @@ This repository is in Wayfinder planning mode. GitHub Issues are the canonical d
   a secondary `Boring` tab. Do not delete boring evidence just to improve curation.
 - Give non-visual components and behaviors a `Skillpack Demos` demo whenever their contract can be shown effectively through controls, state readouts, logs, deterministic fault probes, or another observable surface. Record an explicit reviewed non-applicability only when a demo would not communicate useful behavior.
 - Every demo/test plugin main window must be independently toggleable and listed
-  under a `Skillpack Demos` submenu in Openplanet's Plugins menu. The checked menu
+  through the one `SkillpackDemoLib`-owned `Skillpack Demos` submenu in Openplanet's
+  Plugins menu. Dependent plugins register stable item IDs and callbacks with the
+  library; separate `RenderMenu` owners create duplicate menus. The checked menu
   state and the window close button must update the same persistent visibility
   boolean. Libraries with no window are exempt.
 - Reusable demo infrastructure belongs in `SkillpackDemoLib`. Prefer ordinary `exports` so stateless helpers are compiled into each dependent demo plugin; reserve `shared_exports` for genuine cross-plugin identity or shared state.

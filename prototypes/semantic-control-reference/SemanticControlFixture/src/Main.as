@@ -9,6 +9,7 @@ bool g_WindowOpen = true;
 
 void Main() {
     SemanticControlFixture::RegisterComponents();
+    SkillpackDemoLib::RegisterMenuItem("semantic-control-fixture", "Semantic Control Fixture DEV", SemanticMenuIsOpen, ToggleSemanticMenu);
     if (S_Enabled) StartLoopbackListener();
 }
 
@@ -30,15 +31,11 @@ void RenderInterface() {
     SemanticControl::SealRenderEpoch();
 }
 
-void RenderMenu() {
-    if (UI::BeginMenu("Skillpack Demos")) {
-        if (UI::MenuItem("Semantic Control Fixture DEV", "", g_WindowOpen))
-            g_WindowOpen = !g_WindowOpen;
-        UI::EndMenu();
-    }
-}
+bool SemanticMenuIsOpen() { return g_WindowOpen; }
+void ToggleSemanticMenu() { g_WindowOpen = !g_WindowOpen; }
 
 void OnDestroyed() {
+    SkillpackDemoLib::UnregisterMenuItem("semantic-control-fixture");
     SemanticControlFixture::TeardownComponents();
     if (g_Listener !is null) g_Listener.Close();
     @g_Listener = null;

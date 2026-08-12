@@ -7,10 +7,18 @@ uint64 g_lastAnimationTick = 0;
 float g_animationFrameCarry = 0.0f;
 
 void RenderMenu() {
-    if (UI::BeginMenu("Skillpack Demos")) {
-        if (UI::MenuItem("Visual Recipe Gallery PROTOTYPE", "", g_windowOpen)) g_windowOpen = !g_windowOpen;
-        UI::EndMenu();
-    }
+    // SkillpackDemoLib is the sole Plugins-menu owner.
+}
+
+bool GalleryMenuIsOpen() { return g_windowOpen; }
+void ToggleGalleryMenu() { g_windowOpen = !g_windowOpen; }
+
+void Main() {
+    SkillpackDemoLib::RegisterMenuItem("visual-recipe-gallery", "Visual Recipe Gallery PROTOTYPE", GalleryMenuIsOpen, ToggleGalleryMenu);
+}
+
+void OnDestroyed() {
+    SkillpackDemoLib::UnregisterMenuItem("visual-recipe-gallery");
 }
 
 void RenderInterface() {

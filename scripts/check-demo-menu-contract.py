@@ -9,7 +9,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CATEGORY = 'category = "Skillpack Demos"'
-SUBMENU = 'UI::BeginMenu("Skillpack Demos")'
 
 
 def fail(message: str) -> None:
@@ -25,33 +24,32 @@ def main() -> None:
     if not plugin_roots:
         fail("no Skillpack Demos plugins found")
 
+    menu_owner = ROOT / "prototypes" / "issue-12-gallery" / "generated" / "SkillpackDemoLib" / "src" / "Main.as"
+    owner_text = menu_owner.read_text(encoding="utf-8")
+    if owner_text.count('UI::BeginMenu("Skillpack Demos")') != 1:
+        fail("SkillpackDemoLib must be the sole Skillpack Demos menu owner")
+
     window_plugins = 0
     for plugin in plugin_roots:
         sources = sorted(plugin.rglob("*.as"))
-        window_sources = []
-        for source in sources:
-            text = source.read_text(encoding="utf-8")
-            if "UI::Begin(" in text:
-                window_sources.append((source, text))
+        if plugin.name != "SkillpackDemoLib":
+            for source in sources:
+                if 'UI::BeginMenu("Skillpack Demos' in source.read_text(encoding="utf-8"):
+                    fail(f"{source.relative_to(ROOT)}: dependent plugin owns a duplicate Skillpack Demos menu")
+        window_sources = [(source, source.read_text(encoding="utf-8")) for source in sources if "UI::Begin(" in source.read_text(encoding="utf-8")]
         if not window_sources:
             continue
         window_plugins += 1
-        relative = plugin.relative_to(ROOT)
         for source, text in window_sources:
             owner = source.relative_to(ROOT)
-            if "void RenderMenu()" not in text:
-                fail(f"{owner}: window owner has no colocated RenderMenu")
-            if SUBMENU not in text or "UI::EndMenu()" not in text:
-                fail(f"{owner}: main window is not listed under the Skillpack Demos submenu")
-            window_states = re.findall(r"UI::Begin\([^;]+,\s*([A-Za-z_]\w*)\)", text)
-            if not window_states:
+            states = re.findall(r"UI::Begin\([^;]+,\s*([A-Za-z_]\w*)\)", text)
+            if not states:
                 fail(f"{owner}: main window has no toggleable open-state argument")
-            for state in window_states:
-                menu_item = rf"UI::MenuItem\([^;]+,\s*[^;]+,\s*{re.escape(state)}\)"
-                if not re.search(menu_item, text):
-                    fail(f"{owner}: submenu item does not share window state {state}")
-                if f"{state} = !{state}" not in text:
-                    fail(f"{owner}: submenu item does not toggle window state {state}")
+            if "RegisterMenuItem(" not in text or "UnregisterMenuItem(" not in text:
+                fail(f"{owner}: window owner is not registered with SkillpackDemoLib")
+            for state in states:
+                if f"return {state};" not in text or f"{state} = !{state}" not in text:
+                    fail(f"{owner}: registry callbacks do not share window state {state}")
 
     if window_plugins == 0:
         fail("no Skillpack Demos main windows found")

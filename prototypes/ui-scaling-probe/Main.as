@@ -11,14 +11,10 @@ string V4(const vec4 &in value) {
         + ", " + Text::Format("%.2f", value.z) + ", " + Text::Format("%.2f", value.w) + ")";
 }
 
-void RenderMenu() {
-    if (UI::BeginMenu("Skillpack Demos")) {
-        if (UI::MenuItem("UI Scaling Probe", "", g_ScalingProbeOpen)) {
-            g_ScalingProbeOpen = !g_ScalingProbeOpen;
-        }
-        UI::EndMenu();
-    }
-}
+bool ScalingProbeMenuIsOpen() { return g_ScalingProbeOpen; }
+void ToggleScalingProbeMenu() { g_ScalingProbeOpen = !g_ScalingProbeOpen; }
+void Main() { SkillpackDemoLib::RegisterMenuItem("ui-scaling-probe", "UI Scaling Probe", ScalingProbeMenuIsOpen, ToggleScalingProbeMenu); }
+void OnDestroyed() { SkillpackDemoLib::UnregisterMenuItem("ui-scaling-probe"); }
 
 void RenderInterface() {
     if (!g_ScalingProbeOpen) return;

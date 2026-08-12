@@ -14,14 +14,10 @@ void ThrowProbeIsolated() {
     ThrowProbe("isolated coroutine");
 }
 
-void RenderMenu() {
-    if (UI::BeginMenu("Skillpack Demos")) {
-        if (UI::MenuItem("UI Exception Probe", "", g_WindowOpen)) {
-            g_WindowOpen = !g_WindowOpen;
-        }
-        UI::EndMenu();
-    }
-}
+bool ExceptionProbeMenuIsOpen() { return g_WindowOpen; }
+void ToggleExceptionProbeMenu() { g_WindowOpen = !g_WindowOpen; }
+void Main() { SkillpackDemoLib::RegisterMenuItem("ui-exception-probe", "UI Exception Probe", ExceptionProbeMenuIsOpen, ToggleExceptionProbeMenu); }
+void OnDestroyed() { SkillpackDemoLib::UnregisterMenuItem("ui-exception-probe"); }
 
 void DrawProbeWindow() {
     if (!g_WindowOpen) return;

@@ -67,6 +67,8 @@ class VisualScalingReferenceTests(unittest.TestCase):
         source = PROBE.read_text(encoding="utf-8")
         info = PROBE_INFO.read_text(encoding="utf-8")
         self.assertIn('category = "Skillpack Demos"', info)
+        self.assertIn('SkillpackDemoLib::RegisterMenuItem("ui-scaling-probe"', source)
+        self.assertNotIn('UI::BeginMenu("Skillpack Demos', source)
         for term in (
             "UI::GetScale()",
             "UI::GetWindowPos()",

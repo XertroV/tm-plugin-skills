@@ -25,7 +25,8 @@ This repository is currently being designed through a [Wayfinder map](https://gi
   with deterministic galleries and fresh screenshot critique. The bundled demo
   gallery leads with interesting reusable recipes under `Featured`; foundational
   and diagnostic examples remain available under `Boring`. Demo/test main
-  windows are toggleable from Plugins → `Skillpack Demos`.
+  windows are toggleable from Plugins → `Skillpack Demos`, owned once by
+  `SkillpackDemoLib`; dependent demos register stable item IDs and callbacks.
 - [`openplanet-control`](skills/openplanet-control/SKILL.md) — choose safe runtime
   capabilities and optionally build bounded DEV-only semantic controls.
 - [`openplanet-reviewer`](skills/openplanet-reviewer/SKILL.md) — adversarial,

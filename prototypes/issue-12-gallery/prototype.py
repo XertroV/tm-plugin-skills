@@ -167,10 +167,18 @@ uint64 g_lastAnimationTick = 0;
 float g_animationFrameCarry = 0.0f;
 
 void RenderMenu() {
-    if (UI::BeginMenu("Skillpack Demos")) {
-        if (UI::MenuItem("Visual Recipe Gallery PROTOTYPE", "", g_windowOpen)) g_windowOpen = !g_windowOpen;
-        UI::EndMenu();
-    }
+    // SkillpackDemoLib is the sole Plugins-menu owner.
+}
+
+bool GalleryMenuIsOpen() { return g_windowOpen; }
+void ToggleGalleryMenu() { g_windowOpen = !g_windowOpen; }
+
+void Main() {
+    SkillpackDemoLib::RegisterMenuItem("visual-recipe-gallery", "Visual Recipe Gallery PROTOTYPE", GalleryMenuIsOpen, ToggleGalleryMenu);
+}
+
+void OnDestroyed() {
+    SkillpackDemoLib::UnregisterMenuItem("visual-recipe-gallery");
 }
 
 void RenderInterface() {
@@ -320,17 +328,27 @@ def generate_info(manifest: dict) -> str:
 
 
 def generate_library_info() -> str:
-    return '''[meta]\nname = "Skillpack Demo Library PROTOTYPE"\nauthor = "tm-plugin-skills prototype"\ncategory = "Skillpack Demos"\nversion = "0.0.0"\nsiteid = 0\n\n[script]\nmodule = "SkillpackDemoLib"\nexports = ["Exports.as"]\n'''
+    return '''[meta]\nname = "Skillpack Demo Library PROTOTYPE"\nauthor = "tm-plugin-skills prototype"\ncategory = "Skillpack Demos"\nversion = "0.0.0"\nsiteid = 0\n\n[script]\nmodule = "SkillpackDemoLib"\nexports = ["Exports.as"]\nshared_exports = ["Shared.as"]\n'''
 
 
 def generate_library_exports() -> str:
-    return '''namespace SkillpackDemoLib {\n    float ClampUnit(float value) { return Math::Clamp(value, 0.0f, 1.0f); }\n    float PhaseFromFrame(int frame, int maxFrame) {\n        if (maxFrame <= 0) return 0.0f;\n        return ClampUnit(float(frame) / float(maxFrame));\n    }\n}\n'''
+    return '''namespace SkillpackDemoLib {\n    import float ClampUnit(float value) from "SkillpackDemoLib";\n    import float PhaseFromFrame(int frame, int maxFrame) from "SkillpackDemoLib";\n    import void RegisterMenuItem(const string &in id, const string &in label, MenuIsOpen@ isOpen, MenuToggle@ toggle) from "SkillpackDemoLib";\n    import void UnregisterMenuItem(const string &in id) from "SkillpackDemoLib";\n}\n'''
+
+
+def generate_library_shared() -> str:
+    return '''namespace SkillpackDemoLib {\n    shared funcdef bool MenuIsOpen();\n    shared funcdef void MenuToggle();\n}\n'''
+
+
+def generate_library_main() -> str:
+    return '''namespace SkillpackDemoLib {\n    string[] menuIds;\n    string[] menuLabels;\n    MenuIsOpen@[] menuIsOpen;\n    MenuToggle@[] menuToggle;\n\n    float ClampUnit(float value) { return Math::Clamp(value, 0.0f, 1.0f); }\n    float PhaseFromFrame(int frame, int maxFrame) {\n        if (maxFrame <= 0) return 0.0f;\n        return ClampUnit(float(frame) / float(maxFrame));\n    }\n\n    void UnregisterMenuItem(const string &in id) {\n        int index = menuIds.Find(id);\n        if (index < 0) return;\n        menuIds.RemoveAt(index); menuLabels.RemoveAt(index);\n        menuIsOpen.RemoveAt(index); menuToggle.RemoveAt(index);\n    }\n\n    void RegisterMenuItem(const string &in id, const string &in label, MenuIsOpen@ isOpen, MenuToggle@ toggle) {\n        UnregisterMenuItem(id);\n        menuIds.InsertLast(id); menuLabels.InsertLast(label);\n        menuIsOpen.InsertLast(isOpen); menuToggle.InsertLast(toggle);\n    }\n}\n\nvoid RenderMenu() {\n    if (!UI::BeginMenu("Skillpack Demos")) return;\n    for (uint i = 0; i < SkillpackDemoLib::menuIds.Length; i++) {\n        bool open = SkillpackDemoLib::menuIsOpen[i]();\n        if (UI::MenuItem(SkillpackDemoLib::menuLabels[i] + "###" + SkillpackDemoLib::menuIds[i], "", open)) {\n            SkillpackDemoLib::menuToggle[i]();\n        }\n    }\n    UI::EndMenu();\n}\n'''
 
 
 def expected_outputs(manifest: dict) -> dict[Path, bytes]:
     outputs: dict[Path, bytes] = {
         LIB_OUT / "info.toml": generate_library_info().encode(),
         LIB_OUT / "Exports.as": generate_library_exports().encode(),
+        LIB_OUT / "Shared.as": generate_library_shared().encode(),
+        LIB_OUT / "src" / "Main.as": generate_library_main().encode(),
 
         OUT / "info.toml": generate_info(manifest).encode(),
         OUT / "src" / "Main.as": generate_main(manifest).encode(),

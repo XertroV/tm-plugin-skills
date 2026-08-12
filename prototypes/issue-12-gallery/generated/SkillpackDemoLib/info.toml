@@ -8,3 +8,4 @@ siteid = 0
 [script]
 module = "SkillpackDemoLib"
 exports = ["Exports.as"]
+shared_exports = ["Shared.as"]

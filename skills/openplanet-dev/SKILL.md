@@ -36,7 +36,8 @@ brief. Detect rather than assume:
 - module, `exports`, `shared_exports`, and dependent plugins.
 
 Every demo/test plugin main window must be independently toggleable from a
-checked item under a `Skillpack Demos` submenu in Openplanet's Plugins menu, with
+checked item through the one `SkillpackDemoLib`-owned `Skillpack Demos` submenu in Openplanet's
+Plugins menu, with
 the window close button and menu item sharing one visibility state. Windowless
 libraries are exempt.
 

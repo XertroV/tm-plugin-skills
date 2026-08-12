@@ -40,7 +40,8 @@ lists, NanoVG, Manialink, mouse input, or projected world positions, load
    owners of whichever evidence surface is used. Temporary fault fixtures stay
    separate and are removed after evidence capture.
    Every demo/test plugin main window is independently toggleable from a checked
-   item under a `Skillpack Demos` submenu in Openplanet's Plugins menu. The menu
+   item through the one `SkillpackDemoLib`-owned `Skillpack Demos` submenu in
+   Openplanet's Plugins menu. The menu
    item and window close button share one persistent visibility boolean.
    Lead with the most interesting, reusable demos people will want to adopt.
    Keep foundational or diagnostic examples available under a clearly secondary

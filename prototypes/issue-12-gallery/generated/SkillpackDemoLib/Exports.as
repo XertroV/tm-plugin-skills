@@ -1,7 +1,6 @@
 namespace SkillpackDemoLib {
-    float ClampUnit(float value) { return Math::Clamp(value, 0.0f, 1.0f); }
-    float PhaseFromFrame(int frame, int maxFrame) {
-        if (maxFrame <= 0) return 0.0f;
-        return ClampUnit(float(frame) / float(maxFrame));
-    }
+    import float ClampUnit(float value) from "SkillpackDemoLib";
+    import float PhaseFromFrame(int frame, int maxFrame) from "SkillpackDemoLib";
+    import void RegisterMenuItem(const string &in id, const string &in label, MenuIsOpen@ isOpen, MenuToggle@ toggle) from "SkillpackDemoLib";
+    import void UnregisterMenuItem(const string &in id) from "SkillpackDemoLib";
 }
