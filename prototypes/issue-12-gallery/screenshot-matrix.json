@@ -621,6 +621,96 @@
       "ui_scale": 1.0,
       "game_state": "main-menu",
       "frame": 120
+    },
+    {
+      "id": "chicane-typesetter-000",
+      "recipe": "chicane-typesetter",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "chicane-typesetter-030",
+      "recipe": "chicane-typesetter",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "chicane-typesetter-060",
+      "recipe": "chicane-typesetter",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "chicane-typesetter-090",
+      "recipe": "chicane-typesetter",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "chicane-typesetter-120",
+      "recipe": "chicane-typesetter",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
+    },
+    {
+      "id": "slipstream-loom-000",
+      "recipe": "slipstream-loom",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "slipstream-loom-030",
+      "recipe": "slipstream-loom",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "slipstream-loom-060",
+      "recipe": "slipstream-loom",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "slipstream-loom-090",
+      "recipe": "slipstream-loom",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "slipstream-loom-120",
+      "recipe": "slipstream-loom",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
     }
   ],
   "capture_evidence": [

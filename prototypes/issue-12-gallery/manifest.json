@@ -514,6 +514,72 @@
           "showcase-composition"
         ]
       }
+    },
+    {
+      "id": "chicane-typesetter",
+      "title": "Chicane typesetter",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/ChicaneTypesetter.as",
+      "namespace": "RecipeChicaneTypesetter",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/ChicaneTypesetter.as",
+        "note": "Independently reimagines the measured-typographic-motion thesis from the source inventory as type riding a racing line; gallery-owned line, wordmark, and palette with nothing copied."
+      },
+      "expected": "A wordmark surfs a painted racing line: each glyph is placed at its own arc offset with a tangent direction tick, alternating red/white kerb blocks flank the dashed center paint, and measured APEX flags mark the tightest kerbs as the text mass loops home at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
+    },
+    {
+      "id": "slipstream-loom",
+      "title": "Slipstream loom",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/SlipstreamLoom.as",
+      "namespace": "RecipeSlipstreamLoom",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/SlipstreamLoom.as",
+        "note": "Independently reimagines the layered-ribbon thesis from the source inventory as an interlaced slipstream weave; gallery-owned strands, weave order, and palette with nothing copied."
+      },
+      "expected": "Four draft-trail ribbons braid through faint warp guides: every segment is drawn back-to-front from a physically consistent weave order so crossings interlace, three-stroke bodies carry shadow, body, and spine, and crossing knots mark each change of the front ribbon as the weave slides home at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
     }
   ]
 }
