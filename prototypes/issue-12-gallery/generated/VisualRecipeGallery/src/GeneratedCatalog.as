@@ -22,6 +22,8 @@ RecipeMeta@[] g_recipes = {
     RecipeMeta("apex-envelope", "Apex envelope", GalleryTier::Advanced, true, true, "candidate-static-only", "A restrained carbon instrument horizon maps steering load into a narrowing teal safety envelope; an ivory marker crosses the threshold into a burnt-sienna overslip wedge while compact SIDE, TARGET, and MARGIN readouts preserve calibrated hierarchy.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/ApexEnvelope.as · independent-reimplementation", {0, 30, 60, 90, 120}),
     RecipeMeta("strategy-switchboard", "Strategy switchboard", GalleryTier::Advanced, true, true, "candidate-static-only", "A slate pit-wall decision matrix carries four route cells around a physical toggle rail; the weighted lever and measured directive plate travel PUSH, BALANCED, CONSERVE, OVERTAKE as the frame story advances, closing the loop at frame 120.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/StrategySwitchboard.as · independent-reimplementation", {0, 30, 60, 90, 120}),
     RecipeMeta("trajectory-orrery", "Trajectory orrery", GalleryTier::Advanced, true, true, "candidate-static-only", "A void-dark orbital instrument projects five tilted rings around a warm primary; each ring splits into a dim far stroke, a dashed guide, and a bright doubled near stroke while bodies grow, brighten, and trail as they cross the near rim, closing the loop at frame 120.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/TrajectoryOrrery.as · independent-reimplementation", {0, 30, 60, 90, 120}),
+    RecipeMeta("altitude-ledger", "Altitude ledger", GalleryTier::Advanced, true, true, "candidate-static-only", "A parchment hill-climb ledger reduces six climbers to one elevation axis: the hero diamond and rival rings rise and shuffle while collision-managed rank rows keep every tag legible, falling riders earn a down tick, and the loop closes at frame 120.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/AltitudeLedger.as · independent-reimplementation", {0, 30, 60, 90, 120}),
+    RecipeMeta("ghost-delta-cartogram", "Ghost delta cartogram", GalleryTier::Advanced, true, true, "candidate-static-only", "A deep-sea route ring carries a signed gain/loss field whose segments widen and glow green or sienna with magnitude; six sector gates report state, a ghost marker trails the pulsing live tracer by nine points, and a measured plate reads the average delta.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/GhostDeltaCartogram.as · independent-reimplementation", {0, 30, 60, 90, 120}),
 };
 
 void DrawRecipeByIndex(int index, int captureFrame) {
@@ -38,4 +40,6 @@ void DrawRecipeByIndex(int index, int captureFrame) {
     else if (index == 10) RecipeApexEnvelope::DrawPanel(captureFrame);
     else if (index == 11) RecipeStrategySwitchboard::DrawPanel(captureFrame);
     else if (index == 12) RecipeTrajectoryOrrery::DrawPanel(captureFrame);
+    else if (index == 13) RecipeAltitudeLedger::DrawPanel(captureFrame);
+    else if (index == 14) RecipeGhostDeltaCartogram::DrawPanel(captureFrame);
 }

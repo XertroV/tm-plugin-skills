@@ -441,6 +441,96 @@
       "ui_scale": 1.0,
       "game_state": "main-menu",
       "frame": 120
+    },
+    {
+      "id": "altitude-ledger-000",
+      "recipe": "altitude-ledger",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "altitude-ledger-030",
+      "recipe": "altitude-ledger",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "altitude-ledger-060",
+      "recipe": "altitude-ledger",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "altitude-ledger-090",
+      "recipe": "altitude-ledger",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "altitude-ledger-120",
+      "recipe": "altitude-ledger",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
+    },
+    {
+      "id": "ghost-delta-cartogram-000",
+      "recipe": "ghost-delta-cartogram",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "ghost-delta-cartogram-030",
+      "recipe": "ghost-delta-cartogram",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "ghost-delta-cartogram-060",
+      "recipe": "ghost-delta-cartogram",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "ghost-delta-cartogram-090",
+      "recipe": "ghost-delta-cartogram",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "ghost-delta-cartogram-120",
+      "recipe": "ghost-delta-cartogram",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
     }
   ],
   "capture_evidence": [
