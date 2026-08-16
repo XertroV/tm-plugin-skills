@@ -46,7 +46,7 @@ namespace RecipeChicaneTypesetter {
         float phase = Phase(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
         vec2 available = UI::GetContentRegionAvail();
-        vec2 size = vec2(Math::Max(470.0f, available.x - 8.0f), 290.0f);
+        vec2 size = vec2(Math::Max(440.0f, available.x - 16.0f), 290.0f);
         vec2 max = pos + size;
         vec2 origin = pos + vec2(30.0f, 56.0f);
         vec2 field = vec2(size.x - 60.0f, size.y - 126.0f);
@@ -72,7 +72,7 @@ namespace RecipeChicaneTypesetter {
         dl.AddText(vec2(pos.x + 26.0f, pos.y + 16.0f), typeInk, "CHICANE TYPESETTER");
         UI::PopFontSize();
         UI::PopFont();
-        string sector = "SECTOR OF THE DAY · T7–T9";
+        string sector = "SECTOR · T7–T9";
         vec2 sectorSize = UI::MeasureString(sector);
         dl.AddText(vec2(max.x - 26.0f - sectorSize.x, pos.y + 22.0f), quiet, sector);
 

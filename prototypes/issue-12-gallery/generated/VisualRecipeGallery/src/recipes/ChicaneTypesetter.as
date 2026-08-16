@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=83aeb452619359e19fbec5dc7cc35b8a4c24bf4fba72b5cc86f4f9c4c739b57e source=recipes/ChicaneTypesetter.as
+// GENERATED COPY sha256=e1d486f5d8d5f1112f463c83fc33847de5bc2bebdc53145fcddd8f2056904d14 source=recipes/ChicaneTypesetter.as
 namespace RecipeChicaneTypesetter {
     int clipDepth = 0;
 
@@ -47,7 +47,7 @@ namespace RecipeChicaneTypesetter {
         float phase = Phase(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
         vec2 available = UI::GetContentRegionAvail();
-        vec2 size = vec2(Math::Max(470.0f, available.x - 8.0f), 290.0f);
+        vec2 size = vec2(Math::Max(440.0f, available.x - 16.0f), 290.0f);
         vec2 max = pos + size;
         vec2 origin = pos + vec2(30.0f, 56.0f);
         vec2 field = vec2(size.x - 60.0f, size.y - 126.0f);
@@ -73,7 +73,7 @@ namespace RecipeChicaneTypesetter {
         dl.AddText(vec2(pos.x + 26.0f, pos.y + 16.0f), typeInk, "CHICANE TYPESETTER");
         UI::PopFontSize();
         UI::PopFont();
-        string sector = "SECTOR OF THE DAY · T7–T9";
+        string sector = "SECTOR · T7–T9";
         vec2 sectorSize = UI::MeasureString(sector);
         dl.AddText(vec2(max.x - 26.0f - sectorSize.x, pos.y + 22.0f), quiet, sector);
 

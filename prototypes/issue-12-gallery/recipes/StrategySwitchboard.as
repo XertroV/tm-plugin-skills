@@ -55,7 +55,7 @@ namespace RecipeStrategySwitchboard {
         int selected = SelectedRoute(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
         vec2 available = UI::GetContentRegionAvail();
-        vec2 size = vec2(Math::Max(460.0f, available.x - 8.0f), 300.0f);
+        vec2 size = vec2(Math::Max(430.0f, available.x - 16.0f), 300.0f);
         vec2 max = pos + size;
         UI::Dummy(size);
 
@@ -75,7 +75,7 @@ namespace RecipeStrategySwitchboard {
         dl.AddText(vec2(pos.x + 30.0f, pos.y + 20.0f), bone, "STRATEGY SWITCHBOARD");
         UI::PopFontSize();
         UI::PopFont();
-        string windowLabel = "PIT WINDOW  L14–L17";
+        string windowLabel = "PIT  L14–L17";
         vec2 windowSize = UI::MeasureString(windowLabel);
         dl.AddText(vec2(max.x - 30.0f - windowSize.x, pos.y + 26.0f), quiet, windowLabel);
         dl.AddLine(vec2(pos.x + 30.0f, pos.y + 52.0f), vec2(max.x - 30.0f, pos.y + 52.0f), vec4(bone.x, bone.y, bone.z, 0.16f), 1.0f);
@@ -86,7 +86,7 @@ namespace RecipeStrategySwitchboard {
         float gridW = size.x - 60.0f;
         float cellGap = 10.0f;
         float cellW = (gridW - cellGap) * 0.5f;
-        float cellH = 74.0f;
+        float cellH = 66.0f;
         for (int route = 0; route < 4; route++) {
             float cx = gridLeft + float(route % 2) * (cellW + cellGap);
             float cy = gridTop + float(route / 2) * (cellH + cellGap);
@@ -104,7 +104,7 @@ namespace RecipeStrategySwitchboard {
         }
 
         // Toggle rail below the matrix: a weighted lever rests on the live route.
-        float railY = gridTop + cellH * 2.0f + cellGap + 34.0f;
+        float railY = gridTop + cellH * 2.0f + cellGap + 22.0f;
         float railLeft = gridLeft + 12.0f;
         float railRight = gridLeft + gridW - 12.0f;
         dl.AddLine(vec2(railLeft, railY), vec2(railRight, railY), vec4(bone.x, bone.y, bone.z, 0.22f), 3.0f);
@@ -120,8 +120,10 @@ namespace RecipeStrategySwitchboard {
             }
         }
 
-        // Directive plate: the selected route read out in measured type.
-        float plateY = railY + 26.0f;
+        // Directive plate: the selected route read out in measured type. Keep
+        // it clear of both the rail above and the panel's bottom edge so it
+        // never sits in the footer strip.
+        float plateY = railY + 18.0f;
         string directive = RouteName(selected) + "  —  " + RouteDirective(selected);
         vec2 directiveSize = UI::MeasureString(directive);
         vec2 plateMin = vec2((pos.x + max.x) * 0.5f - directiveSize.x * 0.5f - 18.0f, plateY - 6.0f);

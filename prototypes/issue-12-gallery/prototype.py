@@ -251,6 +251,16 @@ Json::Value@ GalleryCaptureDispatch(const string &in name, Json::Value &in input
         g_windowOpen = !input.HasKey("open") || bool(input["open"]);
         return GalleryCaptureOk(GalleryCaptureState());
     }
+    if (name == "PinWindow") {
+        // Move the gallery to a known anchor for deterministic capture. The
+        // position is applied next frame via SetNextWindowPos(Always).
+        g_pinWindow = true;
+        g_pinPos = vec2(
+            input.HasKey("x") ? float(input["x"]) : 40.0f,
+            input.HasKey("y") ? float(input["y"]) : 60.0f
+        );
+        return GalleryCaptureOk(GalleryCaptureState());
+    }
     return GalleryCaptureErr("unknown gallery capture tool: " + name);
 }
 
@@ -265,6 +275,7 @@ void RegisterGalleryCapturePack() {
     b.AddTool("SelectRecipe", "Select a gallery recipe by id and pause animation.", '{"type":"object","properties":{"id":{"type":"string"}},"required":["id"],"additionalProperties":false}');
     b.AddTool("SetFrame", "Pin the deterministic capture frame; {frame:int, playing?:bool}.", '{"type":"object","properties":{"frame":{"type":"integer"},"playing":{"type":"boolean"}},"required":["frame"],"additionalProperties":false}');
     b.AddTool("SetWindowOpen", "Open or close the gallery window; {open?:bool default true}.", '{"type":"object","properties":{"open":{"type":"boolean"}},"additionalProperties":false}');
+    b.AddTool("PinWindow", "Pin the gallery window to a known anchor for deterministic capture; {x?:float, y?:float}.", '{"type":"object","properties":{"x":{"type":"number"},"y":{"type":"number"}},"additionalProperties":false}');
     b.SetDispatch(GalleryCaptureDispatch);
     TmMcp::RegisterToolPack(b);
 }
@@ -290,11 +301,16 @@ void Render() {
 
 vec2 g_lastWindowPos = vec2(0.0f, 0.0f);
 vec2 g_lastWindowSize = vec2(0.0f, 0.0f);
+bool g_pinWindow = false;
+vec2 g_pinPos = vec2(40.0f, 60.0f);
 
 void DrawGalleryWindow() {
     if (!g_windowOpen) return;
-    UI::SetNextWindowSize(1180, 900, UI::Cond::FirstUseEver);
-    UI::SetNextWindowSizeConstraints(900, 650, 1800, 1200);
+    if (g_pinWindow) {
+        UI::SetNextWindowPos(int(g_pinPos.x), int(g_pinPos.y), UI::Cond::Always);
+    }
+    UI::SetNextWindowSize(1280, 900, UI::Cond::FirstUseEver);
+    UI::SetNextWindowSizeConstraints(1000, 650, 1800, 1200);
     if (UI::Begin("Visual Recipe Gallery PROTOTYPE###skillpack-demo-gallery", g_windowOpen)) {
         g_lastWindowPos = UI::GetWindowPos();
         g_lastWindowSize = UI::GetWindowSize();
@@ -318,7 +334,7 @@ void DrawGallery() {
 
 void DrawNavigation() {
     UI::BeginTabBar("gallery-curation-tabs");
-        if (UI::BeginTabItem("Featured")) {
+    if (UI::BeginTabItem("Featured")) {
             DrawNavigationForCuration(true);
             UI::EndTabItem();
         }

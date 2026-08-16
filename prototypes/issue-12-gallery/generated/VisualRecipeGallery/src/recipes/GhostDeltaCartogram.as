@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=773eaa2117907a156143179f69838d86edf41e10d8bc64aa03a43895fe8cb7bc source=recipes/GhostDeltaCartogram.as
+// GENERATED COPY sha256=d47dc7b9ba6a172c8e3a76bfe93fa379dbb8aaa8f21794a06b57b96288e03e6a source=recipes/GhostDeltaCartogram.as
 namespace RecipeGhostDeltaCartogram {
     int clipDepth = 0;
 
@@ -56,7 +56,7 @@ namespace RecipeGhostDeltaCartogram {
         float phase = Phase(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
         vec2 available = UI::GetContentRegionAvail();
-        vec2 size = vec2(Math::Max(460.0f, available.x - 8.0f), 310.0f);
+        vec2 size = vec2(Math::Max(430.0f, available.x - 16.0f), 310.0f);
         vec2 max = pos + size;
         vec2 center = pos + size * 0.5f + vec2(0.0f, 6.0f);
         float unit = Math::Min(size.x, size.y) * 0.46f;
@@ -78,7 +78,7 @@ namespace RecipeGhostDeltaCartogram {
         dl.AddText(vec2(pos.x + 26.0f, pos.y + 18.0f), foam, "GHOST DELTA CARTOGRAM");
         UI::PopFontSize();
         UI::PopFont();
-        string session = "SESSION BEST vs GHOST · ±0.40 S";
+        string session = "BEST vs GHOST";
         vec2 sessionSize = UI::MeasureString(session);
         dl.AddText(vec2(max.x - 26.0f - sessionSize.x, pos.y + 24.0f), quiet, session);
 

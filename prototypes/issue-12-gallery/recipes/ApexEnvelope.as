@@ -60,7 +60,7 @@ namespace RecipeApexEnvelope {
         vec2 available = UI::GetContentRegionAvail();
         // The calibrated composition intentionally uses a wide layout. The gallery
         // enforces a matching minimum; 450 also keeps independent embeds honest.
-        vec2 size = vec2(Math::Max(450.0f, available.x - 8.0f), 300.0f);
+        vec2 size = vec2(Math::Max(430.0f, available.x - 16.0f), 300.0f);
         vec2 max = pos + size;
         UI::Dummy(size);
 

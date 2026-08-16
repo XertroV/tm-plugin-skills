@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=92cccbe173a4bef3de0aa8e87c87a0d406785893300791a00058105c2c4dcfce source=recipes/ApexEnvelope.as
+// GENERATED COPY sha256=800632b422b1abd08a36390ed9b30fa465376f4f6fc0013dfb8eb618284d612e source=recipes/ApexEnvelope.as
 namespace RecipeApexEnvelope {
     int clipDepth = 0;
 
@@ -61,7 +61,7 @@ namespace RecipeApexEnvelope {
         vec2 available = UI::GetContentRegionAvail();
         // The calibrated composition intentionally uses a wide layout. The gallery
         // enforces a matching minimum; 450 also keeps independent embeds honest.
-        vec2 size = vec2(Math::Max(450.0f, available.x - 8.0f), 300.0f);
+        vec2 size = vec2(Math::Max(430.0f, available.x - 16.0f), 300.0f);
         vec2 max = pos + size;
         UI::Dummy(size);
 

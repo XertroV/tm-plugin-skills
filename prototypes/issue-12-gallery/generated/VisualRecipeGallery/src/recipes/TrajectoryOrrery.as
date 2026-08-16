@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=af13b93c5c6bc4b069a12490498c7589080e9f25c35201a8a34a28fc52c82b4e source=recipes/TrajectoryOrrery.as
+// GENERATED COPY sha256=2afcb4726ab878a725acd6aacf7f6b3fd1b31a869c79a9c7846156519b291214 source=recipes/TrajectoryOrrery.as
 namespace RecipeTrajectoryOrrery {
     int clipDepth = 0;
 
@@ -49,7 +49,7 @@ namespace RecipeTrajectoryOrrery {
         float phase = Phase(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
         vec2 available = UI::GetContentRegionAvail();
-        vec2 size = vec2(Math::Max(460.0f, available.x - 8.0f), 310.0f);
+        vec2 size = vec2(Math::Max(430.0f, available.x - 16.0f), 310.0f);
         vec2 max = pos + size;
         vec2 center = pos + size * 0.5f;
         float unit = Math::Min(size.x, size.y) * 0.46f;
@@ -78,28 +78,36 @@ namespace RecipeTrajectoryOrrery {
             dl.AddLine(t0, t1, vec4(starlight.x, starlight.y, starlight.z, tick % 6 == 0 ? 0.40f : 0.18f), 1.0f);
         }
 
-        // Rings: far half first (dim, thin), then the primary, then near half
-        // (bright, thick) — the split stroke sells depth without real 3D.
-        for (int pass = 0; pass < 3; pass++) {
-            for (int body = 0; body < 5; body++) {
-                float tilt = 0.42f + float(body % 3) * 0.17f;
-                float radius = 0.38f + float(body) * 0.115f;
-                vec4 ringColor = body == 0 ? comet : quiet;
-                float alpha = pass == 1 ? 0.34f : (pass == 0 ? 0.10f : 0.62f);
-                float thick = pass == 1 ? 1.0f : (pass == 0 ? 1.0f : 2.0f);
-                ringColor.w = alpha;
-                int segments = 72;
-                for (int s = 0; s < segments; s++) {
-                    float a0 = float(s) / float(segments) * Math::PI * 2.0f;
-                    float a1 = float(s + 1) / float(segments) * Math::PI * 2.0f;
-                    float zMid = Math::Sin((a0 + a1) * 0.5f) * Math::Sin(tilt);
-                    bool near = zMid >= 0.0f;
-                    if (pass == 0 && near) continue;   // far pass skips near rim
-                    if (pass == 2 && !near) continue;  // near pass skips far rim
-                    if (pass == 1 && s % 2 == 1) continue; // primary is dashed
-                    vec2 p0 = center + vec2(Math::Cos(a0) * radius, Math::Sin(a0) * radius * Math::Cos(tilt)) * unit;
-                    vec2 p1 = center + vec2(Math::Cos(a1) * radius, Math::Sin(a1) * radius * Math::Cos(tilt)) * unit;
-                    dl.AddLine(p0, p1, ringColor, thick);
+        // Rings: for each ring we walk the segments once, computing position
+        // and the near/far split a single time, then emit the far stroke, the
+        // dashed guide, and the near stroke for that segment — the split-depth
+        // read without tripling the trig. Draw order (far, guide, near) keeps
+        // the near stroke visually on top.
+        int segments = 72;
+        for (int body = 0; body < 5; body++) {
+            float tilt = 0.42f + float(body % 3) * 0.17f;
+            float radius = 0.38f + float(body) * 0.115f;
+            float cosTilt = Math::Cos(tilt);
+            float sinTilt = Math::Sin(tilt);
+            vec4 base = body == 0 ? comet : quiet;
+            for (int s = 0; s < segments; s++) {
+                float a0 = float(s) / float(segments) * Math::PI * 2.0f;
+                float a1 = float(s + 1) / float(segments) * Math::PI * 2.0f;
+                float zMid = Math::Sin((a0 + a1) * 0.5f) * sinTilt;
+                bool near = zMid >= 0.0f;
+                vec2 p0 = center + vec2(Math::Cos(a0) * radius, Math::Sin(a0) * radius * cosTilt) * unit;
+                vec2 p1 = center + vec2(Math::Cos(a1) * radius, Math::Sin(a1) * radius * cosTilt) * unit;
+                if (!near) {
+                    vec4 far = base; far.w = 0.10f;
+                    dl.AddLine(p0, p1, far, 1.0f);
+                }
+                if (s % 2 == 0) {
+                    vec4 guide = base; guide.w = 0.34f;
+                    dl.AddLine(p0, p1, guide, 1.0f);
+                }
+                if (near) {
+                    vec4 nearC = base; nearC.w = 0.62f;
+                    dl.AddLine(p0, p1, nearC, 2.0f);
                 }
             }
         }

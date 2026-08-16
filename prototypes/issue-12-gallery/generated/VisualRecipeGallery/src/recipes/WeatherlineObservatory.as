@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=8d22c6780a1225c04c6855ec56c94c913f799c72bf655fddff30fe436c70800f source=recipes/WeatherlineObservatory.as
+// GENERATED COPY sha256=8329e533cc10f6f414e651c3a84c5390abd9bf976633cabda5da1e3ea1c6eed4 source=recipes/WeatherlineObservatory.as
 namespace RecipeWeatherlineObservatory {
     int clipDepth = 0;
 
@@ -57,7 +57,7 @@ namespace RecipeWeatherlineObservatory {
         float phase = Phase(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
         vec2 available = UI::GetContentRegionAvail();
-        vec2 size = vec2(Math::Max(470.0f, available.x - 8.0f), 300.0f);
+        vec2 size = vec2(Math::Max(440.0f, available.x - 16.0f), 300.0f);
         vec2 max = pos + size;
         vec2 origin = pos + vec2(30.0f, 52.0f);
         vec2 field = vec2(size.x - 60.0f, size.y - 116.0f);
@@ -82,7 +82,7 @@ namespace RecipeWeatherlineObservatory {
         dl.AddText(vec2(pos.x + 26.0f, pos.y + 16.0f), ink, "WEATHERLINE OBSERVATORY");
         UI::PopFontSize();
         UI::PopFont();
-        string obs = "PRESSURE FIELD " + Text::Format("%03d", captureFrame) + " / 120";
+        string obs = "FIELD " + Text::Format("%03d", captureFrame) + "/120";
         vec2 obsSize = UI::MeasureString(obs);
         dl.AddText(vec2(max.x - 26.0f - obsSize.x, pos.y + 22.0f), quiet, obs);
 
@@ -96,10 +96,18 @@ namespace RecipeWeatherlineObservatory {
             dl.AddLine(vec2(origin.x, y), vec2(origin.x + field.x, y), vec4(ink.x, ink.y, ink.z, 0.08f), 1.0f);
         }
 
-        // Contours: marching-squares line segments per level; the bold middle
-        // level reads as the primary isobar.
+        // Contours: marching-squares line segments per level. The pressure grid
+        // is evaluated ONCE per frame into a cache, then every contour level
+        // classifies from the cache — this keeps the per-frame trig count at
+        // GridW*GridH instead of (GridW*GridH*4*ContourCount).
         float cellW = field.x / float(GridW() - 1);
         float cellH = field.y / float(GridH() - 1);
+        float[] pressureCache(uint(GridW() * GridH()), 0.0f);
+        for (int gy = 0; gy < GridH(); gy++) {
+            for (int gx = 0; gx < GridW(); gx++) {
+                pressureCache[uint(gy * GridW() + gx)] = Pressure(gx, gy, phase);
+            }
+        }
         for (int contour = 0; contour < ContourCount(); contour++) {
             float level = ContourLevel(contour);
             bool bold = contour == ContourCount() / 2;
@@ -108,7 +116,11 @@ namespace RecipeWeatherlineObservatory {
             float thick = bold ? 2.2f : 1.0f;
             for (int gy = 0; gy + 1 < GridH(); gy++) {
                 for (int gx = 0; gx + 1 < GridW(); gx++) {
-                    int mask = CellMask(gx, gy, level, phase);
+                    int mask = 0;
+                    if (pressureCache[uint(gy * GridW() + gx)] > level) mask |= 1;
+                    if (pressureCache[uint(gy * GridW() + gx + 1)] > level) mask |= 2;
+                    if (pressureCache[uint((gy + 1) * GridW() + gx + 1)] > level) mask |= 4;
+                    if (pressureCache[uint((gy + 1) * GridW() + gx)] > level) mask |= 8;
                     if (mask == 0 || mask == 15) continue;
                     vec2 c00 = origin + vec2(float(gx) * cellW, float(gy) * cellH);
                     vec2 c10 = c00 + vec2(cellW, 0.0f);

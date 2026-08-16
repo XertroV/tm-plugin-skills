@@ -100,7 +100,7 @@ class GalleryCurationTests(unittest.TestCase):
         source = (GALLERY / recipe["source"]).read_text(encoding="utf-8")
         for signature in ("MarkerPosition", "SafeHalfWidth", "MARGIN", "OVERSLIP"):
             self.assertIn(signature, source)
-        self.assertIn("Math::Max(450.0f, available.x - 8.0f)", source)
+        self.assertIn("Math::Max(430.0f, available.x - 16.0f)", source)
         test_path = GALLERY / recipe["source"]
         test_source = test_path.with_name(test_path.stem + "_Test.as").read_text(
             encoding="utf-8"

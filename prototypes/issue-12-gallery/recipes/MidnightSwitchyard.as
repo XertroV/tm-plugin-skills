@@ -77,7 +77,7 @@ namespace RecipeMidnightSwitchyard {
         float phase = Phase(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
         vec2 available = UI::GetContentRegionAvail();
-        vec2 size = vec2(Math::Max(470.0f, available.x - 8.0f), 300.0f);
+        vec2 size = vec2(Math::Max(440.0f, available.x - 16.0f), 300.0f);
         vec2 max = pos + size;
         vec2 origin = pos + vec2(26.0f, 44.0f);
         vec2 field = vec2(size.x - 52.0f, size.y - 104.0f);
@@ -101,7 +101,7 @@ namespace RecipeMidnightSwitchyard {
         dl.AddText(vec2(pos.x + 26.0f, pos.y + 16.0f), rail, "MIDNIGHT SWITCHYARD");
         UI::PopFontSize();
         UI::PopFont();
-        string clock = "SIGNAL WAVE " + Text::Format("%03d", captureFrame) + " / 120";
+        string clock = "WAVE " + Text::Format("%03d", captureFrame) + "/120";
         vec2 clockSize = UI::MeasureString(clock);
         dl.AddText(vec2(max.x - 26.0f - clockSize.x, pos.y + 22.0f), quiet, clock);
 

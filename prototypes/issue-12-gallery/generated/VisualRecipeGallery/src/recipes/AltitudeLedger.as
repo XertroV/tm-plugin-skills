@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=9f2f0070c271b669e1d7301895e2a1e23b9ace4e10b1786102051d01c3a205d4 source=recipes/AltitudeLedger.as
+// GENERATED COPY sha256=56495dcbcc58b1d25711aaef39e44b425ca4d64b3951a34cd7ea65b15b4f62a8 source=recipes/AltitudeLedger.as
 namespace RecipeAltitudeLedger {
     int clipDepth = 0;
 
@@ -67,7 +67,7 @@ namespace RecipeAltitudeLedger {
         float phase = Phase(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
         vec2 available = UI::GetContentRegionAvail();
-        vec2 size = vec2(Math::Max(420.0f, available.x - 8.0f), 320.0f);
+        vec2 size = vec2(Math::Max(400.0f, available.x - 16.0f), 320.0f);
         vec2 max = pos + size;
         UI::Dummy(size);
 
@@ -90,7 +90,7 @@ namespace RecipeAltitudeLedger {
         dl.AddText(vec2(pos.x + 28.0f, pos.y + 18.0f), ink, "ALTITUDE LEDGER");
         UI::PopFontSize();
         UI::PopFont();
-        string course = "CORKSCREW HILL CLIMB · 412 M";
+        string course = "HILL CLIMB · 412 M";
         vec2 courseSize = UI::MeasureString(course);
         dl.AddText(vec2(max.x - 26.0f - courseSize.x, pos.y + 24.0f), quietInk, course);
 
@@ -145,8 +145,10 @@ namespace RecipeAltitudeLedger {
                     accent
                 );
             } else {
-                dl.AddCircleFilled(vec2(ladderX, markerY), 5.5f, vec4(accent.x, accent.y, accent.z, 0.25f), 20);
-                dl.AddCircleFilled(vec2(ladderX, markerY), 3.0f, accent, 20);
+                // Hollow ring: a colored rim with a dark punched center so
+                // rivals read as rings, not filled discs.
+                dl.AddCircleFilled(vec2(ladderX, markerY), 5.0f, accent, 20);
+                dl.AddCircleFilled(vec2(ladderX, markerY), 2.8f, parchment, 20);
             }
             if (falling) {
                 dl.AddLine(vec2(ladderX - 8.0f, markerY + 8.0f), vec2(ladderX - 8.0f, markerY + 15.0f), fallingAccent, 2.0f);
