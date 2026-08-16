@@ -15,10 +15,105 @@ void ToggleGalleryMenu() { g_windowOpen = !g_windowOpen; }
 
 void Main() {
     SkillpackDemoLib::RegisterMenuItem("visual-recipe-gallery", "Visual Recipe Gallery PROTOTYPE", GalleryMenuIsOpen, ToggleGalleryMenu);
+    RegisterGalleryCapturePack();
 }
 
 void OnDestroyed() {
     SkillpackDemoLib::UnregisterMenuItem("visual-recipe-gallery");
+    UnregisterGalleryCapturePack();
+}
+
+void OnEnabled() {
+    RegisterGalleryCapturePack();
+}
+
+void OnDisabled() {
+    UnregisterGalleryCapturePack();
+}
+
+// Live-capture bridge: lets the local tm-control-mcp bridge select recipes,
+// pin deterministic frames, and report window geometry for screenshot review.
+// Registrations are removed on disable/teardown so reloads never go stale.
+string g_capturePackId = "";
+
+Json::Value@ GalleryCaptureOk(Json::Value@ output) {
+    Json::Value r = Json::Object();
+    r["success"] = true;
+    r["output"] = output;
+    return r;
+}
+
+Json::Value@ GalleryCaptureErr(const string &in msg) {
+    Json::Value r = Json::Object();
+    r["success"] = false;
+    r["error"] = msg;
+    return r;
+}
+
+Json::Value@ GalleryCaptureState() {
+    Json::Value o = Json::Object();
+    o["windowOpen"] = g_windowOpen;
+    o["selectedIndex"] = g_selectedRecipe;
+    o["captureFrame"] = g_captureFrame;
+    o["animationPlaying"] = g_animationPlaying;
+    if (g_selectedRecipe >= 0 && g_selectedRecipe < int(g_recipes.Length)) {
+        o["recipe"] = g_recipes[g_selectedRecipe].Id;
+    }
+    Json::Value ids = Json::Array();
+    for (uint i = 0; i < g_recipes.Length; i++) ids.Add(g_recipes[i].Id);
+    o["recipes"] = ids;
+    o["windowPos"] = g_lastWindowPos.x + "," + g_lastWindowPos.y;
+    o["windowSize"] = g_lastWindowSize.x + "," + g_lastWindowSize.y;
+    return o;
+}
+
+Json::Value@ GalleryCaptureDispatch(const string &in name, Json::Value &in input) {
+    if (name == "GetState") return GalleryCaptureOk(GalleryCaptureState());
+    if (name == "SelectRecipe") {
+        string id = input.HasKey("id") ? string(input["id"]) : "";
+        for (uint i = 0; i < g_recipes.Length; i++) {
+            if (g_recipes[i].Id == id) {
+                g_selectedRecipe = int(i);
+                g_animationPlaying = false;
+                return GalleryCaptureOk(GalleryCaptureState());
+            }
+        }
+        return GalleryCaptureErr("unknown recipe id: " + id);
+    }
+    if (name == "SetFrame") {
+        if (!input.HasKey("frame")) return GalleryCaptureErr("SetFrame requires {frame}");
+        g_captureFrame = int(input["frame"]);
+        g_animationPlaying = input.HasKey("playing") ? bool(input["playing"]) : false;
+        g_lastAnimationTick = 0;
+        return GalleryCaptureOk(GalleryCaptureState());
+    }
+    if (name == "SetWindowOpen") {
+        g_windowOpen = !input.HasKey("open") || bool(input["open"]);
+        return GalleryCaptureOk(GalleryCaptureState());
+    }
+    return GalleryCaptureErr("unknown gallery capture tool: " + name);
+}
+
+void RegisterGalleryCapturePack() {
+    auto plugin = Meta::ExecutingPlugin();
+    if (plugin is null) return;
+    auto tmMcp = Meta::GetPluginFromID("tm-control-mcp");
+    if (tmMcp is null || !tmMcp.Enabled) return; // bridge absent: gallery still works by hand
+    g_capturePackId = plugin.ID;
+    auto b = TmMcp::ToolPackBuilder();
+    b.AddTool("GetState", "Gallery capture state: window, selection, frame, geometry.", '{"type":"object","properties":{},"additionalProperties":false}');
+    b.AddTool("SelectRecipe", "Select a gallery recipe by id and pause animation.", '{"type":"object","properties":{"id":{"type":"string"}},"required":["id"],"additionalProperties":false}');
+    b.AddTool("SetFrame", "Pin the deterministic capture frame; {frame:int, playing?:bool}.", '{"type":"object","properties":{"frame":{"type":"integer"},"playing":{"type":"boolean"}},"required":["frame"],"additionalProperties":false}');
+    b.AddTool("SetWindowOpen", "Open or close the gallery window; {open?:bool default true}.", '{"type":"object","properties":{"open":{"type":"boolean"}},"additionalProperties":false}');
+    b.SetDispatch(GalleryCaptureDispatch);
+    TmMcp::RegisterToolPack(b);
+}
+
+void UnregisterGalleryCapturePack() {
+    if (g_capturePackId.Length == 0) return;
+    auto tmMcp = Meta::GetPluginFromID("tm-control-mcp");
+    if (tmMcp !is null) TmMcp::UnregisterToolPack(g_capturePackId);
+    g_capturePackId = "";
 }
 
 void RenderInterface() {
@@ -33,11 +128,18 @@ void Render() {
     DrawGalleryWindow();
 }
 
+vec2 g_lastWindowPos = vec2(0.0f, 0.0f);
+vec2 g_lastWindowSize = vec2(0.0f, 0.0f);
+
 void DrawGalleryWindow() {
     if (!g_windowOpen) return;
     UI::SetNextWindowSize(1180, 900, UI::Cond::FirstUseEver);
     UI::SetNextWindowSizeConstraints(900, 650, 1800, 1200);
-    if (UI::Begin("Visual Recipe Gallery PROTOTYPE###skillpack-demo-gallery", g_windowOpen)) DrawGallery();
+    if (UI::Begin("Visual Recipe Gallery PROTOTYPE###skillpack-demo-gallery", g_windowOpen)) {
+        g_lastWindowPos = UI::GetWindowPos();
+        g_lastWindowSize = UI::GetWindowSize();
+        DrawGallery();
+    }
     UI::End();
 }
 

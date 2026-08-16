@@ -20,6 +20,8 @@ RecipeMeta@[] g_recipes = {
     RecipeMeta("spectral-relay-typography", "Spectral relay typography", GalleryTier::Advanced, true, true, "candidate-static-only", "Two counter-propagating spectral signals race through a monumental CHECKPOINT RELAY wordmark while lane traces, phase markers, and an interference bloom reveal the deterministic collision point; the composition remains legible and dramatic in every frozen frame.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/SpectralRelayTypography.as · independent-reimplementation", {0, 30, 60, 90, 120}),
     RecipeMeta("split-monument", "Split monument", GalleryTier::Advanced, true, true, "candidate-static-only", "An asymmetrical limestone result plate balances a monumental clipped 01 against a precision split ledger; sector emphasis travels through the ledger while a measured NEW BEST lozenge interrupts the baseline rule without disturbing the static hero composition.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/SplitMonument.as · independent-reimplementation", {0, 30, 60, 90, 120}),
     RecipeMeta("apex-envelope", "Apex envelope", GalleryTier::Advanced, true, true, "candidate-static-only", "A restrained carbon instrument horizon maps steering load into a narrowing teal safety envelope; an ivory marker crosses the threshold into a burnt-sienna overslip wedge while compact SIDE, TARGET, and MARGIN readouts preserve calibrated hierarchy.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/ApexEnvelope.as · independent-reimplementation", {0, 30, 60, 90, 120}),
+    RecipeMeta("strategy-switchboard", "Strategy switchboard", GalleryTier::Advanced, true, true, "candidate-static-only", "A slate pit-wall decision matrix carries four route cells around a physical toggle rail; the weighted lever and measured directive plate travel PUSH, BALANCED, CONSERVE, OVERTAKE as the frame story advances, closing the loop at frame 120.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/StrategySwitchboard.as · independent-reimplementation", {0, 30, 60, 90, 120}),
+    RecipeMeta("trajectory-orrery", "Trajectory orrery", GalleryTier::Advanced, true, true, "candidate-static-only", "A void-dark orbital instrument projects five tilted rings around a warm primary; each ring splits into a dim far stroke, a dashed guide, and a bright doubled near stroke while bodies grow, brighten, and trail as they cross the near rim, closing the loop at frame 120.", "XertroV/tm-plugin-skills · prototypes/issue-12-gallery/recipes/TrajectoryOrrery.as · independent-reimplementation", {0, 30, 60, 90, 120}),
 };
 
 void DrawRecipeByIndex(int index, int captureFrame) {
@@ -34,4 +36,6 @@ void DrawRecipeByIndex(int index, int captureFrame) {
     else if (index == 8) RecipeSpectralRelayTypography::DrawPanel(captureFrame);
     else if (index == 9) RecipeSplitMonument::DrawPanel(captureFrame);
     else if (index == 10) RecipeApexEnvelope::DrawPanel(captureFrame);
+    else if (index == 11) RecipeStrategySwitchboard::DrawPanel(captureFrame);
+    else if (index == 12) RecipeTrajectoryOrrery::DrawPanel(captureFrame);
 }

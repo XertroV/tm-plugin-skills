@@ -351,6 +351,96 @@
       "ui_scale": 1.0,
       "game_state": "main-menu",
       "frame": 120
+    },
+    {
+      "id": "strategy-switchboard-000",
+      "recipe": "strategy-switchboard",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "strategy-switchboard-030",
+      "recipe": "strategy-switchboard",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "strategy-switchboard-060",
+      "recipe": "strategy-switchboard",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "strategy-switchboard-090",
+      "recipe": "strategy-switchboard",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "strategy-switchboard-120",
+      "recipe": "strategy-switchboard",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
+    },
+    {
+      "id": "trajectory-orrery-000",
+      "recipe": "trajectory-orrery",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "trajectory-orrery-030",
+      "recipe": "trajectory-orrery",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "trajectory-orrery-060",
+      "recipe": "trajectory-orrery",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "trajectory-orrery-090",
+      "recipe": "trajectory-orrery",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "trajectory-orrery-120",
+      "recipe": "trajectory-orrery",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
     }
   ],
   "capture_evidence": [

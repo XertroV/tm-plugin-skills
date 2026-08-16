@@ -316,6 +316,72 @@
           "showcase-composition"
         ]
       }
+    },
+    {
+      "id": "strategy-switchboard",
+      "title": "Strategy switchboard",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/StrategySwitchboard.as",
+      "namespace": "RecipeStrategySwitchboard",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/StrategySwitchboard.as",
+        "note": "Independently reimagines the interactive-distribution and decision-matrix theses from the source inventory as a Trackmania pit-strategy control; no source, palette, or assets copied."
+      },
+      "expected": "A slate pit-wall decision matrix carries four route cells around a physical toggle rail; the weighted lever and measured directive plate travel PUSH, BALANCED, CONSERVE, OVERTAKE as the frame story advances, closing the loop at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
+    },
+    {
+      "id": "trajectory-orrery",
+      "title": "Trajectory orrery",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/TrajectoryOrrery.as",
+      "namespace": "RecipeTrajectoryOrrery",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/TrajectoryOrrery.as",
+        "note": "Clean-room pseudo-3D projection inspired only by the depth-aware gizmo thesis in the source inventory; gallery-owned projection math, palette, and composition with nothing copied."
+      },
+      "expected": "A void-dark orbital instrument projects five tilted rings around a warm primary; each ring splits into a dim far stroke, a dashed guide, and a bright doubled near stroke while bodies grow, brighten, and trail as they cross the near rim, closing the loop at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
     }
   ]
 }
