@@ -75,6 +75,7 @@ Json::Value@ GalleryCaptureDispatch(const string &in name, Json::Value &in input
             if (g_recipes[i].Id == id) {
                 g_selectedRecipe = int(i);
                 g_animationPlaying = false;
+                g_captureNavLock = true;
                 return GalleryCaptureOk(GalleryCaptureState());
             }
         }
@@ -143,6 +144,9 @@ vec2 g_lastWindowPos = vec2(0.0f, 0.0f);
 vec2 g_lastWindowSize = vec2(0.0f, 0.0f);
 bool g_pinWindow = false;
 vec2 g_pinPos = vec2(40.0f, 60.0f);
+// When the capture bridge selects a recipe by id, stop the nav tab from
+// re-clamping the selection to its own curation each frame.
+bool g_captureNavLock = false;
 
 void DrawGalleryWindow() {
     if (!g_windowOpen) return;
@@ -175,36 +179,40 @@ void DrawGallery() {
 void DrawNavigation() {
     UI::BeginTabBar("gallery-curation-tabs");
     if (UI::BeginTabItem("Featured")) {
-            DrawNavigationForCuration(true);
+            DrawNavigationForCuration(GalleryCuration::Featured);
             UI::EndTabItem();
         }
         if (UI::BeginTabItem("Boring")) {
-            DrawNavigationForCuration(false);
+            DrawNavigationForCuration(GalleryCuration::Boring);
+            UI::EndTabItem();
+        }
+        if (UI::BeginTabItem("Ornaments")) {
+            DrawNavigationForCuration(GalleryCuration::Ornaments);
             UI::EndTabItem();
         }
     UI::EndTabBar();
 }
 
-void DrawNavigationForCuration(bool featured) {
-    EnsureSelectionMatchesCuration(featured);
+void DrawNavigationForCuration(GalleryCuration curation) {
+    if (!g_captureNavLock) EnsureSelectionMatchesCuration(curation);
     GalleryTier lastTier = GalleryTier::Advanced;
     bool first = true;
     for (uint i = 0; i < g_recipes.Length; i++) {
         auto recipe = g_recipes[i];
-        if (recipe.IsFeatured != featured) continue;
+        if (recipe.Curation != curation) continue;
         if (first || recipe.Tier != lastTier) {
             UI::SeparatorText(TierName(recipe.Tier));
             lastTier = recipe.Tier; first = false;
         }
-        if (UI::Selectable(recipe.Title + "###recipe-" + recipe.Id, int(i) == g_selectedRecipe)) g_selectedRecipe = int(i);
+        if (UI::Selectable(recipe.Title + "###recipe-" + recipe.Id, int(i) == g_selectedRecipe)) { g_selectedRecipe = int(i); g_captureNavLock = false; }
     }
 }
 
-void EnsureSelectionMatchesCuration(bool featured) {
+void EnsureSelectionMatchesCuration(GalleryCuration curation) {
     if (g_selectedRecipe >= 0 && g_selectedRecipe < int(g_recipes.Length)
-            && g_recipes[g_selectedRecipe].IsFeatured == featured) return;
+            && g_recipes[g_selectedRecipe].Curation == curation) return;
     for (uint i = 0; i < g_recipes.Length; i++) {
-        if (g_recipes[i].IsFeatured == featured) {
+        if (g_recipes[i].Curation == curation) {
             g_selectedRecipe = int(i);
             g_captureFrame = g_recipes[i].CaptureFrames[0];
             g_animationPlaying = true;

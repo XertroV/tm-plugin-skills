@@ -54,19 +54,32 @@ def main() -> None:
     if window_plugins == 0:
         fail("no Skillpack Demos main windows found")
     gallery = (ROOT / "prototypes" / "issue-12-gallery" / "generated" / "VisualRecipeGallery" / "src" / "Main.as").read_text(encoding="utf-8")
-    for phrase in ('UI::BeginTabItem("Featured")', 'UI::BeginTabItem("Boring")', "EnsureSelectionMatchesCuration"):
+    for phrase in (
+        'UI::BeginTabItem("Featured")',
+        'UI::BeginTabItem("Boring")',
+        'UI::BeginTabItem("Ornaments")',
+        "EnsureSelectionMatchesCuration",
+    ):
         if phrase not in gallery:
             fail(f"gallery curation contract missing {phrase}")
     manifest = json.loads((ROOT / "prototypes" / "issue-12-gallery" / "manifest.json").read_text(encoding="utf-8"))
     curations = [recipe["curation"] for recipe in manifest["recipes"]]
-    if set(curations) != {"featured", "boring"}:
-        fail("gallery manifest must contain both featured and boring recipes")
+    if set(curations) != {"featured", "boring", "ornaments"}:
+        fail("gallery manifest must contain featured, boring, and ornaments recipes")
     initial = re.search(r"^int g_selectedRecipe = (\d+);$", gallery, re.MULTILINE)
     if initial is None or curations[int(initial.group(1))] != "featured":
         fail("gallery initial selection is not featured")
     catalog = (ROOT / "prototypes" / "issue-12-gallery" / "generated" / "VisualRecipeGallery" / "src" / "GeneratedCatalog.as").read_text(encoding="utf-8")
-    generated_curations = re.findall(r"RecipeMeta\([^\n]+, (true|false), (?:true|false), \"candidate-static-only\"", catalog)
-    expected_curations = ["true" if value == "featured" else "false" for value in curations]
+    generated_curations = re.findall(
+        r"RecipeMeta\([^\n]+, (GalleryCuration::(?:Featured|Boring|Ornaments)), (?:true|false), \"candidate-static-only\"",
+        catalog,
+    )
+    curation_expr = {
+        "featured": "GalleryCuration::Featured",
+        "boring": "GalleryCuration::Boring",
+        "ornaments": "GalleryCuration::Ornaments",
+    }
+    expected_curations = [curation_expr[value] for value in curations]
     if generated_curations != expected_curations:
         fail("generated catalog curation does not match manifest order")
     print(f"demo menu validation passed ({window_plugins} toggleable main windows)")

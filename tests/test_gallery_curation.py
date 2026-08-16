@@ -119,7 +119,8 @@ class GalleryCurationTests(unittest.TestCase):
         self.assertIn("AdvanceAnimationFrame(recipe);", generated_main)
         self.assertIn('g_animationPlaying ? "Pause animation" : "Play animation"', generated_main)
         self.assertIn("bool IsAnimated", generated_catalog)
-        self.assertIn("true, true, \"candidate-static-only\"", generated_catalog)
+        # At least one animated recipe: a curation enum value followed by `true`.
+        self.assertRegex(generated_catalog, r"GalleryCuration::\w+, true, \"candidate-static-only\"")
 
 
 if __name__ == "__main__":

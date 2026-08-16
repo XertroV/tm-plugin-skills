@@ -580,6 +580,262 @@
           "showcase-composition"
         ]
       }
+    },
+    {
+      "id": "breathing-divider",
+      "title": "Breathing divider",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/BreathingDivider.as",
+      "namespace": "RecipeBreathingDivider",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/BreathingDivider.as"
+      },
+      "expected": "Three centered rules with a breathing dot at the center; all share one 6s pulse cycle.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "gradient-rule",
+      "title": "Gradient rule",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/GradientRule.as",
+      "namespace": "RecipeGradientRule",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/GradientRule.as"
+      },
+      "expected": "Horizontal rules whose alpha peaks mid-line; one has a travelling bright peak.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "icon-halo",
+      "title": "Icon halo badge",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/IconHalo.as",
+      "namespace": "RecipeIconHalo",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/IconHalo.as"
+      },
+      "expected": "Rounded-square badges with a soft breathing halo of concentric rounded rects.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "status-pulse",
+      "title": "Status pulse",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/StatusPulse.as",
+      "namespace": "RecipeStatusPulse",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/StatusPulse.as"
+      },
+      "expected": "Sonar status dots with an expanding ring and label alpha tracking the pulse.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "loading-dots",
+      "title": "Loading dots",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/LoadingDots.as",
+      "namespace": "RecipeLoadingDots",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/LoadingDots.as"
+      },
+      "expected": "Rows of dots lifting in a travelling wave as a thinking/streaming indicator.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "shimmer-text",
+      "title": "Shimmer text",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/ShimmerText.as",
+      "namespace": "RecipeShimmerText",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/ShimmerText.as"
+      },
+      "expected": "A bright band sweeps across the text, lifting glyph color near the band center.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "typewriter-text",
+      "title": "Typewriter text",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/TypewriterText.as",
+      "namespace": "RecipeTypewriterText",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/TypewriterText.as"
+      },
+      "expected": "Glyphs reveal over the loop with a 2Hz block caret, then snap back.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "breadcrumb-trail",
+      "title": "Breadcrumb trail",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/BreadcrumbTrail.as",
+      "namespace": "RecipeBreadcrumbTrail",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/BreadcrumbTrail.as"
+      },
+      "expected": "Centered breadcrumb segments with the active segment bright and advancing.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
     }
   ]
 }

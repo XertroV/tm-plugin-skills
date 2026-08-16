@@ -711,6 +711,366 @@
       "ui_scale": 1.0,
       "game_state": "main-menu",
       "frame": 120
+    },
+    {
+      "id": "breathing-divider-000",
+      "recipe": "breathing-divider",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "breathing-divider-030",
+      "recipe": "breathing-divider",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "breathing-divider-060",
+      "recipe": "breathing-divider",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "breathing-divider-090",
+      "recipe": "breathing-divider",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "breathing-divider-120",
+      "recipe": "breathing-divider",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
+    },
+    {
+      "id": "gradient-rule-000",
+      "recipe": "gradient-rule",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "gradient-rule-030",
+      "recipe": "gradient-rule",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "gradient-rule-060",
+      "recipe": "gradient-rule",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "gradient-rule-090",
+      "recipe": "gradient-rule",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "gradient-rule-120",
+      "recipe": "gradient-rule",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
+    },
+    {
+      "id": "icon-halo-000",
+      "recipe": "icon-halo",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "icon-halo-030",
+      "recipe": "icon-halo",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "icon-halo-060",
+      "recipe": "icon-halo",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "icon-halo-090",
+      "recipe": "icon-halo",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "icon-halo-120",
+      "recipe": "icon-halo",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
+    },
+    {
+      "id": "status-pulse-000",
+      "recipe": "status-pulse",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "status-pulse-030",
+      "recipe": "status-pulse",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "status-pulse-060",
+      "recipe": "status-pulse",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "status-pulse-090",
+      "recipe": "status-pulse",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "status-pulse-120",
+      "recipe": "status-pulse",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
+    },
+    {
+      "id": "loading-dots-000",
+      "recipe": "loading-dots",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "loading-dots-030",
+      "recipe": "loading-dots",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "loading-dots-060",
+      "recipe": "loading-dots",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "loading-dots-090",
+      "recipe": "loading-dots",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "loading-dots-120",
+      "recipe": "loading-dots",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
+    },
+    {
+      "id": "shimmer-text-000",
+      "recipe": "shimmer-text",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "shimmer-text-030",
+      "recipe": "shimmer-text",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "shimmer-text-060",
+      "recipe": "shimmer-text",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "shimmer-text-090",
+      "recipe": "shimmer-text",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "shimmer-text-120",
+      "recipe": "shimmer-text",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
+    },
+    {
+      "id": "typewriter-text-000",
+      "recipe": "typewriter-text",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "typewriter-text-030",
+      "recipe": "typewriter-text",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "typewriter-text-060",
+      "recipe": "typewriter-text",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "typewriter-text-090",
+      "recipe": "typewriter-text",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "typewriter-text-120",
+      "recipe": "typewriter-text",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
+    },
+    {
+      "id": "breadcrumb-trail-000",
+      "recipe": "breadcrumb-trail",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "breadcrumb-trail-030",
+      "recipe": "breadcrumb-trail",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "breadcrumb-trail-060",
+      "recipe": "breadcrumb-trail",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "breadcrumb-trail-090",
+      "recipe": "breadcrumb-trail",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "breadcrumb-trail-120",
+      "recipe": "breadcrumb-trail",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
     }
   ],
   "capture_evidence": [
