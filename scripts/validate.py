@@ -42,6 +42,17 @@ def check_skill_links() -> None:
     print("skill link validation passed")
 
 
+def whitespace_base(sha: str | None) -> str | None:
+    """Return a usable git base SHA, or None to check the working tree.
+
+    New-branch pushes set github.event.before to the all-zero SHA; that is
+    not a valid `git diff A...B` endpoint.
+    """
+    if not sha or set(sha) <= {"0"}:
+        return None
+    return sha
+
+
 def run(command: tuple[str, ...]) -> None:
     print("+", " ".join(command), flush=True)
     subprocess.run(command, cwd=ROOT, check=True)
@@ -58,7 +69,7 @@ def main() -> None:
     for command in QUICK_COMMANDS:
         run(command)
     check_skill_links()
-    base = os.environ.get("VALIDATION_BASE_SHA")
+    base = whitespace_base(os.environ.get("VALIDATION_BASE_SHA"))
     if base:
         run(("git", "diff", "--check", f"{base}...HEAD"))
     else:
