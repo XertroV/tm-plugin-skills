@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=90fa663b0ad2cb9d04a9e1e279ade7a677e93a39848ca84cf9b73083f7476c74 source=recipes/SpectralRelayTypography.as
+// GENERATED COPY sha256=2131a1fb1519a9d119c61ced77531e69a261d0680ddfd1ec9910103d2257d768 source=recipes/SpectralRelayTypography.as
 namespace RecipeSpectralRelayTypography {
     int clipDepth = 0;
     int lastCaptureFrame = 0;
@@ -51,7 +51,7 @@ namespace RecipeSpectralRelayTypography {
         float phase = Phase(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
         vec2 available = UI::GetContentRegionAvail();
-        vec2 size = vec2(Math::Max(280.0f, available.x - 8.0f), 270.0f);
+        vec2 size = vec2(Math::Max(280.0f, available.x - 16.0f), 270.0f);
         vec2 max = pos + size;
         vec2 center = pos + size * 0.5f;
         UI::Dummy(size);

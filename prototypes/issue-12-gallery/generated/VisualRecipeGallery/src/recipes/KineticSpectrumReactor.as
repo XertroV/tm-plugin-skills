@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=60f63fcf29cf075328f1457689b93070e92a980b47d48b2907c5c9773814354b source=recipes/KineticSpectrumReactor.as
+// GENERATED COPY sha256=6fc03405529524252da522fc57703441b2102af0d94dddc26509e61b551fdb0b source=recipes/KineticSpectrumReactor.as
 namespace RecipeKineticSpectrumReactor {
     int clipDepth = 0;
     int lastCaptureFrame = 0;
@@ -67,7 +67,7 @@ namespace RecipeKineticSpectrumReactor {
         float phase = Phase(captureFrame);
         float breath = Breath(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
-        vec2 size = vec2(Math::Max(500.0f, UI::GetContentRegionAvail().x), 320.0f);
+        vec2 size = vec2(Math::Max(470.0f, UI::GetContentRegionAvail().x - 16.0f), 320.0f);
         vec2 max = pos + size;
         vec2 center = pos + size * 0.5f;
         UI::Dummy(size);

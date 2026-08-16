@@ -50,7 +50,7 @@ namespace RecipeSpectralRelayTypography {
         float phase = Phase(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
         vec2 available = UI::GetContentRegionAvail();
-        vec2 size = vec2(Math::Max(280.0f, available.x - 8.0f), 270.0f);
+        vec2 size = vec2(Math::Max(280.0f, available.x - 16.0f), 270.0f);
         vec2 max = pos + size;
         vec2 center = pos + size * 0.5f;
         UI::Dummy(size);

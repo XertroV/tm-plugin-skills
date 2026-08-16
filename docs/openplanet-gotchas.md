@@ -13,7 +13,9 @@ These are defaults learned from real plugin work. Apply them early; they prevent
 bugs that are disproportionately difficult to diagnose after components spread
 across multiple plugins. For renamed/removed APIs, also check
 `docs/openplanet-deprecations.md` — a running log of versioned deprecations and
-their replacements.
+their replacements. To confirm an exact signature, member offset, or whether a
+class/method exists in a given build, query the exported type dumps directly —
+see `docs/openplanet-api-json.md` and `scripts/op-api.py` / `scripts/op-api-diff.py`.
 
 ## Render callbacks are not interchangeable
 

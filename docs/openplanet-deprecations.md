@@ -18,6 +18,13 @@ sequential, so any version's changelog is reachable by probing
 Where a version number is unconfirmed, the entry records the evidence date
 instead.
 
+**Detecting changes mechanically:** the exported AngelScript type dumps
+(`docs/openplanet-api-json.md`) are the ground truth for what a build exposes.
+`scripts/op-api-diff.py OLD.json NEW.json` reports added/removed/changed classes
+and members between two builds; `scripts/op-api.py` answers "does this
+class/method/signature still exist" against the live dump. Use the diff to spot
+a removal, then log the `Old` → `New` mapping here.
+
 ## 1.29.10 (2026-05, beta/edge)
 
 - `string::Join` → `Text::Join`; `string::Repeat` → `Text::Repeat` (moved to

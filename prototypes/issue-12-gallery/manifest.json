@@ -316,6 +316,526 @@
           "showcase-composition"
         ]
       }
+    },
+    {
+      "id": "strategy-switchboard",
+      "title": "Strategy switchboard",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/StrategySwitchboard.as",
+      "namespace": "RecipeStrategySwitchboard",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/StrategySwitchboard.as",
+        "note": "Independently reimagines the interactive-distribution and decision-matrix theses from the source inventory as a Trackmania pit-strategy control; no source, palette, or assets copied."
+      },
+      "expected": "A slate pit-wall decision matrix carries four route cells around a physical toggle rail; the weighted lever and measured directive plate travel PUSH, BALANCED, CONSERVE, OVERTAKE as the frame story advances, closing the loop at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
+    },
+    {
+      "id": "trajectory-orrery",
+      "title": "Trajectory orrery",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/TrajectoryOrrery.as",
+      "namespace": "RecipeTrajectoryOrrery",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/TrajectoryOrrery.as",
+        "note": "Clean-room pseudo-3D projection inspired only by the depth-aware gizmo thesis in the source inventory; gallery-owned projection math, palette, and composition with nothing copied."
+      },
+      "expected": "A void-dark orbital instrument projects five tilted rings around a warm primary; each ring splits into a dim far stroke, a dashed guide, and a bright doubled near stroke while bodies grow, brighten, and trail as they cross the near rim, closing the loop at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
+    },
+    {
+      "id": "altitude-ledger",
+      "title": "Altitude ledger",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/AltitudeLedger.as",
+      "namespace": "RecipeAltitudeLedger",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/AltitudeLedger.as",
+        "note": "Independently reimagines the altitude-ladder thesis from the source inventory as a Trackmania hill climb; gallery-owned data, palette, and label collision model with nothing copied."
+      },
+      "expected": "A parchment hill-climb ledger reduces six climbers to one elevation axis: the hero diamond and rival rings rise and shuffle while collision-managed rank rows keep every tag legible, falling riders earn a down tick, and the loop closes at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
+    },
+    {
+      "id": "ghost-delta-cartogram",
+      "title": "Ghost delta cartogram",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/GhostDeltaCartogram.as",
+      "namespace": "RecipeGhostDeltaCartogram",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/GhostDeltaCartogram.as",
+        "note": "Independently reimagines the route-heatmap and trajectory theses from the source inventory as a signed delta field; gallery-owned route, field, and palette with nothing copied."
+      },
+      "expected": "A deep-sea route ring carries a signed gain/loss field whose segments widen and glow green or sienna with magnitude; six sector gates report state, a ghost marker trails the pulsing live tracer by nine points, and a measured plate reads the average delta.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
+    },
+    {
+      "id": "midnight-switchyard",
+      "title": "Midnight switchyard",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/MidnightSwitchyard.as",
+      "namespace": "RecipeMidnightSwitchyard",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/MidnightSwitchyard.as",
+        "note": "Independently reimagines the node-graph propagation thesis from the source inventory as a Trackmania freight yard; gallery-owned graph, timing, and palette with nothing copied."
+      },
+      "expected": "A midnight rail-yard diagram propagates an amber signal wave from the throat through a branching graph; switch blades physically swing as blocks energize, sidings glow with lantern halos, and the terminus lantern reports ARRIVED before the loop closes at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
+    },
+    {
+      "id": "weatherline-observatory",
+      "title": "Weatherline observatory",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/WeatherlineObservatory.as",
+      "namespace": "RecipeWeatherlineObservatory",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/WeatherlineObservatory.as",
+        "note": "Independently reimagines the procedural-contour thesis from the source inventory as a weather chart; gallery-owned field, levels, and front geometry with nothing copied."
+      },
+      "expected": "A parchment synoptic chart renders a procedural pressure field as marching-squares isobars with a bold primary line, sweeping warm and cold fronts with disc and tooth conventions, and a corner station model; the whole field drifts and closes its loop at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
+    },
+    {
+      "id": "chicane-typesetter",
+      "title": "Chicane typesetter",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/ChicaneTypesetter.as",
+      "namespace": "RecipeChicaneTypesetter",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/ChicaneTypesetter.as",
+        "note": "Independently reimagines the measured-typographic-motion thesis from the source inventory as type riding a racing line; gallery-owned line, wordmark, and palette with nothing copied."
+      },
+      "expected": "A wordmark surfs a painted racing line: each glyph is placed at its own arc offset with a tangent direction tick, alternating red/white kerb blocks flank the dashed center paint, and measured APEX flags mark the tightest kerbs as the text mass loops home at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
+    },
+    {
+      "id": "slipstream-loom",
+      "title": "Slipstream loom",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/SlipstreamLoom.as",
+      "namespace": "RecipeSlipstreamLoom",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/SlipstreamLoom.as",
+        "note": "Independently reimagines the layered-ribbon thesis from the source inventory as an interlaced slipstream weave; gallery-owned strands, weave order, and palette with nothing copied."
+      },
+      "expected": "Four draft-trail ribbons braid through faint warp guides: every segment is drawn back-to-front from a physically consistent weave order so crossings interlace, three-stroke bodies carry shadow, body, and spine, and crossing knots mark each change of the front ribbon as the weave slides home at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
+    },
+    {
+      "id": "breathing-divider",
+      "title": "Breathing divider",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/BreathingDivider.as",
+      "namespace": "RecipeBreathingDivider",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/BreathingDivider.as"
+      },
+      "expected": "Three centered rules with a breathing dot at the center; all share one 6s pulse cycle.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "gradient-rule",
+      "title": "Gradient rule",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/GradientRule.as",
+      "namespace": "RecipeGradientRule",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/GradientRule.as"
+      },
+      "expected": "Horizontal rules whose alpha peaks mid-line; one has a travelling bright peak.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "icon-halo",
+      "title": "Icon halo badge",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/IconHalo.as",
+      "namespace": "RecipeIconHalo",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/IconHalo.as"
+      },
+      "expected": "Rounded-square badges with a soft breathing halo of concentric rounded rects.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "status-pulse",
+      "title": "Status pulse",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/StatusPulse.as",
+      "namespace": "RecipeStatusPulse",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/StatusPulse.as"
+      },
+      "expected": "Sonar status dots with an expanding ring and label alpha tracking the pulse.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "loading-dots",
+      "title": "Loading dots",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/LoadingDots.as",
+      "namespace": "RecipeLoadingDots",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/LoadingDots.as"
+      },
+      "expected": "Rows of dots lifting in a travelling wave as a thinking/streaming indicator.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "shimmer-text",
+      "title": "Shimmer text",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/ShimmerText.as",
+      "namespace": "RecipeShimmerText",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/ShimmerText.as"
+      },
+      "expected": "A bright band sweeps across the text, lifting glyph color near the band center.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "typewriter-text",
+      "title": "Typewriter text",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/TypewriterText.as",
+      "namespace": "RecipeTypewriterText",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/TypewriterText.as"
+      },
+      "expected": "Glyphs reveal over the loop with a 2Hz block caret, then snap back.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
+    },
+    {
+      "id": "breadcrumb-trail",
+      "title": "Breadcrumb trail",
+      "tier": "nvg",
+      "curation": "ornaments",
+      "source": "recipes/BreadcrumbTrail.as",
+      "namespace": "RecipeBreadcrumbTrail",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-api-example",
+        "repository": "XertroV/tm-plugin-skills",
+        "note": "Adapted from tm-agent ChatUI ornament patterns (drawlist primitives) and written from documented Openplanet UI APIs.",
+        "file": "prototypes/issue-12-gallery/recipes/BreadcrumbTrail.as"
+      },
+      "expected": "Centered breadcrumb segments with the active segment bright and advancing.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state"
+        ]
+      }
     }
   ]
 }

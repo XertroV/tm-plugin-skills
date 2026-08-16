@@ -66,7 +66,7 @@ namespace RecipeKineticSpectrumReactor {
         float phase = Phase(captureFrame);
         float breath = Breath(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
-        vec2 size = vec2(Math::Max(500.0f, UI::GetContentRegionAvail().x), 320.0f);
+        vec2 size = vec2(Math::Max(470.0f, UI::GetContentRegionAvail().x - 16.0f), 320.0f);
         vec2 max = pos + size;
         vec2 center = pos + size * 0.5f;
         UI::Dummy(size);

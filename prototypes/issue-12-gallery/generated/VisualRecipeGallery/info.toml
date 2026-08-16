@@ -8,3 +8,4 @@ siteid = 0
 [script]
 dependencies = ["SkillpackDemoLib"]
 export_dependencies = ["SkillpackDemoLib"]
+optional_dependencies = ["tm-control-mcp"]

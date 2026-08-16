@@ -1,4 +1,4 @@
-// GENERATED COPY sha256=8d9621f6dda5ab5a7ef81bae44377a50155ee75f5b016973cbc0e465f42a30e0 source=recipes/SplitMonument.as
+// GENERATED COPY sha256=08fa553445caa29c7858f7258c7d0a970a45b7d760ad3d8b4c99180d50216381 source=recipes/SplitMonument.as
 namespace RecipeSplitMonument {
     int clipDepth = 0;
     int lastCaptureFrame = 0;
@@ -45,7 +45,7 @@ namespace RecipeSplitMonument {
         float phase = Phase(captureFrame);
         vec2 pos = UI::GetCursorScreenPos();
         vec2 available = UI::GetContentRegionAvail();
-        vec2 size = vec2(Math::Max(280.0f, available.x - 8.0f), 270.0f);
+        vec2 size = vec2(Math::Max(280.0f, available.x - 16.0f), 270.0f);
         vec2 max = pos + size;
         UI::Dummy(size);
 
@@ -85,7 +85,7 @@ namespace RecipeSplitMonument {
         dl.AddRectFilled(vec4(vec2(pos.x + 21.0f, ruleY - 3.0f), vec2(size.x * 0.33f, 3.0f)), seam, 0.0f);
 
         float ledgerX = splitX + 18.0f;
-        float ledgerRight = max.x - 20.0f;
+        float ledgerRight = max.x - 44.0f;
         float rowStartY = pos.y + 48.0f;
         string[] labels = {"SECTOR I", "SECTOR II", "SECTOR III"};
         for (int i = 0; i < 3; i++) {
@@ -119,7 +119,9 @@ namespace RecipeSplitMonument {
         string badge = "NEW BEST";
         vec2 badgeText = UI::MeasureString(badge);
         vec2 badgeSize = badgeText + vec2(24.0f, 10.0f);
-        vec2 badgePos = vec2(splitX - badgeSize.x * 0.5f, ruleY - badgeSize.y * 0.5f);
+        // Sit the lozenge on the hero side of the split so it never collides
+        // with the ledger label/value columns on the right.
+        vec2 badgePos = vec2(splitX - badgeSize.x - 14.0f, ruleY - badgeSize.y * 0.5f);
         vec4 badgeFill = highlighted == 3 ? green : limestone;
         vec4 badgeTextColor = highlighted == 3 ? limestone : green;
         dl.AddRectFilled(vec4(badgePos, badgeSize), badgeFill, badgeSize.y * 0.5f);
