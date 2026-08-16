@@ -448,6 +448,72 @@
           "showcase-composition"
         ]
       }
+    },
+    {
+      "id": "midnight-switchyard",
+      "title": "Midnight switchyard",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/MidnightSwitchyard.as",
+      "namespace": "RecipeMidnightSwitchyard",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/MidnightSwitchyard.as",
+        "note": "Independently reimagines the node-graph propagation thesis from the source inventory as a Trackmania freight yard; gallery-owned graph, timing, and palette with nothing copied."
+      },
+      "expected": "A midnight rail-yard diagram propagates an amber signal wave from the throat through a branching graph; switch blades physically swing as blocks energize, sidings glow with lantern halos, and the terminus lantern reports ARRIVED before the loop closes at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
+    },
+    {
+      "id": "weatherline-observatory",
+      "title": "Weatherline observatory",
+      "tier": "advanced",
+      "curation": "featured",
+      "source": "recipes/WeatherlineObservatory.as",
+      "namespace": "RecipeWeatherlineObservatory",
+      "entrypoint": "DrawPanel",
+      "surface": "panel",
+      "maturity": "candidate-static-only",
+      "license": "CC0-1.0 OR Unlicense",
+      "provenance": {
+        "kind": "independent-reimplementation",
+        "repository": "XertroV/tm-plugin-skills",
+        "file": "prototypes/issue-12-gallery/recipes/WeatherlineObservatory.as",
+        "note": "Independently reimagines the procedural-contour thesis from the source inventory as a weather chart; gallery-owned field, levels, and front geometry with nothing copied."
+      },
+      "expected": "A parchment synoptic chart renders a procedural pressure field as marching-squares isobars with a bold primary line, sweeping warm and cold fronts with disc and tooth conventions, and a corner station model; the whole field drifts and closes its loop at frame 120.",
+      "state_contract": {
+        "capture_frames": [
+          0,
+          30,
+          60,
+          90,
+          120
+        ],
+        "instrumentation": [
+          "clip-depth",
+          "animation-state",
+          "showcase-composition"
+        ]
+      }
     }
   ]
 }

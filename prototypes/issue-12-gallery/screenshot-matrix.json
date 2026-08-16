@@ -531,6 +531,96 @@
       "ui_scale": 1.0,
       "game_state": "main-menu",
       "frame": 120
+    },
+    {
+      "id": "midnight-switchyard-000",
+      "recipe": "midnight-switchyard",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "midnight-switchyard-030",
+      "recipe": "midnight-switchyard",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "midnight-switchyard-060",
+      "recipe": "midnight-switchyard",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "midnight-switchyard-090",
+      "recipe": "midnight-switchyard",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "midnight-switchyard-120",
+      "recipe": "midnight-switchyard",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
+    },
+    {
+      "id": "weatherline-observatory-000",
+      "recipe": "weatherline-observatory",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 0
+    },
+    {
+      "id": "weatherline-observatory-030",
+      "recipe": "weatherline-observatory",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 30
+    },
+    {
+      "id": "weatherline-observatory-060",
+      "recipe": "weatherline-observatory",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 60
+    },
+    {
+      "id": "weatherline-observatory-090",
+      "recipe": "weatherline-observatory",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 90
+    },
+    {
+      "id": "weatherline-observatory-120",
+      "recipe": "weatherline-observatory",
+      "theme": "stock-dark",
+      "viewport": "1920x1080",
+      "ui_scale": 1.0,
+      "game_state": "main-menu",
+      "frame": 120
     }
   ],
   "capture_evidence": [
