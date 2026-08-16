@@ -134,16 +134,34 @@ class Rig:
         ).stdout
         m = re.search(r"Position: (\d+),(\d+)", geo)
         self.tm_x, self.tm_y = int(m.group(1)), int(m.group(2))
+        # Raise TM above desktop windows WITHOUT stealing keyboard focus:
+        # `xdotool windowactivate` grabs focus every frame, which disrupts
+        # whatever the human is typing. A temporary _NET_WM_STATE_ABOVE via
+        # wmctrl raises the window for capture purposes only; it is removed
+        # again in close().
+        self._set_keep_above(True)
         self._shot = tempfile.NamedTemporaryFile(suffix=".png", delete=False)
         self._shot_path = Path(self._shot.name)
         self._shot.close()
 
+    def _wm_winid(self) -> str:
+        return f"0x{int(self.winid):x}"
+
+    def _set_keep_above(self, above: bool) -> None:
+        action = "add" if above else "remove"
+        subprocess.run(
+            ["wmctrl", "-i", "-b", f"{action},above", self._wm_winid()],
+            capture_output=True, timeout=10,
+        )
+
+    def close(self) -> None:
+        self._set_keep_above(False)
+
     def capture(self, win_x: int, win_y: int, win_w: int, win_h: int, dest: Path) -> None:
-        # Raise TM above any overlapping window so the gallery is the topmost
-        # content in the monitor region (a foreign window over TM would
-        # otherwise be captured in its place).
-        subprocess.run(["xdotool", "windowactivate", self.winid], capture_output=True)
-        time.sleep(0.15)
+        # TM was raised above desktop windows once at Rig init (keep-above,
+        # no focus change). In-game overlays can still cover the pinned
+        # gallery; the title-bar check below rejects those frames and the
+        # caller recaptures.
         subprocess.run(
             ["spectacle", "-b", "-n", "-m", str(self.mon_idx), "-o", str(self._shot_path)],
             check=True, capture_output=True,

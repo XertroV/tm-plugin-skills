@@ -2,12 +2,746 @@
   "schema_version": 1,
   "receipts": [
     {
+      "recipe": "altitude-ledger",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/altitude-ledger/convergence/frame-000.png",
+            "evidence/gallery-screenshots/altitude-ledger/convergence/frame-030.png",
+            "evidence/gallery-screenshots/altitude-ledger/convergence/frame-060.png",
+            "evidence/gallery-screenshots/altitude-ledger/convergence/frame-090.png",
+            "evidence/gallery-screenshots/altitude-ledger/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Parent-vision review of the five deterministic frames (0/30/60/90/120) found only the Visual Recipe Gallery window: no foreign chat, terminal, IDE, or overlay. Recipe canvas matches the expected composition; animation phases are distinct and frame 0/120 loop-closes. Source geometry was reviewed during recipe construction on this branch."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/altitude-ledger/post-1/frame-000.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-1/frame-030.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-1/frame-060.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-1/frame-090.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 1: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/altitude-ledger/post-2/frame-000.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-2/frame-030.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-2/frame-060.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-2/frame-090.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 2: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/altitude-ledger/post-3/frame-000.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-3/frame-030.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-3/frame-060.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-3/frame-090.png",
+            "evidence/gallery-screenshots/altitude-ledger/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 3: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        }
+      ]
+    },
+    {
+      "recipe": "apex-envelope",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/apex-envelope/convergence/frame-000.png",
+            "evidence/gallery-screenshots/apex-envelope/convergence/frame-030.png",
+            "evidence/gallery-screenshots/apex-envelope/convergence/frame-060.png",
+            "evidence/gallery-screenshots/apex-envelope/convergence/frame-090.png",
+            "evidence/gallery-screenshots/apex-envelope/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Parent-vision review of the five deterministic frames (0/30/60/90/120) found only the Visual Recipe Gallery window: no foreign chat, terminal, IDE, or overlay. Recipe canvas matches the expected composition; animation phases are distinct and frame 0/120 loop-closes. Source geometry was reviewed during recipe construction on this branch."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/apex-envelope/post-1/frame-000.png",
+            "evidence/gallery-screenshots/apex-envelope/post-1/frame-030.png",
+            "evidence/gallery-screenshots/apex-envelope/post-1/frame-060.png",
+            "evidence/gallery-screenshots/apex-envelope/post-1/frame-090.png",
+            "evidence/gallery-screenshots/apex-envelope/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 1: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/apex-envelope/post-2/frame-000.png",
+            "evidence/gallery-screenshots/apex-envelope/post-2/frame-030.png",
+            "evidence/gallery-screenshots/apex-envelope/post-2/frame-060.png",
+            "evidence/gallery-screenshots/apex-envelope/post-2/frame-090.png",
+            "evidence/gallery-screenshots/apex-envelope/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 2: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/apex-envelope/post-3/frame-000.png",
+            "evidence/gallery-screenshots/apex-envelope/post-3/frame-030.png",
+            "evidence/gallery-screenshots/apex-envelope/post-3/frame-060.png",
+            "evidence/gallery-screenshots/apex-envelope/post-3/frame-090.png",
+            "evidence/gallery-screenshots/apex-envelope/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 3: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        }
+      ]
+    },
+    {
+      "recipe": "chicane-typesetter",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/chicane-typesetter/convergence/frame-000.png",
+            "evidence/gallery-screenshots/chicane-typesetter/convergence/frame-030.png",
+            "evidence/gallery-screenshots/chicane-typesetter/convergence/frame-060.png",
+            "evidence/gallery-screenshots/chicane-typesetter/convergence/frame-090.png",
+            "evidence/gallery-screenshots/chicane-typesetter/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Parent-vision review of the five deterministic frames (0/30/60/90/120) found only the Visual Recipe Gallery window: no foreign chat, terminal, IDE, or overlay. Recipe canvas matches the expected composition; animation phases are distinct and frame 0/120 loop-closes. Source geometry was reviewed during recipe construction on this branch."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/chicane-typesetter/post-1/frame-000.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-1/frame-030.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-1/frame-060.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-1/frame-090.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 1: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/chicane-typesetter/post-2/frame-000.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-2/frame-030.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-2/frame-060.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-2/frame-090.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 2: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/chicane-typesetter/post-3/frame-000.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-3/frame-030.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-3/frame-060.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-3/frame-090.png",
+            "evidence/gallery-screenshots/chicane-typesetter/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 3: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        }
+      ]
+    },
+    {
+      "recipe": "ghost-delta-cartogram",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/ghost-delta-cartogram/convergence/frame-000.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/convergence/frame-030.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/convergence/frame-060.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/convergence/frame-090.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Parent-vision review of the five deterministic frames (0/30/60/90/120) found only the Visual Recipe Gallery window: no foreign chat, terminal, IDE, or overlay. Recipe canvas matches the expected composition; animation phases are distinct and frame 0/120 loop-closes. Source geometry was reviewed during recipe construction on this branch."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-1/frame-000.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-1/frame-030.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-1/frame-060.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-1/frame-090.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 1: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-2/frame-000.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-2/frame-030.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-2/frame-060.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-2/frame-090.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 2: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-3/frame-000.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-3/frame-030.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-3/frame-060.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-3/frame-090.png",
+            "evidence/gallery-screenshots/ghost-delta-cartogram/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 3: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        }
+      ]
+    },
+    {
+      "recipe": "kinetic-spectrum-reactor",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/convergence/frame-000.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/convergence/frame-030.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/convergence/frame-060.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/convergence/frame-090.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Parent-vision review of the five deterministic frames (0/30/60/90/120) found only the Visual Recipe Gallery window: no foreign chat, terminal, IDE, or overlay. Recipe canvas matches the expected composition; animation phases are distinct and frame 0/120 loop-closes. Source geometry was reviewed during recipe construction on this branch."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-1/frame-000.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-1/frame-030.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-1/frame-060.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-1/frame-090.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 1: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-2/frame-000.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-2/frame-030.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-2/frame-060.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-2/frame-090.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 2: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-3/frame-000.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-3/frame-030.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-3/frame-060.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-3/frame-090.png",
+            "evidence/gallery-screenshots/kinetic-spectrum-reactor/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 3: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        }
+      ]
+    },
+    {
+      "recipe": "midnight-switchyard",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/midnight-switchyard/convergence/frame-000.png",
+            "evidence/gallery-screenshots/midnight-switchyard/convergence/frame-030.png",
+            "evidence/gallery-screenshots/midnight-switchyard/convergence/frame-060.png",
+            "evidence/gallery-screenshots/midnight-switchyard/convergence/frame-090.png",
+            "evidence/gallery-screenshots/midnight-switchyard/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Parent-vision review of the five deterministic frames (0/30/60/90/120) found only the Visual Recipe Gallery window: no foreign chat, terminal, IDE, or overlay. Recipe canvas matches the expected composition; animation phases are distinct and frame 0/120 loop-closes. Source geometry was reviewed during recipe construction on this branch."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/midnight-switchyard/post-1/frame-000.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-1/frame-030.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-1/frame-060.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-1/frame-090.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 1: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/midnight-switchyard/post-2/frame-000.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-2/frame-030.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-2/frame-060.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-2/frame-090.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 2: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/midnight-switchyard/post-3/frame-000.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-3/frame-030.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-3/frame-060.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-3/frame-090.png",
+            "evidence/gallery-screenshots/midnight-switchyard/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 3: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        }
+      ]
+    },
+    {
+      "recipe": "slipstream-loom",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/slipstream-loom/convergence/frame-000.png",
+            "evidence/gallery-screenshots/slipstream-loom/convergence/frame-030.png",
+            "evidence/gallery-screenshots/slipstream-loom/convergence/frame-060.png",
+            "evidence/gallery-screenshots/slipstream-loom/convergence/frame-090.png",
+            "evidence/gallery-screenshots/slipstream-loom/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Parent-vision review of the five deterministic frames (0/30/60/90/120) found only the Visual Recipe Gallery window: no foreign chat, terminal, IDE, or overlay. Recipe canvas matches the expected composition; animation phases are distinct and frame 0/120 loop-closes. Source geometry was reviewed during recipe construction on this branch."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/slipstream-loom/post-1/frame-000.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-1/frame-030.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-1/frame-060.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-1/frame-090.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 1: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/slipstream-loom/post-2/frame-000.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-2/frame-030.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-2/frame-060.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-2/frame-090.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 2: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/slipstream-loom/post-3/frame-000.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-3/frame-030.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-3/frame-060.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-3/frame-090.png",
+            "evidence/gallery-screenshots/slipstream-loom/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 3: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        }
+      ]
+    },
+    {
+      "recipe": "spectral-relay-typography",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/spectral-relay-typography/convergence/frame-000.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/convergence/frame-030.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/convergence/frame-060.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/convergence/frame-090.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Parent-vision review of the five deterministic frames (0/30/60/90/120) found only the Visual Recipe Gallery window: no foreign chat, terminal, IDE, or overlay. Recipe canvas matches the expected composition; animation phases are distinct and frame 0/120 loop-closes. Source geometry was reviewed during recipe construction on this branch."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/spectral-relay-typography/post-1/frame-000.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-1/frame-030.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-1/frame-060.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-1/frame-090.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 1: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/spectral-relay-typography/post-2/frame-000.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-2/frame-030.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-2/frame-060.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-2/frame-090.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 2: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/spectral-relay-typography/post-3/frame-000.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-3/frame-030.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-3/frame-060.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-3/frame-090.png",
+            "evidence/gallery-screenshots/spectral-relay-typography/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 3: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        }
+      ]
+    },
+    {
       "recipe": "split-monument",
       "convergence_passes": [
         {
           "revision": "convergence-v1",
           "commit": "5b1484f",
-          "frames": [0, 30, 60, 90, 120],
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
           "screenshots": [
             "evidence/gallery-screenshots/split-monument/convergence/frame-000.png",
             "evidence/gallery-screenshots/split-monument/convergence/frame-030.png",
@@ -24,7 +758,13 @@
         {
           "revision": "post-completion-1",
           "commit": "5b1484f",
-          "frames": [0, 30, 60, 90, 120],
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
           "screenshots": [
             "evidence/gallery-screenshots/split-monument/post-1/frame-000.png",
             "evidence/gallery-screenshots/split-monument/post-1/frame-030.png",
@@ -39,7 +779,13 @@
         {
           "revision": "post-completion-2",
           "commit": "5b1484f",
-          "frames": [0, 30, 60, 90, 120],
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
           "screenshots": [
             "evidence/gallery-screenshots/split-monument/post-2/frame-000.png",
             "evidence/gallery-screenshots/split-monument/post-2/frame-030.png",
@@ -54,7 +800,13 @@
         {
           "revision": "post-completion-3",
           "commit": "5b1484f",
-          "frames": [0, 30, 60, 90, 120],
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
           "screenshots": [
             "evidence/gallery-screenshots/split-monument/post-3/frame-000.png",
             "evidence/gallery-screenshots/split-monument/post-3/frame-030.png",
@@ -65,6 +817,279 @@
           "parent_vision": "pass",
           "source_geometry": "pass",
           "findings": "Final parent visual pass found no clipping, overlap, stray geometry, typographic defect, or state inconsistency; source geometry review independently converged on the same revision."
+        }
+      ]
+    },
+    {
+      "recipe": "strategy-switchboard",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/strategy-switchboard/convergence/frame-000.png",
+            "evidence/gallery-screenshots/strategy-switchboard/convergence/frame-030.png",
+            "evidence/gallery-screenshots/strategy-switchboard/convergence/frame-060.png",
+            "evidence/gallery-screenshots/strategy-switchboard/convergence/frame-090.png",
+            "evidence/gallery-screenshots/strategy-switchboard/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Parent-vision review of the five deterministic frames (0/30/60/90/120) found only the Visual Recipe Gallery window: no foreign chat, terminal, IDE, or overlay. Recipe canvas matches the expected composition; animation phases are distinct and frame 0/120 loop-closes. Source geometry was reviewed during recipe construction on this branch."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/strategy-switchboard/post-1/frame-000.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-1/frame-030.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-1/frame-060.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-1/frame-090.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 1: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/strategy-switchboard/post-2/frame-000.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-2/frame-030.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-2/frame-060.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-2/frame-090.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 2: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/strategy-switchboard/post-3/frame-000.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-3/frame-030.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-3/frame-060.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-3/frame-090.png",
+            "evidence/gallery-screenshots/strategy-switchboard/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 3: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        }
+      ]
+    },
+    {
+      "recipe": "trajectory-orrery",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/trajectory-orrery/convergence/frame-000.png",
+            "evidence/gallery-screenshots/trajectory-orrery/convergence/frame-030.png",
+            "evidence/gallery-screenshots/trajectory-orrery/convergence/frame-060.png",
+            "evidence/gallery-screenshots/trajectory-orrery/convergence/frame-090.png",
+            "evidence/gallery-screenshots/trajectory-orrery/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Parent-vision review of the five deterministic frames (0/30/60/90/120) found only the Visual Recipe Gallery window: no foreign chat, terminal, IDE, or overlay. Recipe canvas matches the expected composition; animation phases are distinct and frame 0/120 loop-closes. Source geometry was reviewed during recipe construction on this branch."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/trajectory-orrery/post-1/frame-000.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-1/frame-030.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-1/frame-060.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-1/frame-090.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 1: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/trajectory-orrery/post-2/frame-000.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-2/frame-030.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-2/frame-060.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-2/frame-090.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 2: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/trajectory-orrery/post-3/frame-000.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-3/frame-030.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-3/frame-060.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-3/frame-090.png",
+            "evidence/gallery-screenshots/trajectory-orrery/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 3: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        }
+      ]
+    },
+    {
+      "recipe": "weatherline-observatory",
+      "convergence_passes": [
+        {
+          "revision": "convergence-v1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/weatherline-observatory/convergence/frame-000.png",
+            "evidence/gallery-screenshots/weatherline-observatory/convergence/frame-030.png",
+            "evidence/gallery-screenshots/weatherline-observatory/convergence/frame-060.png",
+            "evidence/gallery-screenshots/weatherline-observatory/convergence/frame-090.png",
+            "evidence/gallery-screenshots/weatherline-observatory/convergence/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Parent-vision review of the five deterministic frames (0/30/60/90/120) found only the Visual Recipe Gallery window: no foreign chat, terminal, IDE, or overlay. Recipe canvas matches the expected composition; animation phases are distinct and frame 0/120 loop-closes. Source geometry was reviewed during recipe construction on this branch."
+        }
+      ],
+      "post_completion_passes": [
+        {
+          "revision": "post-completion-1",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/weatherline-observatory/post-1/frame-000.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-1/frame-030.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-1/frame-060.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-1/frame-090.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-1/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 1: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-2",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/weatherline-observatory/post-2/frame-000.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-2/frame-030.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-2/frame-060.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-2/frame-090.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-2/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 2: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
+        },
+        {
+          "revision": "post-completion-3",
+          "commit": "1c8c17b",
+          "frames": [
+            0,
+            30,
+            60,
+            90,
+            120
+          ],
+          "screenshots": [
+            "evidence/gallery-screenshots/weatherline-observatory/post-3/frame-000.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-3/frame-030.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-3/frame-060.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-3/frame-090.png",
+            "evidence/gallery-screenshots/weatherline-observatory/post-3/frame-120.png"
+          ],
+          "parent_vision": "pass",
+          "source_geometry": "pass",
+          "findings": "Post-completion pass 3: parent-vision review found a clean gallery window and the expected recipe canvas at all five frames; no foreign overlay."
         }
       ]
     }
