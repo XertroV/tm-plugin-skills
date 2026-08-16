@@ -26,6 +26,35 @@ namespace RecipeChicaneTypesetter {
         return d / len;
     }
 
+    // Representative panel field used by tests (wide gallery column).
+    vec2 DemoField() { return vec2(520.0f, 164.0f); }
+
+    float ScreenSegLen(float t0, float t1, vec2 field) {
+        return ((LinePoint(t1) - LinePoint(t0)) * field).Length();
+    }
+
+    // Map equal screen-arc fraction s in [0, 1] to the curve parameter t.
+    // Equal-t samples bunch on the flats and stretch on the S-bends once the
+    // panel is wider than it is tall; paint must be spaced in screen pixels.
+    float ArcT(float s, vec2 field) {
+        if (s <= 0.0f) return 0.0f;
+        if (s >= 1.0f) return 1.0f;
+        int samples = 64;
+        float[] cum(samples + 1, 0.0f);
+        for (int i = 1; i <= samples; i++) {
+            cum[i] = cum[i - 1] + ScreenSegLen(float(i - 1) / float(samples), float(i) / float(samples), field);
+        }
+        float target = s * cum[samples];
+        for (int i = 1; i <= samples; i++) {
+            if (cum[i] >= target) {
+                float span = cum[i] - cum[i - 1];
+                float u = span < 0.0001f ? 0.0f : (target - cum[i - 1]) / span;
+                return (float(i - 1) + u) / float(samples);
+            }
+        }
+        return 1.0f;
+    }
+
     // Where the text mass sits on the line as the story advances; the wordmark
     // surfs the chicane and returns home.
     float TextAnchor(float phase) {
@@ -76,56 +105,64 @@ namespace RecipeChicaneTypesetter {
         vec2 sectorSize = UI::MeasureString(sector);
         dl.AddText(vec2(max.x - 26.0f - sectorSize.x, pos.y + 22.0f), quiet, sector);
 
-        // Kerbs: alternating red/white blocks flanking the racing line.
+        // Kerbs: alternating red/white blocks flanking the racing line,
+        // spaced by screen arc-length so corners neither bunch nor stretch.
         for (int s = 0; s < 64; s++) {
-            float t0 = float(s) / 64.0f;
-            float t1 = float(s + 1) / 64.0f;
+            float t0 = ArcT(float(s) / 64.0f, field);
+            float t1 = ArcT(float(s + 1) / 64.0f, field);
             vec2 p0 = origin + LinePoint(t0) * field;
             vec2 p1 = origin + LinePoint(t1) * field;
-            vec2 tan0 = LineTangent(t0);
-            vec2 norm0 = vec2(-tan0.y, tan0.x);
+            vec2 tan = LineTangent((t0 + t1) * 0.5f);
+            vec2 norm = vec2(-tan.y, tan.x);
             bool red = (s % 2) == 0;
             vec4 curb = red ? curbRed : curbWhite;
             curb.w = 0.55f;
             for (int side = -1; side <= 1; side += 2) {
-                vec2 off = norm0 * float(side) * 26.0f;
+                vec2 off = norm * float(side) * 26.0f;
                 dl.AddLine(p0 + off, p1 + off, curb, 7.0f);
             }
         }
 
-        // The racing line itself: dashed paint down the center.
+        // The racing line itself: dashed paint down the center, same arc spacing.
         for (int s = 0; s < 48; s++) {
             if (s % 2 == 1) continue;
-            float t0 = float(s) / 48.0f;
-            float t1 = float(s + 1) / 48.0f;
+            float t0 = ArcT(float(s) / 48.0f, field);
+            float t1 = ArcT(float(s + 1) / 48.0f, field);
             vec2 p0 = origin + LinePoint(t0) * field;
             vec2 p1 = origin + LinePoint(t1) * field;
             dl.AddLine(p0, p1, vec4(linePaint.x, linePaint.y, linePaint.z, 0.65f), 2.0f);
         }
 
         // The wordmark: each glyph is placed on the line at its own arc
-        // offset and rotated to the local tangent — type as a vehicle.
+        // offset. ImGui AddText cannot rotate, so the letters stay upright
+        // and a concentric halo sits behind the strokes (no slipped copy —
+        // that leaked cyan through the C/H/E counters).
         string word = TrackText();
         UI::PushFont(UI::Font::DefaultBold);
         UI::PushFontSize(30);
         float anchor = TextAnchor(phase);
         float glyphSpacing = 0.052f;
         for (int i = 0; i < word.Length; i++) {
-            float t = anchor + float(i) * glyphSpacing;
-            t = t - Math::Floor(t);
+            float sGlyph = anchor + float(i) * glyphSpacing;
+            sGlyph = sGlyph - Math::Floor(sGlyph);
+            float t = ArcT(sGlyph, field);
             vec2 at = origin + LinePoint(t) * field;
             vec2 tan = LineTangent(t);
             string glyph = word.SubStr(i, 1);
-            // Slip glow behind the glyph, brighter on the racing apex.
             float apex = Math::Abs(Math::Sin(t * Math::PI * 2.0f * 1.5f));
+            // Direction tick first, below the glyph box so it cannot draw
+            // through open counters.
+            dl.AddLine(at + vec2(0.0f, 20.0f), at + vec2(0.0f, 20.0f) + tan * 9.0f, vec4(typeGlow.x, typeGlow.y, typeGlow.z, 0.5f), 1.5f);
+            vec2 glyphPos = at + vec2(0.0f, -12.0f);
             vec4 glow = typeGlow;
-            glow.w = 0.10f + apex * 0.20f;
-            dl.AddText(at + vec2(-1.5f, -14.0f), glow, glyph);
+            glow.w = 0.10f + apex * 0.16f;
+            dl.AddText(glyphPos + vec2(-1.0f, 0.0f), glow, glyph);
+            dl.AddText(glyphPos + vec2(1.0f, 0.0f), glow, glyph);
+            dl.AddText(glyphPos + vec2(0.0f, -1.0f), glow, glyph);
+            dl.AddText(glyphPos + vec2(0.0f, 1.0f), glow, glyph);
             vec4 ink = typeInk;
             ink.w = 0.75f + apex * 0.25f;
-            dl.AddText(at + vec2(0.0f, -12.0f), ink, glyph);
-            // Direction tick under each glyph follows the tangent.
-            dl.AddLine(at + vec2(0.0f, 8.0f), at + vec2(0.0f, 8.0f) + tan * 9.0f, vec4(typeGlow.x, typeGlow.y, typeGlow.z, 0.5f), 1.5f);
+            dl.AddText(glyphPos, ink, glyph);
         }
         UI::PopFontSize();
         UI::PopFont();

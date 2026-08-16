@@ -40,6 +40,31 @@ namespace Tests {
     }
 
     [Test]
+    void ChicaneTypesetter_ArcTHitsTheEnds(Tests::Context@ ctx) {
+        vec2 field = RecipeChicaneTypesetter::DemoField();
+        ctx.AssertSameApprox(RecipeChicaneTypesetter::ArcT(0.0f, field), 0.0f, "arc start is t = 0");
+        ctx.AssertSameApprox(RecipeChicaneTypesetter::ArcT(1.0f, field), 1.0f, "arc end is t = 1");
+    }
+
+    [Test]
+    void ChicaneTypesetter_EqualArcDashesHaveUniformScreenLength(Tests::Context@ ctx) {
+        // Equal-t sampling stretches/bunches dashes on the S-bends (ratio ~1.6
+        // on the demo field). Arc-length samples must stay within 8%.
+        vec2 field = RecipeChicaneTypesetter::DemoField();
+        float minLen = 1000.0f;
+        float maxLen = 0.0f;
+        for (int s = 0; s < 32; s++) {
+            float t0 = RecipeChicaneTypesetter::ArcT(float(s) / 32.0f, field);
+            float t1 = RecipeChicaneTypesetter::ArcT(float(s + 1) / 32.0f, field);
+            float len = RecipeChicaneTypesetter::ScreenSegLen(t0, t1, field);
+            if (len < minLen) minLen = len;
+            if (len > maxLen) maxLen = len;
+        }
+        ctx.AssertTrue(minLen > 0.5f, "arc dashes have real length");
+        ctx.AssertTrue(maxLen / minLen < 1.08f, "equal-arc dashes stay within 8% length");
+    }
+
+    [Test]
     void ChicaneTypesetter_ClipInstrumentationStartsBalanced(Tests::Context@ ctx) {
         ctx.AssertTrue(RecipeChicaneTypesetter::clipDepth == 0, "render-independent start-state assertion");
     }
