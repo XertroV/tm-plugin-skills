@@ -79,8 +79,27 @@ Remote or programmatic actions activate invisible/undrawn controls. Default to
 ### Export/module identity mismatch
 
 Importer/exporter topology or shared identity assumptions differ between LSP,
-generator, and Openplanet. Prefer ordinary exports unless shared identity/state
-is required; validate dependent load and unload order in game.
+generator, and Openplanet. Prefer ordinary exports unless a type or interface
+must be one shared identity across modules; validate dependent load and unload
+order in game. Reload traps (upstream openplanet-nl/issues #244/#383/#451/
+#503): stale shared-class definitions held by registries in other plugins block
+exporter reload; reload exporter first; prefer shared interfaces over shared
+base classes; shared interface signature changes need a game restart; exporter
+failing while dependents compile can mean a shared type is missing from
+`shared_exports`.
+
+### Shared-export reload traps
+
+A shared class/interface is edited while dependents or registries in other
+loaded modules still reference the old definition; or reload order is
+dependent-before-exporter; or a shared type used by the exporter itself is
+missing from `shared_exports`. Symptoms: "shared classes having different
+definitions" errors that survive exporter reloads; exporter failing while
+dependents compile; errors on school/dev-mode switches with no file change.
+Upstream: openplanet-nl/issues #65, #244, #383, #451, #503. Prevention: prefer
+shared interfaces over shared base classes; define shared interfaces complete
+up front (signature changes need a game restart); reload exporter first; fix
+stale-reference holders rather than restarting.
 
 ### Architecture erosion
 

@@ -129,13 +129,42 @@ adversarial review is performed.
   exports are used without a genuine identity requirement.
 - **Symptom/impact:** game compile differs from LSP, tests cannot see symbols,
   dependency reload becomes fragile, or instances unexpectedly diverge/share.
-- **Invariant:** ordinary exports compile into dependents; shared exports are
-  reserved for intentional cross-module identity/state.
+- **Invariant:** ordinary exports compile into dependents (each plugin gets its
+  own copy, so the same class is a different class per module); shared exports
+  are reserved for types/interfaces that must be one identity across modules —
+  signatures, passing, casts, or a single shared instance.
 - **Evidence:** SkillpackDemoLib test-companion in-game compile failure and fix.
 - **Reviewer probe:** derive actual surface from `info.toml`; test in exporting
   and dependent modules; walk nested shared types and reload order.
 - **Prevention/evidence gate:** consumer-side ordinary-export tests, shared-type
   closure audit, and game/LSP compile parity.
+
+### Shared-export reload traps
+
+- **Trigger:** a shared class/interface is edited while dependents or registries
+  in other loaded modules still reference the old definition; reload order is
+  dependent-before-exporter; or a shared type used by the exporter itself is
+  missing from `shared_exports` in `info.toml`.
+- **Symptom/impact:** "shared classes having different definitions" compile
+  errors that survive reloads of the exporter; exporter fails to compile while
+  dependents succeed; errors appearing on school/dev-mode switches with no file
+  change; stale function bodies applying silently after a body-only edit.
+  Upstream: openplanet-nl/issues #65, #244, #383, #451, #503.
+- **Invariant:** shared types have exactly one live definition across all loaded
+  modules; changing one requires rebuilding every module that can hold a
+  reference, in exporter-first order, or a script-engine/game restart.
+- **Evidence:** MLFeed/MLHook registry held stale hook-class references —
+  reloading MLHook (the holder) unblocked MLFeed (the exporter); ai-api
+  documents game-restart re-linking for shared interface signature changes.
+- **Reviewer probe:** map every shared type's consumers *and* registration
+  holders (registries, caches, retained handles in third-party plugins); check
+  reload transcripts exporter-first; flag shared class hierarchies where a
+  shared interface would do.
+- **Prevention/evidence gate:** prefer shared interfaces over shared base
+  classes (interface surfaces change less; shared-class reload bugs are
+  subtle); define shared interfaces complete up front; keep concrete
+  implementations internal; fix stale-reference holders rather than restarting
+  as a workaround during development.
 
 ### Network architecture mismatch
 

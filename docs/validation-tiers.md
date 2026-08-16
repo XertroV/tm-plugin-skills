@@ -55,8 +55,9 @@ editor mutation, asynchronous state, and multi-file reusable APIs.
 
 Includes Tier 1 plus:
 
-1. Ordinary-export consumer test; `shared_exports` only for required shared
-   identity/state, with shared-type closure and reload-order checks.
+1. Ordinary-export consumer test; `shared_exports` only for types/interfaces
+   requiring one identity across modules, with shared-type closure and
+   reload-order checks.
 2. Ownership/state-machine note covering callbacks, coroutines, generations,
    terminal states, resources, and teardown.
 3. Boundary and transition probes: null/empty, zero/one/exact limit, timeout,

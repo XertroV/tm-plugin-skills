@@ -55,8 +55,10 @@ review invokes lifecycle/control/visual evidence rather than inferring success.
    before later work builds on it.
 4. **Demo topology:** development plugins use category `Skillpack Demos` and a
    tracked initialization brief.
-5. **Exports:** prefer ordinary `exports`; use `shared_exports` only for required
-   shared identity/state and prove dependent/reload topology in game.
+5. **Exports:** prefer ordinary `exports`; use `shared_exports` only when a type
+   or interface must be one shared identity across plugins (cross-module
+   signatures, passing, casts, or a single shared instance) and prove
+   dependent/reload topology in game.
 6. **Rendering:** one authoritative owner per UI surface and overlay state.
    Never submit the same ImGui window ID twice in one frame.
 7. **Identity:** every interactive widget has a stable explicit ID derived from
@@ -82,7 +84,8 @@ review invokes lifecycle/control/visual evidence rather than inferring success.
 
 Experienced mechanisms and reviewer checks live in
 `docs/openplanet-gotchas.md`, `docs/reviewer-failure-ledger.md`, and
-`docs/reviewer-workflow.md`.
+`docs/reviewer-workflow.md`. API deprecations and their replacements are logged
+by version in `docs/openplanet-deprecations.md`.
 
 ## 5. Validation contract
 

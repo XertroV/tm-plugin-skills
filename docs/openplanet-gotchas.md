@@ -11,7 +11,9 @@
 
 These are defaults learned from real plugin work. Apply them early; they prevent
 bugs that are disproportionately difficult to diagnose after components spread
-across multiple plugins.
+across multiple plugins. For renamed/removed APIs, also check
+`docs/openplanet-deprecations.md` — a running log of versioned deprecations and
+their replacements.
 
 ## Render callbacks are not interchangeable
 
@@ -120,16 +122,72 @@ it was forced and must not claim a physical mouse click or hover occurred.
 
 ## Ordinary exports are compiled into dependents
 
-Prefer ordinary `exports` for stateless demo helpers and classes that do not
-need shared cross-plugin identity. Openplanet compiles those files into each
-dependent module, which keeps development plugins isolated and avoids shared
-instance lifecycle problems.
+Prefer ordinary `exports` for stateless helpers and classes that do not need
+shared cross-plugin identity. Openplanet compiles those files into each
+dependent module: each plugin gets its own copy, so the same class compiled
+into two plugins is a *different* class in each — types do not match across
+module boundaries for signatures or casts. Ordinary export files therefore
+typically carry function `import` statements, giving the dependent typed access
+back into the dependency's own module. This keeps development plugins isolated
+and avoids shared instance lifecycle problems.
 
 Consequences:
 
 - test ordinary-export symbols from a dependent demo module;
 - do not expect them to exist in the exporting library's own module; and
-- use `shared_exports` only for genuine shared identity or state.
+- use `shared_exports` when a type, class, or interface must be *one* identity
+  across plugins (e.g. appear in cross-plugin function signatures, be passed
+  between plugins, or back a shared registration instance) — shared state falls
+  out of that single identity, it is not the mechanism.
+
+An ordinary export file pairs with the real implementation like a C header: the
+export holds `import ... from "Module";` declarations, the implementation lives
+in a normal source file in the exporting plugin. When you change a function
+signature, change both files. (Official tutorial:
+`openplanet.dev/docs/tutorials/plugin-dependencies`.)
+
+## Shared exports: reload and identity hazards
+
+`shared_exports` compile into both the exporting plugin and every dependent,
+establishing one shared type identity. Hazards observed in the wild
+(openplanet-nl/issues):
+
+- **Stale definitions block reload** (#244, #383, #451): if any other loaded
+  module still holds a reference to a shared class's old definition (e.g. an
+  uncleared registry — MLHook kept hook classes registered), reloading the
+  exporter fails with "shared classes having different definitions". The fix
+  may be clearing the *holding* plugin's references, not the exporter's; a
+  script-engine or game restart always clears it.
+- **Reload order matters** (#65, #244): reload the dependency (exporter) first;
+  dependents must rebuild against the new definition. Reloading only a
+  dependent after a shared-type change produces the mismatch error even when
+  nothing is wrong. A shared class edited to an incompatible definition and
+  reloaded fails a second reload too — change it back or restart.
+- **Signature changes to shared interfaces require a game restart** for all
+  importers to re-link (observed in ai-api). Define shared interfaces full and
+  complete up front; non-breaking additions (new free functions, new concrete
+  classes) are safe without a restart.
+- **Prefer shared interfaces over shared base classes** where possible:
+  interface surfaces change far less than class bodies, and shared-class
+  reloading has subtle Openplanet bugs (#451: definitions not cleared on
+  reload, exception-adjacent, can even trigger on school/dev-mode switches
+  without any file change). ai-api shares only `ILlmProvider`; all concrete
+  provider classes stay internal.
+- **Shared entities cannot access non-shared entities** (Angelscript rule):
+  audit the full custom-type closure of exported signatures — every
+  plugin-defined nested return/parameter/base type must itself be `shared`;
+  game/Openplanet built-ins do not.
+- **A shared export must be listed in `info.toml` to compile into the exporter**
+  (#503): a shared type used by the exporter itself but missing from
+  `shared_exports` can leave the exporter failing to compile while dependents
+  compile fine.
+- `export_dependencies` re-exports a transitive dependency: A depends on B
+  depends on C, where B's exports contain types from C — list C in B's
+  `export_dependencies` so A can compile against those types (used by
+  MLFeedRaceData → MLHook).
+- Log lines printed from shared-export code are attributed to the *running*
+  plugin, not the exporter (#824) — when tracing, prefix messages yourself if
+  attribution matters.
 
 All skill-dev, test, and demo plugins use the `Skillpack Demos` category and may
 depend on `SkillpackDemoLib` for common infrastructure.

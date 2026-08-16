@@ -43,8 +43,9 @@ libraries are exempt.
 
 Prefer project tooling when present. Default an ordinary project to one plugin
 module; add cross-plugin topology only when its dependency and lifetime costs are
-justified. Prefer ordinary exports; reserve `shared_exports` for APIs that truly
-require shared cross-plugin identity or state.
+justified. Prefer ordinary exports; reserve `shared_exports` for types or
+interfaces that must be one shared identity across plugins (cross-module
+signatures, passing, casts, or a single shared instance).
 
 **Gate:** the canonical source, runtime staging destination, capabilities, and
 validation path are explicit before editing.

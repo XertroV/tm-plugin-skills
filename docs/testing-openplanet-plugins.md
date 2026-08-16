@@ -74,8 +74,9 @@ Prefer deterministic pure seams:
 Ordinary `exports` are compiled into dependent modules, not into the exporting
 library's own module. Put focused tests for those helpers in a dependent demo
 companion. Do not create a library-local test that assumes its ordinary export
-symbols exist in the library module. Use `shared_exports` only when real shared
-identity or state is required, not merely to make a test visible.
+symbols exist in the library module. Use `shared_exports` only when a type or
+interface must be one shared identity across plugins (signatures, passing, or
+casts across module boundaries), not merely to make a test visible.
 
 Do not call ImGui, draw-list, or NVG drawing APIs from a normal `[Test]` unless
 a dedicated live probe proves that the test runner supplies a valid render
