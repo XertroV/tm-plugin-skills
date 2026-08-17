@@ -109,6 +109,8 @@ versioned evidence precedent only when UI containment is in scope.
 - Cheap local UI state changes need no coroutine when they cannot throw or yield.
 - `yield()` / `yield(n)` / `sleep(ms)` inside `startnew(...)` are the correct
   waits. `Dev::Sleep` is the finding.
+- A virtualized or culled list is not the render bottleneck until stable
+  section timings say so.
 - Cached handles are acceptable with explicit owner and generation bounds.
 - Multiple socket writes are findings only when sole-writer/order/full-write
   semantics are absent or unproven.

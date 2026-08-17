@@ -129,7 +129,10 @@ or fault fixture, and development guidance before proceeding.
 
 Load [exports and architecture](references/exports-and-architecture.md) when the
 increment affects module boundaries, dependencies, async ownership, networking,
-or nontrivial architecture.
+or nontrivial architecture. Load [render and frame
+performance](references/render-performance.md) when measuring or budgeting
+`Render` / `RenderInterface` / `Update`, caching draw-path work, or applying
+bulk state across frames.
 
 **Gate:** ownership, terminal states, teardown, and applicable gotcha/reviewer
 feedback are represented in code and evidence rather than left as prose debt.

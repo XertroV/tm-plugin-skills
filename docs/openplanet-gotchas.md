@@ -54,7 +54,11 @@ exception left heartbeats running. Treat that as versioned project evidence and
 rerun the bundled fixture before claiming demonstration in another environment.
 Treat render paths as fragile:
 keep them deterministic, bounded, and limited to drawing plus cheap local state
-changes.
+changes. A plugin's `Render` / `RenderInterface` should stay in the low
+milliseconds in steady state. Instrument sections with `Time::Now` before
+optimizing; do not serialize growing data or rebuild registries on the draw
+path; frame-batch bulk applies with `yield()`. Recipes:
+`skills/openplanet-dev/references/render-performance.md`.
 
 Button presses and other UI events should launch potentially throwing,
 yielding, networked, filesystem, or multi-step mutations through `startnew(...)`

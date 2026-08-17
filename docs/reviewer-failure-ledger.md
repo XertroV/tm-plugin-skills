@@ -278,6 +278,31 @@ adversarial review is performed.
   matches the condition; lifecycle waits are frame-counted. Language primitive;
   do not add a demo that calls `Dev::Sleep`.
 
+### Per-frame O(n) serialization
+
+- **Trigger:** `Render` / `RenderInterface` / `Update` serializes or parses
+  growing history (`Json::Write` / `Json::Parse`, request-body rebuild, token
+  count), rebuilds a static-ish registry every call, or applies a bulk
+  `O(n)` job synchronously on the game loop. Paired UI sections often each
+  invoke the same helper.
+- **Symptom/impact:** the plugin owns a large fraction of the ~16 ms frame
+  (jank, 100 ms/frame UIs); or a one-shot replay/load wedges the game for
+  seconds. The obvious list/cull is often innocent.
+- **Invariant:** draw/update do O(1) or O(visible) work. Growing-data
+  derivations sit behind a fingerprint or version-counter cache with hit/miss
+  counters. Bulk jobs cross `startnew(...)` and `yield()` in bounded chunks.
+- **Evidence:** [Add render/frame performance guidance](https://github.com/XertroV/tm-plugin-skills/issues/18);
+  tm-agent 2026-08-17: 201-message session ~100 ms → 1.8 ms/frame after
+  fingerprint-cached stats and version-cached tool schemas; message-list cull
+  was 0.1–0.7 ms; synchronous 200-row replay ~8 s, then ~12 rows/frame.
+- **Reviewer probe:** time each render section with stable `Time::Now`
+  buckets; search `Json::Write`/`Parse` and registry builders reachable from
+  draw/update; confirm caches invalidate only on mutation; confirm bulk
+  applies are chunked. Separate warmup spikes from settled averages.
+- **Prevention/evidence gate:** profiler report on a real (not empty)
+  fixture; cache hit/miss counters; no unbounded loop in `Render*`.
+  Measurement discipline, not a gallery demo.
+
 ### Zero-progress and boundary behavior
 
 - **Trigger:** a queue/time budget expires before processing item zero or exactly

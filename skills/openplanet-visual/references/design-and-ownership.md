@@ -20,7 +20,7 @@ Default ImGui inherits the installed Openplanet theme. Read style metrics; do no
 
 ## Callback containment
 
-Drawing paths are deterministic, bounded, and exception-minimal. Risky semantic actions cross `startnew(...)` using typed click-time snapshots, explicit busy/cancel/generation ownership, post-yield reacquisition, and terminal cleanup. Inject a throwing action and a transition-during-yield probe; later frames must still render and stale work must abort safely.
+Drawing paths are deterministic, bounded, exception-minimal, and cheap: keep a plugin's `Render` / `RenderInterface` in the low milliseconds in steady state. Risky semantic actions cross `startnew(...)` using typed click-time snapshots, explicit busy/cancel/generation ownership, post-yield reacquisition, and terminal cleanup. Inject a throwing action and a transition-during-yield probe; later frames must still render and stale work must abort safely.
 
 ## Evidence origins and limits
 

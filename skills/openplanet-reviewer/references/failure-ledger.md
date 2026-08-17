@@ -56,6 +56,15 @@ normal path, `sleep()` used for frame-counted lifecycle, `yield(n)` used for
 wall-clock time, and a single `yield()` used as the entire compile/log wait
 across a queued reload. After unload/reload, `yield()` then re-resolve by ID.
 
+### Per-frame O(n) serialization
+
+Draw/update serializes growing history, rebuilds a static registry every
+call, or applies a bulk `O(n)` job on the game loop. Time sections with
+stable `Time::Now` labels before blaming the obvious list. Require
+fingerprint or version-counter caches with hit/miss counters, and
+`startnew` + `yield()` chunking for bulk applies. Measure settled frames
+on a real fixture, not a warmup spike or empty session.
+
 ### Transactional mutation restoration
 
 Patches, hooks, intercepts, temporary modes, or settings survive early return,
