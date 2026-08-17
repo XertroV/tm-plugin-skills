@@ -62,6 +62,13 @@ To select one skill:
 npx skills add XertroV/tm-plugin-skills --skill openplanet-reviewer
 ```
 
+From a local clone (or this checkout):
+
+```bash
+npx skills add /path/to/tm-plugin-skills
+npx skills add .    # from the repository root
+```
+
 ### Claude Code plugin
 
 Clone the repository, then load that checkout directly:
