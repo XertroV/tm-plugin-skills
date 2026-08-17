@@ -114,6 +114,10 @@ yielding, networked, filesystem, or multi-step game mutation behind a real
 `startnew(...)` boundary rather than calling a coroutine-typed callback inline.
 Snapshot typed inputs, revalidate generations/state after yields, and define
 success, failure, timeout, cancellation, stale-result, and unload terminals.
+Reach for `yield()` first; use `yield(n)` for frame-counted waits and
+`sleep(ms)` for wall-clock time. Never call `Dev::Sleep` on a normal path — it
+blocks the main thread. Load [wait primitives](references/wait-primitives.md)
+when choosing a wait.
 
 Interactive controls use stable explicit IDs. One callback owns each rendered
 surface per overlay state; balance every UI/style/clip scope on all paths.

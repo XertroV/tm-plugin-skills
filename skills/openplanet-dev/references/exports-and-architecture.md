@@ -77,7 +77,8 @@ invariants, and abandoned parallel architectures.
 
 A `CoroutineFunc` called inline is still inline. Potentially throwing, yielding,
 I/O, network, or multi-step mutation crosses `startnew(...)` with typed captured
-state. Reacquire/revalidate after yields. Specify duplicate-launch policy and all
+state. Reacquire/revalidate after yields. Reach for `yield()` first; see
+[wait primitives](wait-primitives.md). Specify duplicate-launch policy and all
 terminals: success, partial failure, timeout, cancellation, stale generation,
 mode/map/session transition, disable, destroy, and reload.
 

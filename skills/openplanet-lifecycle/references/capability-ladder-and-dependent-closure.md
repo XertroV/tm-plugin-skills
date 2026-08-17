@@ -21,7 +21,7 @@ Before loading or reloading target `T`:
 2. Compute the transitive loaded reverse-dependent closure, excluding `T`.
 3. Store each member’s ID and live reload descriptor (`SourcePath`, source, type, version). Store `T`’s descriptor too.
 4. If an unrestored snapshot already exists after a failed attempt, reuse it. A retry must not overwrite it with the now-empty live closure.
-5. Let Openplanet cascade unload. Reload `T`, yield, re-resolve by ID, and wait for external fresh-log health evidence.
+5. Let Openplanet cascade unload. Reload `T`, `yield()`, re-resolve by ID, and wait for external fresh-log health evidence. A single `yield()` covers handle invalidation; compile/log settle across the reload can need `yield(n)`, not `sleep()` or `Dev::Sleep`.
 6. If `T` fails, retain the snapshot and load no dependents.
 7. If `T` succeeds, topologically sort the retained members by forward dependencies and load providers before consumers. Verify each from the fresh log.
 8. Clear snapshot memory only after successful restoration or explicit replacement.
@@ -46,7 +46,7 @@ and do not restore required dependents until a later explicit load request.
 | No readable log | Compilation evidence incomplete; socket success is not a pass |
 | Dual plugin paths | Byte-compare both against staged source and correlate fresh log identity |
 
-Openplanet lifecycle operations are queued and plugin handles become invalid next frame. Yield and resolve by ID after mutation.
+Openplanet lifecycle operations are queued and plugin handles become invalid next frame. `yield()` and resolve by ID after mutation; never `Dev::Sleep`.
 
 `prototypes/lifecycle-bridge-contract/` is the executable host-side contract
 model for snapshot retention, unload-only behavior, topological restoration,

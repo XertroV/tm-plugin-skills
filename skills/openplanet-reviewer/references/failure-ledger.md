@@ -47,6 +47,15 @@ and cleanup after partial teardown.
 Loading/busy/in-progress flags or waiters have no error/timeout/cancel terminal.
 Enumerate exactly one terminal state and cleanup for every exit.
 
+### Wrong wait primitive
+
+`Dev::Sleep` blocks the main thread; `sleep()` is the cooperative wall-clock
+wait; `yield()` / `yield(n)` are frame waits (`yield()` is `yield(1)`;
+`yield(0)` is a no-op; `sleep(0)` yields one frame). Flag `Dev::Sleep` on any
+normal path, `sleep()` used for frame-counted lifecycle, `yield(n)` used for
+wall-clock time, and a single `yield()` used as the entire compile/log wait
+across a queued reload. After unload/reload, `yield()` then re-resolve by ID.
+
 ### Transactional mutation restoration
 
 Patches, hooks, intercepts, temporary modes, or settings survive early return,

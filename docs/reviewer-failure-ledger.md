@@ -251,6 +251,33 @@ adversarial review is performed.
 - **Prevention/evidence gate:** explicit terminal-state model and injected
   success/error/timeout/cancel tests with no remaining waiters.
 
+### Wrong wait primitive
+
+- **Trigger:** `Dev::Sleep` on a normal plugin path; `sleep()` used for a
+  frame-counted lifecycle or animation wait; `yield(n)` used for wall-clock
+  time; a single `yield()` used as the entire wait for compile/log evidence
+  across a queued reload.
+- **Symptom/impact:** the game and render freeze; a wait drifts with framerate
+  or wall-clock; handles or logs are read before the next-frame unload/reload
+  has settled.
+- **Invariant:** only cooperative waits run in product code (`yield()`,
+  `yield(n)`, `sleep(ms)`); the unit matches the condition (frames vs time);
+  `Dev::Sleep` is reserved for a deliberate named debug freeze.
+- **Evidence:** official `OpenplanetCore.json` (`yield()` = `yield(1)` next
+  tick; `yield(n)` framerate-dependent, use `sleep()` for time; `sleep()`
+  yields; `sleep(0)` = one frame; `yield(0)` is a no-op; `Dev::Sleep` has no
+  yield description). [Document yield()/yield(n_frames)/sleep(ms) coroutine
+  primitives and the Dev::Sleep main-thread hazard](https://github.com/XertroV/tm-plugin-skills/issues/17).
+  Sibling `tm-change-car-color/src/Main.as:57-58` replaced a hot-loop
+  `Dev::Sleep(5)` with `yield()`.
+- **Reviewer probe:** search `Dev::Sleep`; classify every wait as frame-counted
+  or wall-clock; after `Meta::UnloadPlugin` / `ReloadPlugin`, confirm
+  `yield()`-then-re-resolve-by-ID and that compile/log waits use `yield(n)`
+  settle frames.
+- **Prevention/evidence gate:** no `Dev::Sleep` on product paths; wait unit
+  matches the condition; lifecycle waits are frame-counted. Language primitive;
+  do not add a demo that calls `Dev::Sleep`.
+
 ### Zero-progress and boundary behavior
 
 - **Trigger:** a queue/time budget expires before processing item zero or exactly
