@@ -12,7 +12,21 @@ A build command exit, copy success, or digest of a different tree does not estab
 
 ## Fresh log window
 
-Immediately before the lifecycle action, record `Openplanet.log` path and byte size/offset. Parse only appended bytes. If size shrinks or the file rotates, record a new boundary and explain it. Preserve the raw slice or its path.
+The live log is `IO::FromDataFolder("Openplanet.log")`. Default filesystem
+locations for Trackmania Next:
+
+| File | Role |
+| --- | --- |
+| `~/OpenplanetNext/Openplanet.log` | Current session |
+| `~/OpenplanetNext/Openplanet-Old.log` | Previous session (one-generation rotate on restart) |
+
+Windows: `%USERPROFILE%\OpenplanetNext\` for both names. Wine/Proton often maps
+that user-profile folder to `~/OpenplanetNext`. Other products use
+`OpenplanetTurbo` / `Openplanet4` in the same user-profile place. Dated
+`Openplanet.log.crash-*` siblings are crash copies, not the live file. Native
+Trackmania `LogCrash_*.txt` under `Documents/Trackmania/` is a different log.
+
+Immediately before the lifecycle action, record `Openplanet.log` path and byte size/offset. Parse only appended bytes. If size shrinks or the file rotates, record a new boundary and explain it — a replace usually means a new session; look at `Openplanet-Old.log` if you needed the previous one. Preserve the raw slice or its path.
 
 Target load success requires all of:
 

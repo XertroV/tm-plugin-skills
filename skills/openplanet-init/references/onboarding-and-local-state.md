@@ -58,7 +58,7 @@ A useful receipt may contain:
 - Build command: <command or unavailable>
 - openplanet-lsp: <version/path/result or unavailable>
 - Lifecycle rung: <manual / bridge / RemoteBuild / control>
-- Openplanet.log: <path or unavailable>
+- Openplanet.log: <path or unavailable; probe ~/OpenplanetNext/Openplanet.log or %USERPROFILE%\OpenplanetNext\Openplanet.log>
 - Detected game/Openplanet version: <observed value or unknown>
 - First-load receipt: <fresh log offsets/timestamp and observable result>
 - Blocker: <attempt, exact cause, next step; omit if none>

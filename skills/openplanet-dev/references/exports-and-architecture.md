@@ -7,7 +7,8 @@ async ownership, networking, or nontrivial plugin architecture.
 
 Use one monolithic plugin unless independent deployment is worth cross-plugin
 compile, load-order, reload, and lifetime costs. Prefer mature ecosystem
-dependencies over reimplementing their product; declare required and optional
+dependencies over reimplementing their product; see
+[common dependencies](common-dependencies.md). Declare required and optional
 dependencies truthfully and exercise the missing/disabled path.
 
 For the skill-development harness, use a reusable library plus dependent demo
@@ -55,7 +56,10 @@ identity hazards"):
 - a shared type used by the exporter itself must be in `shared_exports` or the
   exporter can fail to compile while dependents succeed;
 - use `export_dependencies` when your exports expose types from a transitive
-  dependency.
+  dependency (A depends on B depends on C, and B's exports mention C's types —
+  list C in B so A compiles against those types without listing C). Consumers
+  of such a library inherit those exports and list the leaf library only, unless
+  they call the transitive plugin as their own first-class dependency.
 
 ## Ownership map for nontrivial plugins
 

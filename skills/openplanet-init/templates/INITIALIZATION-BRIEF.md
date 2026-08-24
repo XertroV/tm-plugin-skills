@@ -16,7 +16,7 @@ secrets in either artifact.
 - **Source, provenance, and AI use:** newly authored, owner-authorized, or copied/adapted sources and compatible licenses; truthful AI-use disclosure assumptions
 - **Paid-feature permissions:** required permissions/entitlements, or N/A
 - **Architecture / module topology:** default one plugin module; justify every additional plugin or shared boundary
-- **Dependencies:** required, optional with degradation behavior, or none
+- **Dependencies:** required, optional with degradation behavior, or none. Consult the openplanet-dev common-dependencies catalog before inventing accessors.
 - **Canonical source and build/staging flow:** source root, deterministic generated outputs, and relationship to the live plugin folder
 - **Expected Openplanet callbacks:**
 - **Smallest observable completion gate:** identity-level behavior that proves the first load without adding a product feature

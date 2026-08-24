@@ -55,8 +55,13 @@ validation path are explicit before editing.
 State the requested behavior, deterministic seam, live observation, affected
 callbacks/resources, and applicable gotcha/reviewer failure classes. Search
 current official docs and provenance-cleared project/sibling precedents before
-inventing an API pattern. Treat research, commented-out code, and unvalidated
-snippets as candidates, not recipes.
+inventing an API pattern. When the increment needs vehicle, camera, Nadeo HTTP,
+manialink, race/mode data, editor helpers, character/player vis, or club rooms,
+load [common dependencies](references/common-dependencies.md) and usually depend
+on a listed library (the user can overrule). For common operations (play/join/exit
+a map, game state, ghosts, hotkeys, menus, …) load
+[guides/INDEX.md](guides/INDEX.md). Treat research, commented-out code,
+and unvalidated snippets as candidates, not recipes.
 
 For copied/adapted public code, retain source and compatible license. Never
 fabricate provenance. Audit bundled fonts, images, audio, and other assets
@@ -127,7 +132,8 @@ invariant, exact evidence, reviewer probe, and prevention gate. Label hypotheses
 and their next probe. Feed confirmed mechanisms into the neighboring test, demo
 or fault fixture, and development guidance before proceeding.
 
-Load [exports and architecture](references/exports-and-architecture.md) when the
+Load [common dependencies](references/common-dependencies.md) when choosing or
+declaring a library. Load [exports and architecture](references/exports-and-architecture.md) when the
 increment affects module boundaries, dependencies, async ownership, networking,
 or nontrivial architecture. Load [render and frame
 performance](references/render-performance.md) when measuring or budgeting
@@ -157,7 +163,8 @@ claim.
 ### 7. Require lifecycle proof
 
 Invoke `openplanet-lifecycle` after every behavior-affecting increment. Require a
-fresh post-action `Openplanet.log` window showing the plugin loaded with no later
+fresh post-action `Openplanet.log` window (default `~/OpenplanetNext/Openplanet.log`,
+Windows `%USERPROFILE%\OpenplanetNext\`) showing the plugin loaded with no later
 compile error for it, then exercise the observable behavior. Run focused tests,
 reload-and-test where initialization matters, and applicable teardown/reload or
 dependent lifecycle checks. Rendering changes additionally require
