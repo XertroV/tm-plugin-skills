@@ -1,6 +1,8 @@
-# Openplanet Plugin Skills
+# Openplanet Plugin Skills (TM2020 focused)
 
 Opinionated agent skills for developing, testing, operating, and visually reviewing Openplanet AngelScript plugins.
+
+-- *By [XertroV](https://openplanet.dev/u/XertroV) w/ AI*
 
 This repository is currently being designed through a [Wayfinder map](https://github.com/XertroV/tm-plugin-skills/issues?q=label%3Awayfinder%3Amap).
 
