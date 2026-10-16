@@ -3,12 +3,13 @@
 Common operations. Open the matching file; each is standalone.
 
 The user can overrule a suggested library or API. Snippets are public domain.
-Each guide cites the plugin files and public repos the pattern came from.
+Code guides cite the plugin files and public repos the pattern came from.
 
 ## Maps and servers
 
 | Need | Guide |
 | --- | --- |
+| Create or replace dedicated server credentials | [dedicated-server-accounts.md](dedicated-server-accounts.md) |
 | Join a club room / server | [join-a-server.md](join-a-server.md) |
 | Play a local/URL map (`PlayMap`) | [play-a-map.md](play-a-map.md) |
 | Leave a map / return to the main menu | [exit-a-map.md](exit-a-map.md) |

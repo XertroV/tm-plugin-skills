@@ -34,6 +34,9 @@ This repository is currently being designed through a [Wayfinder map](https://gi
 - [`openplanet-reviewer`](skills/openplanet-reviewer/SKILL.md) — adversarial,
   evidence-graded review for subtle Openplanet runtime and architecture failure.
 
+For Trackmania dedicated server account creation and credential recovery, see
+[dedicated server accounts](skills/openplanet-dev/guides/dedicated-server-accounts.md).
+
 ## Validation
 
 Run the repository-owned quick gate with:
