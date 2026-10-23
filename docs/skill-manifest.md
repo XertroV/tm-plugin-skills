@@ -6,7 +6,7 @@ seventh invocation surface.
 
 | Skill | Trigger boundary | Completion gate |
 | --- | --- | --- |
-| `openplanet-init` | Scaffold, bootstrap, or normalize a plugin folder and `info.toml`. | Loadable identity plus first-load evidence or an explicit runtime blocker. |
+| `openplanet-init` | Search existing plugins, then scaffold, bootstrap, or normalize a plugin folder and `info.toml`. | Recorded reuse/extend/build decision; loadable identity plus first-load evidence or an explicit runtime blocker. |
 | `openplanet-dev` | Implement or modify AngelScript behavior, structure, settings, callbacks, dependencies, or architecture. | Static diagnostics plus required lifecycle/runtime proof for behavior changes. |
 | `openplanet-lifecycle` | Load, reload, unload, diagnose compilation, and prove the bytes actually running. | Fresh post-action log window plus observable behavior evidence when applicable. |
 | `openplanet-visual` | Design or review ImGui/NVG/custom-draw appearance. | Fresh screenshot critique under declared states and themes, plus lifecycle proof. |

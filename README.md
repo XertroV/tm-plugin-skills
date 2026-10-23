@@ -18,7 +18,11 @@ This repository is currently being designed through a [Wayfinder map](https://gi
 ## Promoted skills
 
 - [`openplanet-init`](skills/openplanet-init/SKILL.md) — scaffold and normalize
-  plugin identity, policy onboarding, tracked briefs, and private local state.
+  plugin identity after searching existing plugins, with policy onboarding,
+  tracked briefs, and private local state. Its bundled
+  [catalog helper](skills/openplanet-init/references/plugin-discovery.md) caches
+  Openplanet's plugin list across projects and checks versions to refresh changed
+  records, with periodic full metadata reconciliation.
 - [`openplanet-lifecycle`](skills/openplanet-lifecycle/SKILL.md) — stage, load,
   reload, unload, diagnose, restore dependents, and prove exact running bytes.
 - [`openplanet-dev`](skills/openplanet-dev/SKILL.md) — implement AngelScript with

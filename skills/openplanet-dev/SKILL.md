@@ -53,8 +53,12 @@ validation path are explicit before editing.
 ### 2. Define one observable increment
 
 State the requested behavior, deterministic seam, live observation, affected
-callbacks/resources, and applicable gotcha/reviewer failure classes. Search
-current official docs and provenance-cleared project/sibling precedents before
+callbacks/resources, and applicable gotcha/reviewer failure classes. Before
+adding a new capability, check the brief's existing-plugin discovery; if the
+capability falls outside that search, use the init skill's
+[cached catalog workflow](../openplanet-init/references/plugin-discovery.md)
+and record plausible existing features or dependencies before implementing.
+Search current official docs and provenance-cleared project/sibling precedents before
 inventing an API pattern. When the increment needs vehicle, camera, Nadeo HTTP,
 manialink, race/mode data, editor helpers, character/player vis, or club rooms,
 load [common dependencies](references/common-dependencies.md) and usually depend

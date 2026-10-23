@@ -9,6 +9,8 @@ must inherit are tracked; facts specific to this checkout stay clone-local.
 Track the completed initialization brief in the plugin repository. It records:
 
 - purpose, identity, target/tested games, and publication intent;
+- existing-plugin search terms, catalog date/limitations, candidates, and the
+  reuse/extend/build decision;
 - source/provenance and truthful AI-use assumptions;
 - paid-feature permissions and policy assumptions;
 - module topology, dependencies, exports, and durable ownership boundaries;

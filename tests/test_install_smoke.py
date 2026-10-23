@@ -3,6 +3,7 @@ from __future__ import annotations
 import shutil
 import os
 import subprocess
+import sys
 import tempfile
 import unittest
 import re
@@ -19,7 +20,30 @@ EXPECTED = {
 }
 
 
+def check_catalog_install(test: unittest.TestCase, install: Path) -> None:
+    """The init skill must run without the source checkout or extra packages."""
+    skill = install / "openplanet-init"
+    for relative in ("scripts/plugin_catalog.py", "references/plugin-discovery.md"):
+        test.assertEqual(
+            (skill / relative).read_bytes(),
+            (ROOT / "skills" / "openplanet-init" / relative).read_bytes(),
+        )
+    result = subprocess.run(
+        [sys.executable, "-I", str(skill / "scripts" / "plugin_catalog.py"), "--help"],
+        cwd=install.parent,
+        text=True,
+        capture_output=True,
+    )
+    test.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+
 class InstallSmokeTests(unittest.TestCase):
+    def test_catalog_helper_runs_from_isolated_copy(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            install = Path(temporary) / "skills"
+            shutil.copytree(ROOT / "skills" / "openplanet-init", install / "openplanet-init")
+            check_catalog_install(self, install)
+
     def test_local_copy_install_has_exact_skill_set_and_integrity(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             install = Path(temporary) / "skills"
@@ -29,6 +53,7 @@ class InstallSmokeTests(unittest.TestCase):
                 source = (ROOT / "skills" / name / "SKILL.md").read_bytes()
                 copied = (install / name / "SKILL.md").read_bytes()
                 self.assertEqual(copied, source)
+            check_catalog_install(self, install)
 
     def test_pinned_cli_installs_exact_six_skills_in_isolated_home(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -60,6 +85,7 @@ class InstallSmokeTests(unittest.TestCase):
                     (install / name / "SKILL.md").read_bytes(),
                     (ROOT / "skills" / name / "SKILL.md").read_bytes(),
                 )
+            check_catalog_install(self, install)
 
     def test_pinned_cli_discovers_exact_six_skills(self) -> None:
         result = subprocess.run(

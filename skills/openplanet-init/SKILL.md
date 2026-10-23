@@ -18,24 +18,32 @@ ends at initialization; feature implementation belongs to `openplanet-dev`.
 
 ## Workflow
 
-1. **Locate the plugin folder.** Find the repository instructions and
+1. **Search existing plugins before scaffolding.** Establish the intended purpose
+   and target game, then use [existing-plugin discovery](references/plugin-discovery.md)
+   and its bundled catalog helper to search names, summaries, and likely synonyms.
+   Inspect plausible matches for equivalent features or reusable dependencies.
+   Completion: the brief records search terms, catalog date/coverage, linked
+   candidates, and the reason to reuse, extend, or build separately. A stale or
+   unavailable catalog is an explicit discovery limitation, never evidence that
+   nothing exists. Respect an author's deliberate decision to build an alternative.
+2. **Locate the plugin folder.** Find the repository instructions and
    `info.toml`. Determine whether the repository is already a live Openplanet
    plugin folder or stages canonical source elsewhere. For a new plugin, choose
    the folder that will own `info.toml`. Completion: one canonical source root
    and its relationship to the live `Plugins/` tree are known.
-2. **Run the simple interview.** Copy
+3. **Run the simple interview.** Copy
    [the initialization brief template](templates/INITIALIZATION-BRIEF.md) into a
    tracked project document and complete every required field. A tracked
    initialization brief is mandatory for every plugin, including a tiny,
    temporary, or local-only experiment. Completion: purpose, game scope,
    publication intent, rights/disclosure assumptions, topology, and the smallest
    observable first-load gate have explicit answers.
-3. **Branch only when relevant.** Complete advanced brief sections for assets,
+4. **Branch only when relevant.** Complete advanced brief sections for assets,
    dependencies, exports or multiple modules, build/staging tools, preprocessor
    defines, authentication/public configuration, and packaging. Default to one
    plugin module unless a dependency boundary is justified. Completion: each
    applicable branch is answered and each inapplicable branch is marked N/A.
-4. **Record clone-local capabilities.** Follow
+5. **Record clone-local capabilities.** Follow
    [onboarding and local-state guidance](references/onboarding-and-local-state.md).
    Store machine paths, ports, detected tools, and runtime receipts in a private
    checkout-local file listed in `.git/info/exclude` when Git metadata exists;
@@ -44,7 +52,7 @@ ends at initialization; feature implementation belongs to `openplanet-dev`.
    Completion: portable decisions are tracked; local capabilities are excluded
    from tracked/public plugin files;
    secrets remain only in their proper secret store.
-5. **Create the minimal loadable identity.** Preserve a valid existing manifest
+6. **Create the minimal loadable identity.** Preserve a valid existing manifest
    when normalizing. Otherwise create the smallest `info.toml` and AngelScript
    entrypoint appropriate to the recorded game and current Openplanet
    documentation. Keep identity, category, script paths, dependencies, and
@@ -54,12 +62,12 @@ ends at initialization; feature implementation belongs to `openplanet-dev`.
    Use a real version/name/author/category, justify game/timeout constraints, and
    do not set `essential`, `controls_other_plugins`, or deprecated `meta.perms`
    without a concrete requirement supported by current Openplanet documentation.
-6. **Check exact bytes.** Run available repository checks and `openplanet-lsp` on
+7. **Check exact bytes.** Run available repository checks and `openplanet-lsp` on
    the exact source that will be loaded. If staging exists, compare staged bytes
    with canonical/generated inputs and record the command and result in local
    state. Completion: static failures are fixed or reported as explicit blockers;
    static success is not called runtime proof.
-7. **Prove the first load.** Use the highest available lifecycle capability while
+8. **Prove the first load.** Use the highest available lifecycle capability while
    preserving the manual Openplanet UI and `Openplanet.log` fallback. Capture a
    fresh post-action log window showing a `Loaded plugin` event for this identity
    with no later compilation error for it, plus the brief's smallest observable
@@ -67,7 +75,7 @@ ends at initialization; feature implementation belongs to `openplanet-dev`.
    fails, record the attempted rung, exact cause, and next action as an explicit
    runtime blocker. Completion: first-load evidence or an explicit runtime
    blocker exists; “not tested” is never reported as a pass.
-8. **Stop at the boundary.** Report the initialized identity, tracked brief path,
+9. **Stop at the boundary.** Report the initialized identity, tracked brief path,
    excluded local-state path, diagnostics, and runtime evidence/blocker. Hand
    later AngelScript behavior to `openplanet-dev`; use `openplanet-lifecycle` for
    further load/reload diagnosis. Do not add settings, UI, control bridges,
@@ -86,6 +94,8 @@ human-controlled actions. Recheck volatile policy before any later submission.
 
 Initialization is complete only when:
 
+- existing-plugin discovery and the reuse/extend/build decision are recorded,
+  including any catalog limitation;
 - one plugin folder rooted at a valid `info.toml` has a resolvable minimal script
   entrypoint;
 - the tracked initialization brief exists even for tiny/local-only work;

@@ -10,6 +10,7 @@ secrets in either artifact.
 
 - **Plugin identity / folder:**
 - **Purpose:**
+- **Existing-plugin discovery:** search terms/synonyms, catalog checked date and coverage/limitations, linked plausible matches, and why reuse, extension, or a separate plugin fits this purpose (including deliberate overlap)
 - **Target games:**
 - **Tested games and Openplanet versions/channels:**
 - **Publication intent:** public candidate / private distribution / local-only / do-not-publish

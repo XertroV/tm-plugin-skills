@@ -134,7 +134,11 @@ checked-in CLI for framing/macros/assertions. Simple frames may remain usable vi
 
 Every initialized plugin records a tracked brief containing purpose, game scope,
 module topology, dependencies, build/staging flow, expected callbacks, validation
-plan, and policy assumptions. Machine-local paths, ports, installed capabilities,
+plan, and policy assumptions. Before scaffolding, search existing plugins using
+the init skill's shared, locally cached Openplanet catalog. Record the search,
+catalog coverage/freshness, plausible matches, and reuse/extend/build decision in
+the brief; incomplete discovery cannot establish that no equivalent exists.
+Machine-local paths, ports, installed capabilities,
 and runtime receipts stay in private clone-local state rather than portable docs.
 
 ## 9. Packaging and installation

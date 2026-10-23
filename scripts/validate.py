@@ -23,6 +23,7 @@ QUICK_COMMANDS = (
     (sys.executable, "tests/test_install_smoke.py", "-v"),
     (sys.executable, "-m", "unittest", "discover", "-s", "tests/semantic_control", "-v"),
     (sys.executable, "tests/test_lifecycle_bridge_contract.py", "-v"),
+    (sys.executable, "tests/test_plugin_catalog.py", "-v"),
 )
 
 
