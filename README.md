@@ -4,6 +4,16 @@ Opinionated agent skills for developing, testing, operating, and visually review
 
 -- *By [XertroV](https://openplanet.dev/u/XertroV) w/ AI*
 
+> **Publication warning: Openplanet rejects plugins whose code is mostly AI
+> generated.** This applies to the website and in-game plugin manager, with no
+> exceptions for programming experience, directing the LLM, successful in-game
+> testing, or token spend. Using these skills does not establish publication
+> eligibility. Other AI use must be disclosed during review, and AI-generated
+> plugin thumbnails are prohibited. Read the [official terms](https://openplanet.dev/docs/plugin-tos),
+> the [verbatim local copy and update procedure](docs/policies/README.md), and the
+> [publication policy brief](docs/research/issue-8-openplanet-store-policy.md)
+> before starting a plugin intended for publication.
+
 This repository is currently being designed through a [Wayfinder map](https://github.com/XertroV/tm-plugin-skills/issues?q=label%3Awayfinder%3Amap).
 
 ## Intent

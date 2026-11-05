@@ -2,21 +2,26 @@
 
 **Ticket:** [Research the Openplanet store policy and publication constraints](https://github.com/XertroV/tm-plugin-skills/issues/8)
 **Parent map:** [Chart the implementation-ready specification for the Openplanet agent skillpack](https://github.com/XertroV/tm-plugin-skills/issues/1)
-**Research retrieved (UTC):** 2026-08-11T13:31:48Z
+**Original research retrieved (UTC):** 2026-08-11T13:31:48Z
+**Targeted ToS refresh (UTC):** 2026-11-04T15:31:15Z; page updated 2026-11-03T16:30:13+01:00 by Miss. Only the ToS was re-fetched; other sources retain their original research dates.
 **Method:** Read-only fetch of public primary pages on `https://openplanet.dev` (no login, no upload, no admin UI).
 **Out of scope (per map):** Performing store submission.
 
 This brief is an agent-facing pre-code compatibility gate. It separates (1) rules that should shape **every** plugin design, (2) constraints that apply only when **publication/signing** is intended, (3) **local-only** exceptions that must be labelled non-publishable, and (4) facts resolved by the later read-only plugin-owner inspection in [the owner workflow research](issue-9-plugin-owner-admin-workflow.md).
 
+> **Publication blocker: plugins whose code is mostly AI generated will be rejected by Openplanet's website and plugin manager.** The current [Plugin terms of service](https://openplanet.dev/docs/plugin-tos) grant no exceptions for programming experience, directing the LLM yourself, successful in-game testing, or time and money spent on tokens. Tests, review, and disclosure do not make such a plugin eligible. Other AI use, including generated assets, must be disclosed during plugin review; AI-generated plugin thumbnails are prohibited.
+
+The [local verbatim ToS text](../policies/openplanet-plugin-tos.txt), [original fetched HTML](../policies/openplanet-plugin-tos.html), and [snapshot metadata and refresh procedure](../policies/README.md) preserve the updated source for offline use. Check the live terms again before publication preparation.
+
 ---
 
 ## 1. Authority and source map
 
-Prefer these in order. Relative “page updated / posted” stamps are from the live HTML `title` attributes at research time.
+Prefer these in order. “Page updated / posted” stamps are from the source HTML `title` attributes. The ToS row reflects the targeted refresh; every other row reflects the original research.
 
 | Rank | Source | URL | Page stamp (source HTML) | Role |
 |------|--------|-----|--------------------------|------|
-| 1 | Plugin terms of service | https://openplanet.dev/docs/plugin-tos | Updated 2026-06-07 by Miss | **Canonical upload/approval rules** |
+| 1 | Plugin terms of service | https://openplanet.dev/docs/plugin-tos | Updated 2026-11-03 16:30:13 +0100 by Miss; refreshed 2026-11-04 UTC | **Canonical upload/approval rules**; [local copy](../policies/openplanet-plugin-tos.txt) |
 | 2 | Signature modes | https://openplanet.dev/docs/tutorials/signature-modes | Updated 2026-07-19 by Miss | What “signed / school / developer” means at load time |
 | 3 | School mode | https://openplanet.dev/docs/school-mode | Updated 2024-08-09 by Miss | Competitive-integrity boundary for helpers |
 | 4 | School mode for developers | https://openplanet.dev/user/trusted | Public at research time | Folder vs `.op`, whitelist maps, trusted-dev path |
@@ -42,7 +47,7 @@ There is **no** public page at `/store`. The public catalog is `/plugins`; distr
 
 ## 2. Pre-code compatibility gate (all plugins)
 
-Apply these **before writing feature code**, even for local-only work. The upload ToS legally attaches at upload, but the skillpack deliberately adopts the constraints below as its stricter universal product policy because they are hard to retrofit and protect players, authors, reviewers, and the community. Do not misstate that broader skillpack policy as the legal scope of the upload agreement.
+Apply these **before writing feature code**, even for local-only work. The upload ToS legally attaches at upload, but the skillpack deliberately adopts the safety, rights, integrity, and non-deception constraints below as its stricter universal product policy because they are hard to retrofit and protect players, authors, reviewers, and the community. Do not misstate that broader skillpack policy as the legal scope of the upload agreement. Assess AI authorship before coding because it determines publication eligibility; the AI rejection rule concerns distribution through the website and plugin manager, not permission to run a local unsigned plugin (§4).
 
 ### 2.1 Hard product/legal constraints (ToS-shaped)
 
@@ -53,7 +58,7 @@ From [Plugin terms of service](https://openplanet.dev/docs/plugin-tos):
 3. **No full-leaderboard bulk scraping from the client** — Plugins that “request full leaderboards (or similar information)” are not approved because of request volume. If the product needs that data, design a **separate caching server**; the plugin consumes the cache.
 4. **No cryptocurrency features** — Anything crypto-related is barred from the website; avoid building it into a shared codebase you might later publish.
 5. **No NSFW** — Same as above for content policy.
-6. **AI-generated bulk** — “Plugins which are mostly AI generated are not allowed.” Other AI usage “must be disclosed during plugin review as well as publicly using the AI classification settings.” Reviewers may reject work that appears largely AI-generated. **Design implication:** keep human-authored structure, tests, and reviewable diffs; plan disclosure if AI-assisted.
+6. **Mostly AI-generated code blocks publication** — Plugins whose code is mostly AI generated **will be rejected** from the website and plugin manager. The ToS grant no exceptions for programming background, author-directed prompts, working in-game after testing, or token expenditure. Disclose other AI use, including generated assets, during plugin review, and use no AI-generated plugin thumbnail. **Design implication:** record authorship and distribution intent before feature work; tests, human review, disclosure, and a local-only label do not remove this publication blocker.
 7. **Stability / community harm** — Openplanet may unpublish plugins deemed damaging (explicitly includes game instability). Prefer fail-safe defaults, timeouts, and no reckless memory patching in default paths.
 
 ### 2.2 Runtime integrity / competitive boundaries
@@ -83,7 +88,8 @@ Even for local plugins, keep a valid modern plugin folder:
 [ ] Paid game features gated via Permissions::* (no edition bypass)
 [ ] No client-side full-leaderboard (or similar) hammering; server cache if needed
 [ ] No crypto; no NSFW
-[ ] AI assistance planned for disclosure if ever published; not "mostly AI"
+[ ] AI authorship assessed: mostly AI-generated code is ineligible for website/manager publication
+[ ] Other AI use disclosed during review if submitted; no AI-generated plugin thumbnail
 [ ] Competitive helpers classified as school-mode candidates, not silent regular features
 [ ] essential / controls_other_plugins left false unless justified
 [ ] info.toml version/name/author present; deprecated meta.perms avoided
@@ -128,9 +134,11 @@ From [info.toml](https://openplanet.dev/docs/reference/info-toml) and public plu
 | Featured | Site may feature plugins (ToS usage grant) |
 | Source / issues links | Common on listings; not ToS-mandated in the short ToS text |
 
-### 3.5 AI disclosure (publish path)
+### 3.5 AI authorship and disclosure (publish path)
 
-ToS requires AI disclosure **during review** and **publicly via AI classification settings**. Exact enum/UI values were **not** visible on sampled public plugin pages at research time → admin inspection (§5).
+Mostly AI-generated code is a **publication blocker**, not a disclosure category that can be approved through testing or review. The [current ToS](https://openplanet.dev/docs/plugin-tos) explicitly reject it from the website and plugin manager without exceptions for programming experience, directing the LLM, successful testing, or token expenditure.
+
+For other AI use, including generated assets, the current ToS require disclosure **during plugin review** and prohibit AI-generated plugin thumbnails. The refreshed text no longer states the earlier requirement to disclose publicly through AI classification settings. Do not infer that those admin fields were removed: their current existence and behavior require separate inspection (§5).
 
 ### 3.6 Auth API (only if used)
 
@@ -160,7 +168,8 @@ From [Privacy policy](https://openplanet.dev/privacy) and site login chrome:
 
 ```
 [ ] ToS acceptable (display rights, identifier change, unpublish)
-[ ] Not mostly AI; AI classification + review disclosure prepared
+[ ] Code is not mostly AI generated; otherwise stop website/manager publication preparation
+[ ] Other AI use disclosed during review; no AI-generated plugin thumbnail
 [ ] Signed target chosen: Regular vs School
 [ ] .op package path; manager-compatible
 [ ] meta.version set; name/author/category polished
@@ -178,15 +187,16 @@ From [Privacy policy](https://openplanet.dev/privacy) and site login chrome:
 | Exception class | Why non-publishable | Runtime reality |
 |-----------------|---------------------|-----------------|
 | **Unsigned folder plugins** | Not signed; Regular mode users will not load them | Requires Developer mode ([Signature modes](https://openplanet.dev/docs/tutorials/signature-modes); [Developer Mode news](https://openplanet.dev/news/2022/developer-mode)). Club edition required for unsigned per that news. |
+| **Mostly AI-generated local plugins** | Ineligible for website/plugin-manager publication under the ToS; testing, review, disclosure, and author experience do not create an exception | Local unsigned development remains subject to the safety, rights, and runtime constraints above; do not present it as a future store candidate |
 | **Policy-remediation prototypes** | Existing work may need prohibited material removed, permissions added, provenance repaired, scraping redesigned, or AI usage truthfully disclosed | Assistance is limited to diagnosis and remediation; local-only status never authorizes the prohibited behavior |
 | **Unapproved competitive helpers intended for ranked/online play** | School mode / competition integrity policy | Practice helpers belong in **School** signing, not silent Regular features ([School mode](https://openplanet.dev/docs/school-mode)) |
 | **Trusted-dev-only workflows** | Depend on personal trusted flag / abuse risk | Trusted status is case-by-case; abuse → revoke + ban risk ([user/trusted](https://openplanet.dev/user/trusted)) |
 | **Breakage / exploit probes** | Unpublish + community harm; school bypasses must be reported privately | School-mode bypasses: confidential email to Miss per [school developer preview news](https://openplanet.dev/news/2024/school-mode-developer-preview) |
 | **Auth-secret or admin-only tooling** | Secrets and admin surfaces are not plugin payload | Auth secrets live in plugin admin ([Auth API](https://openplanet.dev/docs/reference/auth)) |
 
-**Labelling recommendation for the skillpack (non-normative to Openplanet):** legitimate unsigned or private work may use `publication: none` / `local-only: true`. If work conflicts with §2, refuse enabling assistance and offer remediation; do not use a local-only marker to launder it into an acceptable state.
+**Labelling recommendation for the skillpack (non-normative to Openplanet):** legitimate unsigned or private work may use `publication: none` / `local-only: true`. Mostly AI-generated local work must remain labelled ineligible for website/plugin-manager publication. For the safety, rights, integrity, and non-deception constraints in §2, refuse enabling violations and offer remediation; a local-only marker does not waive those constraints.
 
-**Allowed local pattern that is still publishable later:** develop as `Plugins/<ID>/` folder; optionally install signed `.op` of same ID for non-dev testing. Mode decides which wins ([user/trusted](https://openplanet.dev/user/trusted)).
+**Local folder pattern for an otherwise publication-eligible plugin:** develop as `Plugins/<ID>/` folder; optionally install signed `.op` of same ID for non-dev testing. Mode decides which wins ([user/trusted](https://openplanet.dev/user/trusted)).
 
 ---
 
@@ -197,7 +207,7 @@ Do **not** invent these. A later read-only logged-in pass (no submit) should cap
 | # | Fact gap | Why it matters | Likely surface |
 |---|----------|----------------|----------------|
 | A | **Exact upload / version / “request signing” controls** | Publish skill completion gates | Plugin admin (historical “mark that you want it to be signed” — [Developer Mode news](https://openplanet.dev/news/2022/developer-mode)) |
-| B | **AI classification settings** — field names, allowed values, where public disclosure appears | ToS-mandated public disclosure; not visible on sampled public plugin pages | Plugin admin + public listing rendering |
+| B | **AI disclosure / classification controls** — current field names, allowed values, and any public rendering | The refreshed ToS require review disclosure but no longer mention public classification settings; current admin behavior was not re-inspected | Plugin admin + public listing rendering |
 | C | **Review workflow states** (pending, changes requested, rejected reasons, SLA) | Agent expectations while waiting | Plugin admin + review notification emails |
 | D | **Signer roles / who can `review_sign_*`** | Trust model; feed shows Miss, Fort-TM, etc. | Admin + [Signature Feed](https://openplanet.dev/plugins/signs) correlation |
 | E | **School vs Regular signing request flags** | Choosing correct signature class at upload | Plugin admin create/version form |
@@ -218,7 +228,7 @@ Do **not** invent these. A later read-only logged-in pass (no submit) should cap
 ```
 Author source folder  Plugins/<ID>/     → Developer mode (unsigned OK; school restrictions apply unless trusted)
         │
-        ▼  review + sign (website admin; out of scope to perform)
+        ▼  ToS eligibility → review + sign (mostly AI-generated code rejected; actions out of scope)
 Signed .op on openplanet.dev/plugins
         │
         ├─ Regular signature → loads in Regular + School + Developer
@@ -237,11 +247,11 @@ Official mode → shipped Openplanet plugins only
 
 ## 7. Volatile facts (timestamped)
 
-Re-check before baking into long-lived skills:
+Re-check before baking into long-lived skills. Apart from the targeted ToS refresh, observations below remain from 2026-08-11:
 
-| Fact | As of research UTC 2026-08-11 | Source |
+| Fact | Observation / source date (UTC unless specified) | Source |
 |------|-------------------------------|--------|
-| Plugin ToS text (AI rule, crypto, LB, NSFW, copyright, paid bypass) | Present; page updated **2026-06-07** | ToS |
+| Plugin ToS text (AI rule, crypto, LB, NSFW, copyright, paid bypass) | Refreshed **2026-11-04**; page updated **2026-11-03 16:30:13 +0100**. Mostly AI-generated code will be rejected; other AI use requires review disclosure; AI-generated thumbnails prohibited | [ToS](https://openplanet.dev/docs/plugin-tos); [local snapshot](../policies/README.md) |
 | Signature mode definitions | Page updated **2026-07-19** | Signature modes |
 | Auth token lifetime “5 minutes” | Documented as of **2024-10-21**; may change | Auth API |
 | Auth/config API hosts | New `api.openplanet.dev` preferred since **2026-01-27**; old hosts retained temporarily | API endpoints news |
@@ -259,7 +269,7 @@ Re-check before baking into long-lived skills:
 These are research conclusions for downstream tickets, not product decisions:
 
 1. A **pre-code gate skill/section** should encode §2 checklist for every new plugin, independent of publish intent.
-2. A **publish readiness** gate should add §3 and refuse ToS-violating or unsigned-only designs unless labelled §4.
+2. A **publish readiness** gate should add §3 and stop website/manager publication preparation for mostly AI-generated code or other ToS-ineligible designs. A §4 local-only label records a distribution limit; it never grants publication eligibility.
 3. **School vs Regular** is a first-class product choice for any input helper / competitive-adjacent feature.
 4. **Store submission automation** remains out of map scope; at most, skills may prepare metadata and point humans at admin UI after §5 is filled.
 5. Do not hardcode trusted-dev assumptions; detect or ask.
@@ -268,7 +278,7 @@ These are research conclusions for downstream tickets, not product decisions:
 
 ## 9. Citations (primary)
 
-1. Openplanet, *Plugin terms of service*, https://openplanet.dev/docs/plugin-tos — retrieved 2026-08-11; HTML page updated 2026-06-07 (Miss).
+1. Openplanet, *Plugin terms of service*, https://openplanet.dev/docs/plugin-tos — originally retrieved 2026-08-11 (page updated 2026-06-07); re-fetched 2026-11-04 UTC, HTML page updated 2026-11-03 16:30:13 +0100 (Miss). [Verbatim local text](../policies/openplanet-plugin-tos.txt), [original HTML](../policies/openplanet-plugin-tos.html), [snapshot metadata / refresh](../policies/README.md).
 2. Openplanet, *Signature modes*, https://openplanet.dev/docs/tutorials/signature-modes — retrieved 2026-08-11; HTML page updated 2026-07-19 (Miss).
 3. Openplanet, *School mode*, https://openplanet.dev/docs/school-mode — retrieved 2026-08-11; HTML page updated 2024-08-09 (Miss).
 4. Openplanet, *School mode for developers / trusted developer*, https://openplanet.dev/user/trusted — retrieved 2026-08-11 (public body; application form login-gated).

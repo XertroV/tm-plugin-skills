@@ -11,6 +11,7 @@ This repository is in Wayfinder planning mode. GitHub Issues are the canonical d
 
 ## Product direction
 
+- Before planning a public plugin or preparing publication, read [the saved Openplanet terms and refresh procedure](docs/policies/README.md). Plugins whose code is mostly AI generated will be rejected from the website and plugin manager; tests, human review, and disclosure do not create an exception. Recheck the live terms before submission and refresh the local copy when they change.
 - Portable default: the plugin repository may itself be a folder inside Openplanet's `Plugins/` directory.
 - Project-specific build scripts, `openplanet-lsp`, RemoteBuild, MCP bridges, and screenshot tooling are capabilities to detect, not universal prerequisites.
 - Skills must be concise, opinionated, progressively disclosed, and backed by observable completion gates.

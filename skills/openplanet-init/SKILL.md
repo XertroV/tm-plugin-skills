@@ -33,7 +33,8 @@ ends at initialization; feature implementation belongs to `openplanet-dev`.
    and its relationship to the live `Plugins/` tree are known.
 3. **Run the simple interview.** Copy
    [the initialization brief template](templates/INITIALIZATION-BRIEF.md) into a
-   tracked project document and complete every required field. A tracked
+   tracked project document and complete every required field. Apply the
+   [policy boundary](#policy-boundary) before choosing publication intent. A tracked
    initialization brief is mandatory for every plugin, including a tiny,
    temporary, or local-only experiment. Completion: purpose, game scope,
    publication intent, rights/disclosure assumptions, topology, and the smallest
@@ -82,6 +83,14 @@ ends at initialization; feature implementation belongs to `openplanet-dev`.
    architecture, or product features merely to make initialization look complete.
 
 ## Policy boundary
+
+**Openplanet rejects plugins whose code is mostly AI generated** from its website
+and plugin manager. The [Plugin terms of service](https://openplanet.dev/docs/plugin-tos)
+grant no exceptions for programming experience, directing the LLM, successful
+in-game testing, or token spend. Explain this before generating code for a public
+candidate and record the publication constraint in the brief. Tests, human
+review, and disclosure do not create an exception. Other AI use must be disclosed
+during review; AI-generated plugin thumbnails are prohibited.
 
 Apply the brief's safety, rights, provenance, AI-use, paid-feature permission,
 and publication questions before feature code. `local-only` or

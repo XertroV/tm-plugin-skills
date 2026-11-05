@@ -26,7 +26,15 @@ exists. Use `openplanet-visual` when appearance is the primary task and
 ### 1. Discover the real plugin
 
 Locate `info.toml`; read project instructions and the tracked initialization
-brief. Detect rather than assume:
+brief.
+
+For a plugin intended for publication, apply the init skill's
+[policy boundary](../openplanet-init/SKILL.md#policy-boundary) before generating
+feature code: mostly AI-generated code will be rejected from Openplanet's website
+and plugin manager, even when it passes tests and works in-game. Record the
+publication constraint and truthful AI-use provenance in the brief.
+
+Detect rather than assume:
 
 - live-folder versus staged-source topology;
 - canonical versus generated source;

@@ -161,6 +161,17 @@ user installer.
 
 ## 10. Store-policy boundary
 
+**Plugins whose code is mostly AI generated will be rejected from Openplanet's
+website and plugin manager.** The [current terms](https://openplanet.dev/docs/plugin-tos)
+grant no exceptions for programming experience, directing the LLM, successful
+in-game testing, or token spend. Tests, human review, and disclosure do not make
+such a plugin eligible. Establish publication intent before generating feature
+code and record this constraint in the initialization brief. Other AI use must
+be disclosed during review; AI-generated plugin thumbnails are prohibited. The
+[verbatim local terms and refresh procedure](policies/README.md) preserve the
+source; the [policy brief](research/issue-8-openplanet-store-policy.md) explains
+its application. Recheck live terms before submission.
+
 Preparation may cover public metadata, tested games, images/accessibility text,
 non-secret settings, version artifacts, changelog, compatibility, broad AI-use
 disclosure, and terms checks. Upload, attest, sign, approve, and publish are

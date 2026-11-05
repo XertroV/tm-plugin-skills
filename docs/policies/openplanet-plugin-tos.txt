@@ -1,0 +1,39 @@
+Plugin terms of service
+
+When you upload plugins to the site, you agree to these terms. It's very small and reasonable, the normal stuff you'd expect. If you're unsure about anything described below and have a question, please send a message to any of the staff on Discord or send an email to miss@openplanet.dev.
+
+Rules
+
+Do not upload copyrighted material which you don't have permission to use. This includes plugins not made by yourself for which the author has not given you permission for.
+
+Not Safe For Work (NSFW) content will not be approved.
+
+Plugins that bypass restrictions into paid game features will not be approved. Remember to use permission checks to check if a user of your plugin actually has permissions to use features of your plugin!
+
+Plugins that request full leaderboards (or similar information) will not be approved due to the large number of requests required. If you need this data, consider collecting and caching it on a separate server that the plugin then gets its data from.
+
+Anything that relates to cryptocurrencies are not allowed on the website.
+
+Plugins must follow the AI policy as stated below.
+
+AI policy
+
+When a plugin version is uploaded, it gets reviewed by a team of volunteer humans to ensure safety, security, and fairness for all Openplanet users. The popularity of large language models and "AI agents" requires an increased bandwidth for those reviews which we simply don't have, for a number of reasons:
+
+LLMs generate a lot of very verbose code. This takes much more time to review than regular code.
+
+Generated code usually contains large amounts of problems requiring changes.
+
+A lot of people who submit generated code are not programmers or are unfamiliar with the API or language itself, so their trust in the generated code is unjustified.
+
+Plugins of which the code is mostly AI generated are not allowed on the website and plugin manager, and will be rejected. No exceptions will be granted regardless of your background in programming, whether you wrote the prompts and directed the LLM yourself, whether it happens to work in-game because you've tested it, or the time and money spent on tokens.
+
+Other AI usage (including but not limited to generating assets) must be disclosed during plugin review. However, do not use an AI generated image as your plugin thumbnail.
+
+Usage
+
+You give the Openplanet team permission to display your plugin on the Openplanet website and/or share a link to your plugin page on social media. We might feature your plugin in the Featured section as well.
+
+We have the right to change your unique plugin identifier if absolutely needed. We'll do our best to contact you if something like this needs to happen, though.
+
+We have the right to unpublish plugins if we deem them to be damaging to the game or community. This includes things like game instability as well.

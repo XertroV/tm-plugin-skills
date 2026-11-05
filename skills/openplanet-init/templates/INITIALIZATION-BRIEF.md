@@ -14,6 +14,7 @@ secrets in either artifact.
 - **Target games:**
 - **Tested games and Openplanet versions/channels:**
 - **Publication intent:** public candidate / private distribution / local-only / do-not-publish
+- **AI publication constraint:** record that Openplanet rejects plugins whose code is mostly AI generated, without exceptions for author experience, prompting, testing, or token spend; tests, human review, and disclosure do not establish eligibility. State how this affects the intended distribution. Check the [current terms](https://openplanet.dev/docs/plugin-tos) before submission.
 - **Source, provenance, and AI use:** newly authored, owner-authorized, or copied/adapted sources and compatible licenses; truthful AI-use disclosure assumptions
 - **Paid-feature permissions:** required permissions/entitlements, or N/A
 - **Architecture / module topology:** default one plugin module; justify every additional plugin or shared boundary
@@ -54,6 +55,7 @@ Mark unused branches `N/A` with a short reason.
 
 - Package contents and excluded development artifacts:
 - Compatibility, version, changelog, images/accessibility text, and disclosure plan:
+- AI-use disclosure during review and confirmation that the plugin thumbnail is not AI generated:
 - Human decision boundaries for upload, terms, signing, attestation, approval, and publication:
 
 ## Initialization result
