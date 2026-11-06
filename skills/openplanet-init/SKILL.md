@@ -44,6 +44,7 @@ ends at initialization; feature implementation belongs to `openplanet-dev`.
    defines, authentication/public configuration, and packaging. Default to one
    plugin module unless a dependency boundary is justified. Completion: each
    applicable branch is answered and each inapplicable branch is marked N/A.
+   For a conventional `info.toml` plus `src/` plugin, the bundled [general build helper](references/build.py) can provide dev staging, release packaging, and static-check profiles; treat its optional tools as capabilities to detect rather than prerequisites.
 5. **Record clone-local capabilities.** Follow
    [onboarding and local-state guidance](references/onboarding-and-local-state.md).
    Store machine paths, ports, detected tools, and runtime receipts in a private
