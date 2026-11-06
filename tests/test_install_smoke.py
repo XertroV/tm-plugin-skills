@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {
     "openplanet-control",
+    "openplanet-debugging-game-crashes",
     "openplanet-dev",
     "openplanet-init",
     "openplanet-lifecycle",
@@ -55,7 +56,7 @@ class InstallSmokeTests(unittest.TestCase):
                 self.assertEqual(copied, source)
             check_catalog_install(self, install)
 
-    def test_pinned_cli_installs_exact_six_skills_in_isolated_home(self) -> None:
+    def test_pinned_cli_installs_exact_seven_skills_in_isolated_home(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             temporary_path = Path(temporary)
             home = temporary_path / "home"
@@ -87,7 +88,7 @@ class InstallSmokeTests(unittest.TestCase):
                 )
             check_catalog_install(self, install)
 
-    def test_pinned_cli_discovers_exact_six_skills(self) -> None:
+    def test_pinned_cli_discovers_exact_seven_skills(self) -> None:
         result = subprocess.run(
             ["npx", "--yes", "skills@1.4.1", "add", ".", "--list"],
             cwd=ROOT,
@@ -96,7 +97,7 @@ class InstallSmokeTests(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         plain = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", result.stdout)
-        self.assertIn("Found 6 skills", plain)
+        self.assertIn("Found 7 skills", plain)
         for name in EXPECTED:
             self.assertIn(name, plain)
 

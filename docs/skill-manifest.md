@@ -1,11 +1,12 @@
 # Skill manifest
 
-The portable core contains six independently triggerable, model-invoked skills.
-Shared capability detection and domain language remain references rather than a
-seventh invocation surface.
+The portable core contains seven independently triggerable, model-invoked skills.
+Shared capability detection and domain language remain references rather than an
+additional invocation surface.
 
 | Skill | Trigger boundary | Completion gate |
 | --- | --- | --- |
+| `openplanet-debugging-game-crashes` | Investigate Trackmania crashes, including crashes involving Openplanet.dll. | Relevant crash reports and Openplanet logs inspected; candidate causes distinguished by evidence and targeted probes. |
 | `openplanet-init` | Search existing plugins, then scaffold, bootstrap, or normalize a plugin folder and `info.toml`. | Recorded reuse/extend/build decision; loadable identity plus first-load evidence or an explicit runtime blocker. |
 | `openplanet-dev` | Implement or modify AngelScript behavior, structure, settings, callbacks, dependencies, or architecture. | Static diagnostics plus required lifecycle/runtime proof for behavior changes. |
 | `openplanet-lifecycle` | Load, reload, unload, diagnose compilation, and prove the bytes actually running. | Fresh post-action log window plus observable behavior evidence when applicable. |

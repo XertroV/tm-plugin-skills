@@ -1,0 +1,6 @@
+interface:
+  display_name: "Openplanet Crash Debugging"
+  short_description: "Investigate Trackmania crashes using crash reports and logs"
+  default_prompt: "Use $openplanet-debugging-game-crashes to investigate this Trackmania crash, inspect the relevant crash reports and Openplanet logs, and distinguish likely causes using a binary decision matrix and targeted probes."
+policy:
+  allow_implicit_invocation: true

@@ -22,11 +22,12 @@ This repository is currently being designed through a [Wayfinder map](https://gi
 - Detect project build systems and automation as enhancements rather than assumptions.
 - Close the feedback loop through static checks, live load/reload, `Openplanet.log`, screenshots, and observable plugin behavior.
 - Keep skills concise, composable, and usable across agent harnesses.
-- Maintain six independently triggerable skills, including `openplanet-reviewer` for adversarial runtime, state, synchronization, callback-safety, and architecture review. See `docs/skill-manifest.md`.
+- Maintain seven independently triggerable skills, including `openplanet-reviewer` for adversarial runtime, state, synchronization, callback-safety, and architecture review. See `docs/skill-manifest.md`.
 - Turn every newly discovered subtle failure mode into a reviewer-ledger entry and, where applicable, development guidance plus test/demo evidence.
 
 ## Promoted skills
 
+- [`openplanet-debugging-game-crashes`](skills/openplanet-debugging-game-crashes/SKILL.md) — investigate Trackmania crashes using game crash reports and Openplanet logs.
 - [`openplanet-init`](skills/openplanet-init/SKILL.md) — scaffold and normalize
   plugin identity after searching existing plugins, with policy onboarding,
   tracked briefs, and private local state. Its bundled

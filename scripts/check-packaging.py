@@ -33,13 +33,14 @@ def main() -> None:
     skill_dirs = sorted(p.parent.name for p in (ROOT / "skills").glob("*/SKILL.md"))
     expected_skills = sorted((
         "openplanet-control",
+        "openplanet-debugging-game-crashes",
         "openplanet-dev",
         "openplanet-init",
         "openplanet-lifecycle",
         "openplanet-reviewer",
         "openplanet-visual",
     ))
-    require(skill_dirs == expected_skills, "all six approved skills must be promoted")
+    require(skill_dirs == expected_skills, "all seven skills must be promoted")
     plugin_dirs = sorted(Path(entry).name for entry in plugin["skills"])
     readme = (ROOT / "README.md").read_text()
     readme_dirs = sorted(re.findall(r"\[`([a-z0-9-]+)`\]\(skills/\1/SKILL\.md\)", readme))

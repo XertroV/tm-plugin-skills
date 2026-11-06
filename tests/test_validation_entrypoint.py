@@ -56,7 +56,7 @@ class ValidationEntrypointTests(unittest.TestCase):
             capture_output=True,
         )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
-        self.assertEqual(len(promoted), 6)
+        self.assertEqual(len(promoted), 7)
 
 
 if __name__ == "__main__":
